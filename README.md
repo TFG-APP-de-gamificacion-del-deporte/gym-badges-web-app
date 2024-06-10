@@ -1,5 +1,5 @@
 # TFG-Ingenieria-Informatica
-### Desarrollo de una Web App dew gamificación del gimnasio.
+### Desarrollo de una Web App de gamificación del gimnasio.
 
 Trabajo de Fin de Grado para Ingeniería Informática.
 
