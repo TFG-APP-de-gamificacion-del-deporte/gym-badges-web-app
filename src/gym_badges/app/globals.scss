@@ -4,6 +4,11 @@ body {
   overflow-x: hidden;
 }
 
+body {
+  background-image: radial-gradient(circle at top 30% left 30%, rgba(178, 22, 22, 0.2) 0%, transparent 33%),
+                    radial-gradient(circle at bottom 30% right 15%, rgba(140, 25, 231, 0.2) 0%, transparent 33%);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;

@@ -1,0 +1,29 @@
+.vertical {
+    margin: 10px;
+    width: 2px;
+
+    background: linear-gradient(
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 20px,
+        rgb(178, 22, 22) 100px,
+        rgb(140, 25, 231) calc(100% - 100px),
+        rgba(0, 0, 0, 0) calc(100% - 20px),
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.horizontal {
+    margin: 10px;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 20px,
+        rgb(178, 22, 22) 100px,
+        rgb(140, 25, 231) calc(100% - 100px),
+        rgba(0, 0, 0, 0) calc(100% - 20px),
+        rgba(0, 0, 0, 0) 100%
+    );
+
+}

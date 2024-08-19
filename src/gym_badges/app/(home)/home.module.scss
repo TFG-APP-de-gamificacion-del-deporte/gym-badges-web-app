@@ -1,0 +1,10 @@
+.left_layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.header_layout {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
