@@ -1,4 +1,4 @@
-import LeftPanel from "@/components/left-panel/left-panel"
+import Dashboard from "@/components/dashboard/dashboard"
 import Header from "@/components/header/header"
 import styles from "@/app/(home)/home.module.scss"
 import LineSeparator from "@/components/line-separator/line-separator"
@@ -8,7 +8,7 @@ export default function RootLayout({
 }: Readonly<{children: React.ReactNode}>) {
   return (
     <div className={styles.left_layout}>
-      <LeftPanel></LeftPanel>
+      <Dashboard></Dashboard>
       <LineSeparator vertical></LineSeparator>
       <div className={styles.header_layout}>
         <Header></Header>
