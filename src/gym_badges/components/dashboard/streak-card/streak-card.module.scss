@@ -1,0 +1,6 @@
+@use "@/app/global_vars.scss" as GV;
+
+.streak_card {
+  @include GV.card;
+  background-image: radial-gradient( circle at top 30% left 30%, rgba(216, 71, 19, 0.5) 0%, transparent 70%);
+}

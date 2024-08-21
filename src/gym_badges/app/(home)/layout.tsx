@@ -1,11 +1,11 @@
-import Dashboard from "@/components/dashboard/dashboard"
-import Header from "@/components/header/header"
-import styles from "@/app/(home)/home.module.scss"
-import LineSeparator from "@/components/line-separator/line-separator"
+import Dashboard from "@/components/dashboard/dashboard";
+import Header from "@/components/header/header";
+import styles from "@/app/(home)/home.module.scss";
+import LineSeparator from "@/components/line-separator/line-separator";
 
 export default function RootLayout({
-  children
-}: Readonly<{children: React.ReactNode}>) {
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={styles.left_layout}>
       <Dashboard></Dashboard>
@@ -16,5 +16,5 @@ export default function RootLayout({
         <main>{children}</main>
       </div>
     </div>
-  )
+  );
 }
