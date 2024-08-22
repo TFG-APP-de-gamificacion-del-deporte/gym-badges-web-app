@@ -1,5 +1,6 @@
 import styles from "@/components/dashboard/streak-card/streak-card.module.scss"
 import { FireIcon } from "@heroicons/react/24/solid"
+import WeekBar from "./week-bar/week-bar";
 
 export default function StreakCard() {
   return (
@@ -9,9 +10,7 @@ export default function StreakCard() {
         <FireIcon className={styles.icon}/>
         <p>33 weeks</p>
       </div>
-      <p>This week</p>
-      <p>[] [] [] [] [] [] []</p>
-      <p>Mon Tue Wed Thu Fri Sat Sun</p>
+      <WeekBar></WeekBar>
     </div>
   );
 }

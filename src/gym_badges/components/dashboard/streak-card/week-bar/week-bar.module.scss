@@ -1,0 +1,45 @@
+@use "@/app/global_vars.scss" as GV;
+
+// Number of days in a week.
+// [!] Needs to be the same as the .tsx variable
+$n_days: 7;
+
+@function calcRgbaColor($index) {
+  $start: $index - 1;
+  $end: $index;
+  @return (
+    mix(GV.$red, GV.$purple, (1-$start/$n_days)*100), 
+    mix(GV.$red, GV.$purple, (1-$end/$n_days)*100)
+  );
+}
+
+.container {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+
+  @for $i from 1 through $n_days {
+    div:nth-child(#{$i}) .box {
+      background: linear-gradient(to right, calcRgbaColor($i));
+    }
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  h6 {
+    width: 30px;
+    text-align: center;
+  }
+}
+
+.box {
+  width: 40px;
+  height: 28px;
+  mask-repeat: no-repeat;
+  mask-size: 100%;
+  mask-image: url(../../../../public/box.svg);
+}
