@@ -2,7 +2,7 @@
 $red: rgb(178, 22, 22);
 $purple: rgb(140, 25, 231);
 
-// Card
+// Card component
 @mixin card {
   background-color: rgba(255, 255, 255, 0.01);
   padding: 15px;
@@ -10,7 +10,7 @@ $purple: rgb(140, 25, 231);
   border-radius: 10px;
 }
 
-// Icon size class
+// Icon size
 @mixin icon {
   width: 32px;
 }

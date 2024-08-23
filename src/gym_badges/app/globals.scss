@@ -1,4 +1,5 @@
-@use "global_vars.scss" as GV;
+@use "@/public/global_vars.scss" as GV;
+@import "@/public/fonts.scss";
 
 html,
 body {
@@ -9,7 +10,6 @@ body {
 html {
   color-scheme: dark;
   color: rgb(220, 220, 220);
-  font-weight: 300;
 }
 
 body {
@@ -35,21 +35,4 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-h1 {
-  font-size: 28px;
-  color: white;
-}
-
-h2 {
-  font-size: large;
-  font-weight: 300;
-  color: white;
-}
-
-h6 {
-  font-size: small;
-  font-weight: 300;
-  color: rgb(220, 220, 220);
 }

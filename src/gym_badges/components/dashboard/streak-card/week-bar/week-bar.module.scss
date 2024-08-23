@@ -1,4 +1,4 @@
-@use "@/app/global_vars.scss" as GV;
+@use "@/public/global_vars.scss" as GV;
 
 // Number of days in a week.
 // [!] Needs to be the same as the .tsx variable
@@ -30,7 +30,7 @@ $n_days: 7;
   flex-direction: column;
   gap: 3px;
 
-  h6 {
+  small {
     width: 30px;
     text-align: center;
   }
@@ -39,7 +39,13 @@ $n_days: 7;
 .box {
   width: 40px;
   height: 28px;
+  border: none;
   mask-repeat: no-repeat;
   mask-size: 100%;
   mask-image: url(../../../../public/box.svg);
+  transition: mask 1s ease-in-out;
+}
+
+.filled {
+  mask-image: url(../../../../public/box-filled.svg);
 }
