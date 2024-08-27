@@ -1,0 +1,7 @@
+@use "@/public/global_vars.scss" as GV;
+
+.stats_card {
+  @include GV.card;
+  background-image: radial-gradient(circle at top 30% left 15%, rgba(0, 255, 148, 0.3) 0%, transparent 40%),
+                    radial-gradient(circle at bottom 30% right 15%, rgba(223, 166, 21, 0.3) 0%, transparent 40%);
+}
