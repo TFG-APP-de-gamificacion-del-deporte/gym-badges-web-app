@@ -29,5 +29,4 @@ export async function getCurrentWeek() {
 
 export async function setWeek(newWeek: Array<boolean>) {
   currentWeek = newWeek;
-  revalidatePath("@/components/dashboard/streak-card");
 }

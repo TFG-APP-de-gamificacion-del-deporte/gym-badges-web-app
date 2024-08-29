@@ -12,7 +12,7 @@ export default async function StreakCard() {
       <h2>Your Streak</h2>
       <div className={styles.streak_count}>
         <FireIcon className={styles.icon}/>
-        <p>{streak.toString()} week{streak > 1 ? "s" : ""}</p>
+        <h3>{streak.toString()} week{streak > 1 ? "s" : ""}</h3>
       </div>
       <WeekBar initialWeek={currentWeek}/>
     </div>
