@@ -1,0 +1,24 @@
+@use "@/public/global_vars.scss" as GV;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin: 15px 30px;
+}
+
+.link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.link_active {
+  color: lighten(GV.$purple, 10%);
+  filter: drop-shadow(0 0 8px GV.$purple);
+}
+
+.icon {
+  @include GV.icon_small;
+}

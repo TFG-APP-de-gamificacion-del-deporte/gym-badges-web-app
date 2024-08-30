@@ -10,14 +10,12 @@ $gradient: (
 );
 
 .vertical {
-  margin: 10px;
   width: 2px;
 
   background: linear-gradient($gradient);
 }
 
 .horizontal {
-  margin: 10px;
   height: 2px;
 
   background: linear-gradient(90deg, $gradient);

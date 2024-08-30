@@ -1,5 +1,5 @@
 import styles from "@/components/dashboard/streak-card/streak-card.module.scss"
-import { FireIcon } from "@heroicons/react/24/solid"
+import FireIcon from "@heroicons/react/24/solid/FireIcon";
 import WeekBar from "./week-bar/week-bar";
 import { getCurrentWeek, getStreak } from "@/lib/streak-info";
 
