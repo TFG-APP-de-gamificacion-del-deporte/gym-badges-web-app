@@ -10,19 +10,23 @@ const LINKS = [
   { 
     name: 'Badges', 
     href: '/', 
-    icon: <CheckBadgeIcon className={styles.icon}/> },
+    icon: <CheckBadgeIcon className={styles.icon}/> 
+  },
   { 
     name: 'Rankings', 
     href: '/rankings', 
-    icon: <StarIcon className={styles.icon}/> },
+    icon: <StarIcon className={styles.icon}/> 
+  },
   { 
     name: 'Friends', 
     href: '/friends', 
-    icon: <UserIcon className={styles.icon}/> },
+    icon: <UserIcon className={styles.icon}/> 
+  },
   { 
     name: 'Stats', 
     href: '/stats', 
-    icon: <ChartBarIcon className={styles.icon}/> },
+    icon: <ChartBarIcon className={styles.icon}/> 
+  },
 ];
 
 export default function Header() {

@@ -7,16 +7,22 @@
   margin: 15px 30px;
 }
 
+$transition: filter 0.5s, color 0.5s ease-out;
+
 .link {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
+
+  transition: $transition;
 }
 
 .link_active {
   color: lighten(GV.$purple, 10%);
   filter: drop-shadow(0 0 8px GV.$purple);
+
+  transition: $transition;
 }
 
 .icon {
