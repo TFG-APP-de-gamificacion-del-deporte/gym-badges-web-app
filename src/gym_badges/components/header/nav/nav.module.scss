@@ -1,13 +1,6 @@
 @use "@/public/global_vars.scss" as GV;
 
-.header {
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  margin: 15px 30px;
-}
-
-$transition: filter 0.5s ease-out, color 0.5s ease-out;
+$transition: filter 0.2s ease-out, color 0.2s ease-out;
 
 .link {
   display: flex;
@@ -25,6 +18,6 @@ $transition: filter 0.5s ease-out, color 0.5s ease-out;
   transition: $transition;
 }
 
-.gap {
-  flex-grow: 1
+.icon {
+  @include GV.icon_small;
 }

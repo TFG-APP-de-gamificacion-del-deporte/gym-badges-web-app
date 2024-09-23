@@ -1,0 +1,46 @@
+@use "@/public/global_vars.scss" as GV;
+
+// Number boxes in the exp bar.
+// [!] Need to be the same as the .tsx variables
+$n_boxes: 10;
+$n_boxes_mobile: 5;
+
+@function calcRgbaColor($index) {
+  $start: $index - 1;
+  $end: $index;
+  @return (
+    mix(GV.$red, GV.$purple, (1-$start/$n_boxes)*100), 
+    mix(GV.$red, GV.$purple, (1-$end/$n_boxes)*100)
+  );
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.bar {
+  display: flex;
+  flex-direction: row;
+
+  @for $i from 1 through $n_boxes {
+    div:nth-child(#{$i}) {
+      background: linear-gradient(to right, calcRgbaColor($i));
+    }
+  }
+}
+
+.box {
+  width: 40px;
+  height: 28px;
+  mask-repeat: no-repeat;
+  mask-size: 100%;
+  mask-image: url(../../../public/box.svg);
+  transition: mask 1s ease-in-out;
+}
+
+.filled {
+  mask-image: url(../../../public/box-filled.svg);
+}
