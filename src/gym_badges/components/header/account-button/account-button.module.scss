@@ -1,0 +1,34 @@
+@use "@/public/global_vars.scss" as GV;
+
+.box {
+  $skew: -22deg;
+  $transition: background 0.2s ease-out, filter 0.2s ease-out; 
+
+  background-color: transparent;
+  border: 3px solid GV.$purple;
+  border-radius: 8px;
+
+  transform: skew($skew);
+
+  padding: 3px 12px;
+
+  transition: $transition;
+
+  &:hover {
+    background-color: rgb(GV.$purple, 0.2);
+    filter: drop-shadow(0 0 8px GV.$purple);
+    transition: $transition;
+  }
+
+  svg {
+    transform: skew(-$skew);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.icon {
+  @include GV.icon_mid;
+}

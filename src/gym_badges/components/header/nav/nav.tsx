@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { CheckBadgeIcon, StarIcon, UserIcon, ChartBarIcon } from "@heroicons/react/24/solid";
+import { CheckBadgeIcon, StarIcon, UsersIcon, ChartBarIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
-import { Suspense } from "react";
 import { usePathname } from "next/navigation";
 import styles from "./nav.module.scss";
 
@@ -21,7 +20,7 @@ const LINKS = [
   { 
     name: 'Friends', 
     href: '/friends', 
-    icon: <UserIcon className={styles.icon}/> 
+    icon: <UsersIcon className={styles.icon}/> 
   },
   { 
     name: 'Stats', 

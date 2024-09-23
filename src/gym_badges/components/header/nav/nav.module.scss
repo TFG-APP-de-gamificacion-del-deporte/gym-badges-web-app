@@ -9,6 +9,11 @@ $transition: filter 0.2s ease-out, color 0.2s ease-out;
   gap: 5px;
 
   transition: $transition;
+
+  &:hover {
+    filter: drop-shadow(0 0 8px GV.$purple);
+    transition: $transition;
+  }
 }
 
 .link_active {

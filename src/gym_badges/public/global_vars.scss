@@ -15,6 +15,11 @@ $purple: rgb(140, 25, 231);
   width: 32px;
 }
 
+// Icon sizes
+@mixin icon_mid {
+  width: 28px;
+}
+
 // Icon size
 @mixin icon_small {
   width: 1.22rem;
