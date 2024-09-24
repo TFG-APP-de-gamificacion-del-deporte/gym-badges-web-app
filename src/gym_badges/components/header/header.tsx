@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <Nav/>
-      <div className={styles.gap}></div>
+      <div className={styles.air}></div>
       <LevelBar/>
       <AccountButton/>
     </div>

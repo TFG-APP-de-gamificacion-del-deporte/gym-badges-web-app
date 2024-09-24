@@ -33,7 +33,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className={styles.navbar}>
       {LINKS.map(link => (
         <Link 
           key={link.name}
@@ -47,6 +47,6 @@ export default function Nav() {
           <h3>{link.name}</h3>
         </Link>
       ))}
-    </>
+    </div>
   )
 }

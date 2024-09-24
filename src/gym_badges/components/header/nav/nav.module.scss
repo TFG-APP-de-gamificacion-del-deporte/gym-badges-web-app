@@ -1,18 +1,30 @@
 @use "@/public/global_vars.scss" as GV;
 
-$transition: filter 0.2s ease-out, color 0.2s ease-out;
+$transition: all 0.3s ease-out;
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
 
 .link {
+  border-radius: GV.$corner-radius;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 5px;
-
+  padding: 0 10px;
+  
   transition: $transition;
-
+  
   &:hover {
     filter: drop-shadow(0 0 8px GV.$purple);
+    background-color: rgb(GV.$purple, 0.2);
+
     transition: $transition;
+    transition-duration: 0.1s;
   }
 }
 
