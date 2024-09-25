@@ -21,7 +21,7 @@ $transition: all 0.3s ease-out;
   
   &:hover {
     filter: drop-shadow(0 0 8px GV.$purple);
-    background-color: rgb(GV.$purple, 0.2);
+    background-color: rgb(GV.$purple, 0.5);
 
     transition: $transition;
     transition-duration: 0.1s;
@@ -36,5 +36,5 @@ $transition: all 0.3s ease-out;
 }
 
 .icon {
-  @include GV.icon_small;
+  @include GV.icon-small;
 }

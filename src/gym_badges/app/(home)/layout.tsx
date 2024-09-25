@@ -7,12 +7,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={styles.left_layout}>
-      <Dashboard></Dashboard>
-      <LineSeparator vertical></LineSeparator>
-      <div className={styles.header_layout}>
-        <Header></Header>
-        <LineSeparator></LineSeparator>
+    <div className={styles.layout}>
+      <Header/>
+      <div className={styles.dashboard_main_layout}>
+        <Dashboard/>
         <main>{children}</main>
       </div>
     </div>

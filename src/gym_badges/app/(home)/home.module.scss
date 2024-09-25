@@ -1,10 +1,14 @@
-.left_layout {
-  display: flex;
-  flex-direction: row;
-}
+@use "@/public/global_vars.scss" as GV;
 
-.header_layout {
+.layout {
+  height: 100vh;
+
   display: flex;
   flex-direction: column;
+}
+
+.dashboard_main_layout {
+  display: flex;
+  flex-direction: row;
   flex-grow: 1;
 }

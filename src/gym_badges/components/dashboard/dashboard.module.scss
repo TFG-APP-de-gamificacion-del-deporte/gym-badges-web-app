@@ -1,8 +1,46 @@
+@use "@/public/global_vars.scss" as GV;
+
 .dashboard {
-  height: 100vh;
-  margin: 0px 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px;
+}
+
+.collapse_button {
+  $transition: all 0.2s ease-out; 
 
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  justify-content: center;
+
+  button {
+    background-color: transparent;
+    border: none;
+    border-radius: GV.$corner-radius;
+    margin-left: 15px;
+    transition: $transition;
+    padding: 8px 5px 8px 3px;
+    
+    &:hover {
+      background-color: rgb(GV.$purple, 0.5);
+      filter: drop-shadow(0 0 8px GV.$purple);
+      transition: $transition;
+    }
+  }
+
+  svg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.icon {
+  @include GV.icon-mid;
 }

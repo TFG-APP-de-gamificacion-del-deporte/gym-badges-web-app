@@ -3,7 +3,6 @@
 // Number boxes in the exp bar.
 // [!] Need to be the same as the .tsx variables
 $n_boxes: 10;
-$n_boxes_mobile: 5;
 
 @function calcRgbaColor($index) {
   $start: $index - 1;
@@ -22,6 +21,10 @@ $n_boxes_mobile: 5;
 }
 
 .bar {
+  @include GV.medium-screen {
+    display: none; 
+  }
+  
   display: flex;
   flex-direction: row;
 
@@ -38,7 +41,6 @@ $n_boxes_mobile: 5;
   mask-repeat: no-repeat;
   mask-size: 100%;
   mask-image: url(../../../public/box.svg);
-  transition: mask 1s ease-in-out;
 }
 
 .filled {
