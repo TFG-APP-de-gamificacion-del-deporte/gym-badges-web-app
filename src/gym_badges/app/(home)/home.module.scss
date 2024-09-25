@@ -8,6 +8,10 @@
 }
 
 .dashboard_main_layout {
+  @include GV.mobile-screen {
+    flex-direction: column;
+  }
+
   display: flex;
   flex-direction: row;
   flex-grow: 1;
