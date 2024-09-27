@@ -32,19 +32,16 @@ export default function WeekBar({ initialWeek }: { initialWeek: WeekBarProps }) 
   }, [debouncedWeek]);
 
   return (
-    <>
-      <p>This Week</p>
-      <div className={styles.container}>
-        {Array.from({length: N_DAYS}).map((_, index) => (
-          <div className={styles.day} key={index}>
-            <button onClick={() => handleDayFill(index)} className={clsx(
-              styles.box, 
-              { [styles.filled]: currentWeek.at(index) }
-            )}/>
-            <small>{DAYS[index]}</small>
-          </div>
-        ))}
-      </div>
-    </>
+    <div className={styles.container}>
+      {Array.from({length: N_DAYS}).map((_, index) => (
+        <div className={styles.day} key={index}>
+          <button onClick={() => handleDayFill(index)} className={clsx(
+            styles.box, 
+            { [styles.filled]: currentWeek.at(index) }
+          )}/>
+          <small>{DAYS[index]}</small>
+        </div>
+      ))}
+    </div>
   )
 }

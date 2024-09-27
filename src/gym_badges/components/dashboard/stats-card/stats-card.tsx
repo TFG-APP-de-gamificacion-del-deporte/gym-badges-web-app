@@ -14,22 +14,22 @@ export default function StatsCard({ statsCardProps }: { statsCardProps: StatsCar
       <h2>Stats</h2>
 
       <div className={styles.stats}>
-
+        {/* WEIGHT BOX */}
         <div className={clsx(styles.box, styles.green_border)}>
           <div>
             <h3>{statsCardProps.weight} KG</h3>
             <p>Weight</p>
           </div>
         </div>
-
+        {/* FAT BOX */}
         <div className={clsx(styles.box, styles.yellow_border)}>
           <div>
             <h3>{statsCardProps.fat}%</h3>
             <p>Fat</p>
           </div>
         </div>
-        
       </div>
+      
     </div>
   )
 }

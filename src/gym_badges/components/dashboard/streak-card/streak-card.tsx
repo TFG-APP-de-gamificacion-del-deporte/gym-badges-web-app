@@ -12,12 +12,19 @@ export type StreakCardProps = {
 export default function StreakCard({ streakCardProps }: { streakCardProps: StreakCardProps }) {
   return (
     <div className={styles.streak_card}>
-      <h2>Your Streak</h2>
-      <div className={styles.streak_count}>
-        <FireIcon className={styles.icon}/>
-        <h3>{streakCardProps.streak.toString()} week{streakCardProps.streak > 1 ? "s" : ""}</h3>
+      {/* TITLE AND STREAK */}
+      <div className={styles.streak}>
+        <h2>Your Streak</h2>
+        <div className={styles.streak_count}>
+          <FireIcon className={styles.icon}/>
+          <h3>{streakCardProps.streak.toString()} week{streakCardProps.streak > 1 ? "s" : ""}</h3>
+        </div>
       </div>
-      <WeekBar initialWeek={streakCardProps.currentWeek}/>
+      {/* WEEK BAR */}
+      <div className={styles.this_week}>
+        <p>This Week</p>
+        <WeekBar initialWeek={streakCardProps.currentWeek}/>
+      </div>
     </div>
   );
 }
