@@ -1,7 +1,7 @@
 import Dashboard from "@/components/dashboard/dashboard";
 import Header from "@/components/header/header";
 import styles from "@/app/(home)/home.module.scss";
-import LineSeparator from "@/components/line-separator/line-separator";
+import { Suspense } from "react";
 
 export default function RootLayout({
   children,
@@ -10,7 +10,9 @@ export default function RootLayout({
     <div className={styles.layout}>
       <Header/>
       <div className={styles.dashboard_main_layout}>
-        <Dashboard/>
+        <Suspense fallback={"Loading Dashboard..."} >
+          <Dashboard/>
+        </Suspense>
         <main>{children}</main>
       </div>
     </div>

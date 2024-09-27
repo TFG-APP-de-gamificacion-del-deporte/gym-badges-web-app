@@ -1,33 +1,12 @@
-import styles from "./dashboard.module.scss";
-import StreakCard from "@/components/dashboard/streak-card/streak-card";
-import { Suspense } from "react";
-import StatsCard from "./stats-card/stats-card";
-import LineSeparator from "../line-separator/line-separator";
-import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { getStats } from "@/lib/stats-info";
+import ClientDashboard from "./client-dashboard";
+import { getCurrentWeek, getStreak } from "@/lib/streak-info";
 
-export default function Dashboard() {
-  return (
-    <div className={styles.dashboard}>
-      
-      <div className={styles.widgets}>
-        <Suspense fallback={<>Loading Streak...</>}>
-        {/* TODO Streak card loading fallback  */}
-          <StreakCard/>
-        </Suspense>
-        {/* TODO Streak card loading fallback  */}
-        <Suspense fallback={<>Loading Stats...</>}>
-          <StatsCard/>
-        </Suspense>
-      </div>
+export default async function Dashboard() {
+  const stats = await getStats();
 
-      <LineSeparator vertical/>
+  const streak = await getStreak();
+  const currentWeek = await getCurrentWeek();
 
-      <div className={styles.collapse_button}>
-        <button>
-          <ChevronLeftIcon className={styles.icon}/>
-        </button>
-      </div>
-
-    </div>
-  );
+  return <ClientDashboard streakCardProps={{streak, currentWeek}} statsCardProps={stats} />
 }

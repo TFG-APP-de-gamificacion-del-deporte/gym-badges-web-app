@@ -11,7 +11,10 @@ const N_DAYS = 7; // [!] Needs to be the same as the .scss variable
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 
-export default function WeekBar({ initialWeek }: { initialWeek: Array<boolean> }) {
+export type WeekBarProps = boolean[];
+
+
+export default function WeekBar({ initialWeek }: { initialWeek: WeekBarProps }) {
   const [currentWeek, setCurrentWeek] = useState(initialWeek);
   const debouncedWeek = useDebounce(currentWeek, 500);
 

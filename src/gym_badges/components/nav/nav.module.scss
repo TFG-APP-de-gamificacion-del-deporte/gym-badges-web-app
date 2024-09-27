@@ -30,7 +30,7 @@ $transition: all 0.3s ease-out;
 
 .link_active {
   color: lighten(GV.$purple, 10%);
-  filter: drop-shadow(0 0 8px GV.$purple);
+  filter: drop-shadow(0 0 7px GV.$purple);
 
   transition: $transition;
 }

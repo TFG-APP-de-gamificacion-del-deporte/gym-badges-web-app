@@ -2,10 +2,10 @@ import styles from "@/components/line-separator/line-saparator.module.scss";
 
 export default function LineSeparator({
   vertical = false,
-  text,
+  hidden,
 }: {
   vertical?: boolean;
-  text?: string;
+  hidden?: boolean;
 }) {
-  return <div className={vertical ? styles.vertical : styles.horizontal}></div>;
+  return <div className={vertical ? styles.vertical : styles.horizontal} hidden={hidden}/>;
 }
