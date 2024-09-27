@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import styles from "./week-bar.module.scss"
 import { useEffect, useState } from "react";
-import useDebounce from "@/lib/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 import { setWeek } from "@/lib/streak-info";
 
 

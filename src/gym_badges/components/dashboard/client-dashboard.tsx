@@ -1,11 +1,12 @@
 "use client";
 
 import styles from "./client-dashboard.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StatsCard, { StatsCardProps } from "./stats-card/stats-card";
 import LineSeparator from "../line-separator/line-separator";
-import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import StreakCard, { StreakCardProps } from "./streak-card/streak-card";
+import useScreenSize from "@/hooks/useScreenSize";
 
 type ClientDashboardProps = {
   streakCardProps: StreakCardProps;
@@ -14,8 +15,25 @@ type ClientDashboardProps = {
 
 export default function ClientDashboard({ statsCardProps, streakCardProps }: ClientDashboardProps) {
   const [hidden, setHidden] = useState(false);
+  const [usedButton, setUsedButton] = useState(false);
+  const { width } = useScreenSize();
 
-  // TODO Change chevron icon
+  const toggleHidden = () => {
+    setUsedButton(true);
+    setHidden(!hidden);
+  }
+
+  useEffect(() => {
+    if (usedButton && hidden) { return }  // Used to hide --> Keep hided
+
+    if (!usedButton && width <= 1000) { 
+      setHidden(true) 
+    }
+    else if (width > 1000) { 
+      setHidden(false);
+      setUsedButton(false);
+    }
+  }, [width]);
 
   return (
     <div className={styles.dashboard}>
@@ -31,8 +49,9 @@ export default function ClientDashboard({ statsCardProps, streakCardProps }: Cli
       {!hidden && <LineSeparator vertical/>}
 
       <div className={styles.collapse_button}>
-        <button>
-          <ChevronLeftIcon className={styles.icon} onClick={() => setHidden(!hidden)}/>
+        <button onClick={toggleHidden}>
+          {!hidden && <ChevronLeftIcon className={styles.icon} />}
+          {hidden && <ChevronRightIcon className={styles.icon} />}
         </button>
       </div>
 
