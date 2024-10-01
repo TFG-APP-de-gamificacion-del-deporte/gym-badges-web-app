@@ -7,18 +7,18 @@ import Nav from "../nav/nav";
 
 export default function Header() {
   return (
-    <div className={styles.header_container}>
+    <>
       <div className={styles.header}>
         <Logo/>
-        <div className={styles.air}/>
-        <div className={styles.nav_wrapper}>
+        <div className={styles.nav_container}>
           <Nav/>
         </div>
-        <div className={styles.air2}/>
-        <LevelBar/>
-        <AccountButton/>
+        <div className={styles.account_container}>
+          <LevelBar/>
+          <AccountButton/>
+        </div>
       </div>
       <LineSeparator/>
-    </div>
+    </>
   );
 }

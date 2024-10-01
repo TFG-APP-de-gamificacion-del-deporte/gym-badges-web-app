@@ -9,14 +9,8 @@ $gradient: (
   rgba(0, 0, 0, 0) 100%
 );
 
-.vertical {
-  width: 2px;
-
-  background: linear-gradient($gradient);
-}
-
-.horizontal {
-  height: 2px;
-
-  background: linear-gradient(90deg, $gradient);
+.line {
+  align-self: stretch;
+  border: 1px solid;
+  border-image: linear-gradient(135deg, $gradient) 1;
 }

@@ -8,8 +8,8 @@ $n_days: 7;
   $start: $index - 1;
   $end: $index;
   @return (
-    mix(GV.$red, GV.$purple, (1-$start/$n_days)*100), 
-    mix(GV.$red, GV.$purple, (1-$end/$n_days)*100)
+    mix(GV.$red, GV.$purple, (1 - $start/$n_days) * 100), 
+    mix(GV.$red, GV.$purple, (1 - $end/$n_days) * 100)
   );
 }
 
@@ -17,10 +17,11 @@ $n_days: 7;
   margin-top: 8px;
   display: flex;
   flex-direction: row;
+  gap: 8px;
 
   @for $i from 1 through $n_days {
-    div:nth-child(#{$i}) .box {
-      background: linear-gradient(to right, calcRgbaColor($i));
+    div:nth-child(#{$i}) > .box::before {
+      background: linear-gradient(to right, calcRgbaColor($i)) border-box;
     }
   }
 }
@@ -31,20 +32,38 @@ $n_days: 7;
   gap: 3px;
 
   small {
-    width: 30px;
     text-align: center;
+    translate: -3px;
   }
 }
 
 .box {
-  width: 40px;
-  height: 28px;
+  height: 26px;
+  width: 30px;
   border: none;
-  mask-repeat: no-repeat;
-  mask-size: 100%;
-  mask-image: url(../../../../public/box.svg);
+  background-color: transparent;
+  position: relative;
+  transform: skew(-20deg);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px; 
+    border: 3px solid transparent;
+    mask:
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(#fff 0 0);
+
+    mask-composite: exclude;
+  }
 }
 
 .filled {
-  mask-image: url(../../../../public/box-filled.svg);
+  &::before {
+    mask: linear-gradient(#fff 0 0);
+  }
 }

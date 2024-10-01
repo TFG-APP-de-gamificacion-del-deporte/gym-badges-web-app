@@ -18,25 +18,31 @@
   @include GV.small-screen {
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 0px;
+  }
+}
 
-    div {
-      flex-grow: 1;
-    }
+.separator_container {
+  display: flex;
+
+  @include GV.small-screen {
+    display: none;
   }
 }
 
 .collapse_button {
-  $transition: all 0.2s ease-out; 
+  $transition: background-color 0.2s ease-out, filter 0.2s ease-out; 
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   button {
     background-color: transparent;
     border: none;
     border-radius: GV.$corner-radius;
-    margin-left: 15px;
+    margin: 15px;
     transition: $transition;
     padding: 8px 5px 8px 3px;
     
@@ -45,12 +51,24 @@
       filter: drop-shadow(0 0 8px GV.$purple);
       transition: $transition;
     }
+
+    @include GV.small-screen {
+      transform: rotate(90deg);
+    }
   }
 
   svg {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+.flip_button {
+  transform: scaleX(-1) !important;
+  
+  @include GV.small-screen {
+    transform: rotate(90deg) scaleX(-1) !important; 
   }
 }
 

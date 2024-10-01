@@ -6,6 +6,7 @@ import StatsCard, { StatsCardProps } from "./stats-card/stats-card";
 import LineSeparator from "../line-separator/line-separator";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import StreakCard, { StreakCardProps } from "./streak-card/streak-card";
+import clsx from "clsx";
 
 type ClientDashboardProps = {
   streakCardProps: StreakCardProps;
@@ -30,12 +31,13 @@ export default function ClientDashboard({ statsCardProps, streakCardProps }: Cli
         </div>
       }
 
-      {!hidden && <LineSeparator vertical/>}
+      <div className={styles.separator_container}>
+        {!hidden && <LineSeparator />}
+      </div>
 
       <div className={styles.collapse_button}>
-        <button onClick={toggleHidden}>
-          {!hidden && <ChevronLeftIcon className={styles.icon} />}
-          {hidden && <ChevronRightIcon className={styles.icon} />}
+        <button className={clsx({[styles.flip_button]: hidden})} onClick={toggleHidden}>
+          <ChevronLeftIcon className={styles.icon} />
         </button>
       </div>
 
