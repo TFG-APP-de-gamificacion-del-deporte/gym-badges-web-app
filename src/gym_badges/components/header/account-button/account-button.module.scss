@@ -1,7 +1,7 @@
 @use "@/public/global_vars.scss" as GV;
 
 .box {
-  $skew: -22deg;
+  $skew: -20deg;
   $transition: background 0.2s ease-out, filter 0.2s ease-out; 
 
   background-color: transparent;

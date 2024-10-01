@@ -38,28 +38,9 @@ $n_days: 7;
 }
 
 .box {
-  height: 26px;
-  width: 30px;
-  border: none;
+  @include GV.skewed_box;
   background-color: transparent;
-  position: relative;
-  transform: skew(-20deg);
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 5px; 
-    border: 3px solid transparent;
-    mask:
-      linear-gradient(#fff 0 0) padding-box, 
-      linear-gradient(#fff 0 0);
-
-    mask-composite: exclude;
-  }
+  border: none;
 }
 
 .filled {
