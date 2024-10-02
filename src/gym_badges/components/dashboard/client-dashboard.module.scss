@@ -19,6 +19,10 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 0px;
+
+    & > div {
+      flex-grow: 1;
+    }
   }
 }
 
@@ -41,7 +45,7 @@
   button {
     background-color: transparent;
     border: none;
-    border-radius: GV.$corner-radius;
+    border-radius: GV.$corner-radius-big;
     margin: 15px;
     transition: $transition;
     padding: 8px 5px 8px 3px;

@@ -1,24 +1,30 @@
 @use "@/public/global_vars.scss" as GV;
 
-$transition: all 0.3s ease-out;
+$transition: filter 0.3s ease-out, background-color 0.3s ease-out;
 
 .navbar {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  justify-content: space-around;
+  width: 100%;
+
+  @include GV.mobile-screen {
+    padding: 0 25px;
+  }
 }
 
 .link {
-  border-radius: GV.$corner-radius;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 5px;
-  padding: 10px;
+  padding: 10px 12px;
+  border-radius: GV.$corner-radius-small;
+  flex-grow: 1;
+  
+  transform: skew(-20deg);
+  & > div {
+    transform: skew(20deg);
+  }
   
   transition: $transition;
-  
   &:hover {
     filter: drop-shadow(0 0 8px GV.$purple);
     background-color: rgb(GV.$purple, 0.5);
@@ -26,6 +32,25 @@ $transition: all 0.3s ease-out;
     transition: $transition;
     transition-duration: 0.1s;
   }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+
+    @include GV.mobile-screen {
+      flex-direction: column;
+      margin-left: -5px;
+
+      h3 {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgb(220, 220, 220);
+      }
+    }
+  }
+
 }
 
 .link_active {
@@ -37,4 +62,8 @@ $transition: all 0.3s ease-out;
 
 .icon {
   @include GV.icon-small;
+
+  @include GV.mobile-screen {
+    @include GV.icon-mid;
+  }
 }

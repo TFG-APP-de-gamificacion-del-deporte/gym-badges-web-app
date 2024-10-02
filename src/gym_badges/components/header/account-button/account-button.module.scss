@@ -6,7 +6,7 @@
 
   background-color: transparent;
   border: 3px solid GV.$purple;
-  border-radius: 8px;
+  border-radius: GV.$corner-radius-big;
 
   transform: skew($skew);
 
@@ -30,5 +30,5 @@
 }
 
 .icon {
-  @include GV.icon_mid;
+  @include GV.icon-mid;
 }

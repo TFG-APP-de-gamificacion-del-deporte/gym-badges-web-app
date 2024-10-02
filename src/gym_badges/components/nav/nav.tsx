@@ -43,8 +43,10 @@ export default function Nav() {
             { [styles.link_active]: pathname === link.href }
           )}
         >
-          {link.icon}
-          <h3>{link.name}</h3>
+          <div>
+            {link.icon}
+            <h3>{link.name}</h3>
+          </div>
         </Link>
       ))}
     </div>

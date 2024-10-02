@@ -3,7 +3,8 @@
 $red: rgb(178, 22, 22);
 $purple: rgb(140, 25, 231);
 
-$corner-radius: 10px;
+$corner-radius-big: 10px;
+$corner-radius-small: 5px;
 
 
 // ===== Responsive media queries =====
@@ -31,7 +32,7 @@ $corner-radius: 10px;
   background-color: rgba(255, 255, 255, 0.02);
   padding: 15px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
-  border-radius: $corner-radius;
+  border-radius: $corner-radius-big;
 }
 
 
@@ -49,7 +50,7 @@ $corner-radius: 10px;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 5px; 
+    border-radius: $corner-radius-small; 
     border: 3px solid transparent;
     mask:
       linear-gradient(#fff 0 0) padding-box, 
@@ -64,8 +65,8 @@ $corner-radius: 10px;
   width: 32px;
 }
 
-@mixin icon_mid {
-  width: 28px;
+@mixin icon-mid {
+  width: 24px;
 }
 
 @mixin icon-small {
