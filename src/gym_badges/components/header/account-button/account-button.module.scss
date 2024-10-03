@@ -1,25 +1,22 @@
 @use "@/public/global_vars.scss" as GV;
 
-.box {
+.button {
   $skew: -20deg;
   $transition: background 0.2s ease-out, filter 0.2s ease-out; 
 
   background-color: transparent;
   border: 3px solid GV.$purple;
   border-radius: GV.$corner-radius-big;
-
-  transform: skew($skew);
-
   padding: 3px 12px;
-
+  
   transition: $transition;
-
   &:hover {
     background-color: rgb(GV.$purple, 0.2);
     filter: drop-shadow(0 0 8px GV.$purple);
     transition: $transition;
   }
-
+  
+  transform: skew($skew);
   svg {
     transform: skew(-$skew);
 
@@ -29,6 +26,78 @@
   }
 }
 
-.icon {
+.icon_small {
+  @include GV.icon-small;
+}
+
+.icon_mid {
   @include GV.icon-mid;
+}
+
+.icon {
+  @include GV.icon;
+}
+
+
+// ===== Popover styles =====
+
+$transition: background-color 0.1s ease-out, color 0.1s ease-out, filter 0.1s ease-out;
+$button-padding: 10px;
+
+.popover {
+  margin: 15px 15px 0 auto;
+
+  @include GV.card;
+  border: none;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: GV.$corner-radius-small;
+  padding: $button-padding;
+  margin-bottom: 20px;
+
+  transition: $transition;
+  &:hover {
+    background-color: rgb(GV.$purple, 0.5);
+    filter: drop-shadow(0 0 8px GV.$purple);
+    transition: $transition;
+  }
+}
+
+.menu_button {
+  background-color: transparent;
+  border: none;
+  border-radius: GV.$corner-radius-small;
+  padding: $button-padding;
+  font-size: 1rem;
+  
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  transition: $transition;
+  &:hover {
+    background-color: rgb(GV.$purple, 0.5);
+    filter: drop-shadow(0 0 8px GV.$purple);
+    transition: $transition;
+  }
+}
+
+.logout {
+  transition: $transition;
+  &:hover {
+    // color: white;
+    background-color: GV.$red;
+    filter: drop-shadow(0 0 8px rgba(GV.$red, 0.75));
+    transition: $transition;
+  }
 }

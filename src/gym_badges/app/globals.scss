@@ -26,7 +26,7 @@ body {
   background-color: rgb(13, 11, 16);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
