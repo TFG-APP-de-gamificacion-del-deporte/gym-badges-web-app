@@ -1,8 +1,8 @@
 @use "@/public/global_vars.scss" as GV;
 
 
-$green: rgb(0, 255, 148);
-$yellow: rgb(235, 172, 15);
+$green: #00ff94;
+$yellow: #ebac0f;
 $green_gradient: radial-gradient(circle at top 20% left 10%, rgba($green, 0.3) 0%, transparent 40%);
 $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba($yellow, 0.3) 0%, transparent 40%);
 
