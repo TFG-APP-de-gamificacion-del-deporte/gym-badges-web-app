@@ -37,7 +37,7 @@ $n_boxes: 10;
 }
 
 .box {
-  @include GV.skewed_box;
+  @include GV.skewed-square;
 }
 
 .filled {

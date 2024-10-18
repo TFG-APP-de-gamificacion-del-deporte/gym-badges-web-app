@@ -1,13 +1,5 @@
 @use "@/public/global_vars.scss" as GV;
 
-.layout {
-  height: 100vh;
-  height: 100dvh;
-
-  display: flex;
-  flex-direction: column;
-}
-
 .dashboard_main_layout {
   @include GV.small-screen {
     flex-direction: column;

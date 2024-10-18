@@ -24,6 +24,12 @@ body {
     transparent 33%
   );
   background-color: #0d0b10;
+  
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
 }
 
 *, *::before, *::after {

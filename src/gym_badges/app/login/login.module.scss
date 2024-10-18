@@ -1,0 +1,79 @@
+@use "@/public/global_vars.scss" as GV;
+
+.login_layout {
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 5%;
+}
+
+.slogan {
+  text-align: center;
+  margin: 4rem 1rem;
+  font-size: clamp(1.75rem, 5vw, 4rem);
+  font-weight: 700;
+
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, GV.$red 0%, GV.$purple 100%);
+  filter: drop-shadow(0 0 10px rgba(black, 0.5));
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+
+  & > * {
+    width: min(80vw, 25rem);
+  }
+}
+
+@mixin button($border) {
+  @include GV.skewed-container($border);
+  border: none;
+  background-color: transparent;
+
+  svg {
+    @include GV.icon-mid;
+  }
+}
+
+.login {
+  @include button($border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%));
+
+  $transparency: 0.1;
+  background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%);
+  margin: 15px 0;
+}
+
+.separator {
+  width: min(90vw, 40rem);
+  position: relative;
+  top: -25px;
+  z-index: -1;
+  
+  $cut-left: calc(50% - 5rem);
+  $cut-right: calc(50% + 5rem);
+  clip-path: polygon(0% 0%, 0% 100%, $cut-left 100%, $cut-left 0, $cut-right 0, $cut-right 100%, 100% 100%, 100% 0%);
+}
+
+.google {
+  @include button($border: white);
+
+  background: white;
+  width: min-content;
+  margin-top: -2px;
+  margin-bottom: 40px;
+
+  h3 {
+    color: black;
+  }
+}
+
+.signup {
+  @include button($border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%));
+  background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%);
+}

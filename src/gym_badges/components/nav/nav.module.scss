@@ -19,9 +19,9 @@ $transition: filter 0.3s ease-out, background-color 0.3s ease-out;
   border-radius: GV.$corner-radius-small;
   flex-grow: 1;
   
-  transform: skew(-20deg);
+  transform: skew(GV.$skew);
   & > div {
-    transform: skew(20deg);
+    transform: skew(- GV.$skew);
   }
   
   transition: $transition;
@@ -61,7 +61,7 @@ $transition: filter 0.3s ease-out, background-color 0.3s ease-out;
 }
 
 .icon {
-  @include GV.icon-small;
+  @include GV.icon-text;
 
   @include GV.mobile-screen {
     @include GV.icon-mid;

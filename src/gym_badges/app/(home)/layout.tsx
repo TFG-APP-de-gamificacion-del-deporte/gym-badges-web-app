@@ -8,7 +8,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={styles.layout}>
+    <>
       <Header />
       <div className={styles.dashboard_main_layout}>
         <Suspense fallback={"Loading Dashboard..."} >
@@ -17,6 +17,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
       </div>
-    </div>
+    </>
   );
 }

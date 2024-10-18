@@ -28,18 +28,16 @@ $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba($yellow, 
 }
 
 .box {
-  $skew: -15deg;
-
   border: 3px solid;
   border-radius: GV.$corner-radius-big;
 
-  transform: skew($skew);
+  transform: skew(GV.$skew-small);
   flex-grow: 1;
 
   align-content: center;
 
   div {
-    transform: skew(-$skew);
+    transform: skew(- GV.$skew-small);
 
     display: flex;
     flex-wrap: wrap;

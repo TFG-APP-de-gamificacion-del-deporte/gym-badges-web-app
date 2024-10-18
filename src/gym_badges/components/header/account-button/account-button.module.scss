@@ -1,7 +1,6 @@
 @use "@/public/global_vars.scss" as GV;
 
 .button {
-  $skew: -20deg;
   $transition: background 0.2s ease-out, filter 0.2s ease-out; 
 
   background-color: transparent;
@@ -16,9 +15,9 @@
     transition: $transition;
   }
   
-  transform: skew($skew);
+  transform: skew(GV.$skew);
   svg {
-    transform: skew(-$skew);
+    transform: skew(- GV.$skew);
 
     display: flex;
     flex-direction: column;
@@ -27,7 +26,7 @@
 }
 
 .icon_small {
-  @include GV.icon-small;
+  @include GV.icon-text;
 }
 
 .icon_mid {

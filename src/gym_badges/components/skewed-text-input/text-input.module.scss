@@ -1,0 +1,19 @@
+@use "@/public/global_vars.scss" as GV;
+
+.text_field {
+  @include GV.skewed-container;
+
+  input {
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+
+  svg {
+    @include GV.icon-mid;
+  }
+}

@@ -38,7 +38,7 @@ $n_days: 7;
 }
 
 .box {
-  @include GV.skewed_box;
+  @include GV.skewed-square;
   background-color: transparent;
   border: none;
 }
