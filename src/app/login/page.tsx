@@ -16,8 +16,8 @@ export default function Login() {
       <span className={styles.slogan}>Add Progression to the Gym</span>
 
       <form action="" className={styles.login_form}>
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" />
-        <TextInput icon=<LockClosedIcon/> type="password" placeholder="Password" />
+        <TextInput icon=<EnvelopeIcon/> placeholder="Email" required />
+        <TextInput icon=<LockClosedIcon/> type="password" placeholder="Password" required />
         <button type="submit" className={styles.login}>
           <div>
             <h3>Log In</h3>
