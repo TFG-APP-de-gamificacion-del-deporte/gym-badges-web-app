@@ -7,17 +7,19 @@ export default function TextInput({
   type="text",
   placeholder,
   required=false,
+  name="",
 }: {
   icon: ReactNode,
   type?: HTMLInputTypeAttribute,
   placeholder?: string,
-  required?: boolean
+  required?: boolean,
+  name?: string,
 }) {
   return (
     <label htmlFor="input" className={styles.text_field}>
       <div>
         {icon}
-        <input type={type} id="input" placeholder={placeholder} required={required}/> 
+        <input type={type} id="input" name={name} placeholder={placeholder} required={required}/> 
       </div>
     </label>
   )
