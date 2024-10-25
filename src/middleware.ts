@@ -1,32 +1,28 @@
 import { NextRequest } from "next/server";
-
-
-export const TOKEN_KEY = "token";
-export const USERNAME_KEY = "username";
-
+import { API_ENDPOINTS, TOKEN_KEY, USER_ID_KEY } from "./config/API";
 
 export async function middleware(req: NextRequest) {
   
-  const username = req.cookies.get(USERNAME_KEY);
+  const userID = req.cookies.get(USER_ID_KEY);
   const token = req.cookies.get(TOKEN_KEY);
 
-  if (!username || !token) {
-    return Response.redirect(new URL("/login", req.url))
+  if (!userID || !token) {
+    return Response.redirect(new URL(API_ENDPOINTS.login, req.url))
   }
   
   // Validate Token
   try {
-    const res = await fetch(`${process.env.API_URL}/login-with-token`, {
+    const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.loginWithToken}`, {
       method: "GET",
       headers: {
-        [USERNAME_KEY]: username.value,
+        [USER_ID_KEY]: userID.value,
         [TOKEN_KEY]: token.value,
       },
     })
 
     // Invalid token
     if (!res.ok) {
-      return Response.redirect(new URL("/login", req.url))
+      return Response.redirect(new URL(API_ENDPOINTS.login, req.url))
     }
 
     console.debug("User loged in using token");
