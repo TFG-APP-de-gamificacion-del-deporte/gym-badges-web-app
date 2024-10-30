@@ -2,7 +2,7 @@
 
 import { API_ENDPOINTS, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 type FormResponse = { message: string } | null
 
@@ -50,7 +50,7 @@ export default async function login(prevState: any, formData: FormData): Promise
 
   } catch (error) {
     // API connection error
-    return { message: "Connection Error" }
+    redirect("/internal-error");
   } 
 
   redirect("/");

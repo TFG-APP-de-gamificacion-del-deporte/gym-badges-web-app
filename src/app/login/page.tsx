@@ -23,8 +23,7 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        {/* TODO Poner type="email" */}
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" required name="email" />
+        <TextInput icon=<EnvelopeIcon/> placeholder="Email" required name="email" />  {/* TODO Poner type="email" */}
         <TextInput icon=<LockClosedIcon/> type="password" placeholder="Password" required name="password" />
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>

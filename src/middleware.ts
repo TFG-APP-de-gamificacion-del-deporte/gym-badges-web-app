@@ -1,5 +1,6 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { API_ENDPOINTS, TOKEN_KEY, USER_ID_KEY } from "./config/API";
+
 
 export async function middleware(req: NextRequest) {
   
@@ -30,10 +31,16 @@ export async function middleware(req: NextRequest) {
 
   } catch (error) {
     // API connection error
-    return { message: "Connection Error" }
+    return Response.redirect(new URL("internal-error", req.url))
   } 
 }
 
+// [!] Append any page that requires user to be logged in
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|login).*)'],
+  matcher: [
+    "/",
+    "/friends",
+    "/rankings",
+    "/stats",
+  ]
 }
