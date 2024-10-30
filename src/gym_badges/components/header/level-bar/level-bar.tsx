@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import styles from "./level-bar.module.scss"
-import { getExp, getLevel } from "@/actions/stats-info";
+import { getExp, getLevel } from "@/lib/stats-info";
 
 
 const N_BOXES = 10;  // [!] Needs to be the same as the .scss variable
