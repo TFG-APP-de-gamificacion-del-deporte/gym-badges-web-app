@@ -88,14 +88,23 @@ $skew-small: -15deg;
 
   // Undo skew
   transform: skew($skew);
-  div {
+  & > * {
     transform: skew(-$skew);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   }
+}
 
+@mixin skewed-button($border, $background) {
+  @include skewed-container($border);
+  border: none;
+  background: $background;
+
+  svg {
+    @include icon-mid;
+  }
 }
 
 

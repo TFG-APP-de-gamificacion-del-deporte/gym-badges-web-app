@@ -1,0 +1,49 @@
+@use "@/public/global_vars.scss" as GV;
+
+.signup_layout {
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 5%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  line-height: 0px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  }  
+}
+
+.signup {
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%)
+  );
+}
+
+.login_form {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  } 
+}
+
+.login {
+  $transparency: 0.1;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%)
+  );
+}
