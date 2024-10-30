@@ -4,7 +4,7 @@ import clsx from "clsx";
 import styles from "./week-bar.module.scss"
 import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
-import { setWeek } from "@/lib/streak-info";
+import { setWeek } from "@/actions/streak-info";
 
 
 const N_DAYS = 7; // [!] Needs to be the same as the .scss variable

@@ -1,6 +1,6 @@
-import { getStats } from "@/lib/stats-info";
+import { getStats } from "@/actions/stats-info";
 import ClientDashboard from "./client-dashboard";
-import { getCurrentWeek, getStreak } from "@/lib/streak-info";
+import { getCurrentWeek, getStreak } from "@/actions/streak-info";
 
 export default async function Dashboard() {
   const stats = await getStats();
