@@ -16,10 +16,10 @@ export default function Signup() {
         <br />
         <TextInput icon=<IdentificationIcon/> placeholder="Name" required name="name" />
         <TextInput icon=<AtSymbolIcon/> placeholder="Username" required name="user_id" />
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" required name="email" />
+        <TextInput icon=<EnvelopeIcon/> placeholder="Email" type="email" required name="email" />
         <br />
-        <TextInput icon=<LockClosedIcon/> placeholder="Password" required name="password" />
-        <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" required name="password2" />
+        <TextInput icon=<LockClosedIcon/> placeholder="Password" type="password" required name="password" />
+        <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" type="password" required name="password2" />
         <br />
         {/* SUBMIT BUTTON */}
         <button type="submit" className={styles.signup}>

@@ -10,7 +10,7 @@ let level = 11
 let exp = 230
 
 
-// TODO Make fetching data non server functions
+// TODO Make fetching data non server functions (Not sure anymore)
 export async function getStats(): Promise<StatsCardProps> {
   return { weight, fat }
 }

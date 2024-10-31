@@ -2,14 +2,14 @@
 
 import { API_ENDPOINTS, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 type FormResponse = { message: string } | null
 
 export default async function login(prevState: any, formData: FormData): Promise<FormResponse> {
   const loginInfo = {
     [USER_ID_KEY]: formData.get('email'),
-    [PASSWORD_KEY]: formData.get('password'),
+    [PASSWORD_KEY]: formData.get(PASSWORD_KEY),
   }
 
   // Validate data
