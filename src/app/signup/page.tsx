@@ -3,10 +3,11 @@
 import Logo from "@/components/logo/logo";
 import styles from "./signup.module.scss"
 import TextInput from "@/components/skewed-text-input/text-input";
+import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import { AtSymbolIcon, EnvelopeIcon, IdentificationIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { useFormState } from "react-dom";
+import { ArrowUpTrayIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import signup from "@/actions/signup";
-import { XCircleIcon } from "@heroicons/react/16/solid";
 
 export default function Signup() {
   const initialState = { message: "" }
@@ -15,23 +16,26 @@ export default function Signup() {
   return (
     <div className={styles.signup_layout}>
       <Logo/>
-
       <form action={formAction} className={styles.form}>
-        <p>IMAGE</p>
-        <input type="file"/>
-        <br />
-        <TextInput icon=<IdentificationIcon/> placeholder="Name" required name="name" />
-        <TextInput icon=<AtSymbolIcon/> placeholder="Username" required name="user_id" />
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" type="email" required name="email" />
-        <br />
-        <TextInput icon=<LockClosedIcon/> placeholder="Password" type="password" required name="password" />
-        <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" type="password" required name="password2" />
+        <DefaultProfilePicture/>
+        <label htmlFor="files" className={styles.upload_picture}>
+          <ArrowUpTrayIcon/>
+          <p>Select Image</p>
+          <input type="file" accept="image/png, image/jpeg" id="files"/>
+        </label>
+        <br/>
+        <TextInput icon=<IdentificationIcon/> placeholder="Name" required name="name"/>
+        <TextInput icon=<AtSymbolIcon/> placeholder="Username" required name="user_id"/>
+        <TextInput icon=<EnvelopeIcon/> placeholder="Email" type="email" required name="email"/>
+        <br/>
+        <TextInput icon=<LockClosedIcon/> placeholder="Password" type="password" required name="password"/>
+        <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" type="password" required name="password2"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
-          <XCircleIcon /> 
+          <XCircleIcon/> 
           {state?.message}
         </span>}
-        <br />
+        <br/>
         {/* SUBMIT BUTTON */}
         <button type="submit" className={styles.signup}>
           <h3>Sign In</h3>

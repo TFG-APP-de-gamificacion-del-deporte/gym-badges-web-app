@@ -24,11 +24,11 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        <TextInput icon=<EnvelopeIcon/> required placeholder="Username" name={USER_ID_KEY} />  {/* TODO Login con email */}
-        <TextInput icon=<LockClosedIcon/> required placeholder="Password" name={PASSWORD_KEY} type="password" />
+        <TextInput icon=<EnvelopeIcon/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
+        <TextInput icon=<LockClosedIcon/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
-          <XCircleIcon /> 
+          <XCircleIcon/> 
           {state?.message}
         </span>}
         {/* SUBMIT BUTTON */}

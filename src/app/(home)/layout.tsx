@@ -9,13 +9,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Header />
+      <Header/>
       <div className={styles.dashboard_main_layout}>
         <Suspense fallback={"Loading Dashboard..."} >
-          <Dashboard />
+          <Dashboard/>
         </Suspense>
         <main>{children}</main>
-        <Footer />
+        <Footer/>
       </div>
     </>
   );

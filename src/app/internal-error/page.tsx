@@ -5,10 +5,10 @@ import LineSeparator from "@/components/line-separator/line-separator"
 export default function InternalError() {
   return (
     <div className={styles.error_layout}>
-      <Logo />
+      <Logo/>
       <div className={styles.error}>
         <h2>
-          500<hr />
+          500<hr/>
           Internal Error
         </h2>
         <p>Please try again later :(</p>
