@@ -4,13 +4,19 @@ import Logo from "@/components/logo/logo";
 import styles from "./signup.module.scss"
 import TextInput from "@/components/skewed-text-input/text-input";
 import { AtSymbolIcon, EnvelopeIcon, IdentificationIcon, LockClosedIcon } from "@heroicons/react/24/outline";
+import { useFormState } from "react-dom";
+import signup from "@/actions/signup";
+import { XCircleIcon } from "@heroicons/react/16/solid";
 
 export default function Signup() {
+  const initialState = { message: "" }
+  const [state, formAction] = useFormState(signup, initialState)
+
   return (
     <div className={styles.signup_layout}>
       <Logo/>
 
-      <form action="" className={styles.form}>
+      <form action={formAction} className={styles.form}>
         <p>IMAGE</p>
         <input type="file"/>
         <br />
@@ -20,6 +26,11 @@ export default function Signup() {
         <br />
         <TextInput icon=<LockClosedIcon/> placeholder="Password" type="password" required name="password" />
         <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" type="password" required name="password2" />
+        {/* ERROR MESSAGE */}
+        {state?.message && <span className={styles.error}>
+          <XCircleIcon /> 
+          {state?.message}
+        </span>}
         <br />
         {/* SUBMIT BUTTON */}
         <button type="submit" className={styles.signup}>

@@ -7,5 +7,5 @@ export const EMAIL_KEY = "email";
 export const API_ENDPOINTS = {
   login: "/login",
   loginWithToken: "/login-with-token",
-  signup: "/signup",
+  signup: "/user",
 }

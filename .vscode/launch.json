@@ -9,7 +9,8 @@
       "command": "npm run dev",
       "request": "launch",
       "type": "node-terminal",
-      "cwd": "${workspaceFolder}/src"
+      "cwd": "${workspaceFolder}/src",
+      
     }
   ]
 }
