@@ -8,29 +8,57 @@ import { AtSymbolIcon, EnvelopeIcon, IdentificationIcon, LockClosedIcon } from "
 import { useFormState } from "react-dom";
 import { ArrowUpTrayIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import signup from "@/actions/signup";
+import { ChangeEvent, useRef, useState } from "react";
 
 export default function Signup() {
   const initialState = { message: "" }
   const [state, formAction] = useFormState(signup, initialState)
 
+  const [image, setImage] = useState<string>();
+  const imgInputRef = useRef<HTMLInputElement>(null);
+  
+  function handleImageUpload(evt: ChangeEvent<HTMLInputElement>) {
+    if (evt.target.files && evt.target.files[0]) {
+      setImage(URL.createObjectURL(evt.target.files[0]));
+    }
+  }
+
+  function handleRemoveImage() {
+    setImage(undefined)
+    if (imgInputRef.current) {
+      imgInputRef.current.value = "";
+    }
+  }
+
   return (
     <div className={styles.signup_layout}>
       <Logo/>
       <form action={formAction} className={styles.form}>
-        <DefaultProfilePicture/>
-        {/* TODO Display uploaded image */}
-        <label htmlFor="files" className={styles.upload_picture}>
-          <ArrowUpTrayIcon/>
-          <p>Select Image</p>
-          <input type="file" accept="image/png, image/jpeg" id="files"/>
-        </label>
+        <div className={styles.image_container}>
+          {
+            image
+            ? <img src={image as string} alt="Uploaded image" />
+            : <DefaultProfilePicture/>
+          }
+          { 
+            image &&
+            <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
+              <XCircleIcon/>
+            </button> 
+          }
+          <label htmlFor="files" className={styles.upload_picture}>
+            <ArrowUpTrayIcon/>
+            <p>Select Image</p>
+            <input type="file" accept="image/png, image/jpeg" id="files" name="image" onChange={handleImageUpload} ref={imgInputRef}/>
+          </label>
+        </div>
         <br/>
-        <TextInput icon=<IdentificationIcon/> placeholder="Name" required name="name"/>
-        <TextInput icon=<AtSymbolIcon/> placeholder="Username" required name="user_id"/>
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" type="email" required name="email"/>
+        <TextInput icon=<IdentificationIcon/> placeholder="Name"            name="name"                       required/>
+        <TextInput icon=<AtSymbolIcon/>       placeholder="Username"        name="user_id"                    required/>
+        <TextInput icon=<EnvelopeIcon/>       placeholder="Email"           name="email"      type="email"    required/>
         <br/>
-        <TextInput icon=<LockClosedIcon/> placeholder="Password" type="password" required name="password"/>
-        <TextInput icon=<LockClosedIcon/> placeholder="Repeat Password" type="password" required name="password2"/>
+        <TextInput icon=<LockClosedIcon/>     placeholder="Password"        name="password"   type="password" required/>
+        <TextInput icon=<LockClosedIcon/>     placeholder="Repeat Password" name="password2"  type="password" required/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <XCircleIcon/> 

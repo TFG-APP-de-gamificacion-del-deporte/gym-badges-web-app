@@ -16,10 +16,10 @@ export default function TextInput({
   name?: string,
 }) {
   return (
-    <label htmlFor="input" className={styles.text_field}>
+    <label htmlFor={`input-${name}`} className={styles.text_field}>
       <div>
         {icon}
-        <input type={type} id="input" name={name} placeholder={placeholder} required={required}/> 
+        <input type={type} id={`input-${name}`} name={name} placeholder={placeholder} required={required}/> 
       </div>
     </label>
   )
