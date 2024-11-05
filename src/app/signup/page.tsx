@@ -18,6 +18,7 @@ export default function Signup() {
       <Logo/>
       <form action={formAction} className={styles.form}>
         <DefaultProfilePicture/>
+        {/* TODO Display uploaded image */}
         <label htmlFor="files" className={styles.upload_picture}>
           <ArrowUpTrayIcon/>
           <p>Select Image</p>

@@ -97,13 +97,18 @@ $skew-small: -15deg;
   }
 }
 
-@mixin skewed-button($border, $background) {
+@mixin skewed-button($border, $background, $hover-color: $background) {
   @include skewed-container($border);
   border: none;
   background: $background;
+  cursor: pointer;
 
   svg {
     @include icon-mid;
+  }
+
+  &:hover {
+    background: $hover-color;
   }
 }
 

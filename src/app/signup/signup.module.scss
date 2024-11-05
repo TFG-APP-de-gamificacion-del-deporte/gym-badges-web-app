@@ -42,9 +42,11 @@
 }
 
 .signup {
+  $hover-transparency: 0.5;
   @include GV.skewed-button(
     $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%)
+    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
   );
 }
 
@@ -76,8 +78,10 @@
 
 .login {
   $transparency: 0.1;
+  $hover-transparency: 0.5;
   @include GV.skewed-button(
     $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%)
+    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
   );
 }
