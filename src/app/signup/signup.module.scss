@@ -24,6 +24,14 @@
   border: none;
   background-color: transparent;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: GV.$regular-text-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   svg {
     @include GV.icon-text;

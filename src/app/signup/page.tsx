@@ -35,23 +35,25 @@ export default function Signup() {
       <Logo/>
       <form action={formAction} className={styles.form}>
         <div className={styles.image_container}>
-          {
+          { // DEFAULT OR UPLOADED IMAGE
             image
             ? <img src={image as string} alt="Uploaded image" />
             : <DefaultProfilePicture/>
           }
-          { 
-            image &&
-            <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
-              <XCircleIcon/>
-            </button> 
+          { // UPLOAD OR DELETE BUTTON 
+            image
+            ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
+                <XCircleIcon/>
+                <p>Delete Image</p>
+              </button>
+            : <label htmlFor="files" className={styles.upload_picture}>
+                <ArrowUpTrayIcon/>
+                <p>Select Image</p>
+                <input type="file" accept="image/png, image/jpeg" id="files" name="image" onChange={handleImageUpload} ref={imgInputRef}/>
+              </label>
           }
-          <label htmlFor="files" className={styles.upload_picture}>
-            <ArrowUpTrayIcon/>
-            <p>Select Image</p>
-            <input type="file" accept="image/png, image/jpeg" id="files" name="image" onChange={handleImageUpload} ref={imgInputRef}/>
-          </label>
         </div>
+        {/* TEXT INPUTS */}
         <br/>
         <TextInput icon=<IdentificationIcon/> placeholder="Name"            name="name"                       required/>
         <TextInput icon=<AtSymbolIcon/>       placeholder="Username"        name="user_id"                    required/>
@@ -71,6 +73,7 @@ export default function Signup() {
         </button>
       </form>
 
+      {/* LOGIN BUTTON */}
       <div className={styles.login_form}>
         <p>Already have an account?</p>
         <a href="/login" className={styles.login}>
