@@ -38,23 +38,19 @@
   }
 }
 
-.upload_picture {
+.upload_picture_button {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: -3px;
   gap: 5px;
-
-  input {
-    display: none;
+  
+  &:hover {
+    text-decoration: underline;
   }
   
   svg {
     @include GV.icon-text;
-  }
-
-  &:hover {
-    text-decoration: underline;
   }
 }
 

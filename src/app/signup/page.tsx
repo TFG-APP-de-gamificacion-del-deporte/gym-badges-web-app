@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 import { ArrowUpTrayIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import signup from "@/actions/signup";
 import { ChangeEvent, useRef, useState } from "react";
+import { EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, USER_ID_KEY } from "@/config/API";
 
 export default function Signup() {
   const initialState = { message: "" }
@@ -46,21 +47,21 @@ export default function Signup() {
                 <XCircleIcon/>
                 <p>Delete Image</p>
               </button>
-            : <label htmlFor="files" className={styles.upload_picture}>
+            : <label htmlFor="files" className={styles.upload_picture_button}>
                 <ArrowUpTrayIcon/>
                 <p>Select Image</p>
-                <input type="file" accept="image/png, image/jpeg" id="files" name="image" onChange={handleImageUpload} ref={imgInputRef}/>
               </label>
           }
+          <input type="file" accept="image/png, image/jpeg" id="files" name={IMAGE_KEY} onChange={handleImageUpload} ref={imgInputRef} hidden/>
         </div>
         {/* TEXT INPUTS */}
         <br/>
-        <TextInput icon=<IdentificationIcon/> placeholder="Name"            name="name"                       required/>
-        <TextInput icon=<AtSymbolIcon/>       placeholder="Username"        name="user_id"                    required/>
-        <TextInput icon=<EnvelopeIcon/>       placeholder="Email"           name="email"      type="email"    required/>
+        <TextInput icon=<IdentificationIcon/> placeholder="Name"            name={NAME_KEY}                         required/>
+        <TextInput icon=<AtSymbolIcon/>       placeholder="Username"        name={USER_ID_KEY}                      required/>
+        <TextInput icon=<EnvelopeIcon/>       placeholder="Email"           name={EMAIL_KEY}        type="email"    required/>
         <br/>
-        <TextInput icon=<LockClosedIcon/>     placeholder="Password"        name="password"   type="password" required/>
-        <TextInput icon=<LockClosedIcon/>     placeholder="Repeat Password" name="password2"  type="password" required/>
+        <TextInput icon=<LockClosedIcon/>     placeholder="Password"        name={PASSWORD_KEY}     type="password" required/>
+        <TextInput icon=<LockClosedIcon/>     placeholder="Repeat Password" name={PASSWORD_KEY+"2"} type="password" required/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <XCircleIcon/> 

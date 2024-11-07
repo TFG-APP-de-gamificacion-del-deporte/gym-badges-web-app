@@ -1,17 +1,20 @@
 "use server";
 
-import { API_ENDPOINTS, EMAIL_KEY, NAME_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
+import { API_ENDPOINTS, EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 type FormResponse = { message: string } | null
 
 export default async function signup(prevState: any, formData: FormData): Promise<FormResponse> {
+  // TODO Upload image to a server and get the imageUrl
+  
   const signUpInfo = {
     [NAME_KEY]: formData.get(NAME_KEY) ,
     [USER_ID_KEY]: formData.get(USER_ID_KEY),
     [EMAIL_KEY]: formData.get(EMAIL_KEY),
     [PASSWORD_KEY]: formData.get(PASSWORD_KEY),
+    // [IMAGE_KEY]: imageUrl,
   }
 
   // Validate data
