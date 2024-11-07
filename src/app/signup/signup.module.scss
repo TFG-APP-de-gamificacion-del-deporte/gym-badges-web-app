@@ -1,0 +1,119 @@
+@use "@/public/global_vars.scss" as GV;
+
+.signup_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 30px 5%;
+}
+
+.image_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+  & > div, & > img {
+    width: 128px;
+  }
+}
+
+.remove_image_button {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: GV.$regular-text-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    @include GV.icon-text;
+  }
+}
+
+.upload_picture_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -3px;
+  gap: 5px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  svg {
+    @include GV.icon-text;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  line-height: 0px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  }  
+
+  img {
+    height: 128px;
+    width: 128px !important;
+    border-radius: 150px;
+  }
+}
+
+.signup {
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+  );
+}
+
+.error {
+  color: lighten(GV.$red, 10%) ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  svg {
+    @include GV.icon-text;
+  }
+}
+
+.login_form {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 15px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  } 
+}
+
+.login {
+  $transparency: 0.1;
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
+    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+  );
+}

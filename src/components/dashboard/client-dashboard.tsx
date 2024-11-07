@@ -26,18 +26,18 @@ export default function ClientDashboard({ statsCardProps, streakCardProps }: Cli
       { 
         !hidden && 
         <div className={styles.widgets}>
-            <StreakCard streakCardProps={streakCardProps} />
-            <StatsCard statsCardProps={statsCardProps} />
+            <StreakCard streakCardProps={streakCardProps}/>
+            <StatsCard statsCardProps={statsCardProps}/>
         </div>
       }
 
       <div className={styles.separator_container}>
-        {!hidden && <LineSeparator />}
+        {!hidden && <LineSeparator/>}
       </div>
 
       <div className={styles.collapse_button}>
         <button className={clsx({[styles.flip_button]: hidden})} onClick={toggleHidden}>
-          <ChevronLeftIcon className={styles.icon} />
+          <ChevronLeftIcon className={styles.icon}/>
         </button>
       </div>
 

@@ -20,11 +20,11 @@ export default function AccountButton() {
           Username
         </Link>
         <button className={styles.menu_button}>
-          <Cog6ToothIcon className={styles.icon_small} />
+          <Cog6ToothIcon className={styles.icon_small}/>
           Settings
         </button>
         <button className={clsx(styles.menu_button, styles.logout)}>
-          <ArrowLeftStartOnRectangleIcon className={styles.icon_small} />
+          <ArrowLeftStartOnRectangleIcon className={styles.icon_small}/>
           Log out
         </button>
       </div>

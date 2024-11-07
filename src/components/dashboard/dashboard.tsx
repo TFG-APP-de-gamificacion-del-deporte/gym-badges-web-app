@@ -8,5 +8,5 @@ export default async function Dashboard() {
   const streak = await getStreak();
   const currentWeek = await getCurrentWeek();
 
-  return <ClientDashboard streakCardProps={{streak, currentWeek}} statsCardProps={stats} />
+  return <ClientDashboard streakCardProps={{streak, currentWeek}} statsCardProps={stats}/>
 }

@@ -2,21 +2,22 @@
 
 import { API_ENDPOINTS, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 type FormResponse = { message: string } | null
 
 export default async function login(prevState: any, formData: FormData): Promise<FormResponse> {
   const loginInfo = {
-    [USER_ID_KEY]: formData.get('email'),
-    [PASSWORD_KEY]: formData.get('password'),
+    [USER_ID_KEY]: formData.get(USER_ID_KEY),
+    [PASSWORD_KEY]: formData.get(PASSWORD_KEY),
   }
 
   // Validate data
-  if (!loginInfo[USER_ID_KEY] || !loginInfo.password) {
-    return { message: "Invalid email or password" }
+  if (!loginInfo[USER_ID_KEY] || !loginInfo[PASSWORD_KEY]) {
+    return { message: "Invalid email or password." };
   }
 
+  // Authenticate
   try {
     const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.login}`, {
       method: "POST",
@@ -28,7 +29,7 @@ export default async function login(prevState: any, formData: FormData): Promise
 
     // Invalid login
     if (!res.ok) {
-      return { message: "Invalid email or password" }
+      return { message: "Invalid email or password." }
     }
 
     console.debug("User loged in");

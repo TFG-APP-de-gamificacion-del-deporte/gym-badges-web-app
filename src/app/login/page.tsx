@@ -10,6 +10,7 @@ import TextInput from '@/components/skewed-text-input/text-input'
 import login from '@/actions/login'
 import { useFormState } from 'react-dom';
 import { XCircleIcon } from '@heroicons/react/16/solid';
+import { PASSWORD_KEY, USER_ID_KEY } from '@/config/API';
 
 export default function Login() {
   const initialState = { message: "" }
@@ -23,11 +24,11 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        <TextInput icon=<EnvelopeIcon/> placeholder="Email" required name="email" />  {/* TODO Poner type="email" */}
-        <TextInput icon=<LockClosedIcon/> type="password" placeholder="Password" required name="password" />
+        <TextInput icon=<EnvelopeIcon/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
+        <TextInput icon=<LockClosedIcon/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
-          <XCircleIcon /> 
+          <XCircleIcon/> 
           {state?.message}
         </span>}
         {/* SUBMIT BUTTON */}

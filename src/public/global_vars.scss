@@ -2,6 +2,7 @@
 // ===== App main variables =====
 $red: #b21616;
 $purple: #8c19e7;
+$regular-text-color: #dcdcdc;
 
 $corner-radius-big: 10px;
 $corner-radius-small: 5px;
@@ -88,14 +89,28 @@ $skew-small: -15deg;
 
   // Undo skew
   transform: skew($skew);
-  div {
+  & > * {
     transform: skew(-$skew);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   }
+}
 
+@mixin skewed-button($border, $background, $hover-color: $background) {
+  @include skewed-container($border);
+  border: none;
+  background: $background;
+  cursor: pointer;
+
+  svg {
+    @include icon-mid;
+  }
+
+  &:hover {
+    background: $hover-color;
+  }
 }
 
 
