@@ -1,0 +1,107 @@
+@use "@/public/global_vars.scss" as GV;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    & > h2, & > p {
+      align-self: flex-start;
+    }
+  }
+}
+
+.image_container {
+  & > div, & > img {
+    width: 128px;
+  }
+}
+
+@mixin card {
+  @include GV.card;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+}
+
+.info_card {
+  @include card;
+  padding: 40px 0;
+
+  & > div {
+    text-align: center;
+  }
+}
+
+.top_feats_card {
+  @include card;
+
+  // Badge div
+  & > div {
+    display: flex;
+    gap: 10px;
+  }
+
+  @include GV.medium-screen {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.badge_icon {
+  $size: 75px;
+  min-width: $size;
+  width: $size;
+  height: $size;
+  border-radius: 100%;
+  background-color: rgb(54, 54, 54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 40px;
+    min-width: 40px;
+  }
+
+  @include GV.small-screen {
+    $size: 60px;
+    min-width: $size;
+    width: $size;
+    height: $size;
+    svg {
+      width: 30px;
+      min-width: 30px;
+    }
+  }
+}
+
+.edit_button {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: GV.$regular-text-color;
+  align-self: flex-end;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  svg {
+    @include GV.icon-text;
+  }
+}
+
+.settings {
+  // TODO Aprender de display grid
+}

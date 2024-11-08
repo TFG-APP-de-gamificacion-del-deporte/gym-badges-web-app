@@ -42,5 +42,6 @@ export const config = {
     "/friends",
     "/rankings",
     "/stats",
+    // "/user/(.*)",
   ]
 }

@@ -1,7 +1,9 @@
 .default_profile_picture {
   aspect-ratio: 1;
   border-radius: 100%;
-  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   svg {
     width: 70%;
