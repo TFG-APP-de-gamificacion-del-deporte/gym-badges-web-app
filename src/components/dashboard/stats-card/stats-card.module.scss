@@ -1,10 +1,7 @@
 @use "@/public/global_vars.scss" as GV;
 
-
-$green: #00ff94;
-$yellow: #ebac0f;
-$green_gradient: radial-gradient(circle at top 20% left 10%, rgba($green, 0.3) 0%, transparent 40%);
-$yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba($yellow, 0.3) 0%, transparent 40%);
+$green_gradient: radial-gradient(circle at top 20% left 10%, rgba(GV.$green, 0.3) 0%, transparent 40%);
+$yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba(GV.$yellow, 0.3) 0%, transparent 40%);
 
 
 .stats_card {
@@ -56,11 +53,11 @@ $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba($yellow, 
 }
 
 .green_border {
-  border-color: $green;
+  border-color: GV.$green;
   background-image: $green_gradient;
 }
 
 .yellow_border {
-  border-color: $yellow;
+  border-color: GV.$yellow;
   background-image: $yellow_gradient;
 }
