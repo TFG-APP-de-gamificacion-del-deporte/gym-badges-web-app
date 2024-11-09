@@ -11,6 +11,11 @@
 
   main {
     flex-grow: 1;
-    margin-right: 60px;
+    margin: 30px 60px;
+    margin-left: 0;
+
+    @include GV.small-screen {
+      margin: 30px;
+    }
   }
 }

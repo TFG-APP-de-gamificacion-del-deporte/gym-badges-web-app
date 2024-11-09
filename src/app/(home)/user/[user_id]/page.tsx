@@ -96,7 +96,7 @@ export default function Page({ params }: { params: { user_id: string } }) {
         </div>
         <button className={styles.edit_button}>
           <ArrowPathIcon/>
-          <p>Edit profile</p>
+          <p>Change badges</p>
         </button>
       </section>
 
