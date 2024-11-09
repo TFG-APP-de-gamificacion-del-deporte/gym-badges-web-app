@@ -17,10 +17,13 @@
   }
 }
 
+$image-size: 128px;
 .image_container {
   & > div, & > img {
-    width: 128px;
+    width: $image-size;
   }
+
+  z-index: 1;
 }
 
 @mixin card {
@@ -34,9 +37,30 @@
 .info_card {
   @include card;
   padding: 40px 0;
+  margin-top: -($image-size * 1/5);
 
+  // Info div
   & > div {
     text-align: center;
+    flex-basis: 0;
+    flex-grow: 1;
+
+    span {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+  }
+
+  .streak {
+    color: GV.$orange;
+  }
+
+  .fat {
+    color: GV.$yellow;
+  }
+
+  .weight {
+    color: GV.$green;
   }
 }
 

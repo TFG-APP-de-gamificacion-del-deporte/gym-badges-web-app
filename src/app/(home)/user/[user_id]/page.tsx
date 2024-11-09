@@ -53,11 +53,11 @@ export default function Page({ params }: { params: { user_id: string } }) {
         </div>
         <div className={styles.info_card}>
           <div>
-            <span>33 Weeks</span>
+            <span className={styles.streak}>33 Weeks</span>
             <p>Streak</p>
           </div>
           <div>
-            <span>18%</span>
+            <span className={styles.fat}>18%</span>
             <p>Fat</p>
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function Page({ params }: { params: { user_id: string } }) {
             <p>@Username</p>
           </div>
           <div>
-            <span>86 KG</span>
+            <span className={styles.weight}>86 KG</span>
             <p>Weight</p>
           </div>
           <div>
