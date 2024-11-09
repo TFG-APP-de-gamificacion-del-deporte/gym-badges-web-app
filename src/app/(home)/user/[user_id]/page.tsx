@@ -60,7 +60,7 @@ export default function Page({ params }: { params: { user_id: string } }) {
             <span className={styles.fat}>18%</span>
             <p>Fat</p>
           </div>
-          <div>
+          <div className={styles.name}>
             <span>Name</span>
             <p>@Username</p>
           </div>
