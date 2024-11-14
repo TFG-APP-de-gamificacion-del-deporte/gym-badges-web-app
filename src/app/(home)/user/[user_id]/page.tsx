@@ -9,12 +9,14 @@ import { cookies } from "next/headers"
 import { XCircleIcon } from '@heroicons/react/16/solid';
 
 type GetUserResponse = {
-  image: string | null,  // url
-  experience: number,
-  streak: number,
-  weight: number,
+  user_id: string,
   body_fat: number,
   current_week: boolean[],
+  experience: number,
+  image: string | null,  // url
+  name: string,
+  streak: number,
+  weight: number,
 }
 
 const preferences = [
@@ -25,18 +27,6 @@ const preferences = [
   {
     name: "Hide weight and fat",
     description: "Don’t show weight and fat for anyone (not even your friends).",
-  },
-  {
-    name: "Some other setting 1",
-    description: "Description for this other setting",
-  },
-  {
-    name: "Some other setting 2",
-    description: "Description for this other setting",
-  },
-  {
-    name: "Some other setting 3",
-    description: "Description for this other setting",
   },
 ]
 
@@ -61,7 +51,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
   const token = cookies().get(TOKEN_KEY);
 
   if (!authUserID || !token) {
-    redirect("/login")
+    redirect("/login");
   }  
 
   let res: Response;
@@ -72,14 +62,14 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         [AUTH_USER_ID_KEY]: authUserID.value,
         [TOKEN_KEY]: token.value,
       }
-    })
+    });
   } catch (error) {
     // API connection error
-    redirect("/internal-error")
+    redirect("/internal-error");
   } 
 
   if (res.status == 401) {  // Unauthorized
-    redirect("/login")
+    redirect("/login");
   }
   if (res.status == 404) {  // User not found
     return <div className={styles.user_not_found}>
@@ -88,12 +78,23 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     </div>
   }
   if (!res.ok) {  // Other errors
-    redirect("/internal-error")
+    redirect("/internal-error");
   }
 
-  let GetUserResponse: GetUserResponse;
-  // TODO Parsear la response y usarla en la pagina
+  const resBody = await res.json();
+  const userInfo: GetUserResponse = {
+    user_id: resBody.user_id,
+    body_fat: resBody.body_fat,
+    current_week: resBody.current_week,
+    experience: resBody.experience,
+    image: resBody.image,
+    name: resBody.name,
+    streak: resBody.streak,
+    weight: resBody.weight,
+  };
 
+  console.log(resBody);
+  
 
   return (
     <div className={styles.layout}>
@@ -104,22 +105,23 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         </div>
         <div className={styles.info_card}>
           <div>
-            <span className={styles.streak}>33 Weeks</span>
+            <span className={styles.streak}>{userInfo.streak} Weeks</span>
             <p>Streak</p>
           </div>
           <div>
-            <span className={styles.fat}>18%</span>
+            <span className={styles.fat}>{userInfo.body_fat}%</span>
             <p>Fat</p>
           </div>
           <div className={styles.name}>
-            <span>Name</span>
-            <p>@Username</p>
+            <span>{userInfo.name}</span>  
+            <p>@{userInfo.user_id}</p>
           </div>
           <div>
-            <span className={styles.weight}>86 KG</span>
+            <span className={styles.weight}>{userInfo.weight} KG</span>
             <p>Weight</p>
           </div>
           <div>
+            {/* TODO get info from api */}
             <span>28</span>
             <p>Friends</p>
           </div>
