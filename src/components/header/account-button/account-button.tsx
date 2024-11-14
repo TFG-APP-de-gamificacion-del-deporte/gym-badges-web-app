@@ -1,14 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import styles from "./account-button.module.scss"
 import { ArrowLeftStartOnRectangleIcon, Cog6ToothIcon, UserIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 
+// TODO Poner imagen de perfil en vez de boton
 export default function AccountButton() {
   return (
   <>
-  {/* @ts-ignore */}
+    {/* @ts-ignore */}
     <button className={styles.button} popovertarget="account_popover">
       <UserIcon className={styles.icon}/>
     </button>

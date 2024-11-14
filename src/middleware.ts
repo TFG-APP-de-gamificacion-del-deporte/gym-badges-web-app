@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest) {
 
   } catch (error) {
     // API connection error
-    return Response.redirect(new URL("internal-error", req.url))
+    return Response.redirect(new URL("internal-error", req.nextUrl.origin))
   } 
 }
 
@@ -42,6 +42,6 @@ export const config = {
     "/friends",
     "/rankings",
     "/stats",
-    // "/user/(.*)",
+    "/user(/?)(.*)",
   ]
 }
