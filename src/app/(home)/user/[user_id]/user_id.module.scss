@@ -168,3 +168,15 @@ $image-size: 128px;
     }
   }
 }
+
+.user_not_found {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  svg {
+    @include GV.icon-text;
+  }
+}

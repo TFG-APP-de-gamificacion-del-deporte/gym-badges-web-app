@@ -1,6 +1,6 @@
 "use server";
 
-import { API_ENDPOINTS, EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
+import { API_ENDPOINTS, AUTH_USER_ID_KEY, EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -35,10 +35,10 @@ export default async function signup(prevState: any, formData: FormData): Promis
   try {
     const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.signup}`, {
       method: "POST",
-      body: JSON.stringify(signUpInfo),
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(signUpInfo),
     })
 
     // Invalid signup
@@ -51,7 +51,7 @@ export default async function signup(prevState: any, formData: FormData): Promis
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: USER_ID_KEY,
+      name: AUTH_USER_ID_KEY,
       value: signUpInfo[USER_ID_KEY].toString(),
       maxAge: oneYear,
     });

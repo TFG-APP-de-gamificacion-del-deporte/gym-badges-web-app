@@ -3,6 +3,19 @@ import styles from "./user_id.module.scss"
 import { StarIcon } from "@heroicons/react/24/outline"
 import { ArrowPathIcon, PencilIcon } from "@heroicons/react/16/solid"
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import { redirect } from "next/navigation"
+import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "@/config/API"
+import { cookies } from "next/headers"
+import { XCircleIcon } from '@heroicons/react/16/solid';
+
+type GetUserResponse = {
+  image: string | null,  // url
+  experience: number,
+  streak: number,
+  weight: number,
+  body_fat: number,
+  current_week: boolean[],
+}
 
 const preferences = [
   {
@@ -43,7 +56,45 @@ const topFeats = [
 ]
 
 
-export default function Page({ params }: { params: { user_id: string } }) {
+export default async function Page({ params }: { params: { user_id: string } }) {
+  const authUserID = cookies().get(AUTH_USER_ID_KEY);
+  const token = cookies().get(TOKEN_KEY);
+
+  if (!authUserID || !token) {
+    redirect("/login")
+  }  
+
+  let res: Response;
+  try {
+    res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.getUser}/${params.user_id}`, {
+      method: "GET",
+      headers: {
+        [AUTH_USER_ID_KEY]: authUserID.value,
+        [TOKEN_KEY]: token.value,
+      }
+    })
+  } catch (error) {
+    // API connection error
+    redirect("/internal-error")
+  } 
+
+  if (res.status == 401) {  // Unauthorized
+    redirect("/login")
+  }
+  if (res.status == 404) {  // User not found
+    return <div className={styles.user_not_found}>
+      <XCircleIcon/>
+      User not found
+    </div>
+  }
+  if (!res.ok) {  // Other errors
+    redirect("/internal-error")
+  }
+
+  let GetUserResponse: GetUserResponse;
+  // TODO Parsear la response y usarla en la pagina
+
+
   return (
     <div className={styles.layout}>
       {/* IMAGE AND MAIN INFO */}
