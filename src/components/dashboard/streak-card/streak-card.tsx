@@ -1,6 +1,6 @@
 import styles from "@/components/dashboard/streak-card/streak-card.module.scss"
-import FireIcon from "@heroicons/react/24/solid/FireIcon";
 import WeekBar, { WeekBarProps } from "./week-bar/week-bar";
+import { FaFire } from "react-icons/fa6";
 
 
 export type StreakCardProps = {
@@ -16,7 +16,7 @@ export default function StreakCard({ streakCardProps }: { streakCardProps: Strea
       <div className={styles.streak}>
         <h2>Your Streak</h2>
         <div className={styles.streak_count}>
-          <FireIcon className={styles.icon}/>
+          <FaFire size="1.5rem"/>
           <h3>{streakCardProps.streak.toString()} week{streakCardProps.streak > 1 ? "s" : ""}</h3>
         </div>
       </div>

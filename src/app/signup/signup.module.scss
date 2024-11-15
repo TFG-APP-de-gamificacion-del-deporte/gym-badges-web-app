@@ -21,8 +21,6 @@
 }
 
 .remove_image_button {
-  border: none;
-  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,10 +29,6 @@
 
   &:hover {
     text-decoration: underline;
-  }
-
-  svg {
-    @include GV.icon-text;
   }
 }
 
@@ -47,10 +41,6 @@
   
   &:hover {
     text-decoration: underline;
-  }
-  
-  svg {
-    @include GV.icon-text;
   }
 }
 
@@ -88,10 +78,6 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-
-  svg {
-    @include GV.icon-text;
-  }
 }
 
 .login_form {

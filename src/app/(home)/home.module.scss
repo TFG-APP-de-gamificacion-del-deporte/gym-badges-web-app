@@ -9,7 +9,21 @@
   flex-direction: row;
   flex-grow: 1;
 
+  overflow: hidden;
+
   main {
     flex-grow: 1;
+    overflow: auto;
+    margin: 30px 0;
+    padding-right: 40px;
+    margin-right: 10px;
+
+    scrollbar-color: GV.$regular-text-color transparent;
+    scrollbar-gutter: stable;
+
+    @include GV.small-screen {
+      margin: 0 8px 30px 30px;
+      padding-right: 8px;
+    }
   }
 }

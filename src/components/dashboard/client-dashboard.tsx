@@ -1,12 +1,12 @@
 "use client";
 
 import styles from "./client-dashboard.module.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StatsCard, { StatsCardProps } from "./stats-card/stats-card";
 import LineSeparator from "../line-separator/line-separator";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import StreakCard, { StreakCardProps } from "./streak-card/streak-card";
 import clsx from "clsx";
+import { FaChevronLeft } from "react-icons/fa6";
 
 type ClientDashboardProps = {
   streakCardProps: StreakCardProps;
@@ -37,7 +37,7 @@ export default function ClientDashboard({ statsCardProps, streakCardProps }: Cli
 
       <div className={styles.collapse_button}>
         <button className={clsx({[styles.flip_button]: hidden})} onClick={toggleHidden}>
-          <ChevronLeftIcon className={styles.icon}/>
+          <FaChevronLeft size="1.5rem"/>
         </button>
       </div>
 

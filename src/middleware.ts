@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
-import { API_ENDPOINTS, TOKEN_KEY, USER_ID_KEY } from "./config/API";
+import { NextRequest } from "next/server";
+import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "./config/API";
 
 
 export async function middleware(req: NextRequest) {
   
-  const userID = req.cookies.get(USER_ID_KEY);
+  const authUserID = req.cookies.get(AUTH_USER_ID_KEY);
   const token = req.cookies.get(TOKEN_KEY);
 
-  if (!userID || !token) {
+  if (!authUserID || !token) {
     return Response.redirect(new URL(API_ENDPOINTS.login, req.url))
   }
   
@@ -16,7 +16,7 @@ export async function middleware(req: NextRequest) {
     const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.loginWithToken}`, {
       method: "GET",
       headers: {
-        [USER_ID_KEY]: userID.value,
+        [AUTH_USER_ID_KEY]: authUserID.value,
         [TOKEN_KEY]: token.value,
       },
     })
@@ -27,11 +27,10 @@ export async function middleware(req: NextRequest) {
     }
 
     console.debug("User loged in using token");
-
-
+    
   } catch (error) {
     // API connection error
-    return Response.redirect(new URL("internal-error", req.url))
+    return Response.redirect(new URL("internal-error", req.nextUrl.origin))
   } 
 }
 
@@ -42,5 +41,6 @@ export const config = {
     "/friends",
     "/rankings",
     "/stats",
+    "/user(/?)(.*)",
   ]
 }

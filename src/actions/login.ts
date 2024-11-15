@@ -1,6 +1,6 @@
 "use server";
 
-import { API_ENDPOINTS, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
+import { API_ENDPOINTS, AUTH_USER_ID_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -21,10 +21,10 @@ export default async function login(prevState: any, formData: FormData): Promise
   try {
     const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.login}`, {
       method: "POST",
-      body: JSON.stringify(loginInfo),
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify(loginInfo),
     })
 
     // Invalid login
@@ -37,7 +37,7 @@ export default async function login(prevState: any, formData: FormData): Promise
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: USER_ID_KEY,
+      name: AUTH_USER_ID_KEY,
       value: loginInfo[USER_ID_KEY].toString(),
       maxAge: oneYear,
     });

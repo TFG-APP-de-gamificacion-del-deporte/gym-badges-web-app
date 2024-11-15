@@ -1,0 +1,30 @@
+@use "@/public/global_vars.scss" as GV;
+
+.settings {
+  margin-top: 5px;
+  width: 100%;
+  display: grid;
+  $column-gap: 80px;
+  gap: 10px $column-gap;
+  grid-template-columns: repeat(auto-fit, minmax(max(min(25rem, 100%), calc((100% - $column-gap) / 2)), 1fr));
+
+  & > li {
+    list-style: none;
+
+    button {
+      width: 100%;
+      text-align: start;
+      display: flex;
+      gap: 10px;
+      padding: 15px;
+
+      & > div {
+        flex-grow: 1;
+      }
+
+      &:hover {
+        @include GV.card;
+      }
+    }
+  }
+}

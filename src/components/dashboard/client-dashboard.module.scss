@@ -43,12 +43,10 @@
   align-items: center;
 
   button {
-    background-color: transparent;
-    border: none;
     border-radius: GV.$corner-radius-big;
     margin: 15px;
     transition: $transition;
-    padding: 8px 5px 8px 3px;
+    padding: 8px 5px;
     
     &:hover {
       background-color: rgb(GV.$purple, 0.5);
@@ -74,8 +72,4 @@
   @include GV.small-screen {
     transform: rotate(90deg) scaleX(-1) !important; 
   }
-}
-
-.icon {
-  @include GV.icon-mid;
 }
