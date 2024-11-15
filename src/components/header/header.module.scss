@@ -22,3 +22,9 @@ $gap: 30px;
   display: flex;
   gap: $gap;
 }
+
+.image_container {
+  & > div, & > img {
+    width: 50px;
+  }
+}
