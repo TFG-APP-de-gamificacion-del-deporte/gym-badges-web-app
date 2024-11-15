@@ -1,6 +1,5 @@
 import LineSeparator from "../line-separator/line-separator";
 import Logo from "../logo/logo";
-import AccountButton from "./account-button/account-button";
 import styles from "./header.module.scss";
 import LevelBar from "./level-bar/level-bar";
 import Nav from "../nav/nav";
