@@ -55,12 +55,12 @@ export default function Signup() {
         </div>
         {/* TEXT INPUTS */}
         <br/>
-        <TextInput icon=<FaIdBadge size="1.5rem"/>  placeholder="Name"            name={NAME_KEY}                         required/>
-        <TextInput icon=<FaAt size="1.5rem"/>       placeholder="Username"        name={USER_ID_KEY}                      required/>
-        <TextInput icon=<FaEnvelope size="1.5rem"/> placeholder="Email"           name={EMAIL_KEY}        type="email"    required/>
+        <TextInput icon=<FaIdBadge size="1.2rem"/>  placeholder="Name"            name={NAME_KEY}                         required/>
+        <TextInput icon=<FaAt size="1.2rem"/>       placeholder="Username"        name={USER_ID_KEY}                      required/>
+        <TextInput icon=<FaEnvelope size="1.2rem"/> placeholder="Email"           name={EMAIL_KEY}        type="email"    required/>
         <br/>
-        <TextInput icon=<FaLock size="1.5rem"/>     placeholder="Password"        name={PASSWORD_KEY}     type="password" required/>
-        <TextInput icon=<FaLock size="1.5rem"/>     placeholder="Repeat Password" name={PASSWORD_KEY+"2"} type="password" required/>
+        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Password"        name={PASSWORD_KEY}     type="password" required/>
+        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Repeat Password" name={PASSWORD_KEY+"2"} type="password" required/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <FaCircleXmark size="1.2rem"/> 

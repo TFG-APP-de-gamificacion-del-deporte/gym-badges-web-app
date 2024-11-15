@@ -22,8 +22,8 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        <TextInput icon=<FaEnvelope size="1.5rem"/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
-        <TextInput icon=<FaLock size="1.5rem"/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
+        <TextInput icon=<FaEnvelope size="1.2rem"/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
+        <TextInput icon=<FaLock size="1.2rem"/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <FaCircleXmark size="1.2rem"/> 

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "@/config/API"
 import { cookies } from "next/headers"
 import { FaArrowsRotate, FaCircleXmark, FaPen, FaStar, FaToggleOff } from "react-icons/fa6"
+import UserPreferences from "@/components/user-preferences/user-preferences"
 
 type GetUserResponse = {
   user_id: string,
@@ -15,17 +16,6 @@ type GetUserResponse = {
   streak: number,
   weight: number,
 }
-
-const preferences = [
-  {
-    name: "Private account",
-    description: "Only your friends will be able to see your profile.",
-  },
-  {
-    name: "Hide weight and fat",
-    description: "Don’t show weight and fat to anyone (not even your friends).",
-  },
-]
 
 const topFeats = [
   {
@@ -149,18 +139,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
       {/* PREFERENCES */}
       <section>
-        <h2>Preferences</h2>
-        <ul className={styles.settings}>
-          {preferences.map(({ name, description }) => 
-            <li key={name}>
-              <div>
-                <h3>{name}</h3>
-                <p>{description}</p>
-              </div>
-              <FaToggleOff size="2.25rem" style={{minWidth: "2.25rem"}}/>
-            </li>
-          )}
-        </ul>
+        <UserPreferences/>
       </section>
     </div>
   )

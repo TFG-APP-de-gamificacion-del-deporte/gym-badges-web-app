@@ -3,6 +3,10 @@
 .text_field {
   @include GV.skewed-container;
 
+  & > div {
+    padding: 3px;
+  }
+
   input {
     background-color: transparent;
     border: none;

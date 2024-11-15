@@ -134,24 +134,6 @@ $image-size: 128px;
   }
 }
 
-.settings {
-  margin-top: 20px;
-  width: 100%;
-  display: grid;
-  $column-gap: 80px;
-  gap: 10px $column-gap;
-  grid-template-columns: repeat(auto-fit, minmax(max(min(25rem, 100%), calc((100% - $column-gap) / 2)), 1fr));
-
-  & > li {
-    display: flex;
-    gap: 10px;
-
-    & > div {
-      flex-grow: 1
-    }
-  }
-}
-
 .user_not_found {
   height: 100%;
   display: flex;
