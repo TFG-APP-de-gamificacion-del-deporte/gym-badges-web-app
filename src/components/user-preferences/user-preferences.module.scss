@@ -9,21 +9,22 @@
   grid-template-columns: repeat(auto-fit, minmax(max(min(25rem, 100%), calc((100% - $column-gap) / 2)), 1fr));
 
   & > li {
-    display: flex;
-    gap: 10px;
-    padding: 15px;
+    list-style: none;
 
-    & > div {
-      flex-grow: 1;
-    }
+    button {
+      width: 100%;
+      text-align: start;
+      display: flex;
+      gap: 10px;
+      padding: 15px;
 
-    & > button {
-      background-color: transparent;
-      border: none;
-    }
+      & > div {
+        flex-grow: 1;
+      }
 
-    &:hover {
-      @include GV.card;
+      &:hover {
+        @include GV.card;
+      }
     }
   }
 }

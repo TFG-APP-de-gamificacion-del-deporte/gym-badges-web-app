@@ -35,15 +35,17 @@ export default function UserPreferences() {
       <ul className={styles.settings}>
         {preferences.map(({ name, description, on, toggle }) => 
           <li key={name} onClick={toggle}>
-            <div>
-              <h3>{name}</h3>
-              <p>{description}</p>
-            </div>
-            { 
-              on
-              ? <FaToggleOn size="2.25rem" style={{minWidth: "2.25rem"}}/>
-              : <FaToggleOff size="2.25rem" style={{minWidth: "2.25rem"}}/>
-            } 
+            <button>
+              <div>
+                <h3>{name}</h3>
+                <p>{description}</p>
+              </div>
+              { 
+                on
+                ? <FaToggleOn size="2.25rem" style={{minWidth: "2.25rem"}}/>
+                : <FaToggleOff size="2.25rem" style={{minWidth: "2.25rem"}}/>
+              } 
+            </button>
           </li>
         )}
       </ul>
