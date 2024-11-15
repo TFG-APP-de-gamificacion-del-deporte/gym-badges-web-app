@@ -121,7 +121,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
           </div>
         </div>
         <button className={styles.edit_button}>
-          <FaPen size="1.2rem"/>
+          <FaPen/>
           <p>Edit profile</p>
         </button>
       </section>
@@ -142,7 +142,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
           )}
         </div>
         <button className={styles.edit_button}>
-          <FaArrowsRotate size="1.2rem"/>
+          <FaArrowsRotate/>
           <p>Change badges</p>
         </button>
       </section>

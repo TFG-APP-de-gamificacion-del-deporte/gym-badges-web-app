@@ -47,7 +47,7 @@ export default function Signup() {
                 <p>Delete Image</p>
               </button>
             : <label htmlFor="files" className={styles.upload_picture_button}>
-                <FaUpload size="1.2rem"/>
+                <FaUpload/>
                 <p>Select Image</p>
               </label>
           }
