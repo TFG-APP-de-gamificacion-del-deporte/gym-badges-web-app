@@ -107,28 +107,7 @@ $skew-small: -15deg;
   background: $background;
   cursor: pointer;
 
-  svg {
-    @include icon-mid;
-  }
-
   &:hover {
     background: $hover-color;
   }
-}
-
-
-// ===== Icon sizes =====
-@mixin icon {
-  width: 32px;
-  min-width: 32px;
-}
-
-@mixin icon-mid {
-  width: 24px;
-  min-width: 24px;
-}
-
-@mixin icon-text {
-  width: 1.22rem;
-  min-width: 1.22rem;
 }

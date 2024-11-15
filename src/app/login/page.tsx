@@ -3,14 +3,12 @@
 import Logo from '@/components/logo/logo'
 import styles from './login.module.scss'
 import Link from 'next/link'
-import { EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-
 import LineSeparator from '@/components/line-separator/line-separator'
 import TextInput from '@/components/skewed-text-input/text-input'
 import login from '@/actions/login'
 import { useFormState } from 'react-dom';
-import { XCircleIcon } from '@heroicons/react/16/solid';
 import { PASSWORD_KEY, USER_ID_KEY } from '@/config/API';
+import { FaCircleXmark, FaEnvelope, FaLock } from 'react-icons/fa6';
 
 export default function Login() {
   const initialState = { message: "" }
@@ -24,11 +22,11 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        <TextInput icon=<EnvelopeIcon/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
-        <TextInput icon=<LockClosedIcon/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
+        <TextInput icon=<FaEnvelope size="1.5rem"/> required placeholder="Username" name={USER_ID_KEY}/>  {/* TODO Login con email */}
+        <TextInput icon=<FaLock size="1.5rem"/> required placeholder="Password" name={PASSWORD_KEY} type="password"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
-          <XCircleIcon/> 
+          <FaCircleXmark size="1.2rem"/> 
           {state?.message}
         </span>}
         {/* SUBMIT BUTTON */}

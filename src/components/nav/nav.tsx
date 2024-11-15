@@ -1,31 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { CheckBadgeIcon, UsersIcon, ChartBarIcon, TrophyIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import styles from "./nav.module.scss";
+import { FaChartSimple, FaMedal, FaTrophy, FaUserGroup } from "react-icons/fa6";
 
 const LINKS = [
   { 
     name: 'Badges', 
     href: '/', 
-    icon: <CheckBadgeIcon className={styles.icon}/> 
+    icon: <FaMedal size="1.2rem"/> 
   },
   { 
     name: 'Rankings', 
     href: '/rankings', 
-    icon: <TrophyIcon className={styles.icon}/> 
+    icon: <FaTrophy size="1.2rem"/> 
   },
   { 
     name: 'Friends', 
     href: '/friends', 
-    icon: <UsersIcon className={styles.icon}/> 
+    icon: <FaUserGroup size="1.2rem"/> 
   },
   { 
     name: 'Stats', 
     href: '/stats', 
-    icon: <ChartBarIcon className={styles.icon}/> 
+    icon: <FaChartSimple size="1.2rem"/> 
   },
 ];
 

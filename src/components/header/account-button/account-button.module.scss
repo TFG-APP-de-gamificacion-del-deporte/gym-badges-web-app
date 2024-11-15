@@ -25,18 +25,6 @@
   }
 }
 
-.icon_small {
-  @include GV.icon-text;
-}
-
-.icon_mid {
-  @include GV.icon-mid;
-}
-
-.icon {
-  @include GV.icon;
-}
-
 
 // ===== Popover styles =====
 

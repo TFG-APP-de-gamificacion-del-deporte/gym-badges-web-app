@@ -1,4 +1,4 @@
-import { UserIcon } from "@heroicons/react/24/solid"
+import { FaUser } from "react-icons/fa6";
 import styles from "./default-profile-picture.module.scss"
 
 export default function DefaultProfilePicture({ hexColor }: { hexColor?: string }) {
@@ -21,7 +21,7 @@ export default function DefaultProfilePicture({ hexColor }: { hexColor?: string 
 
   return (
     <div className={styles.default_profile_picture} style={style}>
-      <UserIcon/>
+      <FaUser size="50%"/>
     </div>
   )
 }

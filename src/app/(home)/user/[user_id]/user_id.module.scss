@@ -111,20 +111,11 @@ $image-size: 128px;
   align-items: center;
   justify-content: center;
 
-  svg {
-    width: 40px;
-    min-width: 40px;
-  }
-
   @include GV.small-screen {
     $size: 60px;
     min-width: $size;
     width: $size;
     height: $size;
-    svg {
-      width: 30px;
-      min-width: 30px;
-    }
   }
 }
 
@@ -140,10 +131,6 @@ $image-size: 128px;
 
   &:hover {
     text-decoration: underline;
-  }
-
-  svg {
-    @include GV.icon-text;
   }
 }
 
@@ -162,10 +149,6 @@ $image-size: 128px;
     & > div {
       flex-grow: 1
     }
-
-    & > svg {
-      @include GV.icon;
-    }
   }
 }
 
@@ -175,8 +158,4 @@ $image-size: 128px;
   align-items: center;
   justify-content: center;
   gap: 5px;
-
-  svg {
-    @include GV.icon-text;
-  }
 }

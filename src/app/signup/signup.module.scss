@@ -32,10 +32,6 @@
   &:hover {
     text-decoration: underline;
   }
-
-  svg {
-    @include GV.icon-text;
-  }
 }
 
 .upload_picture_button {
@@ -47,10 +43,6 @@
   
   &:hover {
     text-decoration: underline;
-  }
-  
-  svg {
-    @include GV.icon-text;
   }
 }
 
@@ -88,10 +80,6 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-
-  svg {
-    @include GV.icon-text;
-  }
 }
 
 .login_form {

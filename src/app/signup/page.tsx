@@ -4,12 +4,11 @@ import Logo from "@/components/logo/logo";
 import styles from "./signup.module.scss"
 import TextInput from "@/components/skewed-text-input/text-input";
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
-import { AtSymbolIcon, EnvelopeIcon, IdentificationIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { useFormState } from "react-dom";
-import { ArrowUpTrayIcon, XCircleIcon } from "@heroicons/react/16/solid";
 import signup from "@/actions/signup";
 import { ChangeEvent, useRef, useState } from "react";
 import { EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, USER_ID_KEY } from "@/config/API";
+import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
 
 export default function Signup() {
   const initialState = { message: "" }
@@ -44,11 +43,11 @@ export default function Signup() {
           { // UPLOAD OR DELETE BUTTON 
             image
             ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
-                <XCircleIcon/>
+                <FaCircleXmark size="1.2rem"/>
                 <p>Delete Image</p>
               </button>
             : <label htmlFor="files" className={styles.upload_picture_button}>
-                <ArrowUpTrayIcon/>
+                <FaUpload size="1.2rem"/>
                 <p>Select Image</p>
               </label>
           }
@@ -56,15 +55,15 @@ export default function Signup() {
         </div>
         {/* TEXT INPUTS */}
         <br/>
-        <TextInput icon=<IdentificationIcon/> placeholder="Name"            name={NAME_KEY}                         required/>
-        <TextInput icon=<AtSymbolIcon/>       placeholder="Username"        name={USER_ID_KEY}                      required/>
-        <TextInput icon=<EnvelopeIcon/>       placeholder="Email"           name={EMAIL_KEY}        type="email"    required/>
+        <TextInput icon=<FaIdBadge size="1.5rem"/>  placeholder="Name"            name={NAME_KEY}                         required/>
+        <TextInput icon=<FaAt size="1.5rem"/>       placeholder="Username"        name={USER_ID_KEY}                      required/>
+        <TextInput icon=<FaEnvelope size="1.5rem"/> placeholder="Email"           name={EMAIL_KEY}        type="email"    required/>
         <br/>
-        <TextInput icon=<LockClosedIcon/>     placeholder="Password"        name={PASSWORD_KEY}     type="password" required/>
-        <TextInput icon=<LockClosedIcon/>     placeholder="Repeat Password" name={PASSWORD_KEY+"2"} type="password" required/>
+        <TextInput icon=<FaLock size="1.5rem"/>     placeholder="Password"        name={PASSWORD_KEY}     type="password" required/>
+        <TextInput icon=<FaLock size="1.5rem"/>     placeholder="Repeat Password" name={PASSWORD_KEY+"2"} type="password" required/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
-          <XCircleIcon/> 
+          <FaCircleXmark size="1.2rem"/> 
           {state?.message}
         </span>}
         <br/>

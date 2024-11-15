@@ -1,12 +1,9 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
-import { StarIcon } from "@heroicons/react/24/outline"
-import { ArrowPathIcon, PencilIcon } from "@heroicons/react/16/solid"
-import { CheckCircleIcon } from "@heroicons/react/24/solid"
 import { redirect } from "next/navigation"
 import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "@/config/API"
 import { cookies } from "next/headers"
-import { XCircleIcon } from '@heroicons/react/16/solid';
+import { FaArrowsRotate, FaCircleXmark, FaPen, FaStar, FaToggleOff } from "react-icons/fa6"
 
 type GetUserResponse = {
   user_id: string,
@@ -26,7 +23,7 @@ const preferences = [
   },
   {
     name: "Hide weight and fat",
-    description: "Don’t show weight and fat for anyone (not even your friends).",
+    description: "Don’t show weight and fat to anyone (not even your friends).",
   },
 ]
 
@@ -73,7 +70,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
   }
   if (res.status == 404) {  // User not found
     return <div className={styles.user_not_found}>
-      <XCircleIcon/>
+      <FaCircleXmark size="1.2rem"/>
       User not found
     </div>
   }
@@ -92,9 +89,6 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     streak: resBody.streak,
     weight: resBody.weight,
   };
-
-  console.log(resBody);
-  
 
   return (
     <div className={styles.layout}>
@@ -121,13 +115,13 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>Weight</p>
           </div>
           <div>
-            {/* TODO get info from api */}
+            {/* TODO get number of friends from api */}
             <span>28</span>
             <p>Friends</p>
           </div>
         </div>
         <button className={styles.edit_button}>
-          <PencilIcon/>
+          <FaPen size="1.2rem"/>
           <p>Edit profile</p>
         </button>
       </section>
@@ -139,7 +133,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <div className={styles.top_feats_card}>
           {topFeats.slice(0, 3).map(({ title, description }) =>
             <div key={title}>
-              <div className={styles.badge_icon}><StarIcon/></div>
+              <div className={styles.badge_icon}><FaStar size="35px"/></div>
               <div>
                 <h3>{title}</h3>
                 <p>{description}</p>
@@ -148,7 +142,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
           )}
         </div>
         <button className={styles.edit_button}>
-          <ArrowPathIcon/>
+          <FaArrowsRotate size="1.2rem"/>
           <p>Change badges</p>
         </button>
       </section>
@@ -163,7 +157,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
                 <h3>{name}</h3>
                 <p>{description}</p>
               </div>
-              <CheckCircleIcon/>
+              <FaToggleOff size="2.25rem" style={{minWidth: "2.25rem"}}/>
             </li>
           )}
         </ul>

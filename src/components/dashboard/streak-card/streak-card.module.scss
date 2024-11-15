@@ -19,6 +19,7 @@
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
+  gap: 5px;
 }
 
 .this_week {
@@ -26,9 +27,4 @@
     display: flex;
     flex-direction: column;
   }
-}
-
-.icon {
-  @include GV.icon;
-  margin-right: 5px;
 }
