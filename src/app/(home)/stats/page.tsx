@@ -1,6 +1,5 @@
 import styles from "./stats.module.scss"
-
-const N_DAYS = 7
+import StreakCalendar from "./streak-calendar/streak-calendar"
 
 export default function Page() {
   return (
@@ -8,23 +7,7 @@ export default function Page() {
       <h2>Stats</h2>
       <div className={styles.card_layout}>
         {/* STREAK CALENDAR */}
-        <div className={styles.calendar_card}>
-          <h2>33 Weeks</h2>
-          <small>Streak</small>
-          <div>Calendar</div>
-          <h3>Weekly Goal</h3>
-          <p>How many times a week you plan to hit the gym?</p>
-          <div className={styles.goal_selector}>
-            {
-              Array.from({length: N_DAYS}).map((_, index) => (
-                <label className={styles.goal_label} key={index}>
-                  <input type="radio" name="goal" hidden/>
-                  {index + 1}
-                </label>
-              ))
-            }
-          </div>
-        </div>
+        <StreakCalendar/>
         {/* WEIGHT AND FAT */}
         <div className={styles.weight_fat_layout}>
           {/* WEIGHT CARD */}
