@@ -1,4 +1,4 @@
-@use "@/public/global_vars.scss" as GV;
+@use "@/public/global_vars.module.scss" as GV;
 
 .dashboard_main_layout {
   @include GV.small-screen {

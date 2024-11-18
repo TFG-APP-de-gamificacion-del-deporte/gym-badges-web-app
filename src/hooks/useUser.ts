@@ -1,5 +1,4 @@
-import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "@/config/API";
-import { cookies } from "next/headers";
+import { API_ENDPOINTS, API_KEYS } from "@/config/API";
 import { redirect } from "next/navigation";
 import useSWR from "swr";
 
@@ -15,8 +14,8 @@ export default function useUser(user_id: string, authUserID: string, token: stri
   const args = {
     method: "GET",
     headers: {
-      [AUTH_USER_ID_KEY]: authUserID,
-      [TOKEN_KEY]: token,
+      [API_KEYS.AUTH_USER_ID_KEY]: authUserID,
+      [API_KEYS.TOKEN_KEY]: token,
     }
   }
 

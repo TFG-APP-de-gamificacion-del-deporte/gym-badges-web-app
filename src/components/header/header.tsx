@@ -5,11 +5,11 @@ import LevelBar from "./level-bar/level-bar";
 import Nav from "../nav/nav";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { AUTH_USER_ID_KEY } from "@/config/API";
 import DefaultProfilePicture from "../default-profile-picture/default-profile-picture";
+import { API_KEYS } from "@/config/API";
 
 export default function Header() {
-  const user_id = cookies().get(AUTH_USER_ID_KEY);
+  const user_id = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
 
   return (
     <>

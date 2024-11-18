@@ -1,4 +1,4 @@
-@use "@/public/global_vars.scss" as GV;
+@use "@/public/global_vars.module.scss" as GV;
 
 .layout {
   display: flex;
@@ -22,29 +22,5 @@
   
   & > div {
     flex-grow: 1;
-  }
-}
-
-.weight_card {
-  @include GV.card;
-}
-
-.fat_card {
-  @include GV.card;
-}
-
-.chart_header {
-  display: flex;
-  justify-content: space-between;
-
-  .data > div {
-    display: flex;
-    gap: 5px;
-    align-items: flex-end;
-
-    & > small {
-      position: relative;
-      top: -2px;
-    }
   }
 }
