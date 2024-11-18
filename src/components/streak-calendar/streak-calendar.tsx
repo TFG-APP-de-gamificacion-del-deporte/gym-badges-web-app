@@ -66,14 +66,13 @@ export default function StreakCalendar() {
       <h3>Weekly Goal</h3>
       <p>How many times a week you plan to hit the gym?</p>
       <div className={styles.goal_selector}>
-        {
-          Array.from({length: N_DAYS}).map((_, index) => (
-            <label className={styles.goal_label} key={index}>
-              <input type="radio" name="goal" hidden/>
-              {index + 1}
-            </label>
-          ))
-        }
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
+        <input type="radio" name="goal"/>
       </div>
     </div>
   )

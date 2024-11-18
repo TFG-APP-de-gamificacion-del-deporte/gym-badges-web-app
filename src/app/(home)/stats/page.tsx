@@ -1,5 +1,5 @@
 import styles from "./stats.module.scss"
-import StreakCalendar from "./streak-calendar/streak-calendar"
+import StreakCalendar from "../../../components/streak-calendar/streak-calendar"
 
 export default function Page() {
   return (
