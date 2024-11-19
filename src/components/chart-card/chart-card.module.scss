@@ -38,6 +38,11 @@
   border-radius: GV.$corner-radius-big;
   padding: 5px 20px;
 
+  & > span {
+    margin-top: 1px;
+    margin-right: 0.3rem;
+  }
+  
   &:hover {
     background-color: rgba(white, 0.1);
   }
