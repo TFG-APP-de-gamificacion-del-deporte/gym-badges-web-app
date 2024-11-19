@@ -64,8 +64,6 @@ function customTooltip({
   active?: boolean, payload?: any[], label?: Date, unit: string 
 }) {
   if (active && payload && payload.length) {
-    console.log(payload);
-    
     return (
       <div className={styles.tooltip}>
         <small>{payload[0].value}{unit}</small>
