@@ -15,7 +15,8 @@
 }
 
 .weight_fat_layout {
-  flex-grow: 10;
+  flex-grow: 1;
+  flex-basis: 60%;
   display: flex;
   flex-direction: column;
   gap: 20px;
