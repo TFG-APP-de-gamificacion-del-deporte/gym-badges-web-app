@@ -47,3 +47,18 @@
   @include GV.card;
   flex-grow: 1;
 }
+
+.tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: GV.$regular-text-color;
+  padding: 3px 8px;
+  border-radius: GV.$corner-radius-small;
+  transform: translate(-50%, calc(-50% - 1.3rem));
+
+  small {
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+  }
+}

@@ -3,9 +3,10 @@
 import { ApiKey } from "@/config/API"
 import styles from "./chart-card.module.scss"
 import { FaPlus } from "react-icons/fa6";
-import { Area, AreaChart, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { PureComponent } from "react";
-import { Props } from "recharts/types/component/LabelList";
+import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useState } from "react";
+import { CategoricalChartState } from "recharts/types/chart/types";
+import colors from "@/public/global_vars.module.scss"
 
 const data = [
   {
@@ -42,21 +43,11 @@ const data = [
   },
 ]
 
-const firstAndLastLabel = ({
-  x,
-  y,
-  index,
-  dataLength,
-  value,
-  unit,
-}: {
-  x: number,
-  y: number,
-  index: number,
-  dataLength: number,
-  value: number,
-  unit: string
-}) => {
+function firstAndLastLabel({
+  x, y, index, dataLength, value, unit,
+}: { 
+  x: number, y: number, index: number, dataLength: number, value: number, unit: string
+}) {
   if (index == 0 || index == dataLength - 1) {
     return (
       <text x={x} y={y} dy={-10} fill="grey" fontSize="0.8rem" textAnchor="middle">
@@ -67,18 +58,33 @@ const firstAndLastLabel = ({
   return null;
 };
 
-
-export default function ChartCard({ 
-  title,
-  unit,
-  dataKey,  // Used to retrieve the data from the API
-  color="white",
-}: {
-  title: string
-  dataKey: ApiKey,
-  unit: string,
-  color?: string,
+function customTooltip({ 
+  active, payload, label, unit 
+}: { 
+  active?: boolean, payload?: any[], label?: Date, unit: string 
 }) {
+  if (active && payload && payload.length) {
+    console.log(payload);
+    
+    return (
+      <div className={styles.tooltip}>
+        <small>{payload[0].value}{unit}</small>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+
+export default function ChartCard({
+  title, unit, dataKey, color="white",
+}: { 
+  title: string, dataKey: ApiKey, unit: string, color?: string,
+}) {
+  const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>()
+  let areaInstance: Area | null = null;
+  
   return (
     <div className={styles.card}>
       <div className={styles.chart_header}>
@@ -103,7 +109,21 @@ export default function ChartCard({
             top: 0,
             right: 45,
             left: 45,
-            bottom: -10,
+            bottom: -8,
+          }}
+          // Calculates tooltip coords based on the mouse coords
+          onMouseMove={(data: CategoricalChartState) => {
+            // Get index of the closest point to the mouse
+            const pointIndex = data.activeTooltipIndex;
+            if (pointIndex !== undefined) {
+              // Get coords of that point from the variable areaInstance
+              const x = areaInstance?.props.points?.at(pointIndex)?.x;
+              const y = areaInstance?.props.points?.at(pointIndex)?.y;
+              if (x !== undefined && y !== undefined) {
+                // Save tooltip coords in an useState()
+                setTooltipCoords({x: x, y: y})
+              }
+            }
           }}
         >
           <defs>
@@ -115,21 +135,24 @@ export default function ChartCard({
           <XAxis
             dataKey="date"
             tickFormatter={(d: Date) => d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
-            axisLine={false}
             tickLine={false}
+            axisLine={false}
             minTickGap={10}
             interval="equidistantPreserveStart"
           />
           <YAxis
             domain={([dataMin, dataMax]) => {
-              const padding = Math.abs(dataMin - dataMax) * 0.2;  // 10% of domain padding
+              const padding = Math.abs(dataMin - dataMax) * 0.2;  // 20% of domain padding
               return [dataMin - padding, dataMax + padding];
             }}
             padding={{bottom: 20}}
             hide
           />
-          {/* TODO custom tooltip */}
-          <Tooltip/>
+          <Tooltip 
+            content={(props: any) => customTooltip({...props, unit: unit})}
+            cursor={false}
+            position={{x: tooltipCoords?.x, y: tooltipCoords?.y}}
+          />
           <Area 
             type="monotone"
             dataKey="value"
@@ -137,6 +160,11 @@ export default function ChartCard({
             strokeWidth={2}
             fill={`url(#gradient-${color})`}
             label={(props: any) => firstAndLastLabel({ ...props, dataLength: data.length, unit: unit })}
+            ref={(instance: any) => {
+              // Save reference to the Area element to access the list of points later
+              // and get their coords to paint the tooltips
+              areaInstance = instance;
+            }}
           />
         </AreaChart>
       </ResponsiveContainer>
