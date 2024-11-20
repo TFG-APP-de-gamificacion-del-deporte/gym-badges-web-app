@@ -54,7 +54,7 @@ export default function StreakCalendar() {
           tileClassName={styleTile}
           onChange={setDateRange}
           value={dateRange}
-          locale="en-US"
+          locale="en-GB"
           view="month"
           onClickDay={handleCalendarClick}
           nextLabel=<FaAngleRight/>
