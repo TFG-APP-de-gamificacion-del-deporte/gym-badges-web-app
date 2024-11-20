@@ -1,6 +1,6 @@
 "use server";
 
-import { API_ENDPOINTS, AUTH_USER_ID_KEY, EMAIL_KEY, IMAGE_KEY, NAME_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
+import { API_ENDPOINTS, API_KEYS } from "@/config/API";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -10,23 +10,23 @@ export default async function signup(prevState: any, formData: FormData): Promis
   // TODO Upload image to a server and get the imageUrl
   
   const signUpInfo = {
-    [NAME_KEY]: formData.get(NAME_KEY) ,
-    [USER_ID_KEY]: formData.get(USER_ID_KEY),
-    [EMAIL_KEY]: formData.get(EMAIL_KEY),
-    [PASSWORD_KEY]: formData.get(PASSWORD_KEY),
+    [API_KEYS.NAME_KEY]: formData.get(API_KEYS.NAME_KEY) ,
+    [API_KEYS.USER_ID_KEY]: formData.get(API_KEYS.USER_ID_KEY),
+    [API_KEYS.EMAIL_KEY]: formData.get(API_KEYS.EMAIL_KEY),
+    [API_KEYS.PASSWORD_KEY]: formData.get(API_KEYS.PASSWORD_KEY),
     // [IMAGE_KEY]: imageUrl,
   }
 
   // Validate data
-  if (signUpInfo[PASSWORD_KEY] != formData.get(PASSWORD_KEY + "2")) {
+  if (signUpInfo[API_KEYS.PASSWORD_KEY] != formData.get(API_KEYS.PASSWORD_KEY + "2")) {
     return { message: "Passwords not matching" };
   }
 
   if (
-    !signUpInfo[NAME_KEY]
-    || !signUpInfo[USER_ID_KEY]
-    || !signUpInfo[EMAIL_KEY]
-    || !signUpInfo[PASSWORD_KEY]
+    !signUpInfo[API_KEYS.NAME_KEY]
+    || !signUpInfo[API_KEYS.USER_ID_KEY]
+    || !signUpInfo[API_KEYS.EMAIL_KEY]
+    || !signUpInfo[API_KEYS.PASSWORD_KEY]
   ) {
     return { message: "Please fill in all the fields." }
   }
@@ -51,14 +51,14 @@ export default async function signup(prevState: any, formData: FormData): Promis
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: AUTH_USER_ID_KEY,
-      value: signUpInfo[USER_ID_KEY].toString(),
+      name: API_KEYS.AUTH_USER_ID_KEY,
+      value: (signUpInfo[API_KEYS.USER_ID_KEY] as FormDataEntryValue).toString(),
       maxAge: oneYear,
     });
     // Save Token cookie
     const { token } = await res.json();
     cookies().set({
-      name: TOKEN_KEY,
+      name: API_KEYS.TOKEN_KEY,
       value: token,
       maxAge: oneYear,
     });

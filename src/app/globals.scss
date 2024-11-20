@@ -1,4 +1,4 @@
-@use "@/public/global_vars.scss" as GV;
+@use "@/public/global_vars.module.scss" as GV;
 @import "@/public/fonts.scss";
 
 html,
@@ -48,4 +48,5 @@ a {
 button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }

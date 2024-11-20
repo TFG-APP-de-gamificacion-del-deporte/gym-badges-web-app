@@ -1,6 +1,6 @@
 "use server";
 
-import { API_ENDPOINTS, AUTH_USER_ID_KEY, PASSWORD_KEY, TOKEN_KEY, USER_ID_KEY } from "@/config/API";
+import { API_ENDPOINTS, API_KEYS } from "@/config/API";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -8,12 +8,12 @@ type FormResponse = { message: string } | null
 
 export default async function login(prevState: any, formData: FormData): Promise<FormResponse> {
   const loginInfo = {
-    [USER_ID_KEY]: formData.get(USER_ID_KEY),
-    [PASSWORD_KEY]: formData.get(PASSWORD_KEY),
+    [API_KEYS.USER_ID_KEY]: formData.get(API_KEYS.USER_ID_KEY),
+    [API_KEYS.PASSWORD_KEY]: formData.get(API_KEYS.PASSWORD_KEY),
   }
 
   // Validate data
-  if (!loginInfo[USER_ID_KEY] || !loginInfo[PASSWORD_KEY]) {
+  if (!loginInfo[API_KEYS.USER_ID_KEY] || !loginInfo[API_KEYS.PASSWORD_KEY]) {
     return { message: "Invalid email or password." };
   }
 
@@ -37,14 +37,14 @@ export default async function login(prevState: any, formData: FormData): Promise
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: AUTH_USER_ID_KEY,
-      value: loginInfo[USER_ID_KEY].toString(),
+      name: API_KEYS.AUTH_USER_ID_KEY,
+      value: (loginInfo[API_KEYS.USER_ID_KEY] as FormDataEntryValue).toString(),
       maxAge: oneYear,
     });
     // Save Token cookie
     const { token } = await res.json();
     cookies().set({
-      name: TOKEN_KEY,
+      name: API_KEYS.TOKEN_KEY,
       value: token,
       maxAge: oneYear,
     });

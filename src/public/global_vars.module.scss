@@ -7,6 +7,15 @@ $green: #00ff94;
 $yellow: #ebac0f;
 $regular-text-color: #dcdcdc;
 
+:export {
+  red: $red;
+  purple: $purple;
+  orange: $orange;
+  green: $green;
+  yellow: $yellow;
+  regularTextColor: $regular-text-color;
+}
+
 $corner-radius-big: 10px;
 $corner-radius-small: 5px;
 

@@ -1,7 +1,7 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
 import { redirect } from "next/navigation"
-import { API_ENDPOINTS, AUTH_USER_ID_KEY, TOKEN_KEY } from "@/config/API"
+import { API_ENDPOINTS, API_KEYS } from "@/config/API"
 import { cookies } from "next/headers"
 import { FaArrowsRotate, FaCircleXmark, FaPen, FaStar, FaToggleOff } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
@@ -34,8 +34,8 @@ const topFeats = [
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
-  const authUserID = cookies().get(AUTH_USER_ID_KEY);
-  const token = cookies().get(TOKEN_KEY);
+  const authUserID = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
+  const token = cookies().get(API_KEYS.TOKEN_KEY);
 
   if (!authUserID || !token) {
     redirect("/login");
@@ -46,8 +46,8 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.getUser}/${params.user_id}`, {
       method: "GET",
       headers: {
-        [AUTH_USER_ID_KEY]: authUserID.value,
-        [TOKEN_KEY]: token.value,
+        [API_KEYS.AUTH_USER_ID_KEY]: authUserID.value,
+        [API_KEYS.TOKEN_KEY]: token.value,
       }
     });
   } catch (error) {

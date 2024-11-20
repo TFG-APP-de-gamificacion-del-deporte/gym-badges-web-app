@@ -1,0 +1,27 @@
+@use "@/public/global_vars.module.scss" as GV;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.card_layout {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 20px;
+}
+
+.weight_fat_layout {
+  flex-grow: 1;
+  flex-basis: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+  & > div {
+    flex-grow: 1;
+  }
+}

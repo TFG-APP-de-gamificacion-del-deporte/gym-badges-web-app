@@ -1,10 +1,16 @@
-export const TOKEN_KEY = "token";
-export const AUTH_USER_ID_KEY = "auth_user_id";
-export const USER_ID_KEY = "user_id";
-export const PASSWORD_KEY = "password";
-export const NAME_KEY = "name";
-export const EMAIL_KEY = "email";
-export const IMAGE_KEY = "image";
+export const API_KEYS = {
+  TOKEN_KEY: "token",
+  AUTH_USER_ID_KEY: "auth_user_id",
+  USER_ID_KEY: "user_id",
+  PASSWORD_KEY: "password",
+  NAME_KEY: "name",
+  EMAIL_KEY: "email",
+  IMAGE_KEY: "image",
+  WEIGHT_KEY: "weight",
+  BODY_FAT_KEY: "body_fat",
+} as const
+
+export type ApiKey = typeof API_KEYS[keyof typeof API_KEYS]
 
 export const API_ENDPOINTS = {
   login: "/login",
