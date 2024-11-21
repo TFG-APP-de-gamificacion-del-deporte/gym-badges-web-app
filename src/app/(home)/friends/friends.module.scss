@@ -1,5 +1,12 @@
 @use "@/public/global_vars.module.scss" as GV;
 
+// Set different anchors for each friend option-popover
+$max_friends: 10;
+:export {
+  MAX_FRIENDS: $max_friends;
+}
+
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -93,7 +100,6 @@
   }
 }
 
-// TODO Add anchor polyfill
 .options_popover {
   @include GV.card;
   border: none;
@@ -123,9 +129,6 @@
   }
 }
 
-// Set different anchors for each friend option-popover
-// [!] $max-friends has to be the same as MAX_FRIENDS variable in page.tsx
-$max_friends: 10;
 @for $i from 1 through $max_friends {
   // --more_button_#{$i}
   .friend_container:nth-child(#{$i}) .options_button {

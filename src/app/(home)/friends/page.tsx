@@ -2,6 +2,8 @@ import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
 import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
+import Script from "next/script"
+import Head from "next/head"
 
 type Friend = {
   image: string,
@@ -14,7 +16,7 @@ type Friend = {
   topFeats: [string, string, string]
 }
 
-const MAX_FRIENDS = 10;  // [!] Has to be the same as $max_friends variable in page.tsx
+const MAX_FRIENDS = Number(styles.MAX_FRIENDS);
 const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
   image: "",
   name: "Friend Name",
@@ -29,80 +31,86 @@ const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
 
 export default function Page() {
   return (
-    <div className={styles.layout}>
-      <header className={styles.header}>
-        <div>
-          <h2>Friends</h2>
-          <small>({friends.length})</small>
-        </div>
-        <TextInput icon=<FaMagnifyingGlass/> placeholder="Find friends"/>
-      </header>
-      {friends.map(friend => 
-        <div className={styles.friend_container} key={friend.userID}>
-          <div className={styles.friend} >
-
-            <div className={styles.avatar}>
-              {/* NAME AND USERNAME */}
-              <div className={styles.image_container}><DefaultProfilePicture/></div>
-              <span>{friend.name}<br/>{friend.userID}</span>
-              {/* OPTIONS BUTTON */}
-              {/* @ts-ignore */}
-              <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
-                <FaEllipsis size="1.5rem"/>
-              </button>
-              {/* OPTIONS MENU */}
-              <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
-                <button>
-                  <FaCircleUser/>
-                  <span>See profile</span>
-                </button>
-                <button>
-                  <FaUserSlash/>
-                  <span>Remove friend</span>
-                </button>
-              </div>
-            </div>
-
-            <div className={styles.stats_top_feats}>
-              {/* STATS */}
-              <div className={styles.stats}>
-                <div>
-                  <small>Lvl</small>
-                  <span className={styles.level}><p>{friend.level}</p></span>
-                </div>
-                <div>
-                  <small>Streak</small>
-                  <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
-                </div>
-                {friend.weight &&
-                  <div>
-                    <small>Weight</small>
-                    <span className={styles.weight}><p>{friend.weight} KG</p></span>
-                  </div>
-                }
-                {friend.bodyFat &&
-                  <div>
-                    <small>Fat</small>
-                    <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
-                  </div>
-                }
-              </div>
-
-              {/* TOP FEATS */}
-              <div className={styles.top_feats}>
-                <small>Top Feats</small>
-                <div className={styles.badge_container}>
-                  <div className={styles.top_feat}><FaStar size="20px"/></div>
-                  <div className={styles.top_feat}><FaStar size="20px"/></div>
-                  <div className={styles.top_feat}><FaStar size="20px"/></div>
-                </div>
-              </div>
-            </div>
+    <>
+      <Script>
+        if (!("anchorName" in document.documentElement.style)) 
+          import("https://unpkg.com/@oddbird/css-anchor-positioning");  
+      </Script>
+      <div className={styles.layout}>
+        <header className={styles.header}>
+          <div>
+            <h2>Friends</h2>
+            <small>({friends.length})</small>
           </div>
-          {/* DIVIDER */}
-          <hr className={styles.divider}/>
-        </div>
-      )}
-    </div>
+          <TextInput icon=<FaMagnifyingGlass/> placeholder="Find friends"/>
+        </header>
+        {friends.map(friend => 
+          <div className={styles.friend_container} key={friend.userID}>
+            <div className={styles.friend} >
+
+              <div className={styles.avatar}>
+                {/* NAME AND USERNAME */}
+                <div className={styles.image_container}><DefaultProfilePicture/></div>
+                <span>{friend.name}<br/>{friend.userID}</span>
+                {/* OPTIONS BUTTON */}
+                {/* @ts-ignore */}
+                <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
+                  <FaEllipsis size="1.5rem"/>
+                </button>
+                {/* OPTIONS MENU */}
+                <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
+                  <button>
+                    <FaCircleUser/>
+                    <span>See profile</span>
+                  </button>
+                  <button>
+                    <FaUserSlash/>
+                    <span>Remove friend</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className={styles.stats_top_feats}>
+                {/* STATS */}
+                <div className={styles.stats}>
+                  <div>
+                    <small>Lvl</small>
+                    <span className={styles.level}><p>{friend.level}</p></span>
+                  </div>
+                  <div>
+                    <small>Streak</small>
+                    <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
+                  </div>
+                  {friend.weight &&
+                    <div>
+                      <small>Weight</small>
+                      <span className={styles.weight}><p>{friend.weight} KG</p></span>
+                    </div>
+                  }
+                  {friend.bodyFat &&
+                    <div>
+                      <small>Fat</small>
+                      <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
+                    </div>
+                  }
+                </div>
+
+                {/* TOP FEATS */}
+                <div className={styles.top_feats}>
+                  <small>Top Feats</small>
+                  <div className={styles.badge_container}>
+                    <div className={styles.top_feat}><FaStar size="20px"/></div>
+                    <div className={styles.top_feat}><FaStar size="20px"/></div>
+                    <div className={styles.top_feat}><FaStar size="20px"/></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* DIVIDER */}
+            <hr className={styles.divider}/>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
