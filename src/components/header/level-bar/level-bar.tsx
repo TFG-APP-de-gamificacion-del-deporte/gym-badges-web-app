@@ -3,7 +3,7 @@ import styles from "./level-bar.module.scss"
 import { getExp, getLevel } from "@/actions/stats-info";
 
 
-const N_BOXES = 10;  // [!] Needs to be the same as the .scss variable
+const N_BOXES = Number(styles.N_BOXES);
 const EXP_PER_LVL = 1000
 
 

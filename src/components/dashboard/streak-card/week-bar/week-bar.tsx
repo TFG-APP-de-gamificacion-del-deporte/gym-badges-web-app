@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { setWeek } from "@/actions/streak-info";
 
-
-const N_DAYS = 7; // [!] Needs to be the same as the .scss variable
+const N_DAYS = Number(styles.N_DAYS);
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 

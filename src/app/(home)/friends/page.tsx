@@ -75,10 +75,10 @@ export default function Page() {
                   <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
                 </div>
                 {friend.weight &&
-                <div>
-                  <small>Weight</small>
-                  <span className={styles.weight}><p>{friend.weight} KG</p></span>
-                </div>
+                  <div>
+                    <small>Weight</small>
+                    <span className={styles.weight}><p>{friend.weight} KG</p></span>
+                  </div>
                 }
                 {friend.bodyFat &&
                   <div>
