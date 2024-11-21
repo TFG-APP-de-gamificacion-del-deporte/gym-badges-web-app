@@ -1,6 +1,6 @@
 import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
-import { FaEllipsis, FaMagnifyingGlass, FaStar } from "react-icons/fa6"
+import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 
 type Friend = {
@@ -14,13 +14,14 @@ type Friend = {
   topFeats: [string, string, string]
 }
 
-const friends: Friend[] = Array.from({length: 10}).map(_ => {return {
+const MAX_FRIENDS = 10;  // [!] Has to be the same as $max_friends variable in page.tsx
+const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
   image: "",
   name: "Friend Name",
   userID: `@Friend${Math.floor(Math.random()*1000)}`,
   level: 21,
   streak: 103,
-  weight: 64.9,
+  weight: 84.9,
   bodyFat: 22.4,
   topFeats: ["badge_id_1", "badge_id_2", "badge_id_3"]
 }})
@@ -39,14 +40,31 @@ export default function Page() {
       {friends.map(friend => 
         <div className={styles.friend_container} key={friend.userID}>
           <div className={styles.friend} >
+
             <div className={styles.avatar}>
+              {/* NAME AND USERNAME */}
               <div className={styles.image_container}><DefaultProfilePicture/></div>
               <span>{friend.name}<br/>{friend.userID}</span>
-              <button>
+              {/* OPTIONS BUTTON */}
+              {/* @ts-ignore */}
+              <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
                 <FaEllipsis size="1.5rem"/>
               </button>
+              {/* OPTIONS MENU */}
+              <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
+                <button>
+                  <FaCircleUser/>
+                  <span>See profile</span>
+                </button>
+                <button>
+                  <FaUserSlash/>
+                  <span>Remove friend</span>
+                </button>
+              </div>
             </div>
+
             <div className={styles.stats_top_feats}>
+              {/* STATS */}
               <div className={styles.stats}>
                 <div>
                   <small>Lvl</small>
@@ -69,6 +87,8 @@ export default function Page() {
                   </div>
                 }
               </div>
+
+              {/* TOP FEATS */}
               <div className={styles.top_feats}>
                 <small>Top Feats</small>
                 <div className={styles.badge_container}>
@@ -79,7 +99,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          {/* Divider */}
+          {/* DIVIDER */}
           <hr className={styles.divider}/>
         </div>
       )}
