@@ -28,8 +28,8 @@
     border-radius: GV.$corner-radius-small + 5px;
     
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+      background-color: rgba(white, 0.1) !important;
+      box-shadow: inset 0 0 0 1px rgba(white, 0.15);
     }
 
     display: flex;
@@ -52,7 +52,7 @@
 }
 
 .goal_selector {
-  $border-color: rgba(255, 255, 255, 0.15);
+  $border-color: rgba(white, 0.15);
   $border-width: 1px;
 
   display: flex;
@@ -65,7 +65,7 @@
     height: 40px;
     border: $border-width solid $border-color;
     border-right-width: 0;
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(white, 0.02);
     
     &:first-child {
       border-radius: GV.$corner-radius-small 0 0 GV.$corner-radius-small;
@@ -76,7 +76,7 @@
     }
   
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(white, 0.1);
       cursor: pointer;
     }
 
