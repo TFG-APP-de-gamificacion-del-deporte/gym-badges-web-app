@@ -11,6 +11,8 @@ $max_friends: 10;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .header {
@@ -32,7 +34,24 @@ $max_friends: 10;
   // Search text input
   & > label {
     flex-grow: 1;
-    margin-left: 4px;
+  }
+}
+
+.friends_list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  overflow: auto;
+  padding-right: 20px;
+  padding-bottom: 50px;
+  @include GV.small-screen {
+    padding: 0 10px;
+  }
+
+  &:has(:popover-open) {
+    overflow: hidden;
+    scrollbar-gutter: stable;
   }
 }
 
@@ -145,7 +164,6 @@ $max_friends: 10;
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-left: 5px;
 
   @include GV.mobile-screen {
     justify-content: center;
@@ -157,6 +175,7 @@ $max_friends: 10;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin: 0 4px;
 
   // Stat div
   & > div {

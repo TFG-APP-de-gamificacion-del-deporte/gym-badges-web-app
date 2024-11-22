@@ -78,6 +78,7 @@ $skew-small: -15deg;
 
 @mixin skewed-container($border: white) {
   padding: 8px 14px;
+  margin: 0 4px;
   overflow: hidden;
   position: relative;
   border-radius: $corner-radius-big; 

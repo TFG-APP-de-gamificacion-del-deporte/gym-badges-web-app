@@ -3,7 +3,6 @@ import styles from "./friends.module.scss"
 import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
-import Head from "next/head"
 
 type Friend = {
   image: string,
@@ -44,72 +43,74 @@ export default function Page() {
           </div>
           <TextInput icon=<FaMagnifyingGlass/> placeholder="Find friends"/>
         </header>
-        {friends.map(friend => 
-          <div className={styles.friend_container} key={friend.userID}>
-            <div className={styles.friend} >
+        <div className={styles.friends_list}>
+          {friends.map(friend => 
+            <div className={styles.friend_container} key={friend.userID}>
+              <div className={styles.friend} >
 
-              <div className={styles.avatar}>
-                {/* NAME AND USERNAME */}
-                <div className={styles.image_container}><DefaultProfilePicture/></div>
-                <span>{friend.name}<br/>{friend.userID}</span>
-                {/* OPTIONS BUTTON */}
-                {/* @ts-ignore */}
-                <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
-                  <FaEllipsis size="1.5rem"/>
-                </button>
-                {/* OPTIONS MENU */}
-                <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
-                  <button>
-                    <FaCircleUser/>
-                    <span>See profile</span>
+                <div className={styles.avatar}>
+                  {/* NAME AND USERNAME */}
+                  <div className={styles.image_container}><DefaultProfilePicture/></div>
+                  <span>{friend.name}<br/>{friend.userID}</span>
+                  {/* OPTIONS BUTTON */}
+                  {/* @ts-ignore */}
+                  <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
+                    <FaEllipsis size="1.5rem"/>
                   </button>
-                  <button>
-                    <FaUserSlash/>
-                    <span>Remove friend</span>
-                  </button>
+                  {/* OPTIONS MENU */}
+                  <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
+                    <button>
+                      <FaCircleUser/>
+                      <span>See profile</span>
+                    </button>
+                    <button>
+                      <FaUserSlash/>
+                      <span>Remove friend</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div className={styles.stats_top_feats}>
+                  {/* STATS */}
+                  <div className={styles.stats}>
+                    <div>
+                      <small>Lvl</small>
+                      <span className={styles.level}><p>{friend.level}</p></span>
+                    </div>
+                    <div>
+                      <small>Streak</small>
+                      <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
+                    </div>
+                    {friend.weight &&
+                      <div>
+                        <small>Weight</small>
+                        <span className={styles.weight}><p>{friend.weight} KG</p></span>
+                      </div>
+                    }
+                    {friend.bodyFat &&
+                      <div>
+                        <small>Fat</small>
+                        <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
+                      </div>
+                    }
+                  </div>
+
+                  {/* TOP FEATS */}
+                  <div className={styles.top_feats}>
+                    <small>Top Feats</small>
+                    <div className={styles.badge_container}>
+                      <div className={styles.top_feat}><FaStar size="20px"/></div>
+                      <div className={styles.top_feat}><FaStar size="20px"/></div>
+                      <div className={styles.top_feat}><FaStar size="20px"/></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className={styles.stats_top_feats}>
-                {/* STATS */}
-                <div className={styles.stats}>
-                  <div>
-                    <small>Lvl</small>
-                    <span className={styles.level}><p>{friend.level}</p></span>
-                  </div>
-                  <div>
-                    <small>Streak</small>
-                    <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
-                  </div>
-                  {friend.weight &&
-                    <div>
-                      <small>Weight</small>
-                      <span className={styles.weight}><p>{friend.weight} KG</p></span>
-                    </div>
-                  }
-                  {friend.bodyFat &&
-                    <div>
-                      <small>Fat</small>
-                      <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
-                    </div>
-                  }
-                </div>
-
-                {/* TOP FEATS */}
-                <div className={styles.top_feats}>
-                  <small>Top Feats</small>
-                  <div className={styles.badge_container}>
-                    <div className={styles.top_feat}><FaStar size="20px"/></div>
-                    <div className={styles.top_feat}><FaStar size="20px"/></div>
-                    <div className={styles.top_feat}><FaStar size="20px"/></div>
-                  </div>
-                </div>
-              </div>
+              {/* DIVIDER */}
+              <hr className={styles.divider}/>
             </div>
-            {/* DIVIDER */}
-            <hr className={styles.divider}/>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   )
