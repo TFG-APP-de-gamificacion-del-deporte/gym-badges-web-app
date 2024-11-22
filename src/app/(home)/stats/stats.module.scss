@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  height: 100%;
+  height: 100%;  // Required for making .card_layout scrollable
 }
 
 .card_layout {
@@ -12,6 +12,8 @@
   display: flex;
   flex-wrap: wrap-reverse;
   gap: 20px;
+
+  @include GV.scrollable;
 }
 
 .weight_fat_layout {

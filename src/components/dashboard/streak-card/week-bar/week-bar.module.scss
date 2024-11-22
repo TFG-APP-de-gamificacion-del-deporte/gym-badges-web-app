@@ -1,8 +1,10 @@
 @use "@/public/global_vars.module.scss" as GV;
 
 // Number of days in a week.
-// [!] Needs to be the same as the .tsx variable
 $n_days: 7;
+:export {
+  N_DAYS: $n_days;
+}
 
 @function calcRgbaColor($index) {
   $start: $index - 1;

@@ -40,7 +40,7 @@ export const config = {
     "/",
     "/friends",
     "/rankings",
-    // "/stats",
+    "/stats",
     "/user(/?)(.*)",
   ]
 }

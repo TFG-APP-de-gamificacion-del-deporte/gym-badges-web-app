@@ -70,7 +70,6 @@ function customTooltip({
       </div>
     );
   }
-
   return null;
 }
 
@@ -78,7 +77,7 @@ function customTooltip({
 export default function ChartCard({
   title, unit, dataKey, color="white",
 }: { 
-  title: string, dataKey: ApiKey, unit: string, color?: string,
+  title: string, unit: string, dataKey: ApiKey, color?: string,
 }) {
   const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>()
   let areaInstance: Area | null = null;

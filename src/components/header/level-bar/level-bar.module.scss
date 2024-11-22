@@ -1,8 +1,10 @@
 @use "@/public/global_vars.module.scss" as GV;
 
 // Number boxes in the exp bar.
-// [!] Need to be the same as the .tsx variables
 $n_boxes: 10;
+:export {
+  N_BOXES: $n_boxes;
+}
 
 @function calcRgbaColor($index) {
   $start: $index - 1;

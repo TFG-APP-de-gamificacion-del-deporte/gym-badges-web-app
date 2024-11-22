@@ -24,7 +24,5 @@ $gap: 30px;
 }
 
 .image_container {
-  & > div, & > img {
-    width: 50px;
-  }
+  max-width: 48px;
 }

@@ -45,10 +45,10 @@ $skew-small: -15deg;
 
 // ===== Card component =====
 @mixin card {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: rgba(white, 0.02);
   backdrop-filter: blur(20px);
   padding: 15px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(white, 0.15);
   border-radius: $corner-radius-big;
 }
 
@@ -78,6 +78,7 @@ $skew-small: -15deg;
 
 @mixin skewed-container($border: white) {
   padding: 8px 14px;
+  margin: 0 4px;
   overflow: hidden;
   position: relative;
   border-radius: $corner-radius-big; 
@@ -117,5 +118,14 @@ $skew-small: -15deg;
 
   &:hover {
     background: $hover-color;
+  }
+}
+
+// ===== Scrollable div =====
+@mixin scrollable {
+  overflow: auto;
+  padding-right: 20px;
+  @include small-screen {
+    padding: 1px 10px;
   }
 }
