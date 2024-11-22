@@ -5,6 +5,10 @@
   flex-direction: column;
   gap: 20px;
 
+  max-height: 100%;  // Required for making this scrollable
+  @include GV.scrollable;
+  padding-bottom: 50px;
+
   section {
     display: flex;
     flex-direction: column;

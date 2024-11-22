@@ -120,3 +120,12 @@ $skew-small: -15deg;
     background: $hover-color;
   }
 }
+
+// ===== Scrollable div =====
+@mixin scrollable {
+  overflow: auto;
+  padding-right: 20px;
+  @include small-screen {
+    padding: 1px 10px;
+  }
+}

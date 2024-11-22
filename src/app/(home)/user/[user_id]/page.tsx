@@ -80,6 +80,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     weight: resBody.weight,
   };
 
+  // TODO Make profile scrollable 
   return (
     <div className={styles.layout}>
       {/* IMAGE AND MAIN INFO */}

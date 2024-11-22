@@ -2,11 +2,11 @@
 
 .text_field {
   @include GV.skewed-container;
-  display: flex;
-  align-items: center;
   margin: 0 4px;
-
+  
   & > div {
+    display: flex;
+    align-items: center;
     padding: 3px;
   }
 

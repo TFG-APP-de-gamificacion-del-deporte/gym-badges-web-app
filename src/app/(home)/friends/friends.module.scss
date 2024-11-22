@@ -11,8 +11,7 @@ $max_friends: 10;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  max-height: 100%;
-  overflow: hidden;
+  max-height: 100%;  // Required for making .card_layout scrollable
 }
 
 .header {
@@ -42,12 +41,8 @@ $max_friends: 10;
   flex-direction: column;
   gap: 40px;
 
-  overflow: auto;
-  padding-right: 20px;
+  @include GV.scrollable;
   padding-bottom: 50px;
-  @include GV.small-screen {
-    padding: 0 10px;
-  }
 
   &:has(:popover-open) {
     overflow: hidden;
