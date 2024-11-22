@@ -3,6 +3,7 @@ import styles from "./friends.module.scss"
 import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
+import Link from "next/link"
 
 type Friend = {
   image: string,
@@ -50,8 +51,12 @@ export default function Page() {
 
                 <div className={styles.avatar}>
                   {/* NAME AND USERNAME */}
-                  <div className={styles.image_container}><DefaultProfilePicture/></div>
-                  <span>{friend.name}<br/>{friend.userID}</span>
+                  <Link href={`user/${friend.userID}`} className={styles.image_container}>
+                    <DefaultProfilePicture/>
+                  </Link>
+                  <Link href={`user/${friend.userID}`} className={styles.username}>
+                    {friend.name}<br/>{friend.userID}
+                  </Link>
                   {/* OPTIONS BUTTON */}
                   {/* @ts-ignore */}
                   <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
@@ -59,10 +64,10 @@ export default function Page() {
                   </button>
                   {/* OPTIONS MENU */}
                   <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
-                    <button>
+                    <Link href={`user/${friend.userID}`}>
                       <FaCircleUser/>
                       <span>See profile</span>
-                    </button>
+                    </Link>
                     <button>
                       <FaUserSlash/>
                       <span>Remove friend</span>
