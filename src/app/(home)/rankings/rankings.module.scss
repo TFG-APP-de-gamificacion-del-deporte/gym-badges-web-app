@@ -1,0 +1,136 @@
+@use "@/public/global_vars.module.scss" as GV;
+
+$gold: GV.$yellow;
+$silver: GV.$regular-text-color;
+$bronze: #BA461C;
+
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  height: 100%;
+  overflow: auto;
+  scrollbar-color: transparent transparent !important;
+}
+
+.ranking {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  max-height: 100%;
+
+  @include GV.mobile-screen {
+    max-height: 90%;
+  }
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  
+  @include GV.scrollable;
+
+  .user {
+    &:nth-child(1) .rank {
+      @include GV.skewed-container($border: $gold);
+      background-color: rgba($gold, 0.5);
+      color: white;
+    }
+    &:nth-child(2) .rank {
+      @include GV.skewed-container($border: $silver);
+      background-color: rgba($silver, 0.5);
+      color: white;
+    }
+    &:nth-child(3) .rank {
+      @include GV.skewed-container($border: $bronze);
+      background-color: rgba($bronze, 0.5);
+      color: white;
+    }
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  .image_container {
+    max-width: 55px;
+  }
+
+  .username {
+    flex-grow: 1;
+  }
+
+  .rank {
+    @include GV.skewed-container($border: transparent);
+    min-width: 4rem;
+    font-weight: bold;
+  }
+
+  .username {
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @include GV.mobile-screen {
+      flex-grow: 1;
+    }
+  }
+}
+
+.yourself {
+  @include GV.card;
+  background-image: radial-gradient(
+    circle at top 50% left 30%,
+    rgba(GV.$regular-text-color, 0.15) 0%,
+    transparent 40%
+  );
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+
+  small {
+    color: rgba(GV.$regular-text-color, 0.6);
+  }
+  
+  $transparency: 0.2;
+
+  .level {
+    min-width: 100%;
+    @include GV.skewed-container($border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%));
+    background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+  }
+
+  .streak {
+    min-width: 100%;
+    @include GV.skewed-container($border: GV.$orange);
+    background-color: rgba(GV.$orange, $transparency);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+
+    @include GV.mobile-screen {
+      display: none;
+    }
+  }
+  .streak_title {
+    @include GV.mobile-screen {
+      display: none;
+    }
+  }
+}
