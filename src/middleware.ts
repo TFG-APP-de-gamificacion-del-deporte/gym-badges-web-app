@@ -39,7 +39,7 @@ export const config = {
   matcher: [
     "/",
     "/friends",
-    "/rankings",
+    // "/rankings",
     "/stats",
     "/user(/?)(.*)",
   ]

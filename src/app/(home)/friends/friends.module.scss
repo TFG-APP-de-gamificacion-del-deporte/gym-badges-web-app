@@ -88,9 +88,6 @@ $max_friends: 10;
   }
 
   .username {
-    display: flex;
-    align-items: center;
-    
     &:hover {
       text-decoration: underline;
     }
@@ -185,7 +182,7 @@ $max_friends: 10;
     gap: 5px;
   
     small {
-      margin-left: 8px;
+      color: rgba(GV.$regular-text-color, 0.6);
     }
     @include GV.mobile-screen {
       flex-grow: 1;

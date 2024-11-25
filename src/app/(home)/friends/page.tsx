@@ -5,7 +5,7 @@ import DefaultProfilePicture from "@/components/default-profile-picture/default-
 import Script from "next/script"
 import Link from "next/link"
 
-type Friend = {
+interface Friend {
   image: string,
   name: string,
   userID: string,
@@ -50,12 +50,12 @@ export default function Page() {
               <div className={styles.friend} >
 
                 <div className={styles.avatar}>
-                  {/* NAME AND USERNAME */}
+                  {/* IMAGE, NAME AND USERNAME */}
                   <Link href={`user/${friend.userID}`} className={styles.image_container}>
                     <DefaultProfilePicture/>
                   </Link>
                   <Link href={`user/${friend.userID}`} className={styles.username}>
-                    {friend.name}<br/>{friend.userID}
+                    {friend.name}<br/><small>{friend.userID}</small>
                   </Link>
                   {/* OPTIONS BUTTON */}
                   {/* @ts-ignore */}
