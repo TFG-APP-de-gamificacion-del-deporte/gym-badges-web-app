@@ -33,6 +33,7 @@ $bronze: #BA461C;
   gap: 20px;
   
   @include GV.scrollable;
+  padding-right: 0;
 
   .user {
     &:nth-child(1) .rank {
@@ -58,6 +59,7 @@ $bronze: #BA461C;
   align-items: center;
   gap: 10px;
   width: 100%;
+  padding-right: 20px;
 
   .image_container {
     max-width: 55px;
@@ -69,7 +71,7 @@ $bronze: #BA461C;
 
   .rank {
     @include GV.skewed-container($border: transparent);
-    min-width: 4rem;
+    width: 4rem;
     font-weight: bold;
   }
 
@@ -86,6 +88,7 @@ $bronze: #BA461C;
 
 .yourself {
   @include GV.card;
+  padding: 10px 20px 10px 0;
   background-image: radial-gradient(
     circle at top 50% left 30%,
     rgba(GV.$regular-text-color, 0.15) 0%,

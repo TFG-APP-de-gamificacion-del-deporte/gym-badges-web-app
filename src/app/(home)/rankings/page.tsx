@@ -2,6 +2,9 @@ import Link from "next/link";
 import styles from "./rankings.module.scss"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import clsx from "clsx";
+import { cookies } from "next/headers";
+import { API_KEYS } from "@/config/API";
+import { redirect } from "next/navigation";
 
 interface RankingUser {
   image: string,
@@ -13,14 +16,6 @@ interface RankingUser {
 
 const MAX_USERS = 20;
 
-const rankingUsers: RankingUser[] = Array.from({length: MAX_USERS}).map(_ => {return {
-  image: "",
-  name: "Name",
-  userID: `@User_${Math.floor(Math.random()*10000)}`,
-  level: 21,
-  streak: 103,
-}})
-
 const myself: RankingUser = {
   image: "",
   name: "Diego",
@@ -29,9 +24,19 @@ const myself: RankingUser = {
   streak: 33,
 }
 
-function RankingUser({ user, index, yourself=false }: { user: RankingUser, index: number, yourself?: boolean }) {
+const rankingUsers: RankingUser[] = Array.from({length: MAX_USERS}).map(_ => {return {
+  image: "",
+  name: "Name",
+  userID: `@User_${Math.floor(Math.random()*10000)}`,
+  level: 21,
+  streak: 103,
+}});
+// rankingUsers[7] = myself;
+
+
+function RankingUser({ user, index, selfUserID }: { user: RankingUser, index: number, selfUserID: string }) {
   return (
-    <div className={clsx(styles.user, {[styles.yourself]: yourself})}>
+    <div className={clsx(styles.user, {[styles.yourself]: user.userID === selfUserID})}>
       {/* RANK */}
       <div className={styles.rank}><span>{index + 1}</span></div>
       {/* IMAGE, NAME AND USERNAME */}
@@ -55,30 +60,40 @@ function RankingUser({ user, index, yourself=false }: { user: RankingUser, index
   )
 }
 
-function RankingList({ userList }: { userList: RankingUser[] }) {
+function RankingList({ userList, selfUserID }: { userList: RankingUser[], selfUserID: string }) {
   return (
-    <div className={styles.list}>
-      { userList.map((user, index) => 
-        <RankingUser user={user} index={index} key={user.userID}/>
-      )}
-    </div>
+    <>
+      <div className={styles.list}>
+        { userList.map((user, index) => 
+          <RankingUser user={user} index={index} key={user.userID} selfUserID={selfUserID}/>
+        )}
+      </div>
+      {/* IF YOU ARE NOT IN THE LIST -> SHOW YOURSELF BELLOW */}
+      { !rankingUsers.find(u => u.userID === selfUserID) &&
+        <RankingUser user={myself} index={209} selfUserID={selfUserID}/>
+      }
+    </>
   )
 }
 
 
 export default function Page() {
+  const selfUserID = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
+  if (!selfUserID) {
+    redirect("/login");
+  }
+
   return (
     <div className={styles.layout}>
       {/* FRIENDS RANKING */}
       <section className={styles.ranking}>
         <h2>Friends Ranking</h2>
-        <RankingList userList={rankingUsers}/>
+        <RankingList userList={rankingUsers} selfUserID={selfUserID?.value}/>
       </section>
       {/* GLOBAL RANKING */}
       <section className={styles.ranking}>
         <h2>Global Ranking</h2>
-        <RankingList userList={rankingUsers}/>
-        <RankingUser user={myself} index={209} yourself/>
+        <RankingList userList={rankingUsers} selfUserID={selfUserID?.value}/>
       </section>
     </div>
   )
