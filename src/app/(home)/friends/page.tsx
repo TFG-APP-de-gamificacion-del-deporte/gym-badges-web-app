@@ -89,7 +89,7 @@ export default function Page() {
                     {friend.weight &&
                       <div>
                         <small>Weight</small>
-                        <span className={styles.weight}><p>{friend.weight} KG</p></span>
+                        <span className={styles.weight}><p>{friend.weight} kg</p></span>
                       </div>
                     }
                     {friend.bodyFat &&

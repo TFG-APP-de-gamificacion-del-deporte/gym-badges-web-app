@@ -102,7 +102,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>@{userInfo.user_id}</p>
           </div>
           <div>
-            <span className={styles.weight}>{userInfo.weight} KG</span>
+            <span className={styles.weight}>{userInfo.weight} kg</span>
             <p>Weight</p>
           </div>
           <div>

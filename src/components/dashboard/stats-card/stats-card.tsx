@@ -17,7 +17,7 @@ export default function StatsCard({ statsCardProps }: { statsCardProps: StatsCar
         {/* WEIGHT BOX */}
         <div className={clsx(styles.box, styles.green_border)}>
           <div>
-            <h3>{statsCardProps.weight} KG</h3>
+            <h3>{statsCardProps.weight} kg</h3>
             <p>Weight</p>
           </div>
         </div>

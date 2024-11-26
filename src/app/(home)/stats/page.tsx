@@ -11,7 +11,7 @@ export default function Page() {
       <div className={styles.card_layout}>
         <StreakCalendar/>
         <div className={styles.weight_fat_layout}>
-          <ChartCard title="Weight" unit=" KG" dataKey={API_KEYS.WEIGHT_KEY} color={colors.green}/>
+          <ChartCard title="Weight" unit=" kg" dataKey={API_KEYS.WEIGHT_KEY} color={colors.green}/>
           <ChartCard title="Body Fat" unit="%" dataKey={API_KEYS.BODY_FAT_KEY} color={colors.yellow}/>
         </div>
       </div>
