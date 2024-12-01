@@ -39,7 +39,10 @@ function createBadges(node: Node, col: number, row: number) {
       style={{ gridColumnStart: col, gridRowStart: row }}
       ref={badgeRef}
     >
-      {!node.id && <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>}
+      {node.id 
+        ? <img src={`/badge-icons/${node.id}.svg`} alt={node.id.toString()} draggable={false}/>
+        : <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
+      }
     </div>
   )
 
@@ -88,7 +91,6 @@ function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
 }
 
 export default function BadgeTree({ tree }: { tree: Node }) {
-  
   const width = computeWidth(tree);
   const cols = width * 2;
   
