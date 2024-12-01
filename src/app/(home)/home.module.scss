@@ -1,23 +1,7 @@
-@use "@/public/global_vars.module.scss" as GV;
-
-.dashboard_main_layout {
-  @include GV.small-screen {
-    flex-direction: column;
-  }
-
+.layout {
+  height: 100%;
+  overflow: auto;
   display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-
-  overflow: hidden;
-  
-  main {
-    flex-grow: 1;
-    overflow: hidden;
-    margin: 30px 50px 30px 0;
-
-    @include GV.small-screen {
-      margin: 0 30px 30px 30px;
-    }
-  }
+  gap: 60px;
+  scrollbar-width: none;
 }

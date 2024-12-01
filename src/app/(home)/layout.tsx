@@ -1,6 +1,6 @@
 import Dashboard from "@/components/dashboard/dashboard";
 import Header from "@/components/header/header";
-import styles from "@/app/(home)/home.module.scss";
+import styles from "./home-layout.module.scss"
 import { Suspense } from "react";
 import Footer from "@/components/footer/footer";
 
