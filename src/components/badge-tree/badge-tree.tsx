@@ -32,12 +32,13 @@ function computeWidth(node: Node) {
 
 function createBadges(node: Node, col: number, row: number) {
   const badgeRef = useRef<HTMLDivElement>(null); 
-
+  
   const currentBadge = (
     <div 
       className={node.id ? styles.badge : styles.category} 
       style={{ gridColumnStart: col, gridRowStart: row }}
       ref={badgeRef}
+      key={node.id || node.name}
     >
       {node.id 
         ? <img src={`/badge-icons/${node.id}.svg`} alt={node.id.toString()} draggable={false}/>

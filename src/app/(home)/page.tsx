@@ -59,7 +59,7 @@ export default function Home() {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      { badges.map(tree => <BadgeTree tree={tree}/>) }
+      { badges.map((tree, i) => <BadgeTree tree={tree} key={`tree_${i}`}/>) }
     </div>
   )
 }
