@@ -51,8 +51,13 @@ function createBadges(node: Node, col: number, row: number) {
       ref={badgeRef}
       key={node.id || node.name}
     >
+      {/* TOOLTIP */}
+      {node.id && <span className={styles.tooltip}>{node.name}</span>}
+
       {node.id 
+        // BADGE 
         ? <img src={`/badge-icons/${node.id}.svg`} alt={node.id.toString()} draggable={false}/>
+        // CATEGORY
         : <div>
           {categoryIcons.get(node.name)}
           <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
