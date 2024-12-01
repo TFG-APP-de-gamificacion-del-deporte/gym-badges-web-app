@@ -2,6 +2,7 @@
 
 import { RefObject, useEffect, useRef } from "react";
 import styles from "./badge-tree.module.scss"
+import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
 
 type Node = {
   id?: number,  // If no id, its a root node (name: chest, arms, core...)
@@ -30,9 +31,19 @@ function computeWidth(node: Node) {
   return width;
 }
 
+const categoryIcons = new Map([
+  ["chest", <GiShoulderArmor className={styles.chest}/>],
+  ["arms", <GiBiceps/>],
+  ["back", <GiAngelWings/>],
+  ["legs", <GiLegArmor/>],
+  ["core", <GiAbdominalArmor/>],
+  ["consistency", <GiTimeTrap/>],
+  ["social", <GiTwoShadows/>],
+])
+
 function createBadges(node: Node, col: number, row: number) {
   const badgeRef = useRef<HTMLDivElement>(null); 
-  
+
   const currentBadge = (
     <div 
       className={node.id ? styles.badge : styles.category} 
@@ -42,7 +53,10 @@ function createBadges(node: Node, col: number, row: number) {
     >
       {node.id 
         ? <img src={`/badge-icons/${node.id}.svg`} alt={node.id.toString()} draggable={false}/>
-        : <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
+        : <div>
+          {categoryIcons.get(node.name)}
+          <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
+        </div> 
       }
     </div>
   )
@@ -115,7 +129,7 @@ export default function BadgeTree({ tree }: { tree: Node }) {
     canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.5)";
 
     drawLines(tree, canvasCtx);
-  }, [])
+  }, [badgeDivs])
 
   return (
     <div className={styles.tree}>
