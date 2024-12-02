@@ -14,10 +14,11 @@
   main {
     flex-grow: 1;
     overflow: hidden;
-    margin: 30px 50px 30px 0;
+    margin: 30px;
+    margin-left: 0;
 
     @include GV.small-screen {
-      margin: 0 30px 30px 30px;
+      margin: 0;
     }
   }
 }

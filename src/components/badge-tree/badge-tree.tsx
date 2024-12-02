@@ -1,9 +1,10 @@
 "use client";
 
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import styles from "./badge-tree.module.scss"
 import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
 import Badge, { BadgeInfo } from "@/components/badge/badge";
+import useMobileScreen from "@/hooks/useMobileScreen";
 
 type Node = {
   id?: number,  // If no id, it's a root node (name: chest, arms, core...)
@@ -110,10 +111,11 @@ export default function BadgeTree({ tree }: { tree: Node }) {
   const width = computeWidth(tree);
   const cols = width * 2;
   
-  const badges = createNodes(tree, cols / 2, 1);
+  const nodeDivs = createNodes(tree, cols / 2, 1);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const isMobile = useMobileScreen();
   useEffect(() => {
     if (!canvasRef.current) { return }
     const canvas = canvasRef.current;
@@ -130,13 +132,13 @@ export default function BadgeTree({ tree }: { tree: Node }) {
     canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.5)";
 
     drawLines(tree, canvasCtx);
-  }, [badges])
+  }, [isMobile])  // Re-draw lines when layout changes
 
   return (
     <div className={styles.tree}>
       <canvas className={styles.canvas} ref={canvasRef}></canvas>
       <div className={styles.grid} style={{gridTemplateColumns: `repeat(${cols}, 1fr)`}}>
-        {badges}
+        {nodeDivs}
       </div>
     </div>
   )

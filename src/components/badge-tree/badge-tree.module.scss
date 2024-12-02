@@ -24,6 +24,11 @@
   grid-column-end: span 2;  // 2 columns wide
   min-width: 75px;
   min-height: 75px;
+
+  @include GV.mobile-screen {
+    min-width: 50px;
+    min-height: 50px;
+  }
 }
 
 .category{

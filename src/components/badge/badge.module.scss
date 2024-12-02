@@ -46,6 +46,12 @@ $badge-bg-color: #1f1f1f;
   &:hover .tooltip {
     visibility: visible;
   }
+
+  @include GV.mobile-screen {
+    & > img {
+      width: 100%;
+    }
+  }
 }
 
 // TODO Make popover full-screen on mobile
@@ -58,13 +64,12 @@ $badge-bg-color: #1f1f1f;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-
   background-image: radial-gradient(
     circle at bottom 0% left 50%,
     rgba(GV.$regular-text-color, 0.2) 0%,
     transparent 50%
   );
-
+  
   &:popover-open {
     display: flex;
     flex-direction: column;
@@ -72,7 +77,26 @@ $badge-bg-color: #1f1f1f;
     gap: 10px;
   }
 
-  // Badge
+  header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+      
+    & > button {
+      display: flex;
+      padding: 8px;
+    
+      &:hover {
+        background-color: rgba(white, 0.15);
+        box-shadow: inset 0 0 0 1px rgba(white, 0.15);
+        border-radius: 100%;
+        padding: 8px;
+      }
+    }
+  }
+
+  // Badge icon
   & > img {
     width: 145px;
     border-radius: 100%;
@@ -84,26 +108,18 @@ $badge-bg-color: #1f1f1f;
     justify-content: center;
   }
 
+  // Badge name
   & > h2 {
     flex-grow: 1;
     text-align: center;
   }
 
-  header {
+  @include GV.mobile-screen {
     width: 100%;
-    display: flex;
-    justify-content: flex-end;
-     
-    & > button {
-      display: flex;
-      padding: 8px;
+    height: 100%;
     
-      &:hover {
-        background-color: rgba(white, 0.15);
-        box-shadow: inset 0 0 0 1px rgba(white, 0.15);
-        border-radius: 100%;
-        padding: 8px;
-      }
+    & > header {
+      flex-grow: 1;
     }
   }
 }

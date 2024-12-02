@@ -24,8 +24,14 @@ $skew-small: -15deg;
 
 
 // ===== Responsive media queries =====
+$mobile-width: 750px;
+
+:export {
+  mobileWidth: $mobile-width;
+}
+
 @mixin mobile-screen {
-  @media (max-width: 750px) {
+  @media (max-width: $mobile-width) {
     @content;
   }
 }
