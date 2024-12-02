@@ -24,8 +24,14 @@ $skew-small: -15deg;
 
 
 // ===== Responsive media queries =====
+$mobile-width: 750px;
+
+:export {
+  mobileWidth: $mobile-width;
+}
+
 @mixin mobile-screen {
-  @media (max-width: 750px) {
+  @media (max-width: $mobile-width) {
     @content;
   }
 }
@@ -46,7 +52,7 @@ $skew-small: -15deg;
 // ===== Card component =====
 @mixin card {
   background-color: rgba(white, 0.02);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(45px);
   padding: 15px;
   box-shadow: inset 0 0 0 1px rgba(white, 0.15);
   border-radius: $corner-radius-big;
@@ -123,7 +129,8 @@ $skew-small: -15deg;
 
 // ===== Scrollable div =====
 @mixin scrollable {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding-right: 20px;
   @include small-screen {
     padding: 1px 10px;

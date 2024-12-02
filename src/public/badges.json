@@ -1,0 +1,583 @@
+[
+  {
+    "name": "chest",
+    "children": [
+      {
+        "id": 1,
+        "name": "Do five push-ups",
+        "children": [
+          {
+            "id": 2,
+            "name": "Do ten push-ups",
+            "children": [
+              {
+                "id": 3,
+                "name": "Do twenty push-ups",
+                "children": [
+                  {
+                    "id": 4,
+                    "name": "Do thirty push-ups",
+                    "children": [
+                      {
+                        "id": 5,
+                        "name": "Do fifty push-ups",
+                        "children": [
+                          {
+                            "id": 6,
+                            "name": "Do a hundred push-ups",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 7,
+                "name": "Bench press 20kg for 10 reps",
+                "children": [
+                  {
+                    "id": 8,
+                    "name": "Bench press 30kg for 10 reps",
+                    "children": [
+                      {
+                        "id": 9,
+                        "name": "Bench press 40kg for 10 reps",
+                        "children": [
+                          {
+                            "id": 10,
+                            "name": "Bench press 60kg for 10 reps",
+                            "children": [
+                              {
+                                "id": 11,
+                                "name": "Bench press 80kg for 5 reps",
+                                "children": [
+                                  {
+                                    "id": 12,
+                                    "name": "Bench press 100kg for 5 reps",
+                                    "children": [
+                                      {
+                                        "id": 13,
+                                        "name": "Bench press 120kg for 5 reps",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 14,
+                "name": "Do five chest dips",
+                "children": [
+                  {
+                    "id": 15,
+                    "name": "Do ten chest dips",
+                    "children": [
+                      {
+                        "id": 16,
+                        "name": "Do twenty chest dips",
+                        "children": [
+                          {
+                            "id": 17,
+                            "name": "Do thirty chest dips",
+                            "children": [
+                              {
+                                "id": 18,
+                                "name": "Do fifty chest dips",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "arms",
+    "children": [
+      {
+        "id": 19,
+        "name": "Biceps curl 8kg dumbbell",
+        "children": [
+          {
+            "id": 20,
+            "name": "Biceps curl 10kg dumbbell",
+            "children": [
+              {
+                "id": 21,
+                "name": "Biceps curl 12kg dumbbell",
+                "children": [
+                  {
+                    "id": 22,
+                    "name": "Biceps curl 16kg dumbbell",
+                    "children": [
+                      {
+                        "id": 23,
+                        "name": "Biceps curl 20kg dumbbell",
+                        "children": [
+                          {
+                            "id": 24,
+                            "name": "Biceps curl 25kg dumbbell",
+                            "children": [
+                              {
+                                "id": 25,
+                                "name": "Biceps curl 30kg dumbbell",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "name": "Shoulder press with 6kg",
+        "children": [
+          {
+            "id": 27,
+            "name": "Shoulder press with 10kg",
+            "children": [
+              {
+                "id": 28,
+                "name": "Shoulder press with 14kg",
+                "children": [
+                  {
+                    "id": 29,
+                    "name": "Shoulder press with 18kg",
+                    "children": [
+                      {
+                        "id": 30,
+                        "name": "Shoulder press with 22kg",
+                        "children": [
+                          {
+                            "id": 31,
+                            "name": "Shoulder press with 26kg",
+                            "children": [
+                              {
+                                "id": 32,
+                                "name": "Shoulder press with 30kg",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 33,
+        "name": "Lateral raises with 4kg",
+        "children": [
+          {
+            "id": 34,
+            "name": "Lateral raises with 8kg",
+            "children": [
+              {
+                "id": 35,
+                "name": "Lateral raises with 10kg",
+                "children": [
+                  {
+                    "id": 36,
+                    "name": "Lateral raises with 12kg",
+                    "children": [
+                      {
+                        "id": 37,
+                        "name": "Lateral raises with 14kg",
+                        "children": [
+                          {
+                            "id": 38,
+                            "name": "Lateral raises with 16kg",
+                            "children": [
+                              {
+                                "id": 39,
+                                "name": "Lateral raises with 20kg",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "back",
+    "children": [
+      {
+        "id": 40,
+        "name": "Do five pull-ups",
+        "children": [
+          {
+            "id": 41,
+            "name": "Do ten pull-ups",
+            "children": [
+              {
+                "id": 42,
+                "name": "Do twenty pull-ups",
+                "children": [
+                  {
+                    "id": 43,
+                    "name": "Do thirty pull-ups",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "name": "Lat pull-down with 20kg",
+        "children": [
+          {
+            "id": 45,
+            "name": "Lat pull-down with 30kg",
+            "children": [
+              {
+                "id": 46,
+                "name": "Lat pull-down with 40kg",
+                "children": [
+                  {
+                    "id": 47,
+                    "name": "Lat pull-down with 50kg",
+                    "children": [
+                      {
+                        "id": 48,
+                        "name": "Lat pull-down with 60kg",
+                        "children": [
+                          {
+                            "id": 49,
+                            "name": "Lat pull-down with 70kg",
+                            "children": [
+                              {
+                                "id": 50,
+                                "name": "Lat pull-down with 80kg",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "legs",
+    "children": [
+      {
+        "id": 51,
+        "name": "Squat 20kg for 10 reps",
+        "children": [
+          {
+            "id": 52,
+            "name": "Squat 30kg for 10 reps",
+            "children": [
+              {
+                "id": 53,
+                "name": "Squat 40kg for 10 reps",
+                "children": [
+                  {
+                    "id": 54,
+                    "name": "Squat 60kg for 10 reps",
+                    "children": [
+                      {
+                        "id": 55,
+                        "name": "Squat 80kg for 10 reps",
+                        "children": [
+                          {
+                            "id": 56,
+                            "name": "Squat 100kg for 5 reps",
+                            "children": [
+                              {
+                                "id": 57,
+                                "name": "Squat 120kg for 5 reps",
+                                "children": [
+                                  {
+                                    "id": 58,
+                                    "name": "Squat 150kg for 5 reps",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "core",
+    "children": [
+      {
+        "id": 59,
+        "name": "Do ten abdominal crunches in a row",
+        "children": [
+          {
+            "id": 60,
+            "name": "Do twenty-five abdominal crunches in a row",
+            "children": [
+              {
+                "id": 61,
+                "name": "Do fifty abdominal crunches in a row",
+                "children": []
+              },
+              {
+                "id": 62,
+                "name": "Loaded abdominal crunches with 10kg for 10 reps",
+                "children": [
+                  {
+                    "id": 63,
+                    "name": "Loaded abdominal crunches with 20kg for 10 reps",
+                    "children": [
+                      {
+                        "id": 64,
+                        "name": "Loaded abdominal crunches with 30kg for 10 reps",
+                        "children": [
+                          {
+                            "id": 65,
+                            "name": "Loaded abdominal crunches with 50kg for 10 reps",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "consistency",
+    "children": [
+      {
+        "id": 66,
+        "name": "The first week",
+        "children": [
+          {
+            "id": 67,
+            "name": "4 weeks streak",
+            "children": [
+              {
+                "id": 68,
+                "name": "10 weeks streak",
+                "children": [
+                  {
+                    "id": 69,
+                    "name": "20 weeks streak",
+                    "children": [
+                      {
+                        "id": 70,
+                        "name": "50 weeks streak",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 71,
+            "name": "First month",
+            "children": [
+              {
+                "id": 72,
+                "name": "Reach 100 gym sessions",
+                "children": [
+                  {
+                    "id": 73,
+                    "name": "Reach 200 gym sessions",
+                    "children": [
+                      {
+                        "id": 74,
+                        "name": "Reach 500 gym sessions",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 75,
+                "name": "Six months",
+                "children": [
+                  {
+                    "id": 76,
+                    "name": "First year!",
+                    "children": [
+                      {
+                        "id": 77,
+                        "name": "Two years",
+                        "children": [
+                          {
+                            "id": 78,
+                            "name": "Three years",
+                            "children": [
+                              {
+                                "id": 79,
+                                "name": "Five years",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "social",
+    "children": [
+      {
+        "id": 80,
+        "name": "Get to the top 500 at the Global Ranking",
+        "children": [
+          {
+            "id": 81,
+            "name": "Get to the top 100 at the Global Ranking",
+            "children": [
+              {
+                "id": 82,
+                "name": "Get to the top 50 at the Global Ranking",
+                "children": [
+                  {
+                    "id": 83,
+                    "name": "Get to the top 10 at the Global Ranking",
+                    "children": [
+                      {
+                        "id": 84,
+                        "name": "Get to the top 3 at the Global Ranking",
+                        "children": [
+                          {
+                            "id": 85,
+                            "name": "Get to the top 1 at the Global Ranking",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 86,
+        "name": "Add your first friend",
+        "children": [
+          {
+            "id": 87,
+            "name": "Add five friends",
+            "children": [
+              {
+                "id": 88,
+                "name": "Add ten friends",
+                "children": [
+                  {
+                    "id": 89,
+                    "name": "Add twenty friends",
+                    "children": [
+                      {
+                        "id": 90,
+                        "name": "Reach the podium at the Friends Ranking with at least 20 friends",
+                        "children": [
+                          {
+                            "id": 91,
+                            "name": "Get to the top at the Friends Ranking with at least 20 friends",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": 92,
+                    "name": "Reach the podium at the Friends Ranking with at least 10 friends",
+                    "children": [
+                      {
+                        "id": 93,
+                        "name": "Get to the top at the Friends Ranking with at least 10 friends",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 94,
+                "name": "Get to the top at the Friends Ranking with at least 5 friends",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
