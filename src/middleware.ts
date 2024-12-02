@@ -37,8 +37,8 @@ export async function middleware(req: NextRequest) {
 // [!] Append any page that requires user to be logged in
 export const config = {
   matcher: [
-    // "/",
-    // "/friends",
+    "/",
+    "/friends",
     "/rankings",
     "/stats",
     "/user(/?)(.*)",

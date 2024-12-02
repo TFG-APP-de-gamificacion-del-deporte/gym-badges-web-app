@@ -5,6 +5,7 @@ import { API_ENDPOINTS, API_KEYS } from "@/config/API"
 import { cookies } from "next/headers"
 import { FaArrowsRotate, FaCircleXmark, FaPen, FaStar, FaToggleOff } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
+import Badge from "@/components/badge/badge"
 
 type GetUserResponse = {
   user_id: string,
@@ -19,16 +20,16 @@ type GetUserResponse = {
 
 const topFeats = [
   {
-    title: "Badge Title 1",
-    description: "This is the description for the badge, explaining what it is.",
+    id: 4,
+    name: "Do thirty push-ups",
   },
   {
-    title: "Badge Title 2",
-    description: "This is the description for the badge, explaining what it is.",
+    id: 12,
+    name: "Bench press 100kg for 5 reps",
   },
   {
-    title: "Badge Title 3",
-    description: "This is the description for the badge, explaining what it is.",
+    id: 25,
+    name: "Biceps curl 30kg dumbbell",
   },
 ]
 
@@ -80,7 +81,6 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     weight: resBody.weight,
   };
 
-  // TODO Make profile scrollable 
   return (
     <div className={styles.layout}>
       {/* IMAGE AND MAIN INFO */}
@@ -122,12 +122,12 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <h2>Top Feats</h2>
         <p>Highlight the badges you feel most proud of.</p>
         <div className={styles.top_feats_card}>
-          {topFeats.slice(0, 3).map(({ title, description }) =>
-            <div key={title}>
-              <div className={styles.badge_icon}><FaStar size="35px"/></div>
+          {topFeats.slice(0, 3).map(badgeInfo =>
+            <div key={badgeInfo.id}>
+              <div className={styles.badge_container}><Badge badgeInfo={badgeInfo} tooltip={false}/></div>
               <div>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <h3>{badgeInfo.name}</h3>
+                {/* <p>{description}</p> */}
               </div>
             </div>
           )}

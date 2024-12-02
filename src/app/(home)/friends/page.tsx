@@ -118,9 +118,9 @@ export default function Page() {
                   <div className={styles.top_feats}>
                     <small>Top Feats</small>
                     <div className={styles.badges}>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[0]}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[1]}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[2]}/></div>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[0]} tooltip={false}/></div>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[1]} tooltip={false}/></div>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[2]} tooltip={false}/></div>
                     </div>
                   </div>
                 </div>

@@ -39,7 +39,7 @@ $max_friends: 10;
 .friends_list {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 25px;
 
   @include GV.scrollable;
   padding-bottom: 50px;
@@ -53,7 +53,7 @@ $max_friends: 10;
 .friend_container {
   display: flex;
   flex-direction: column;
-  gap: 39px;
+  gap: 26px;
 
   hr {
     border: none;

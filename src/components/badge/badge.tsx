@@ -6,7 +6,7 @@ export interface BadgeInfo {
   name: string,
 }
 
-export default function Badge({ badgeInfo, achieved=false }: { badgeInfo: BadgeInfo, achieved?: boolean}) {
+export default function Badge({ badgeInfo, achieved=false, tooltip=true }: { badgeInfo: BadgeInfo, achieved?: boolean, tooltip?: boolean}) {
   const popoverId = `badge_menu_${badgeInfo.id}_${crypto.randomUUID()}`
 
   return (
@@ -31,7 +31,7 @@ export default function Badge({ badgeInfo, achieved=false }: { badgeInfo: BadgeI
       {/* @ts-ignore  */}
       <button className={styles.badge} popovertarget={popoverId}>
         {/* TOOLTIP */}
-        {badgeInfo.id && <span className={styles.tooltip}>{badgeInfo.name}</span>}
+        {tooltip && <span className={styles.tooltip}>{badgeInfo.name}</span>}
         {/* ICON */}
         <img src={`/badge-icons/${badgeInfo.id}.svg`} alt={badgeInfo.id.toString()} draggable={false}/>
       </button>

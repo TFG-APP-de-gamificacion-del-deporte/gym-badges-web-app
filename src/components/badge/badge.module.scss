@@ -25,7 +25,7 @@ $badge-bg-color: #1f1f1f;
     visibility: hidden;
     width: max-content;
     max-width: 200px;
-    z-index: 1;
+    z-index: 2;
     @include GV.card;
     bottom: calc(100% + $arrow-size + 2px);
     text-align: center;
