@@ -11,10 +11,13 @@ export default function Badge({ badgeInfo, achieved=false }: { badgeInfo: BadgeI
     <>
       {/* POPOVER MENU */}
       <div className={styles.badge_menu} id={`badge_menu_${badgeInfo.id}`} popover="auto">
-        <header><button><FaXmark size="1.5rem"/></button></header>
+        {/* @ts-ignore  */}
+        <header><button popovertarget={`badge_menu_${badgeInfo.id}`}>
+          <FaXmark size="1.5rem"/>
+        </button></header>
         <img src={`/badge-icons/${badgeInfo.id}.svg`} alt={badgeInfo.id.toString()} draggable={false}/>
         <h2>{badgeInfo.name}</h2>
-        <button className={ achieved ? styles.button_unmark : styles.button_complete }>
+        <button className={achieved ? styles.button_unmark : styles.button_complete}>
           { achieved
             ? "Unmark as Complete"
             : "Complete Badge!"
