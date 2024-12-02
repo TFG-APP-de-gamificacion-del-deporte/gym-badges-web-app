@@ -17,92 +17,28 @@
   gap: 20px;
 }
 
-.category {
+.node {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
-  padding-bottom: 10px;
-  margin-bottom: 5px;
   grid-column-end: span 2;  // 2 columns wide
-
-  & > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // gap: 5px;
-
-    svg {
-      width: 70px;
-      height: 70px;
-      display: flex;
-    }
-
-    .chest {
-      margin-bottom: -5px;
-    }
-  }
-}
-  
-.badge {
-  position: relative;
-  width: 75px;
-  height: 75px;
-  border-radius: 100%;
-  
-  grid-column-end: span 2;  // 2 columns wide
-  background-color: rgba(#2c2c2c, 0.5);
-  border: 2px solid #303030;
-  
-  display: flex;
-  align-items:center;
-  justify-content: center;
-
-  & > img {
-    width: 90%;
-  }
-
-  .tooltip {
-    $arrow-size: 10px;
-
-    position: absolute;
-    visibility: hidden;
-    width: max-content;
-    max-width: 200px;
-    z-index: 1;
-    @include GV.card;
-    bottom: calc(100% + $arrow-size + 2px);
-    text-align: center;
-
-    // Arrow
-    &:after {
-      content: " ";
-      position: absolute;
-      top: 100%; /* At the bottom of the tooltip */
-      left: 50%;
-      margin-left: -$arrow-size;
-      border-width: $arrow-size;
-      border-style: solid;
-      border-color: rgb(148, 148, 148) transparent transparent transparent;
-    }
-  }
-  
-
-  &:hover .tooltip {
-    visibility: visible;
-  }
+  min-width: 75px;
+  min-height: 75px;
 }
 
-.badge_menu {
-  @include GV.card;
-  border: none;
-  top: 50%;
-  left: 50%;
+.category{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 
-  &:popover-open {
+  svg {
+    width: 70px;
+    height: 70px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+  }
+
+  .chest {
+    margin-bottom: -7px;
   }
 }

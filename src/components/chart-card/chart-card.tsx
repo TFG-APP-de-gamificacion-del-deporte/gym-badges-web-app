@@ -6,7 +6,6 @@ import { FaPlus } from "react-icons/fa6";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { CategoricalChartState } from "recharts/types/chart/types";
-import colors from "@/public/global_vars.module.scss"
 
 const data = [
   {

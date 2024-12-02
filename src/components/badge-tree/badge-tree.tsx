@@ -3,6 +3,7 @@
 import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import styles from "./badge-tree.module.scss"
 import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
+import Badge, { BadgeInfo } from "@/components/badge/badge";
 
 type Node = {
   id?: number,  // If no id, it's a root node (name: chest, arms, core...)
@@ -10,7 +11,7 @@ type Node = {
   children: Node[],
 
   width?: number,
-  ref?: RefObject<HTMLButtonElement>,
+  ref?: RefObject<HTMLDivElement>,
 }
 
 interface Badge {
@@ -46,46 +47,34 @@ const categoryIcons = new Map([
   ["social", <GiTwoShadows/>],
 ])
 
-function createBadges(node: Node, col: number, row: number) {
-  const badgeRef = useRef<HTMLButtonElement>(null); 
+function createNodes(node: Node, col: number, row: number) {
+  const nodeRef = useRef<HTMLDivElement>(null); 
 
-  const currentBadge = (
-    <button 
-      className={node.id ? styles.badge : styles.category} 
-      style={{ gridColumnStart: col, gridRowStart: row }}
-      ref={badgeRef}
-      key={node.id || node.name}
-      // @ts-ignore
-      popovertarget="badge_menu"
-    >
-      {/* TOOLTIP */}
-      {node.id && <span className={styles.tooltip}>{node.name}</span>}
-
-      {node.id 
-        // BADGE 
-        ? <img src={`/badge-icons/${node.id}.svg`} alt={node.id.toString()} draggable={false}/>
-        // CATEGORY
-        : <div>
-          {categoryIcons.get(node.name)}
-          <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
-        </div> 
+  const nodeDiv = (
+    <div className={styles.node} style={{ gridColumnStart: col, gridRowStart: row }} ref={nodeRef} key={node.id || node.name}>
+      { node.id
+        ? <Badge badgeInfo={node as BadgeInfo}/>
+        : <div className={styles.category}>
+            {categoryIcons.get(node.name)}
+            <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
+          </div>
       }
-    </button>
+    </div>
   )
 
-  node.ref = badgeRef;  // Save ref to draw lines later
+  node.ref = nodeRef;  // Save ref to draw lines later
 
-  let badges = [currentBadge];
+  let nodes = [nodeDiv];
   
   let childCol = col - (node.width as number);
   
   for (const child of node.children) {
     childCol += child.width as number;  // Make room on the left
-    badges.push(...createBadges(child, childCol, row + 1));
+    nodes.push(...createNodes(child, childCol, row + 1));
     childCol += child.width as number;  // Make room on the right
   }
 
-  return badges;
+  return nodes;
 }
 
 function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
@@ -93,19 +82,19 @@ function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
     return;
   }
 
-  const badge = node.ref.current;
+  const nodeDiv = node.ref.current;
   
   // Get bottom center coords of parent badge
-  const x = badge.offsetLeft + badge.offsetWidth / 2;
-  const y = badge.offsetTop + badge.offsetHeight - 1;
+  const x = nodeDiv.offsetLeft + nodeDiv.offsetWidth / 2;
+  const y = nodeDiv.offsetTop + nodeDiv.offsetHeight - 1;
 
   for (const child of node.children) {
     if (!child.ref?.current) { return }
-    const childBadge = child.ref.current;
+    const childNodeDiv = child.ref.current;
 
     // Get top center coords of parent badge
-    const childX = childBadge.offsetLeft + childBadge.offsetWidth / 2;
-    const childY = childBadge.offsetTop;
+    const childX = childNodeDiv.offsetLeft + childNodeDiv.offsetWidth / 2;
+    const childY = childNodeDiv.offsetTop;
 
     // Draw line
     canvasCtx.beginPath();
@@ -117,30 +106,13 @@ function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
   }
 }
 
-function addClickHandlers(node: Node, setBadgeOnMenu: Dispatch<SetStateAction<Badge | undefined>>) {
-  if (!node.ref?.current) { return }
-
-  if (node.id !== undefined) {
-    node.ref.current.onclick = () => {
-      setBadgeOnMenu({ id: node.id as number, name: node.name });
-    }
-  }
-
-  for (const child of node.children) {
-    addClickHandlers(child, setBadgeOnMenu);
-  }
-}
-
 export default function BadgeTree({ tree }: { tree: Node }) {
   const width = computeWidth(tree);
   const cols = width * 2;
   
-  const badges = createBadges(tree, cols / 2, 1);
+  const badges = createNodes(tree, cols / 2, 1);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const [badgeOnMenu, setBadgeOnMenu] = useState<Badge>();
-  addClickHandlers(tree, setBadgeOnMenu);
 
   useEffect(() => {
     if (!canvasRef.current) { return }
@@ -162,11 +134,6 @@ export default function BadgeTree({ tree }: { tree: Node }) {
 
   return (
     <div className={styles.tree}>
-      <div className={styles.badge_menu} id="badge_menu" popover="auto">
-        {/* <img src={`/badge-icons/${badgeOnMenu?.id}.svg`} alt={badgeOnMenu?.id.toString()} draggable={false}/> */}
-        {/* <h3>{badgeOnMenu?.name}</h3> */}
-        MENU
-      </div>
       <canvas className={styles.canvas} ref={canvasRef}></canvas>
       <div className={styles.grid} style={{gridTemplateColumns: `repeat(${cols}, 1fr)`}}>
         {badges}
