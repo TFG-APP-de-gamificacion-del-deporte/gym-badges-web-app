@@ -100,6 +100,7 @@ export default function Page() {
                     }
                   </div>
 
+                  {/* TODO Use Badge component */}
                   {/* TOP FEATS */}
                   <div className={styles.top_feats}>
                     <small>Top Feats</small>
