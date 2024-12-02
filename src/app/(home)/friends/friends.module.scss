@@ -146,7 +146,6 @@ $max_friends: 10;
 }
 
 @for $i from 1 through $max_friends {
-  // --more_button_#{$i}
   .friend_container:nth-child(#{$i}) .options_button {
     anchor-name: --more_button_#{$i};
   }
@@ -239,16 +238,12 @@ $max_friends: 10;
   align-items: center;
   gap: 5px;
 
-  .badge_container {
+  .badges {
     display: flex;
     gap: 10px;
   }
 
-  .top_feat {
-    display: flex;
-    width: max-content;
-    border-radius: 100%;
-    background-color: #363636;
-    padding: 12px;
+  .badge_container {
+    aspect-ratio: 1;
   }
 }

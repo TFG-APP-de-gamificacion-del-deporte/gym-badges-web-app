@@ -38,7 +38,7 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     // "/",
-    "/friends",
+    // "/friends",
     "/rankings",
     "/stats",
     "/user(/?)(.*)",

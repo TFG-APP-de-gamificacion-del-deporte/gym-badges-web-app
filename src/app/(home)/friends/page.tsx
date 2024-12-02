@@ -4,6 +4,7 @@ import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
+import Badge, { BadgeInfo } from "@/components/badge/badge"
 
 interface Friend {
   image: string,
@@ -13,7 +14,7 @@ interface Friend {
   streak: number,
   weight?: number,
   bodyFat?: number,
-  topFeats: [string, string, string]
+  topFeats: [BadgeInfo, BadgeInfo, BadgeInfo]
 }
 
 const MAX_FRIENDS = Number(styles.MAX_FRIENDS);
@@ -25,7 +26,20 @@ const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
   streak: 103,
   weight: 84.9,
   bodyFat: 22.4,
-  topFeats: ["badge_id_1", "badge_id_2", "badge_id_3"]
+  topFeats: [
+    {
+      id: 4,
+      name: "Do thirty push-ups",
+    },
+    {
+      id: 12,
+      name: "Bench press 100kg for 5 reps",
+    },
+    {
+      id: 25,
+      name: "Biceps curl 30kg dumbbell",
+    },
+  ]
 }})
 
 
@@ -100,14 +114,13 @@ export default function Page() {
                     }
                   </div>
 
-                  {/* TODO Use Badge component */}
                   {/* TOP FEATS */}
                   <div className={styles.top_feats}>
                     <small>Top Feats</small>
-                    <div className={styles.badge_container}>
-                      <div className={styles.top_feat}><FaStar size="20px"/></div>
-                      <div className={styles.top_feat}><FaStar size="20px"/></div>
-                      <div className={styles.top_feat}><FaStar size="20px"/></div>
+                    <div className={styles.badges}>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[0]}/></div>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[1]}/></div>
+                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[2]}/></div>
                     </div>
                   </div>
                 </div>

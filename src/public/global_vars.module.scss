@@ -129,7 +129,8 @@ $mobile-width: 750px;
 
 // ===== Scrollable div =====
 @mixin scrollable {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding-right: 20px;
   @include small-screen {
     padding: 1px 10px;

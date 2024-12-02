@@ -7,12 +7,14 @@ export interface BadgeInfo {
 }
 
 export default function Badge({ badgeInfo, achieved=false }: { badgeInfo: BadgeInfo, achieved?: boolean}) {
+  const popoverId = `badge_menu_${badgeInfo.id}_${crypto.randomUUID()}`
+
   return (
     <>
       {/* POPOVER MENU */}
-      <div className={styles.badge_menu} id={`badge_menu_${badgeInfo.id}`} popover="auto">
+      <div className={styles.badge_menu} id={popoverId} popover="auto">
         {/* @ts-ignore  */}
-        <header><button popovertarget={`badge_menu_${badgeInfo.id}`}>
+        <header><button popovertarget={popoverId}>
           <FaXmark size="1.5rem"/>
         </button></header>
         <img src={`/badge-icons/${badgeInfo.id}.svg`} alt={badgeInfo.id.toString()} draggable={false}/>
@@ -27,7 +29,7 @@ export default function Badge({ badgeInfo, achieved=false }: { badgeInfo: BadgeI
 
       {/* BADGE */}
       {/* @ts-ignore  */}
-      <button className={styles.badge} popovertarget={`badge_menu_${badgeInfo.id}`}>
+      <button className={styles.badge} popovertarget={popoverId}>
         {/* TOOLTIP */}
         {badgeInfo.id && <span className={styles.tooltip}>{badgeInfo.name}</span>}
         {/* ICON */}
