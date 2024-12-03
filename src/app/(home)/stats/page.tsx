@@ -1,7 +1,7 @@
 import styles from "./stats.module.scss"
 import StreakCalendar from "../../../components/streak-calendar/streak-calendar"
 import ChartCard from "@/components/chart-card/chart-card"
-import colors from "@/public/global_vars.module.scss"
+import colors from "@/styles/global_vars.module.scss"
 import { USER_KEYS } from "@/api/models"
 
 export default function Page() {

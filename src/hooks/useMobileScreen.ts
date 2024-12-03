@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GV from "@/public/global_vars.module.scss"
+import GV from "@/styles/global_vars.module.scss"
 
 export default function useMobileScreen() {
   const [matches, setMatches] = useState<boolean>(false);
