@@ -1,11 +1,11 @@
 "use client";
 
-import { ApiKey } from "@/config/API"
 import styles from "./chart-card.module.scss"
 import { FaPlus } from "react-icons/fa6";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { CategoricalChartState } from "recharts/types/chart/types";
+import { UserKey } from "@/api/models";
 
 const data = [
   {
@@ -47,7 +47,7 @@ function firstAndLastLabel({
 }: { 
   x: number, y: number, index: number, dataLength: number, value: number, unit: string
 }) {
-  if (index == 0 || index == dataLength - 1) {
+  if (index === 0 || index === dataLength - 1) {
     return (
       <text x={x} y={y} dy={-10} fill="grey" fontSize="0.8rem" textAnchor="middle">
         {value}{unit}
@@ -58,7 +58,7 @@ function firstAndLastLabel({
 };
 
 function customTooltip({ 
-  active, payload, label, unit 
+  active, payload, label, unit, 
 }: { 
   active?: boolean, payload?: any[], label?: Date, unit: string 
 }) {
@@ -76,7 +76,7 @@ function customTooltip({
 export default function ChartCard({
   title, unit, dataKey, color="white",
 }: { 
-  title: string, unit: string, dataKey: ApiKey, color?: string,
+  title: string, unit: string, dataKey: UserKey, color?: string,
 }) {
   const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>()
   let areaInstance: Area | null = null;
@@ -130,7 +130,7 @@ export default function ChartCard({
           </defs>
           <XAxis
             dataKey="date"
-            tickFormatter={(d: Date) => d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}
+            tickFormatter={(d: Date) => d.toLocaleDateString(undefined, { day: "numeric", month: "short" })}
             tickLine={false}
             axisLine={false}
             minTickGap={10}

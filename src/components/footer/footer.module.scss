@@ -1,9 +1,10 @@
-@use "@/public/global_vars.module.scss" as GV;
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/media-queries.module.scss" as mq;
 
 .footer {
   display: none;
   
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     display: flex;
     flex-direction: column;
     align-items: center;

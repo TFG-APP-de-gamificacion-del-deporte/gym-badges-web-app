@@ -1,4 +1,6 @@
-@use "@/public/global_vars.module.scss" as GV;
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 $badge-bg-color: #1f1f1f;
 
@@ -47,7 +49,7 @@ $badge-bg-color: #1f1f1f;
     visibility: visible;
   }
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     & > img {
       width: 100%;
     }
@@ -66,7 +68,7 @@ $badge-bg-color: #1f1f1f;
   overflow-x: hidden;
   background-image: radial-gradient(
     circle at bottom 0% left 50%,
-    rgba(GV.$regular-text-color, 0.2) 0%,
+    rgba(colors.$regular-text-color, 0.2) 0%,
     transparent 50%
   );
   
@@ -114,7 +116,7 @@ $badge-bg-color: #1f1f1f;
     text-align: center;
   }
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     width: calc(100% - 40px);
     // height: calc(100% - 20px);
     

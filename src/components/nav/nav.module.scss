@@ -1,4 +1,6 @@
-@use "@/public/global_vars.module.scss" as GV;
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 $transition: color 0.1s ease-out;
 
@@ -9,7 +11,7 @@ $transition: color 0.1s ease-out;
   justify-content: space-around;
   width: 100%;
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     padding: 0 25px;
   }
 }
@@ -21,7 +23,7 @@ $transition: color 0.1s ease-out;
   
   transition: $transition;
   &:hover {
-    color: lighten(GV.$purple, 10%);
+    color: lighten(colors.$purple, 10%);
     transition: $transition;
   }
 
@@ -31,7 +33,7 @@ $transition: color 0.1s ease-out;
     align-items: center;
     gap: 5px;
 
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       flex-direction: column;
       margin-left: -5px;
 
@@ -46,8 +48,8 @@ $transition: color 0.1s ease-out;
 }
 
 .link_active {
-  color: lighten(GV.$purple, 10%);
-  filter: drop-shadow(0 0 7px GV.$purple);
+  color: lighten(colors.$purple, 10%);
+  filter: drop-shadow(0 0 7px colors.$purple);
 
   transition: $transition;
 }

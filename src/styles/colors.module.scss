@@ -1,0 +1,15 @@
+$red: #b21616;
+$purple: #8c19e7;
+$orange: #d84713;
+$green: #00ff94;
+$yellow: #ebac0f;
+$regular-text-color: #dcdcdc;
+
+:export {
+  red: $red;
+  purple: $purple;
+  orange: $orange;
+  green: $green;
+  yellow: $yellow;
+  regularTextColor: $regular-text-color;
+}

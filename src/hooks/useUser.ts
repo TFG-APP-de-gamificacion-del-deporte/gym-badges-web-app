@@ -1,4 +1,5 @@
-import { API_ENDPOINTS, API_KEYS } from "@/config/API";
+import { USER_ENDPOINTS } from "@/api/endpoints";
+import { AUTH_KEYS } from "@/api/models";
 import { redirect } from "next/navigation";
 import useSWR from "swr";
 
@@ -10,13 +11,13 @@ export default function useUser(user_id: string, authUserID: string, token: stri
   }  
 
   // Create request's url and body
-  const url = `${process.env.API_URL}${API_ENDPOINTS.getUser}/${user_id}`;
+  const url = `${process.env.API_URL}${USER_ENDPOINTS.GET_USER(user_id)}`;
   const args = {
     method: "GET",
     headers: {
-      [API_KEYS.AUTH_USER_ID_KEY]: authUserID,
-      [API_KEYS.TOKEN_KEY]: token,
-    }
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+    },
   }
 
   // Make request
@@ -25,6 +26,6 @@ export default function useUser(user_id: string, authUserID: string, token: stri
   return {
     user: data,
     isLoading,
-    isError: error
+    isError: error,
   }
 }

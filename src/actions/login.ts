@@ -1,6 +1,7 @@
 "use server";
 
-import { API_ENDPOINTS, API_KEYS } from "@/config/API";
+import { AUTH_ENDPOINTS } from "@/api/endpoints";
+import { AUTH_KEYS, USER_KEYS } from "@/api/models";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -8,18 +9,18 @@ type FormResponse = { message: string } | null
 
 export default async function login(prevState: any, formData: FormData): Promise<FormResponse> {
   const loginInfo = {
-    [API_KEYS.USER_ID_KEY]: formData.get(API_KEYS.USER_ID_KEY),
-    [API_KEYS.PASSWORD_KEY]: formData.get(API_KEYS.PASSWORD_KEY),
+    [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
+    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),
   }
 
   // Validate data
-  if (!loginInfo[API_KEYS.USER_ID_KEY] || !loginInfo[API_KEYS.PASSWORD_KEY]) {
+  if (!loginInfo[USER_KEYS.USER_ID] || !loginInfo[USER_KEYS.PASSWORD]) {
     return { message: "Invalid email or password." };
   }
 
   // Authenticate
   try {
-    const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.login}`, {
+    const res = await fetch(`${process.env.API_URL}${AUTH_ENDPOINTS.LOGIN}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,14 +38,14 @@ export default async function login(prevState: any, formData: FormData): Promise
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: API_KEYS.AUTH_USER_ID_KEY,
-      value: (loginInfo[API_KEYS.USER_ID_KEY] as FormDataEntryValue).toString(),
+      name: AUTH_KEYS.AUTH_USER_ID,
+      value: (loginInfo[USER_KEYS.USER_ID] as FormDataEntryValue).toString(),
       maxAge: oneYear,
     });
     // Save Token cookie
     const { token } = await res.json();
     cookies().set({
-      name: API_KEYS.TOKEN_KEY,
+      name: AUTH_KEYS.TOKEN,
       value: token,
       maxAge: oneYear,
     });

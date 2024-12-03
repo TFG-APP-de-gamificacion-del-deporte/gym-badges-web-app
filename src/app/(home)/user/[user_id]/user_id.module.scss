@@ -1,4 +1,6 @@
-@use "@/public/global_vars.module.scss" as GV;
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 .layout {
   display: flex;
@@ -44,7 +46,7 @@ $image-size: 128px;
   margin-top: -($image-size * 1/5);
   flex-wrap: wrap;
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 20px;
@@ -63,22 +65,22 @@ $image-size: 128px;
   }
 
   .name {
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       order: -1;
       grid-column: 1 / -1;
     }
   }
 
   .streak {
-    color: GV.$orange;
+    color: colors.$orange;
   }
 
   .fat {
-    color: GV.$yellow;
+    color: colors.$yellow;
   }
 
   .weight {
-    color: GV.$green;
+    color: colors.$green;
   }
 }
 
@@ -102,7 +104,7 @@ $image-size: 128px;
     }
   }
 
-  @include GV.medium-screen {
+  @include mq.medium-screen {
     flex-direction: column;
   }
 }
@@ -117,7 +119,7 @@ $image-size: 128px;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  color: GV.$regular-text-color;
+  color: colors.$regular-text-color;
   align-self: flex-end;
 
   &:hover {

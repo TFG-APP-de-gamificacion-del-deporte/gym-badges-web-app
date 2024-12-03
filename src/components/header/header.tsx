@@ -6,10 +6,10 @@ import Nav from "../nav/nav";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import DefaultProfilePicture from "../default-profile-picture/default-profile-picture";
-import { API_KEYS } from "@/config/API";
+import { AUTH_KEYS } from "@/api/models";
 
 export default function Header() {
-  const user_id = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
+  const user_id = cookies().get(AUTH_KEYS.AUTH_USER_ID);
 
   return (
     <>

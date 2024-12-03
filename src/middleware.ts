@@ -1,29 +1,30 @@
 import { NextRequest } from "next/server";
-import { API_ENDPOINTS, API_KEYS } from "./config/API";
+import { AUTH_ENDPOINTS } from "./api/endpoints";
+import { AUTH_KEYS } from "./api/models";
 
 
 export async function middleware(req: NextRequest) {
   
-  const authUserID = req.cookies.get(API_KEYS.AUTH_USER_ID_KEY);
-  const token = req.cookies.get(API_KEYS.TOKEN_KEY);
+  const authUserID = req.cookies.get(AUTH_KEYS.AUTH_USER_ID);
+  const token = req.cookies.get(AUTH_KEYS.TOKEN);
 
   if (!authUserID || !token) {
-    return Response.redirect(new URL(API_ENDPOINTS.login, req.url))
+    return Response.redirect(new URL(AUTH_ENDPOINTS.LOGIN, req.url))
   }
   
   // Validate Token
   try {
-    const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.loginWithToken}`, {
+    const res = await fetch(`${process.env.API_URL}${AUTH_ENDPOINTS.LOGIN_WITH_TOKEN}`, {
       method: "GET",
       headers: {
-        [API_KEYS.AUTH_USER_ID_KEY]: authUserID.value,
-        [API_KEYS.TOKEN_KEY]: token.value,
+        [AUTH_KEYS.AUTH_USER_ID]: authUserID.value,
+        [AUTH_KEYS.TOKEN]: token.value,
       },
     })
 
     // Invalid token
     if (!res.ok) {
-      return Response.redirect(new URL(API_ENDPOINTS.login, req.url))
+      return Response.redirect(new URL(AUTH_ENDPOINTS.LOGIN, req.url))
     }
 
     console.debug("User loged in using token");
@@ -42,5 +43,5 @@ export const config = {
     "/rankings",
     "/stats",
     "/user(/?)(.*)",
-  ]
+  ],
 }

@@ -8,7 +8,7 @@ import { useFormState } from "react-dom";
 import signup from "@/actions/signup";
 import { ChangeEvent, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
-import { API_KEYS } from "@/config/API";
+import { USER_KEYS } from "@/api/models";
 
 export default function Signup() {
   const initialState = { message: "" }
@@ -37,7 +37,7 @@ export default function Signup() {
         <div className={styles.image_container}>
           { // DEFAULT OR UPLOADED IMAGE
             image
-            ? <img src={image as string} alt="Uploaded image" />
+            ? <img src={image as string} alt="Uploaded image"/>
             : <DefaultProfilePicture/>
           }
           { // UPLOAD OR DELETE BUTTON 
@@ -51,16 +51,16 @@ export default function Signup() {
                 <p>Select Image</p>
               </label>
           }
-          <input type="file" accept="image/png, image/jpeg" id="files" name={API_KEYS.IMAGE_KEY} onChange={handleImageUpload} ref={imgInputRef} hidden/>
+          <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleImageUpload} ref={imgInputRef} hidden/>
         </div>
         {/* TEXT INPUTS */}
         <br/>
-        <TextInput icon=<FaIdBadge size="1.2rem"/>  placeholder="Name"            name={API_KEYS.NAME_KEY}                         required/>
-        <TextInput icon=<FaAt size="1.2rem"/>       placeholder="Username"        name={API_KEYS.USER_ID_KEY}                      required/>
-        <TextInput icon=<FaEnvelope size="1.2rem"/> placeholder="Email"           name={API_KEYS.EMAIL_KEY}        type="email"    required/>
+        <TextInput icon=<FaIdBadge size="1.2rem"/>  placeholder="Name"            name={USER_KEYS.NAME}                         required/>
+        <TextInput icon=<FaAt size="1.2rem"/>       placeholder="Username"        name={USER_KEYS.USER_ID}                      required/>
+        <TextInput icon=<FaEnvelope size="1.2rem"/> placeholder="Email"           name={USER_KEYS.EMAIL}        type="email"    required/>
         <br/>
-        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Password"        name={API_KEYS.PASSWORD_KEY}     type="password" required/>
-        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Repeat Password" name={API_KEYS.PASSWORD_KEY+"2"} type="password" required/>
+        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Password"        name={USER_KEYS.PASSWORD}     type="password" required/>
+        <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Repeat Password" name={USER_KEYS.PASSWORD+"2"} type="password" required/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <FaCircleXmark size="1.2rem"/> 

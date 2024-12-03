@@ -2,7 +2,7 @@
 
 import BadgeTree from "@/components/badge-tree/badge-tree";
 import styles from "./home.module.scss"
-import badges from "@/public/badges.json" assert { type: "json" };
+import badges from "@/static/badges.json" assert { type: "json" };
 import { MouseEvent, useRef, useState } from "react";
 
 export default function Home() {

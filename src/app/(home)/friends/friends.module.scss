@@ -1,4 +1,6 @@
-@use "@/public/global_vars.module.scss" as GV;
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 // Set different anchors for each friend option-popover
 $max_friends: 10;
@@ -71,7 +73,7 @@ $max_friends: 10;
   align-items: center;
   flex-wrap: wrap;
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     flex-direction: column;
     align-items: normal;
   }
@@ -92,7 +94,7 @@ $max_friends: 10;
       text-decoration: underline;
     }
 
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       flex-grow: 1;
     }
   }
@@ -110,7 +112,7 @@ $max_friends: 10;
     }
 
     & > svg {
-      color: GV.$regular-text-color;
+      color: colors.$regular-text-color;
     }
   }
 }
@@ -161,7 +163,7 @@ $max_friends: 10;
   gap: 20px;
   flex-wrap: wrap;
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     justify-content: center;
     flex-direction: column;
   }
@@ -181,9 +183,9 @@ $max_friends: 10;
     gap: 5px;
   
     small {
-      color: rgba(GV.$regular-text-color, 0.6);
+      color: rgba(colors.$regular-text-color, 0.6);
     }
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       flex-grow: 1;
     }
   }
@@ -193,8 +195,8 @@ $max_friends: 10;
 
   .level {
     min-width: 100%;
-    @include GV.skewed-container($border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%));
-    background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%);
+    @include GV.skewed-container($border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%));
+    background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%);
     color: white;
     p {
       margin-left: -2px;
@@ -203,8 +205,8 @@ $max_friends: 10;
 
   .streak {
     min-width: 100%;
-    @include GV.skewed-container($border: GV.$orange);
-    background-color: rgba(GV.$orange, $transparency);
+    @include GV.skewed-container($border: colors.$orange);
+    background-color: rgba(colors.$orange, $transparency);
     color: white;
     p {
       margin-left: -2px;
@@ -213,8 +215,8 @@ $max_friends: 10;
 
   .weight {
     min-width: 100%;
-    @include GV.skewed-container($border: GV.$green);
-    background-color: rgba(GV.$green, $transparency);
+    @include GV.skewed-container($border: colors.$green);
+    background-color: rgba(colors.$green, $transparency);
     color: white;
     p {
       margin-left: -2px;
@@ -223,8 +225,8 @@ $max_friends: 10;
 
   .fat {
     min-width: 100%;
-    @include GV.skewed-container($border: GV.$yellow);
-    background-color: rgba(GV.$yellow, $transparency);
+    @include GV.skewed-container($border: colors.$yellow);
+    background-color: rgba(colors.$yellow, $transparency);
     color: white;
     p {
       margin-left: -2px;
