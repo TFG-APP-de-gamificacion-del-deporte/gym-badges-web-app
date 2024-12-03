@@ -1,0 +1,23 @@
+$mobile-width: 750px;
+
+:export {
+  mobileWidth: $mobile-width;
+}
+
+@mixin mobile-screen {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}
+
+@mixin small-screen {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin medium-screen {
+  @media (max-width: 1400px) {
+    @content;
+  }
+}

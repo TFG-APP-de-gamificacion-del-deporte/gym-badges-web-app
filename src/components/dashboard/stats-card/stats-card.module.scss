@@ -1,5 +1,6 @@
 @use "@/styles/global_vars.module.scss" as GV;
 @use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 $green_gradient: radial-gradient(circle at top 20% left 10%, rgba(colors.$green, 0.3) 0%, transparent 40%);
 $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba(colors.$yellow, 0.3) 0%, transparent 40%);
@@ -9,7 +10,7 @@ $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba(colors.$y
   @include GV.card;
   background-image: $green_gradient, $yellow_gradient;
   
-  @include GV.small-screen {
+  @include mq.small-screen {
     display: flex;
     flex-direction: row;
   }
@@ -46,7 +47,7 @@ $yellow_gradient: radial-gradient(circle at bottom 20% right 10%, rgba(colors.$y
     margin-left: -2px;
     padding: 10px;
 
-    @include GV.small-screen {
+    @include mq.small-screen {
       flex-direction: row-reverse;
       align-items: center;
       justify-content: space-around;

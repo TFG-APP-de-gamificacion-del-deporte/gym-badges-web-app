@@ -1,5 +1,6 @@
 @use "@/styles/global_vars.module.scss" as GV;
 @use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 $gold: colors.$yellow;
 $silver: colors.$regular-text-color;
@@ -22,7 +23,7 @@ $bronze: #BA461C;
   align-items: center;
   max-height: 100%;
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     max-height: 90%;
   }
 }
@@ -81,7 +82,7 @@ $bronze: #BA461C;
       text-decoration: underline;
     }
 
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       flex-grow: 1;
     }
   }
@@ -128,12 +129,12 @@ $bronze: #BA461C;
       margin-left: -2px;
     }
 
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       display: none;
     }
   }
   .streak_title {
-    @include GV.mobile-screen {
+    @include mq.mobile-screen {
       display: none;
     }
   }

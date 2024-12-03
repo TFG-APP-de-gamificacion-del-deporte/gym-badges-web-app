@@ -1,5 +1,6 @@
 @use "@/styles/global_vars.module.scss" as GV;
 @use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 // Number boxes in the exp bar.
 $n_boxes: 10;
@@ -24,7 +25,7 @@ $n_boxes: 10;
 }
 
 .bar {
-  @include GV.medium-screen {
+  @include mq.medium-screen {
     display: none; 
   }
   

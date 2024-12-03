@@ -1,34 +1,10 @@
+@use "@/styles/media-queries.module.scss" as mq;
+
 $corner-radius-big: 10px;
 $corner-radius-small: 5px;
 
 $skew: -20deg;
 $skew-small: -15deg;
-
-
-// ===== Responsive media queries =====
-$mobile-width: 750px;
-
-:export {
-  mobileWidth: $mobile-width;
-}
-
-@mixin mobile-screen {
-  @media (max-width: $mobile-width) {
-    @content;
-  }
-}
-
-@mixin small-screen {
-  @media (max-width: 1000px) {
-    @content;
-  }
-}
-
-@mixin medium-screen {
-  @media (max-width: 1400px) {
-    @content;
-  }
-}
 
 
 // ===== Card component =====
@@ -114,7 +90,7 @@ $mobile-width: 750px;
   overflow-x: hidden;
   overflow-y: auto;
   padding-right: 20px;
-  @include small-screen {
+  @include mq.small-screen {
     padding: 1px 10px;
   }
 }

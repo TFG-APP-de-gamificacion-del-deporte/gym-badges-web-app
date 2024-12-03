@@ -1,5 +1,6 @@
 @use "@/styles/global_vars.module.scss" as GV;
 @use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
 
 .logo {
   display: flex;
@@ -8,11 +9,11 @@
 }
 
 .title {
-  @include GV.small-screen {
+  @include mq.small-screen {
     display: none; 
   }
 
-  @include GV.mobile-screen {
+  @include mq.mobile-screen {
     display: block; 
   }
 
