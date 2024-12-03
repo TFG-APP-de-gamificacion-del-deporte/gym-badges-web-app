@@ -1,4 +1,5 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 .layout {
   display: flex;
@@ -70,15 +71,15 @@ $image-size: 128px;
   }
 
   .streak {
-    color: GV.$orange;
+    color: colors.$orange;
   }
 
   .fat {
-    color: GV.$yellow;
+    color: colors.$yellow;
   }
 
   .weight {
-    color: GV.$green;
+    color: colors.$green;
   }
 }
 
@@ -117,7 +118,7 @@ $image-size: 128px;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  color: GV.$regular-text-color;
+  color: colors.$regular-text-color;
   align-self: flex-end;
 
   &:hover {

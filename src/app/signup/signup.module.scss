@@ -1,4 +1,5 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 .signup_layout {
   display: flex;
@@ -25,7 +26,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  color: GV.$regular-text-color;
+  color: colors.$regular-text-color;
 
   &:hover {
     text-decoration: underline;
@@ -66,14 +67,14 @@
 .signup {
   $hover-transparency: 0.5;
   @include GV.skewed-button(
-    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
   );
 }
 
 .error {
-  color: lighten(GV.$red, 10%) ;
+  color: lighten(colors.$red, 10%) ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,8 +99,8 @@
   $transparency: 0.1;
   $hover-transparency: 0.5;
   @include GV.skewed-button(
-    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%),
-    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
   );
 }

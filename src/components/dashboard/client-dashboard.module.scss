@@ -1,4 +1,5 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 .dashboard {
   display: flex;
@@ -49,8 +50,8 @@
     padding: 8px 5px;
     
     &:hover {
-      background-color: rgb(GV.$purple, 0.5);
-      filter: drop-shadow(0 0 8px GV.$purple);
+      background-color: rgb(colors.$purple, 0.5);
+      filter: drop-shadow(0 0 8px colors.$purple);
       transition: $transition;
     }
 

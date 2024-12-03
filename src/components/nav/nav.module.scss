@@ -1,4 +1,5 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 $transition: color 0.1s ease-out;
 
@@ -21,7 +22,7 @@ $transition: color 0.1s ease-out;
   
   transition: $transition;
   &:hover {
-    color: lighten(GV.$purple, 10%);
+    color: lighten(colors.$purple, 10%);
     transition: $transition;
   }
 
@@ -46,8 +47,8 @@ $transition: color 0.1s ease-out;
 }
 
 .link_active {
-  color: lighten(GV.$purple, 10%);
-  filter: drop-shadow(0 0 7px GV.$purple);
+  color: lighten(colors.$purple, 10%);
+  filter: drop-shadow(0 0 7px colors.$purple);
 
   transition: $transition;
 }

@@ -1,4 +1,5 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 .login_layout {
   display: flex;
@@ -15,7 +16,7 @@
 
   background-clip: text;
   color: transparent;
-  background-image: linear-gradient(to right, GV.$red 0%, GV.$purple 100%);
+  background-image: linear-gradient(to right, colors.$red 0%, colors.$purple 100%);
   filter: drop-shadow(0 0 10px rgba(black, 0.5));
 }
 
@@ -32,7 +33,7 @@
 }
 
 .error {
-  color: lighten(GV.$red, 10%);
+  color: lighten(colors.$red, 10%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,9 +44,9 @@
   $transparency: 0.1;
   $hover-transparency: 0.5;
   @include GV.skewed-button(
-    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%),
-    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
   );
 
   margin: 15px 0 30px 0;
@@ -77,8 +78,8 @@
 .signup {
   $hover-transparency: 0.5;
   @include GV.skewed-button(
-    $border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $background: linear-gradient(to right, GV.$red 0%, GV.$purple 100%),
-    $hover-color: linear-gradient(to right, rgba(GV.$red, $hover-transparency) 0%, rgba(GV.$purple, $hover-transparency) 100%),
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
   );
 }

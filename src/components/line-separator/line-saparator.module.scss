@@ -1,10 +1,11 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
 $gradient: (
   rgba(0, 0, 0, 0) 0%,
   rgba(0, 0, 0, 0) 20px,
-  GV.$red 100px,
-  GV.$purple calc(100% - 100px),
+  colors.$red 100px,
+  colors.$purple calc(100% - 100px),
   rgba(0, 0, 0, 0) calc(100% - 20px),
   rgba(0, 0, 0, 0) 100%
 );

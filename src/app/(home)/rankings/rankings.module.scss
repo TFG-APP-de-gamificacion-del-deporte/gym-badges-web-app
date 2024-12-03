@@ -1,7 +1,8 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
 
-$gold: GV.$yellow;
-$silver: GV.$regular-text-color;
+$gold: colors.$yellow;
+$silver: colors.$regular-text-color;
 $bronze: #BA461C;
 
 .layout {
@@ -91,7 +92,7 @@ $bronze: #BA461C;
   padding: 10px 20px 10px 0;
   background-image: radial-gradient(
     circle at top 50% left 30%,
-    rgba(GV.$regular-text-color, 0.15) 0%,
+    rgba(colors.$regular-text-color, 0.15) 0%,
     transparent 40%
   );
 }
@@ -103,15 +104,15 @@ $bronze: #BA461C;
   gap: 3px;
 
   small {
-    color: rgba(GV.$regular-text-color, 0.6);
+    color: rgba(colors.$regular-text-color, 0.6);
   }
   
   $transparency: 0.2;
 
   .level {
     min-width: 100%;
-    @include GV.skewed-container($border: linear-gradient(to right, GV.$red 0%, GV.$purple 100%));
-    background: linear-gradient(to right, rgba(GV.$red, $transparency) 0%, rgba(GV.$purple, $transparency) 100%);
+    @include GV.skewed-container($border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%));
+    background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%);
     color: white;
     p {
       margin-left: -2px;
@@ -120,8 +121,8 @@ $bronze: #BA461C;
 
   .streak {
     min-width: 100%;
-    @include GV.skewed-container($border: GV.$orange);
-    background-color: rgba(GV.$orange, $transparency);
+    @include GV.skewed-container($border: colors.$orange);
+    background-color: rgba(colors.$orange, $transparency);
     color: white;
     p {
       margin-left: -2px;
