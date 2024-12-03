@@ -3,8 +3,8 @@ import styles from "./rankings.module.scss"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import clsx from "clsx";
 import { cookies } from "next/headers";
-import { API_KEYS } from "@/config/API";
 import { redirect } from "next/navigation";
+import { AUTH_KEYS } from "@/api/models";
 
 interface RankingUser {
   image: string,
@@ -31,7 +31,6 @@ const rankingUsers: RankingUser[] = Array.from({length: MAX_USERS}).map(_ => {re
   level: 21,
   streak: 103,
 }});
-// rankingUsers[7] = myself;
 
 
 function RankingUser({ user, index, selfUserID }: { user: RankingUser, index: number, selfUserID: string }) {
@@ -78,7 +77,7 @@ function RankingList({ userList, selfUserID }: { userList: RankingUser[], selfUs
 
 
 export default function Page() {
-  const selfUserID = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
+  const selfUserID = cookies().get(AUTH_KEYS.AUTH_USER_ID);
   if (!selfUserID) {
     redirect("/login");
   }

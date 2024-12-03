@@ -1,4 +1,4 @@
-import { FaX, FaXmark } from "react-icons/fa6"
+import { FaXmark } from "react-icons/fa6"
 import styles from "./badge.module.scss"
 
 export interface BadgeInfo {
@@ -6,6 +6,7 @@ export interface BadgeInfo {
   name: string,
 }
 
+// TODO Add option to not show the complete badge button
 export default function Badge({ badgeInfo, achieved=false, tooltip=true }: { badgeInfo: BadgeInfo, achieved?: boolean, tooltip?: boolean}) {
   const popoverId = `badge_menu_${badgeInfo.id}_${crypto.randomUUID()}`
 

@@ -1,14 +1,14 @@
 "use client";
 
-import Logo from '@/components/logo/logo'
-import styles from './login.module.scss'
-import Link from 'next/link'
-import LineSeparator from '@/components/line-separator/line-separator'
-import TextInput from '@/components/skewed-text-input/text-input'
-import login from '@/actions/login'
-import { useFormState } from 'react-dom';
-import { FaCircleXmark, FaEnvelope, FaLock } from 'react-icons/fa6';
-import { API_KEYS } from '@/config/API';
+import Logo from "@/components/logo/logo"
+import styles from "./login.module.scss"
+import Link from "next/link"
+import LineSeparator from "@/components/line-separator/line-separator"
+import TextInput from "@/components/skewed-text-input/text-input"
+import login from "@/actions/login"
+import { useFormState } from "react-dom";
+import { FaCircleXmark, FaEnvelope, FaLock } from "react-icons/fa6";
+import { USER_KEYS } from "@/api/models";
 
 export default function Login() {
   const initialState = { message: "" }
@@ -22,8 +22,8 @@ export default function Login() {
 
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
-        <TextInput icon=<FaEnvelope size="1.2rem"/> required placeholder="Username" name={API_KEYS.USER_ID_KEY}/>
-        <TextInput icon=<FaLock size="1.2rem"/> required placeholder="Password" name={API_KEYS.PASSWORD_KEY} type="password"/>
+        <TextInput icon=<FaEnvelope size="1.2rem"/> required placeholder="Username" name={USER_KEYS.USER_ID}/>
+        <TextInput icon=<FaLock size="1.2rem"/> required placeholder="Password" name={USER_KEYS.PASSWORD} type="password"/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <FaCircleXmark size="1.2rem"/> 

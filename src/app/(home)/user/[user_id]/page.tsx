@@ -1,11 +1,12 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
 import { redirect } from "next/navigation"
-import { API_ENDPOINTS, API_KEYS } from "@/config/API"
 import { cookies } from "next/headers"
-import { FaArrowsRotate, FaCircleXmark, FaPen, FaStar, FaToggleOff } from "react-icons/fa6"
+import { FaArrowsRotate, FaCircleXmark, FaPen } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
+import { AUTH_KEYS } from "@/api/models"
+import { USER_ENDPOINTS } from "@/api/endpoints"
 
 type GetUserResponse = {
   user_id: string,
@@ -35,8 +36,8 @@ const topFeats = [
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
-  const authUserID = cookies().get(API_KEYS.AUTH_USER_ID_KEY);
-  const token = cookies().get(API_KEYS.TOKEN_KEY);
+  const authUserID = cookies().get(AUTH_KEYS.AUTH_USER_ID);
+  const token = cookies().get(AUTH_KEYS.TOKEN);
 
   if (!authUserID || !token) {
     redirect("/login");
@@ -44,22 +45,22 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
   let res: Response;
   try {
-    res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.getUser}/${params.user_id}`, {
+    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.GET_USER(params.user_id)}`, {
       method: "GET",
       headers: {
-        [API_KEYS.AUTH_USER_ID_KEY]: authUserID.value,
-        [API_KEYS.TOKEN_KEY]: token.value,
-      }
+        [AUTH_KEYS.AUTH_USER_ID]: authUserID.value,
+        [AUTH_KEYS.TOKEN]: token.value,
+      },
     });
   } catch (error) {
     // API connection error
     redirect("/internal-error");
   } 
 
-  if (res.status == 401) {  // Unauthorized
+  if (res.status === 401) {  // Unauthorized
     redirect("/login");
   }
-  if (res.status == 404) {  // User not found
+  if (res.status === 404) {  // User not found
     return <div className={styles.user_not_found}>
       <FaCircleXmark size="1.2rem"/>
       User not found

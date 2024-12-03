@@ -1,6 +1,7 @@
 "use server";
 
-import { API_ENDPOINTS, API_KEYS } from "@/config/API";
+import { AUTH_ENDPOINTS } from "@/api/endpoints";
+import { AUTH_KEYS, USER_KEYS } from "@/api/models";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -10,30 +11,30 @@ export default async function signup(prevState: any, formData: FormData): Promis
   // TODO Upload image to a server and get the imageUrl
   
   const signUpInfo = {
-    [API_KEYS.NAME_KEY]: formData.get(API_KEYS.NAME_KEY) ,
-    [API_KEYS.USER_ID_KEY]: formData.get(API_KEYS.USER_ID_KEY),
-    [API_KEYS.EMAIL_KEY]: formData.get(API_KEYS.EMAIL_KEY),
-    [API_KEYS.PASSWORD_KEY]: formData.get(API_KEYS.PASSWORD_KEY),
+    [USER_KEYS.NAME]: formData.get(USER_KEYS.NAME) ,
+    [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
+    [USER_KEYS.EMAIL]: formData.get(USER_KEYS.EMAIL),
+    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),
     // [IMAGE_KEY]: imageUrl,
   }
 
   // Validate data
-  if (signUpInfo[API_KEYS.PASSWORD_KEY] != formData.get(API_KEYS.PASSWORD_KEY + "2")) {
+  if (signUpInfo[USER_KEYS.PASSWORD] !== formData.get(USER_KEYS.PASSWORD + "2")) {
     return { message: "Passwords not matching" };
   }
 
   if (
-    !signUpInfo[API_KEYS.NAME_KEY]
-    || !signUpInfo[API_KEYS.USER_ID_KEY]
-    || !signUpInfo[API_KEYS.EMAIL_KEY]
-    || !signUpInfo[API_KEYS.PASSWORD_KEY]
+    !signUpInfo[USER_KEYS.NAME]
+    || !signUpInfo[USER_KEYS.USER_ID]
+    || !signUpInfo[USER_KEYS.EMAIL]
+    || !signUpInfo[USER_KEYS.PASSWORD]
   ) {
     return { message: "Please fill in all the fields." }
   }
 
   // Authenticate
   try {
-    const res = await fetch(`${process.env.API_URL}${API_ENDPOINTS.signup}`, {
+    const res = await fetch(`${process.env.API_URL}${AUTH_ENDPOINTS.SIGNUP}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,14 +52,14 @@ export default async function signup(prevState: any, formData: FormData): Promis
     const oneYear = 365 * 24 * 60 * 60 * 1000;
     // Save UserID cookie
     cookies().set({
-      name: API_KEYS.AUTH_USER_ID_KEY,
-      value: (signUpInfo[API_KEYS.USER_ID_KEY] as FormDataEntryValue).toString(),
+      name: AUTH_KEYS.AUTH_USER_ID,
+      value: (signUpInfo[USER_KEYS.USER_ID] as FormDataEntryValue).toString(),
       maxAge: oneYear,
     });
     // Save Token cookie
     const { token } = await res.json();
     cookies().set({
-      name: API_KEYS.TOKEN_KEY,
+      name: AUTH_KEYS.TOKEN,
       value: token,
       maxAge: oneYear,
     });
