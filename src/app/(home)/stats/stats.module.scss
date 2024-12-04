@@ -1,10 +1,14 @@
 @use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/media-queries.module.scss" as mq;
 
 .layout {
   display: flex;
   flex-direction: column;
   gap: 20px;
   height: 100%;  // Required for making .card_layout scrollable
+  @include mq.mobile-screen {
+    padding: 10px;
+  }
 }
 
 .card_layout {

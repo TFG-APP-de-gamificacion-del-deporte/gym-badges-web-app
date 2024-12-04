@@ -10,6 +10,10 @@
   max-height: 100%;  // Required for making this scrollable
   @include GV.scrollable;
   padding-bottom: 50px;
+  @include mq.mobile-screen {
+    padding: 10px;
+    padding-bottom: 50px;
+  }
 
   section {
     display: flex;

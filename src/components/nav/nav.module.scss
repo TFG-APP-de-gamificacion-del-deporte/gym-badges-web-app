@@ -6,7 +6,6 @@ $transition: color 0.1s ease-out;
 
 .navbar {
   display: flex;
-  flex-direction: row;
   gap: 10px;
   justify-content: space-around;
   width: 100%;
@@ -19,6 +18,7 @@ $transition: color 0.1s ease-out;
 .link {
   padding: 10px 12px;
   border-radius: GV.$corner-radius-small;
+  flex-basis: 0;
   flex-grow: 1;
   
   transition: $transition;
@@ -29,7 +29,6 @@ $transition: color 0.1s ease-out;
 
   div {
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 5px;
 

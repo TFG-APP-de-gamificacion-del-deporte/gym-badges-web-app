@@ -11,6 +11,21 @@
   }
 }
 
+.open {
+  @include mq.mobile-screen {
+    @include GV.card;
+    padding: 0;
+    position: absolute;
+    height: 100%;
+    z-index: 3;
+
+    .hide_button {
+      flex-grow: 1;
+      justify-content: flex-end;
+    }
+  }
+}
+
 .widgets {
   display: flex;
   flex-direction: column;
@@ -36,7 +51,7 @@
   }
 }
 
-.collapse_button {
+.hide_button {
   $transition: background-color 0.1s ease-out, filter 0.1s ease-out; 
 
   display: flex;
