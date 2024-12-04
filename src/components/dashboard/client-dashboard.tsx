@@ -21,26 +21,26 @@ export default function ClientDashboard({ statsCardProps, streakCardProps }: Cli
   }
 
   return (
-    <div className={styles.dashboard}>
-      
-      { 
-        !hidden && 
+    <div className={clsx([styles.dashboard, {[styles.open]: !hidden}])}>
+      {/* DASHBOARD */}
+      { !hidden && 
         <div className={styles.widgets}>
             <StreakCard streakCardProps={streakCardProps}/>
             <StatsCard statsCardProps={statsCardProps}/>
         </div>
       }
 
+      {/* LINE SEPARATOR */}
       <div className={styles.separator_container}>
         {!hidden && <LineSeparator/>}
       </div>
 
-      <div className={styles.collapse_button}>
+      {/* HIDE BUTTON */}
+      <div className={styles.hide_button}>
         <button className={clsx({[styles.flip_button]: hidden})} onClick={toggleHidden}>
           <FaChevronLeft size="1.5rem"/>
         </button>
       </div>
-
     </div>
   );
 }

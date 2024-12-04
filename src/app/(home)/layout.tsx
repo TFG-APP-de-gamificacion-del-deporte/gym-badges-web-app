@@ -15,8 +15,8 @@ export default function RootLayout({
           <Dashboard/>
         </Suspense>
         <main>{children}</main>
-        <Footer/>
       </div>
+      <Footer/>
     </>
   );
 }
