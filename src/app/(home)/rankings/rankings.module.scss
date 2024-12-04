@@ -13,6 +13,10 @@ $bronze: #BA461C;
   height: 100%;
   overflow: auto;
   scrollbar-color: transparent transparent !important;
+  padding: 30px;
+  @include mq.mobile-screen {
+    padding: 10px;
+  }
 }
 
 .ranking {

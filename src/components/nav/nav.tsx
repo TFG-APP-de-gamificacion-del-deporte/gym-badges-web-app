@@ -8,24 +8,24 @@ import { FaChartSimple, FaMedal, FaTrophy, FaUserGroup } from "react-icons/fa6";
 
 const LINKS = [
   { 
-    name: 'Badges', 
-    href: '/', 
-    icon: <FaMedal size="1.2rem"/> 
+    name: "Badges", 
+    href: "/", 
+    icon: <FaMedal size="1.2rem"/>, 
   },
   { 
-    name: 'Rankings', 
-    href: '/rankings', 
-    icon: <FaTrophy size="1.2rem"/> 
+    name: "Rankings", 
+    href: "/rankings", 
+    icon: <FaTrophy size="1.2rem"/>, 
   },
   { 
-    name: 'Friends', 
-    href: '/friends', 
-    icon: <FaUserGroup size="1.2rem"/> 
+    name: "Friends", 
+    href: "/friends", 
+    icon: <FaUserGroup size="1.2rem"/>, 
   },
   { 
-    name: 'Stats', 
-    href: '/stats', 
-    icon: <FaChartSimple size="1.2rem"/> 
+    name: "Stats", 
+    href: "/stats", 
+    icon: <FaChartSimple size="1.2rem"/>, 
   },
 ];
 

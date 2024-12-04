@@ -14,6 +14,10 @@ $max_friends: 10;
   flex-direction: column;
   gap: 40px;
   max-height: 100%;  // Required for making .card_layout scrollable
+  padding: 30px;
+  @include mq.mobile-screen {
+    padding: 10px;
+  }
 }
 
 .header {
