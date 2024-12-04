@@ -1,12 +1,13 @@
 "use client";
 
 import styles from "./client-dashboard.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StatsCard, { StatsCardProps } from "./stats-card/stats-card";
 import LineSeparator from "../line-separator/line-separator";
 import StreakCard, { StreakCardProps } from "./streak-card/streak-card";
 import clsx from "clsx";
 import { FaChevronLeft } from "react-icons/fa6";
+import useMobileScreen from "@/hooks/useMobileScreen";
 
 type ClientDashboardProps = {
   streakCardProps: StreakCardProps;
@@ -15,6 +16,11 @@ type ClientDashboardProps = {
 
 export default function ClientDashboard({ statsCardProps, streakCardProps }: ClientDashboardProps) {
   const [hidden, setHidden] = useState(false);
+
+  const isMobile = useMobileScreen();
+  useEffect(() => {
+    setHidden(isMobile);
+  }, [isMobile])
 
   const toggleHidden = () => {
     setHidden(!hidden);
