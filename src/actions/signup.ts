@@ -4,6 +4,7 @@ import { AUTH_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/models";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import crypto from "crypto"
 
 type FormResponse = { message: string } | null
 
@@ -31,6 +32,10 @@ export default async function signup(prevState: any, formData: FormData): Promis
   ) {
     return { message: "Please fill in all the fields." }
   }
+
+  // Encrypt password
+  const hash = crypto.createHash("sha256").update(signUpInfo[USER_KEYS.PASSWORD] as string).digest("hex");
+  signUpInfo[USER_KEYS.PASSWORD] = hash;
 
   // Authenticate
   try {
