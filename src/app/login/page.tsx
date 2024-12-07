@@ -23,7 +23,7 @@ export default function Login() {
       <form action={formAction} className={styles.form}>
         {/* TEXT INPUTS */}
         <TextInput icon=<FaUser size="1.2rem"/> required placeholder="Username" name={USER_KEYS.USER_ID}/>
-        <TextInput icon=<FaLock size="1.2rem"/> required placeholder="Password" name={USER_KEYS.PASSWORD} type="password"/>
+        <TextInput icon=<FaLock size="1.2rem"/> required placeholder="Password" name={USER_KEYS.PASSWORD} type="password" minLength={10}/>
         {/* ERROR MESSAGE */}
         {state?.message && <span className={styles.error}>
           <FaCircleXmark size="1.2rem"/> 
