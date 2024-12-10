@@ -1,4 +1,4 @@
-import { getStats } from "@/actions/stats-info";
+import { getStats } from "@/actions/stats";
 import ClientDashboard from "./client-dashboard";
 import { getCurrentWeek, getStreak } from "@/actions/streak-info";
 

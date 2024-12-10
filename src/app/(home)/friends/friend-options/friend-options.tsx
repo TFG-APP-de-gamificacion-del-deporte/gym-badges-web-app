@@ -4,7 +4,7 @@ import styles from "./friend-options.module.scss";
 import Link from "next/link";
 import { FaCircleUser, FaEllipsis, FaUserSlash } from "react-icons/fa6";
 import { Friend } from "../page";
-import { deleteFriend } from "@/actions/friends";
+import { deleteFriendAction } from "@/actions/friends";
 
 export default function FriendOptions({friend}: {friend: Friend}) {
   return (
@@ -20,7 +20,7 @@ export default function FriendOptions({friend}: {friend: Friend}) {
           <FaCircleUser/>
           <span>See profile</span>
         </Link>
-        <button onClick={() => deleteFriend(friend.user)}>
+        <button onClick={() => deleteFriendAction(friend.user)}>
           <FaUserSlash/>
           <span>Remove friend</span>
         </button>

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import styles from "./level-bar.module.scss"
-import { getExp, getLevel } from "@/actions/stats-info";
+import { getExp, getLevel } from "@/actions/stats";
 
 
 const N_BOXES = Number(styles.N_BOXES);

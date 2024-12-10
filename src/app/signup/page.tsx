@@ -5,14 +5,14 @@ import styles from "./signup.module.scss"
 import TextInput from "@/components/skewed-text-input/text-input";
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import { useFormState } from "react-dom";
-import signup from "@/actions/signup";
+import signupAction from "@/actions/signup";
 import { ChangeEvent, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
 import { USER_KEYS } from "@/api/models";
 
 export default function Signup() {
   const initialState = { message: "" }
-  const [state, formAction] = useFormState(signup, initialState)
+  const [state, formAction] = useFormState(signupAction, initialState)
 
   const [image, setImage] = useState<string>();
   const imgInputRef = useRef<HTMLInputElement>(null);

@@ -8,15 +8,14 @@ import crypto from "crypto"
 
 type FormResponse = { message: string } | null
 
-export default async function signup(prevState: any, formData: FormData): Promise<FormResponse> {
-  // TODO Upload image to a server and get the imageUrl
+export default async function signupAction(prevState: any, formData: FormData): Promise<FormResponse> {
   
   const signUpInfo = {
     [USER_KEYS.NAME]: formData.get(USER_KEYS.NAME) ,
     [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
     [USER_KEYS.EMAIL]: formData.get(USER_KEYS.EMAIL),
     [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),
-    // [IMAGE_KEY]: imageUrl,
+    // TODO [IMAGE_KEY]: image blob,
   }
 
   // Validate data

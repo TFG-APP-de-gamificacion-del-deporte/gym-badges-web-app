@@ -8,7 +8,7 @@ import crypto from "crypto"
 
 type FormResponse = { message: string } | null
 
-export default async function login(prevState: any, formData: FormData): Promise<FormResponse> {
+export default async function loginAction(prevState: any, formData: FormData): Promise<FormResponse> {
   const loginInfo = {
     [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
     [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),

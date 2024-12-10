@@ -7,7 +7,7 @@ import getAuthCookies from "@/utils/getAuthCookies";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getFriends() {
+export async function getFriendsAction() {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)
@@ -31,9 +31,10 @@ export async function getFriends() {
   return (await res.json()).friends as Friend[]
 }
 
+
 type FormResponse = { message: string } | null
 
-export async function addFriend(prevState: any, formData: FormData): Promise<FormResponse> {
+export async function addFriendAction(prevState: any, formData: FormData): Promise<FormResponse> {
   // Get own user id
   const { authUserID, token } = getAuthCookies();
   
@@ -70,7 +71,8 @@ export async function addFriend(prevState: any, formData: FormData): Promise<For
   return { message: `Added ${friendID.toString()} as a friend!` }
 }
 
-export async function deleteFriend(friendID: string) {
+
+export async function deleteFriendAction(friendID: string) {
   const { authUserID, token } = getAuthCookies();
   
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)

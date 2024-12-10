@@ -6,7 +6,7 @@ import Link from "next/link"
 import Badge, { BadgeInfo } from "@/components/badge/badge"
 import TextInput from "@/components/skewed-text-input/text-input"
 import FriendOptions from "./friend-options/friend-options"
-import { getFriends } from "@/actions/friends"
+import { getFriendsAction } from "@/actions/friends"
 import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 
 export interface Friend {
@@ -21,7 +21,7 @@ export interface Friend {
 }
 
 export default async function Page() {
-  const friends = await getFriends();
+  const friends = await getFriendsAction();
 
   return (
     <>

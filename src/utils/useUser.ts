@@ -3,8 +3,6 @@ import { AUTH_KEYS } from "@/api/models";
 import { redirect } from "next/navigation";
 import useSWR from "swr";
 
-const fetcher = (url: string, args: RequestInit) => fetch(url, args).then(res => res.json());
-
 export default function useUser(user_id: string, authUserID: string, token: string) {
   if (!authUserID || !token) {
     redirect("/login");
@@ -21,7 +19,7 @@ export default function useUser(user_id: string, authUserID: string, token: stri
   }
 
   // Make request
-  const { data, error, isLoading } = useSWR([url, args], ([url, args]) => fetcher(url, args))
+  const { data, error, isLoading } = useSWR([url, args], ([url, args]) => fetch(url, args).then(res => res.json()))
 
   return {
     user: data,

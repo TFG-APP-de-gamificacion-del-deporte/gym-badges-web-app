@@ -1,3 +1,5 @@
+import { USER_KEYS } from "./models";
+
 export const AUTH_ENDPOINTS = {
   LOGIN: "/login",
   LOGIN_WITH_TOKEN: "/login-with-token",
@@ -17,7 +19,7 @@ export const FRIENDS_ENDPOINTS = {
 } as const;
 
 export const STATS_ENDPOINTS = {
-  GET_WEIGHT_HISTORY: (userID: string) => `/stats/weight/${userID}` as const,
-  GET_FAT_HISTORY:    (userID: string) => `/stats/fat/${userID}` as const,
-  GET_STREAK_HISTORY: (userID: string) => `/stats/streak/${userID}` as const,
+  [USER_KEYS.WEIGHT]:   (userID: string) => `/stats/weight/${userID}` as const,
+  [USER_KEYS.BODY_FAT]: (userID: string) => `/stats/fat/${userID}` as const,
+  [USER_KEYS.STREAK]:   (userID: string) => `/stats/streak/${userID}` as const,
 } as const;

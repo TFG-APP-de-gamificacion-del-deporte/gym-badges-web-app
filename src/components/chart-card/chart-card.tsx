@@ -1,46 +1,14 @@
 "use client";
 
 import styles from "./chart-card.module.scss"
-import { FaPlus } from "react-icons/fa6";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { CategoricalChartState } from "recharts/types/chart/types";
-import { UserKey } from "@/api/models";
-
-const data = [
-  {
-    date: new Date(2024, 8, 27),
-    value: 92,
-  },
-  {
-    date: new Date(2024, 9, 4),
-    value: 90.5,
-  },
-  {
-    date: new Date(2024, 9, 11),
-    value: 91.3,
-  },
-  {
-    date: new Date(2024, 9, 18),
-    value: 90.1,
-  },
-  {
-    date: new Date(2024, 9, 25),
-    value: 89.2,
-  },
-  {
-    date: new Date(2024, 10, 1),
-    value: 89.9,
-  },
-  {
-    date: new Date(2024, 10, 8),
-    value: 89,
-  },
-  {
-    date: new Date(2024, 10, 15),
-    value: 88.9,
-  },
-]
+import { StatsKeys } from "@/api/models";
+import AddNewDataMenu from "./add-new-data-menu/add-new-data-menu";
+import useSWR from "swr";
+import { getDataAction } from "@/actions/stats";
+import { redirect } from "next/navigation";
 
 function firstAndLastLabel({
   x, y, index, dataLength, value, unit,
@@ -76,10 +44,17 @@ function customTooltip({
 export default function ChartCard({
   title, unit, dataKey, color="white",
 }: { 
-  title: string, unit: string, dataKey: UserKey, color?: string,
+  title: string, unit: string, dataKey: StatsKeys, color?: string,
 }) {
-  const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>()
+  // Get data from the API
+  const { data, error, isLoading } = useSWR(`getDataAction-${dataKey}`, getDataAction.bind(null, dataKey));
+
+  // Use state to store chart tooltip coords
+  const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>();
   let areaInstance: Area | null = null;
+
+  if (isLoading) return
+  if (error) redirect("/internal-error");
   
   return (
     <div className={styles.card}>
@@ -91,10 +66,7 @@ export default function ChartCard({
           </div>
           <small>{title}</small>
         </div>
-        <button className={styles.new_button}>
-          <FaPlus/>
-          <span>New {title}</span>
-        </button>
+        <AddNewDataMenu title={title} unit={unit} dataKey={dataKey}/>
       </div>
       <ResponsiveContainer width="100%" height="80%" minHeight={200} >
         <AreaChart
@@ -130,7 +102,7 @@ export default function ChartCard({
           </defs>
           <XAxis
             dataKey="date"
-            tickFormatter={(d: Date) => d.toLocaleDateString(undefined, { day: "numeric", month: "short" })}
+            tickFormatter={(s: string) => new Date(s).toLocaleDateString(undefined, { day: "numeric", month: "short" })}
             tickLine={false}
             axisLine={false}
             minTickGap={10}
