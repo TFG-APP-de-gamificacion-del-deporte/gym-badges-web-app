@@ -7,7 +7,7 @@ import LineSeparator from "../line-separator/line-separator";
 import StreakCard, { StreakCardProps } from "./streak-card/streak-card";
 import clsx from "clsx";
 import { FaChevronLeft } from "react-icons/fa6";
-import useMobileScreen from "@/hooks/useMobileScreen";
+import useMobileScreen from "@/utils/useMobileScreen";
 
 type ClientDashboardProps = {
   streakCardProps: StreakCardProps;

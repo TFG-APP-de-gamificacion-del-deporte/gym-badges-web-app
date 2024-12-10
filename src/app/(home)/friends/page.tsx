@@ -1,49 +1,54 @@
 import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
-import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
+import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
 import Badge, { BadgeInfo } from "@/components/badge/badge"
+import { AUTH_KEYS } from "@/api/models"
+import { redirect } from "next/navigation"
+import { FRIENDS_ENDPOINTS } from "@/api/endpoints"
+import getAuthCookies from "@/utils/getAuthCookies"
 
 interface Friend {
   image: string,
   name: string,
-  userID: string,
+  user: string,
   level: number,
   streak: number,
   weight?: number,
-  bodyFat?: number,
-  topFeats: [BadgeInfo, BadgeInfo, BadgeInfo]
+  fat?: number,
+  top_feats: BadgeInfo[]
 }
 
-const MAX_FRIENDS = Number(styles.MAX_FRIENDS);
-const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
-  image: "",
-  name: "Friend Name",
-  userID: `@Friend${Math.floor(Math.random()*1000)}`,
-  level: 21,
-  streak: 103,
-  weight: 84.9,
-  bodyFat: 22.4,
-  topFeats: [
-    {
-      id: 4,
-      name: "Do thirty push-ups",
+async function getFriends() {
+  const { userID, token } = getAuthCookies();
+
+  let url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.GET_FRIENDS(userID)}`)
+  url.searchParams.append("page", "0")
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: userID,
+      [AUTH_KEYS.TOKEN]: token,
     },
-    {
-      id: 12,
-      name: "Bench press 100kg for 5 reps",
-    },
-    {
-      id: 25,
-      name: "Biceps curl 30kg dumbbell",
-    },
-  ],
-}})
+  })
+
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    redirect("/internal-error");
+  }
+
+  return (await res.json()).friends as Friend[]
+}
 
 
-export default function Page() {
+export default async function Page() {
+  const friends = await getFriends();
+
   return (
     <>
       <Script id="css-anchor-polyfill">{`
@@ -60,16 +65,16 @@ export default function Page() {
         </header>
         <div className={styles.friends_list}>
           {friends.map(friend => 
-            <div className={styles.friend_container} key={friend.userID}>
+            <div className={styles.friend_container} key={friend.user}>
               <div className={styles.friend} >
 
                 <div className={styles.avatar}>
                   {/* IMAGE, NAME AND USERNAME */}
-                  <Link href={`user/${friend.userID}`} className={styles.image_container}>
+                  <Link href={`user/${friend.user}`} className={styles.image_container}>
                     <DefaultProfilePicture/>
                   </Link>
-                  <Link href={`user/${friend.userID}`} className={styles.username}>
-                    {friend.name}<br/><small>{friend.userID}</small>
+                  <Link href={`user/${friend.user}`} className={styles.username}>
+                    {friend.name}<br/><small>@{friend.user}</small>
                   </Link>
                   {/* OPTIONS BUTTON */}
                   {/* @ts-ignore */}
@@ -77,8 +82,8 @@ export default function Page() {
                     <FaEllipsis size="1.5rem"/>
                   </button>
                   {/* OPTIONS MENU */}
-                  <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
-                    <Link href={`user/${friend.userID}`}>
+                  <div id={`options_popover_${friend.user}`} className={styles.options_popover} popover="auto">
+                    <Link href={`user/${friend.user}`}>
                       <FaCircleUser/>
                       <span>See profile</span>
                     </Link>
@@ -100,29 +105,31 @@ export default function Page() {
                       <small>Streak</small>
                       <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
                     </div>
-                    {friend.weight &&
+                    {friend.weight !== undefined &&
                       <div>
                         <small>Weight</small>
                         <span className={styles.weight}><p>{friend.weight} kg</p></span>
                       </div>
                     }
-                    {friend.bodyFat &&
+                    {friend.fat !== undefined &&
                       <div>
                         <small>Fat</small>
-                        <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
+                        <span className={styles.fat}><p>{friend.fat}%</p></span>
                       </div>
                     }
                   </div>
 
                   {/* TOP FEATS */}
-                  <div className={styles.top_feats}>
-                    <small>Top Feats</small>
-                    <div className={styles.badges}>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[0]} tooltip={false}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[1]} tooltip={false}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[2]} tooltip={false}/></div>
+                  { friend.top_feats.length > 0 && 
+                    <div className={styles.top_feats}>
+                      <small>Top Feats</small>
+                      <div className={styles.badges}>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false}/></div>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false}/></div>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false}/></div>
+                      </div>
                     </div>
-                  </div>
+                  }
                 </div>
               </div>
               {/* DIVIDER */}

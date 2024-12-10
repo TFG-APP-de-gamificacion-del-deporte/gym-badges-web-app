@@ -24,7 +24,7 @@ export async function middleware(req: NextRequest) {
 
     // Invalid token
     if (!res.ok) {
-      return Response.redirect(new URL(AUTH_ENDPOINTS.LOGIN, req.url))
+      return Response.redirect(new URL("/login", req.url))
     }
 
     console.debug("User loged in using token");
