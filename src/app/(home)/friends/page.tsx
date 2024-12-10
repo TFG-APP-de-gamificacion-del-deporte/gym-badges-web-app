@@ -1,92 +1,59 @@
-import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
-import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaStar, FaUserSlash } from "react-icons/fa6"
+import { FaMagnifyingGlass, FaPlus, FaXmark } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
 import Badge, { BadgeInfo } from "@/components/badge/badge"
+import TextInput from "@/components/skewed-text-input/text-input"
+import FriendOptions from "./friend-options/friend-options"
+import { getFriends } from "@/actions/friends"
+import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 
-interface Friend {
+export interface Friend {
   image: string,
   name: string,
-  userID: string,
+  user: string,
   level: number,
   streak: number,
   weight?: number,
-  bodyFat?: number,
-  topFeats: [BadgeInfo, BadgeInfo, BadgeInfo]
+  fat?: number,
+  top_feats: BadgeInfo[]
 }
 
-const MAX_FRIENDS = Number(styles.MAX_FRIENDS);
-const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
-  image: "",
-  name: "Friend Name",
-  userID: `@Friend${Math.floor(Math.random()*1000)}`,
-  level: 21,
-  streak: 103,
-  weight: 84.9,
-  bodyFat: 22.4,
-  topFeats: [
-    {
-      id: 4,
-      name: "Do thirty push-ups",
-    },
-    {
-      id: 12,
-      name: "Bench press 100kg for 5 reps",
-    },
-    {
-      id: 25,
-      name: "Biceps curl 30kg dumbbell",
-    },
-  ]
-}})
+export default async function Page() {
+  const friends = await getFriends();
 
-
-export default function Page() {
   return (
     <>
-      <Script>
+      <Script id="css-anchor-polyfill">{`
         if (!("anchorName" in document.documentElement.style)) 
-          import("https://unpkg.com/@oddbird/css-anchor-positioning");  
-      </Script>
+          import("https://unpkg.com/@oddbird/css-anchor-positioning");
+      `}</Script>
       <div className={styles.layout}>
+
         <header className={styles.header}>
-          <div>
+          {/* TITLE */}
+          <div className={styles.title}>
             <h2>Friends</h2>
             <small>({friends.length})</small>
           </div>
-          <TextInput icon=<FaMagnifyingGlass/> placeholder="Find friends"/>
+          <AddFriendMenu/>
         </header>
+
         <div className={styles.friends_list}>
           {friends.map(friend => 
-            <div className={styles.friend_container} key={friend.userID}>
+            <div className={styles.friend_container} key={friend.user}>
               <div className={styles.friend} >
 
                 <div className={styles.avatar}>
                   {/* IMAGE, NAME AND USERNAME */}
-                  <Link href={`user/${friend.userID}`} className={styles.image_container}>
+                  <Link href={`user/${friend.user}`} className={styles.image_container}>
                     <DefaultProfilePicture/>
                   </Link>
-                  <Link href={`user/${friend.userID}`} className={styles.username}>
-                    {friend.name}<br/><small>{friend.userID}</small>
+                  <Link href={`user/${friend.user}`} className={styles.username}>
+                    {friend.name}<br/><small>@{friend.user}</small>
                   </Link>
-                  {/* OPTIONS BUTTON */}
-                  {/* @ts-ignore */}
-                  <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
-                    <FaEllipsis size="1.5rem"/>
-                  </button>
-                  {/* OPTIONS MENU */}
-                  <div id={`options_popover_${friend.userID}`} className={styles.options_popover} popover="auto">
-                    <Link href={`user/${friend.userID}`}>
-                      <FaCircleUser/>
-                      <span>See profile</span>
-                    </Link>
-                    <button>
-                      <FaUserSlash/>
-                      <span>Remove friend</span>
-                    </button>
-                  </div>
+                  <FriendOptions friend={friend}/>
                 </div>
 
                 <div className={styles.stats_top_feats}>
@@ -100,29 +67,31 @@ export default function Page() {
                       <small>Streak</small>
                       <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
                     </div>
-                    {friend.weight &&
+                    {friend.weight !== undefined &&
                       <div>
                         <small>Weight</small>
                         <span className={styles.weight}><p>{friend.weight} kg</p></span>
                       </div>
                     }
-                    {friend.bodyFat &&
+                    {friend.fat !== undefined &&
                       <div>
                         <small>Fat</small>
-                        <span className={styles.fat}><p>{friend.bodyFat}%</p></span>
+                        <span className={styles.fat}><p>{friend.fat}%</p></span>
                       </div>
                     }
                   </div>
 
                   {/* TOP FEATS */}
-                  <div className={styles.top_feats}>
-                    <small>Top Feats</small>
-                    <div className={styles.badges}>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[0]} tooltip={false}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[1]} tooltip={false}/></div>
-                      <div className={styles.badge_container}><Badge badgeInfo={friend.topFeats[2]} tooltip={false}/></div>
+                  { friend.top_feats.length > 0 && 
+                    <div className={styles.top_feats}>
+                      <small>Top Feats</small>
+                      <div className={styles.badges}>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false}/></div>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false}/></div>
+                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false}/></div>
+                      </div>
                     </div>
-                  </div>
+                  }
                 </div>
               </div>
               {/* DIVIDER */}

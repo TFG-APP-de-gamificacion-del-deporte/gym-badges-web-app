@@ -4,7 +4,7 @@ import { RefObject, useEffect, useRef } from "react";
 import styles from "./badge-tree.module.scss"
 import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
 import Badge, { BadgeInfo } from "@/components/badge/badge";
-import useMobileScreen from "@/hooks/useMobileScreen";
+import useMobileScreen from "@/utils/useMobileScreen";
 
 type Node = {
   id?: number,  // If no id, it's a root node (name: chest, arms, core...)

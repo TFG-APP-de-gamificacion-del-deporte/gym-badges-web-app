@@ -1,0 +1,49 @@
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/global_vars.module.scss" as GV;
+
+.options_button {
+  margin-left: 12px;
+  display: flex;
+  padding: 8px;
+  
+  &:hover {
+    background-color: rgba(white, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(white, 0.15);
+    border-radius: 100%;
+    padding: 8px;
+  }
+
+  & > svg {
+    color: colors.$regular-text-color;
+  }
+}
+
+.options_popover {
+  @include GV.card;
+  border: none;
+  top: anchor(top);
+  left: anchor(right);
+  translate: -100% calc(-100% - 5px);
+
+  &:popover-open {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  & > button, & > a {
+    width: 100%;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    &:hover {
+      background-color: rgba(white, 0.15);
+      box-shadow: inset 0 0 0 1px rgba(white, 0.15);
+      border-radius: GV.$corner-radius-small;
+      padding: 8px 10px;
+    }
+  }
+}
