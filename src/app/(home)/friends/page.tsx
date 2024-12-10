@@ -1,6 +1,6 @@
 import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
-import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaUserSlash } from "react-icons/fa6"
+import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaPlus, FaUserSlash } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
@@ -61,7 +61,10 @@ export default async function Page() {
             <h2>Friends</h2>
             <small>({friends.length})</small>
           </div>
-          <TextInput icon=<FaMagnifyingGlass/> placeholder="Find friends"/>
+          <button className={styles.add_friend}>
+            <FaPlus/>
+            <span>Add friend</span>
+          </button>
         </header>
         <div className={styles.friends_list}>
           {friends.map(friend => 
