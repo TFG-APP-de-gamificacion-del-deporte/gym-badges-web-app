@@ -6,8 +6,8 @@ import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, 
 import Badge, { BadgeInfo } from "@/components/badge/badge";
 import useMobileScreen from "@/utils/useMobileScreen";
 
-type Node = {
-  id?: number,  // If no id, it's a root node (name: chest, arms, core...)
+interface Node {
+  id: number,  // If id is negative, it's a root node (name: chest, arms, core...)
   name: string,
   children: Node[],
 
@@ -39,13 +39,13 @@ function computeWidth(node: Node) {
 }
 
 const categoryIcons = new Map([
-  ["chest", <GiShoulderArmor className={styles.chest}/>],
-  ["arms", <GiBiceps/>],
-  ["back", <GiAngelWings/>],
-  ["legs", <GiLegArmor/>],
-  ["core", <GiAbdominalArmor/>],
-  ["consistency", <GiTimeTrap/>],
-  ["social", <GiTwoShadows/>],
+  ["chest", <GiShoulderArmor className={styles.chest} key=""/>],
+  ["arms", <GiBiceps key=""/>],
+  ["back", <GiAngelWings key=""/>],
+  ["legs", <GiLegArmor key=""/>],
+  ["core", <GiAbdominalArmor key=""/>],
+  ["consistency", <GiTimeTrap key=""/>],
+  ["social", <GiTwoShadows key=""/>],
 ])
 
 function createNodes(node: Node, col: number, row: number) {
@@ -53,7 +53,7 @@ function createNodes(node: Node, col: number, row: number) {
 
   const nodeDiv = (
     <div className={styles.node} style={{ gridColumnStart: col, gridRowStart: row }} ref={nodeRef} key={node.id || node.name}>
-      { node.id
+      { node.id > 0
         ? <Badge badgeInfo={node as BadgeInfo}/>
         : <div className={styles.category}>
             {categoryIcons.get(node.name)}
@@ -132,7 +132,7 @@ export default function BadgeTree({ tree }: { tree: Node }) {
     canvasCtx.strokeStyle = "rgba(255, 255, 255, 0.5)";
 
     drawLines(tree, canvasCtx);
-  }, [isMobile])  // Re-draw lines when layout changes
+  }, [isMobile, tree])  // Re-draw lines when layout changes
 
   return (
     <div className={styles.tree}>

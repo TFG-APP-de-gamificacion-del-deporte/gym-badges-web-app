@@ -1,5 +1,6 @@
 [
   {
+    "id": -1,
     "name": "chest",
     "children": [
       {
@@ -110,6 +111,7 @@
     ]
   },
   {
+    "id": -2,
     "name": "arms",
     "children": [
       {
@@ -238,6 +240,7 @@
     ]
   },
   {
+    "id": -3,
     "name": "back",
     "children": [
       {
@@ -307,6 +310,7 @@
     ]
   },
   {
+    "id": -4,
     "name": "legs",
     "children": [
       {
@@ -359,6 +363,7 @@
     ]
   },
   {
+    "id": -5,
     "name": "core",
     "children": [
       {
@@ -404,6 +409,7 @@
     ]
   },
   {
+    "id": -6,
     "name": "consistency",
     "children": [
       {
@@ -490,6 +496,7 @@
     ]
   },
   {
+    "id": -7,
     "name": "social",
     "children": [
       {
