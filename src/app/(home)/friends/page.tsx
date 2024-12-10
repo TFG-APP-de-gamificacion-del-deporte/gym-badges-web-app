@@ -1,6 +1,5 @@
-import TextInput from "@/components/skewed-text-input/text-input"
 import styles from "./friends.module.scss"
-import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaPlus, FaUserSlash } from "react-icons/fa6"
+import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaPlus, FaUserSlash, FaXmark } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
@@ -9,6 +8,7 @@ import { AUTH_KEYS } from "@/api/models"
 import { redirect } from "next/navigation"
 import { FRIENDS_ENDPOINTS } from "@/api/endpoints"
 import getAuthCookies from "@/utils/getAuthCookies"
+import TextInput from "@/components/skewed-text-input/text-input"
 
 interface Friend {
   image: string,
@@ -56,16 +56,35 @@ export default async function Page() {
           import("https://unpkg.com/@oddbird/css-anchor-positioning");
       `}</Script>
       <div className={styles.layout}>
+
         <header className={styles.header}>
-          <div>
+          {/* TITLE */}
+          <div className={styles.title}>
             <h2>Friends</h2>
             <small>({friends.length})</small>
           </div>
-          <button className={styles.add_friend}>
+          {/* ADD FRIEND BUTTON */}
+          {/* @ts-ignore  */}
+          <button className={styles.add_friend} popovertarget="add-friend-popover">
             <FaPlus/>
             <span>Add friend</span>
           </button>
+          {/* ADD FRIEND POPOVER */}
+          <div className={styles.add_friend_popover} id="add-friend-popover" popover="auto">
+            {/* @ts-ignore  */}
+            <header><button popovertarget="add-friend-popover">
+              <FaXmark size="1.5rem"/>
+            </button></header>
+            <TextInput icon=<FaMagnifyingGlass/> placeholder="Search by Username" required/>
+            <div>
+              <button className={styles.add_friend}>
+                <FaPlus/>
+                <span>Add friend</span>
+              </button>
+            </div>
+          </div>
         </header>
+
         <div className={styles.friends_list}>
           {friends.map(friend => 
             <div className={styles.friend_container} key={friend.user}>
