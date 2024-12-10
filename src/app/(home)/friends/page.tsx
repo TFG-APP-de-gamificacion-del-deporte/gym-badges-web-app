@@ -39,17 +39,17 @@ const friends: Friend[] = Array.from({length: MAX_FRIENDS}).map(_ => {return {
       id: 25,
       name: "Biceps curl 30kg dumbbell",
     },
-  ]
+  ],
 }})
 
 
 export default function Page() {
   return (
     <>
-      <Script>
+      <Script id="css-anchor-polyfill">{`
         if (!("anchorName" in document.documentElement.style)) 
-          import("https://unpkg.com/@oddbird/css-anchor-positioning");  
-      </Script>
+          import("https://unpkg.com/@oddbird/css-anchor-positioning");
+      `}</Script>
       <div className={styles.layout}>
         <header className={styles.header}>
           <div>
