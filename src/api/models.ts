@@ -6,9 +6,11 @@ export const USER_KEYS = {
   IMAGE: "image",
   WEIGHT: "weight",
   BODY_FAT: "body_fat",
+  STREAK: "streak",
 } as const;
 
 export type UserKey = typeof USER_KEYS[keyof typeof USER_KEYS]
+export type StatsKeys = typeof USER_KEYS.WEIGHT | typeof USER_KEYS.BODY_FAT | typeof USER_KEYS.STREAK
 
 
 export const AUTH_KEYS = {

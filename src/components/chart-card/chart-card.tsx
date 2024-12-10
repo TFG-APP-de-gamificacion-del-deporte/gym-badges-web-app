@@ -1,11 +1,11 @@
 "use client";
 
 import styles from "./chart-card.module.scss"
-import { FaPlus } from "react-icons/fa6";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { CategoricalChartState } from "recharts/types/chart/types";
-import { UserKey } from "@/api/models";
+import { StatsKeys } from "@/api/models";
+import AddNewDataMenu from "./add-new-data-menu/add-new-data-menu";
 
 const data = [
   {
@@ -76,7 +76,7 @@ function customTooltip({
 export default function ChartCard({
   title, unit, dataKey, color="white",
 }: { 
-  title: string, unit: string, dataKey: UserKey, color?: string,
+  title: string, unit: string, dataKey: StatsKeys, color?: string,
 }) {
   const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>()
   let areaInstance: Area | null = null;
@@ -91,10 +91,7 @@ export default function ChartCard({
           </div>
           <small>{title}</small>
         </div>
-        <button className={styles.new_button}>
-          <FaPlus/>
-          <span>New {title}</span>
-        </button>
+        <AddNewDataMenu title={title} unit={unit} dataKey={dataKey}/>
       </div>
       <ResponsiveContainer width="100%" height="80%" minHeight={200} >
         <AreaChart

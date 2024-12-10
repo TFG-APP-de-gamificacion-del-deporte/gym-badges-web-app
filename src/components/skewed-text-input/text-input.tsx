@@ -9,6 +9,7 @@ export default function TextInput({
   required=false,
   name="",
   minLength,
+  step,
 }: {
   icon: ReactNode,
   type?: HTMLInputTypeAttribute,
@@ -16,12 +17,13 @@ export default function TextInput({
   required?: boolean,
   name?: string,
   minLength?: number,
+  step: number,
 }) {
   return (
     <label htmlFor={`input-${name}`} className={styles.text_field}>
       <div>
         {icon}
-        <input type={type} id={`input-${name}`} name={name} placeholder={placeholder} required={required} minLength={minLength}/> 
+        <input type={type} id={`input-${name}`} name={name} placeholder={placeholder} required={required} minLength={minLength} step={step}/> 
       </div>
     </label>
   )
