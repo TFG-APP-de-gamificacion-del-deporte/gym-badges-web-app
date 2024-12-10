@@ -2,10 +2,6 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "quotes": ["warn", "double"],
-    "no-unused-vars": ["warn", {
-      "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_"
-    }],
     "eqeqeq": "warn",
     "comma-dangle": ["warn", "always-multiline"]
   }

@@ -11,7 +11,7 @@ export default function getAuthCookies() {
   }
 
   return {
-    userID: authUserID.value, 
+    authUserID: authUserID.value, 
     token: token.value,
   }
 }

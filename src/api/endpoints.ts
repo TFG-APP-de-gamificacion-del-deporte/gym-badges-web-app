@@ -13,7 +13,7 @@ export const BADGES_ENDPOINTS = {
 } as const;
 
 export const FRIENDS_ENDPOINTS = {
-  GET_FRIENDS: (userID: string) => `/friends/${userID}` as const,
+  FRIENDS: (userID: string) => `/friends/${userID}` as const,
 } as const;
 
 export const STATS_ENDPOINTS = {

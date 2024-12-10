@@ -1,16 +1,14 @@
 import styles from "./friends.module.scss"
-import { FaCircleUser, FaEllipsis, FaMagnifyingGlass, FaPlus, FaUserSlash, FaXmark } from "react-icons/fa6"
+import { FaMagnifyingGlass, FaPlus, FaXmark } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
 import Badge, { BadgeInfo } from "@/components/badge/badge"
-import { AUTH_KEYS } from "@/api/models"
-import { redirect } from "next/navigation"
-import { FRIENDS_ENDPOINTS } from "@/api/endpoints"
-import getAuthCookies from "@/utils/getAuthCookies"
 import TextInput from "@/components/skewed-text-input/text-input"
+import FriendOptions from "./friend-options/friend-options"
+import { getFriends } from "@/actions/friends"
 
-interface Friend {
+export interface Friend {
   image: string,
   name: string,
   user: string,
@@ -20,31 +18,6 @@ interface Friend {
   fat?: number,
   top_feats: BadgeInfo[]
 }
-
-async function getFriends() {
-  const { userID, token } = getAuthCookies();
-
-  let url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.GET_FRIENDS(userID)}`)
-  url.searchParams.append("page", "0")
-
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      [AUTH_KEYS.AUTH_USER_ID]: userID,
-      [AUTH_KEYS.TOKEN]: token,
-    },
-  })
-
-  if (res.status === 401) {
-    redirect("/login")
-  }
-  if (!res.ok) {
-    redirect("/internal-error");
-  }
-
-  return (await res.json()).friends as Friend[]
-}
-
 
 export default async function Page() {
   const friends = await getFriends();
@@ -98,22 +71,7 @@ export default async function Page() {
                   <Link href={`user/${friend.user}`} className={styles.username}>
                     {friend.name}<br/><small>@{friend.user}</small>
                   </Link>
-                  {/* OPTIONS BUTTON */}
-                  {/* @ts-ignore */}
-                  <button popovertarget={`options_popover_${friend.userID}`} className={styles.options_button}>
-                    <FaEllipsis size="1.5rem"/>
-                  </button>
-                  {/* OPTIONS MENU */}
-                  <div id={`options_popover_${friend.user}`} className={styles.options_popover} popover="auto">
-                    <Link href={`user/${friend.user}`}>
-                      <FaCircleUser/>
-                      <span>See profile</span>
-                    </Link>
-                    <button>
-                      <FaUserSlash/>
-                      <span>Remove friend</span>
-                    </button>
-                  </div>
+                  <FriendOptions friend={friend}/>
                 </div>
 
                 <div className={styles.stats_top_feats}>
