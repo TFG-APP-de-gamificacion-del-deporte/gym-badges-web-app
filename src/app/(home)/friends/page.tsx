@@ -7,6 +7,7 @@ import Badge, { BadgeInfo } from "@/components/badge/badge"
 import TextInput from "@/components/skewed-text-input/text-input"
 import FriendOptions from "./friend-options/friend-options"
 import { getFriends } from "@/actions/friends"
+import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 
 export interface Friend {
   image: string,
@@ -36,26 +37,7 @@ export default async function Page() {
             <h2>Friends</h2>
             <small>({friends.length})</small>
           </div>
-          {/* ADD FRIEND BUTTON */}
-          {/* @ts-ignore  */}
-          <button className={styles.add_friend} popovertarget="add-friend-popover">
-            <FaPlus/>
-            <span>Add friend</span>
-          </button>
-          {/* ADD FRIEND POPOVER */}
-          <div className={styles.add_friend_popover} id="add-friend-popover" popover="auto">
-            {/* @ts-ignore  */}
-            <header><button popovertarget="add-friend-popover">
-              <FaXmark size="1.5rem"/>
-            </button></header>
-            <TextInput icon=<FaMagnifyingGlass/> placeholder="Search by Username" required/>
-            <div>
-              <button className={styles.add_friend}>
-                <FaPlus/>
-                <span>Add friend</span>
-              </button>
-            </div>
-          </div>
+          <AddFriendMenu/>
         </header>
 
         <div className={styles.friends_list}>
