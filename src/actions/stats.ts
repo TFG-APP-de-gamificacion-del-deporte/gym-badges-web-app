@@ -4,7 +4,6 @@ import { STATS_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, StatsKeys } from "@/api/models";
 import { StatsCardProps } from "@/components/dashboard/stats-card/stats-card";
 import getAuthCookies from "@/utils/getAuthCookies";
-import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 // ===== Mocked Database =====
@@ -60,6 +59,29 @@ export async function addNewData(title: string, dataKey: StatsKeys, prevState: a
     redirect("/internal-error");
   }
 
-  revalidatePath("/stats")
   return { message: `New ${title} added!` }
+}
+
+export async function getDataAction(dataKey: StatsKeys) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS[dataKey](authUserID)}`)
+  url.searchParams.append("months", "0");  // Available values : 0, 3, 6, 12. To return all use 0.
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+    },
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    redirect("/internal-error");
+  }
+
+  return (await res.json()).days;
 }

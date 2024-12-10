@@ -6,12 +6,18 @@ import { FaPlus, FaXmark } from "react-icons/fa6";
 import { useFormState } from "react-dom";
 import TextInput from "@/components/skewed-text-input/text-input";
 import { addNewData } from "@/actions/stats";
+import { mutate } from "swr";
+import { useEffect } from "react";
 
 export default function AddNewDataMenu({ title, unit, dataKey }: { title: string, unit: string, dataKey: StatsKeys }) {
   const initialState = { message: "" }
   const [state, formAction] = useFormState(addNewData.bind(null, title, dataKey), initialState)
   
   const popoverID = `add-friend-popover-${dataKey}`
+
+  useEffect(() => {
+    mutate(`getDataAction-${dataKey}`)
+  }, [state, dataKey])
 
   return (
     <>
@@ -32,7 +38,7 @@ export default function AddNewDataMenu({ title, unit, dataKey }: { title: string
           { state?.message && <span>{state.message}</span>}
           <button className={styles.new_button} type="submit">
             <FaPlus/>
-            <span>Add friend</span>
+            <span>Add New {title}</span>
           </button>
         </form>
       </div>

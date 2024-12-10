@@ -2,15 +2,12 @@
 
 import styles from "./streak-calendar.module.scss"
 import { useState } from "react";
-import Calendar, { TileClassNameFunc } from 'react-calendar';
-import './Calendar.css';
+import Calendar, { TileClassNameFunc } from "react-calendar";
+import "./Calendar.css";
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
-
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-const N_DAYS = 7
 
 export default function StreakCalendar() {
   const [dateRange, setDateRange] = useState<Value>(new Date());
@@ -30,13 +27,13 @@ export default function StreakCalendar() {
   ])
   
   const styleTile: TileClassNameFunc = ({activeStartDate, date, view}) => {    
-    return gymAttendances.find(d => d.valueOf() == date.valueOf()) ? [styles.tile, styles.attended] : [styles.tile];
+    return gymAttendances.find(d => d.valueOf() === date.valueOf()) ? [styles.tile, styles.attended] : [styles.tile];
   }
   
   function handleCalendarClick(date: Date) {
-    const index = gymAttendances.findIndex(d => d.valueOf() == date.valueOf());
+    const index = gymAttendances.findIndex(d => d.valueOf() === date.valueOf());
 
-    if (index != -1) {
+    if (index !== -1) {
       setGymAttendances(gymAttendances.toSpliced(index, 1));
     }
     else {
