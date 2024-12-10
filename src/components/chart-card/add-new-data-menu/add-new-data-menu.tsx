@@ -5,13 +5,13 @@ import styles from "./add-new-data-menu.module.scss"
 import { FaPlus, FaXmark } from "react-icons/fa6";
 import { useFormState } from "react-dom";
 import TextInput from "@/components/skewed-text-input/text-input";
-import { addNewData } from "@/actions/stats";
+import { addNewDataAction } from "@/actions/stats";
 import { mutate } from "swr";
 import { useEffect } from "react";
 
 export default function AddNewDataMenu({ title, unit, dataKey }: { title: string, unit: string, dataKey: StatsKeys }) {
   const initialState = { message: "" }
-  const [state, formAction] = useFormState(addNewData.bind(null, title, dataKey), initialState)
+  const [state, formAction] = useFormState(addNewDataAction.bind(null, title, dataKey), initialState)
   
   const popoverID = `add-friend-popover-${dataKey}`
 

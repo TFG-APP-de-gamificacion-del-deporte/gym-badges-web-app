@@ -29,7 +29,7 @@ export async function getExp() {
 
 type FormResponse = { message: string } | null
 
-export async function addNewData(title: string, dataKey: StatsKeys, prevState: any, formData: FormData): Promise<FormResponse>  {
+export async function addNewDataAction(title: string, dataKey: StatsKeys, prevState: any, formData: FormData): Promise<FormResponse>  {
   // Get own user id
   const { authUserID, token } = getAuthCookies();
 
