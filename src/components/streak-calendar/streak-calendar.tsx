@@ -41,16 +41,10 @@ export default function StreakCalendar() {
       return;
     }
 
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const isoDate = [
-      date.getFullYear(), 
-      month < 10 ? "0" + month + 1 : month, 
-      day < 10 ? "0" + day : day, 
-    ].join("-");
+    const isoDate = toISODate(date)
 
     // Check if date is already in
-    const index = gymAttendances.findIndex(d => toISODate(d) === toISODate(date));
+    const index = gymAttendances.findIndex(d => toISODate(d) === isoDate);
     
     // Already in
     if (index !== -1) { 
