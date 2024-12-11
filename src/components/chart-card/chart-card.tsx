@@ -61,7 +61,7 @@ export default function ChartCard({
       <div className={styles.chart_header}>
         <div className={styles.data}>
           <div>
-            <h2>86{unit}</h2>
+            <h2>--{unit}</h2>
             <small style={{color: color}}>-4.1{unit}</small>
           </div>
           <small>{title}</small>
@@ -108,14 +108,16 @@ export default function ChartCard({
             minTickGap={10}
             interval="equidistantPreserveStart"
           />
-          <YAxis
-            domain={([dataMin, dataMax]) => {
-              const padding = Math.abs(dataMin - dataMax) * 0.2;  // 20% of domain padding
-              return [dataMin - padding, dataMax + padding];
-            }}
-            padding={{bottom: 20}}
-            hide
-          />
+          { data?.length &&
+            <YAxis
+              domain={([dataMin, dataMax]) => {
+                const padding = Math.abs(dataMin - dataMax) * 0.2;  // 20% of domain padding
+                return [dataMin - padding, dataMax + padding];
+              }}
+              padding={{bottom: 20}}
+              hide
+            />
+          }
           <Tooltip 
             content={(props: any) => customTooltip({...props, unit: unit})}
             cursor={false}
@@ -127,7 +129,7 @@ export default function ChartCard({
             stroke={color}
             strokeWidth={2}
             fill={`url(#gradient-${color})`}
-            label={(props: any) => firstAndLastLabel({ ...props, dataLength: data.length, unit: unit })}
+            label={(props: any) => firstAndLastLabel({ ...props, dataLength: data?.length, unit: unit })}
             ref={(instance: any) => {
               // Save reference to the Area element to access the list of points later
               // and get their coords to paint the tooltips
