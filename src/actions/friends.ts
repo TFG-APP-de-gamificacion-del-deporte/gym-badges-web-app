@@ -1,7 +1,7 @@
 "use server";
 
 import { FRIENDS_ENDPOINTS } from "@/api/endpoints";
-import { AUTH_KEYS, USER_KEYS } from "@/api/models";
+import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import { Friend } from "@/app/(home)/friends/page";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { revalidatePath } from "next/cache";

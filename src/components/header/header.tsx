@@ -6,7 +6,7 @@ import Nav from "../nav/nav";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import DefaultProfilePicture from "../default-profile-picture/default-profile-picture";
-import { AUTH_KEYS } from "@/api/models";
+import { AUTH_KEYS } from "@/api/constants";
 
 export default function Header() {
   const user_id = cookies().get(AUTH_KEYS.AUTH_USER_ID);

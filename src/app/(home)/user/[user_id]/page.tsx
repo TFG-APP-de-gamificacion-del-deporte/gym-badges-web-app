@@ -5,7 +5,7 @@ import { cookies } from "next/headers"
 import { FaArrowsRotate, FaCircleXmark, FaPen } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
-import { AUTH_KEYS } from "@/api/models"
+import { AUTH_KEYS } from "@/api/constants"
 import { USER_ENDPOINTS } from "@/api/endpoints"
 
 type GetUserResponse = {

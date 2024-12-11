@@ -4,7 +4,7 @@ import styles from "./chart-card.module.scss"
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useState } from "react";
 import { CategoricalChartState } from "recharts/types/chart/types";
-import { StatsKeys } from "@/api/models";
+import { StatsKeys } from "@/api/constants";
 import AddNewDataMenu from "./add-new-data-menu/add-new-data-menu";
 import useSWR from "swr";
 import { getDataAction } from "@/actions/stats";

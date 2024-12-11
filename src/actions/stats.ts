@@ -1,7 +1,7 @@
 "use server";
 
 import { STATS_ENDPOINTS } from "@/api/endpoints";
-import { AUTH_KEYS, StatsKeys } from "@/api/models";
+import { AUTH_KEYS, StatsKeys } from "@/api/constants";
 import { StatsCardProps } from "@/components/dashboard/stats-card/stats-card";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";

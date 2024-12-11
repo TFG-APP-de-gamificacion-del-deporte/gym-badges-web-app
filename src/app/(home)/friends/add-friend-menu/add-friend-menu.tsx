@@ -5,7 +5,7 @@ import styles from "./add-friend-menu.module.scss"
 import { FaMagnifyingGlass, FaPlus, FaXmark } from "react-icons/fa6";
 import { addFriendAction } from "@/actions/friends";
 import { useFormState } from "react-dom";
-import { USER_KEYS } from "@/api/models";
+import { USER_KEYS } from "@/api/constants";
 
 export default function AddFriendMenu() {
   const initialState = { message: "" }

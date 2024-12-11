@@ -1,7 +1,7 @@
 "use server";
 
 import { AUTH_ENDPOINTS } from "@/api/endpoints";
-import { AUTH_KEYS, USER_KEYS } from "@/api/models";
+import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "crypto"
