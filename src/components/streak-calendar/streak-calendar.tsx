@@ -60,7 +60,6 @@ export default function StreakCalendar() {
 
   const [dateRange, setDateRange] = useState<Value>(new Date());
   const [gymAttendances, setGymAttendances] = useState<Date[]>([])
-  const [checked, setCheched] = useState<number>();
 
   const month = new Date().getMonth() + 1;  // Month is 0-based
   const year = new Date().getFullYear();
@@ -77,14 +76,8 @@ export default function StreakCalendar() {
   // Get user info
   const { data: user, error: userRrror, isLoading: userLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
 
-  useEffect(() => {
-    if (user) {
-      setCheched(user.weekly_goal);
-    }
-  }, [user])
-  
-  if (isLoading) return;
-  if (error) redirect("/internal-error");
+  if (isLoading || userLoading) return;
+  if (error || userRrror) redirect("/internal-error");
   
   return (
     <div className={styles.calendar_card}>
@@ -111,16 +104,16 @@ export default function StreakCalendar() {
         onChange={ e => {
           const n = Number((e.target as HTMLInputElement).value);
           setWeeklyGoalAction(n);
-          setCheched(n)
+          // setCheched(n)
         }}
       >
-        <input type="radio" name="goal" value={1} checked={checked === 1}/>
-        <input type="radio" name="goal" value={2} checked={checked === 2}/>
-        <input type="radio" name="goal" value={3} checked={checked === 3}/>
-        <input type="radio" name="goal" value={4} checked={checked === 4}/>
-        <input type="radio" name="goal" value={5} checked={checked === 5}/>
-        <input type="radio" name="goal" value={6} checked={checked === 6}/>
-        <input type="radio" name="goal" value={7} checked={checked === 7}/>
+        <input type="radio" name="goal" value={1} defaultChecked={user?.weekly_goal === 1}/>
+        <input type="radio" name="goal" value={2} defaultChecked={user?.weekly_goal === 2}/>
+        <input type="radio" name="goal" value={3} defaultChecked={user?.weekly_goal === 3}/>
+        <input type="radio" name="goal" value={4} defaultChecked={user?.weekly_goal === 4}/>
+        <input type="radio" name="goal" value={5} defaultChecked={user?.weekly_goal === 5}/>
+        <input type="radio" name="goal" value={6} defaultChecked={user?.weekly_goal === 6}/>
+        <input type="radio" name="goal" value={7} defaultChecked={user?.weekly_goal === 7}/>
       </div>
     </div>
   )
