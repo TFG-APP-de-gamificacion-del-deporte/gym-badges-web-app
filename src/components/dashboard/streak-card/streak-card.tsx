@@ -4,12 +4,11 @@ import styles from "@/components/dashboard/streak-card/streak-card.module.scss"
 import WeekBar from "./week-bar/week-bar";
 import { FaFire } from "react-icons/fa6";
 import { redirect } from "next/navigation";
-import useSWR from "swr";
-import { getUserAction } from "@/actions/user";
+import useUser from "@/utils/useUser";
 
 export default function StreakCard() {
   // Get user info
-  const { data: user, error, isLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
+  const { user, error, isLoading } = useUser();
 
   if (isLoading) return;
   if (error) redirect("/internal-error");

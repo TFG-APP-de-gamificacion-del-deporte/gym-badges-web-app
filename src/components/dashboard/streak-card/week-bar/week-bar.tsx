@@ -3,11 +3,10 @@
 import clsx from "clsx";
 import styles from "./week-bar.module.scss"
 import { useEffect, useState } from "react";
-import useSWR from "swr";
-import { getUserAction } from "@/actions/user";
 import { redirect } from "next/navigation";
 import { addGymAttendanceAction, deleteGymAttendanceAction } from "@/actions/stats";
 import { toISODate } from "@/utils/dates";
+import useUser from "@/utils/useUser";
 
 const N_DAYS = Number(styles.N_DAYS);
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -42,7 +41,7 @@ export default function WeekBar() {
   const [currentWeek, setCurrentWeek] = useState([false, false, false, false, false, false, false]);
 
   // Get user info
-  const { data: user, error, isLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
+  const { user, error, isLoading } = useUser();
 
   // Save current week in an useState
   useEffect(() => {

@@ -8,8 +8,9 @@ import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-ic
 import { addGymAttendanceAction, deleteGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
 import useSWR from "swr";
 import { redirect } from "next/navigation";
-import { getUserAction, setWeeklyGoalAction } from "@/actions/user";
+import { setWeeklyGoalAction } from "@/actions/user";
 import { toISODate } from "@/utils/dates";
+import useUser from "@/utils/useUser";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -53,7 +54,7 @@ export default function StreakCalendar() {
   const year = new Date().getFullYear();
 
   // Get data from the API
-  const { data, error, isLoading } = useSWR("getGymAttendancesAction", getGymAttendancesAction.bind(null, month, year));
+  const { data, error, isLoading } = useSWR("getGymAttendancesAction", getGymAttendancesAction.bind(null, month, year), {refreshInterval: 5000});
   
   useEffect(() => {
     if (data) {
@@ -62,7 +63,7 @@ export default function StreakCalendar() {
   }, [data])
 
   // Get user info
-  const { data: user, error: userRrror, isLoading: userLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
+  const { user, error: userRrror, isLoading: userLoading } = useUser();
 
   if (isLoading || userLoading) return;
   if (error || userRrror) redirect("/internal-error");
