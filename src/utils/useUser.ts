@@ -9,7 +9,7 @@ export default function useUser(user_id: string, authUserID: string, token: stri
   }  
 
   // Create request's url and body
-  const url = `${process.env.API_URL}${USER_ENDPOINTS.GET_USER(user_id)}`;
+  const url = `${process.env.API_URL}${USER_ENDPOINTS.USER(user_id)}`;
   const args = {
     method: "GET",
     headers: {

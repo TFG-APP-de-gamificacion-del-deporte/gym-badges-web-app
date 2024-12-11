@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
   let res: Response;
   try {
-    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.GET_USER(params.user_id)}`, {
+    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.USER(params.user_id)}`, {
       method: "GET",
       headers: {
         [AUTH_KEYS.AUTH_USER_ID]: authUserID.value,

@@ -7,6 +7,7 @@ export const USER_KEYS = {
   WEIGHT: "weight",
   BODY_FAT: "body_fat",
   STREAK: "streak",
+  WEEKLY_GOAL: "weekly_goal",
 } as const;
 
 export type UserKey = typeof USER_KEYS[keyof typeof USER_KEYS]

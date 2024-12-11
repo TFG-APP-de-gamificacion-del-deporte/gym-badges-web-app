@@ -8,6 +8,7 @@ import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-ic
 import { addGymAttendanceAction, deleteGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
 import useSWR from "swr";
 import { redirect } from "next/navigation";
+import { setWeeklyGoalAction } from "@/actions/user";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -101,14 +102,19 @@ export default function StreakCalendar() {
       </div>
       <h3>Weekly Goal</h3>
       <p>How many times a week you plan to hit the gym?</p>
-      <div className={styles.goal_selector}>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
-        <input type="radio" name="goal"/>
+      <div 
+        className={styles.goal_selector} 
+        onChange={ e => {
+          setWeeklyGoalAction(Number((e.target as HTMLInputElement).value));
+        }}
+      >
+        <input type="radio" name="goal" value={1}/>
+        <input type="radio" name="goal" value={2}/>
+        <input type="radio" name="goal" value={3}/>
+        <input type="radio" name="goal" value={4}/>
+        <input type="radio" name="goal" value={5}/>
+        <input type="radio" name="goal" value={6}/>
+        <input type="radio" name="goal" value={7}/>
       </div>
     </div>
   )
