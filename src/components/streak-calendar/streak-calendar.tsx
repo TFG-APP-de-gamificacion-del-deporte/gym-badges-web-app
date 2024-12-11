@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Calendar, { TileClassNameFunc } from "react-calendar";
 import "./Calendar.css";
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
-import { addGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
+import { addGymAttendanceAction, deleteGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
 import useSWR from "swr";
 import { redirect } from "next/navigation";
 
@@ -40,27 +40,27 @@ export default function StreakCalendar() {
       return;
     }
 
-    // Save date in useState to paint callendar
-    const index = gymAttendances.findIndex(d => toISODate(d) === toISODate(date));
-
-    if (index !== -1) {
-      setGymAttendances(gymAttendances.toSpliced(index, 1));
-    }
-    else {
-      setGymAttendances([date, ...gymAttendances]);
-    }
-
-    // Send to API
     const month = date.getMonth() + 1
     const day = date.getDate()
-
     const isoDate = [
       date.getFullYear(), 
       month < 10 ? "0" + month + 1 : month, 
       day < 10 ? "0" + day : day, 
     ].join("-");
+
+    // Check if date is already in
+    const index = gymAttendances.findIndex(d => toISODate(d) === toISODate(date));
     
-    addGymAttendanceAction(isoDate)
+    // Already in
+    if (index !== -1) { 
+      setGymAttendances(gymAttendances.toSpliced(index, 1));
+      deleteGymAttendanceAction(isoDate);
+    }
+    // New date
+    else { 
+      setGymAttendances([date, ...gymAttendances]);
+      addGymAttendanceAction(isoDate)
+    }
   }
 
   const [dateRange, setDateRange] = useState<Value>(new Date());

@@ -98,6 +98,32 @@ export async function getDataAction(dataKey: StatsKeys) {
 // GYM ATTENDANCES (STREAK)
 // ************************************************************
 
+export async function getGymAttendancesAction(month: number, year: number) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  url.searchParams.append("month", month.toString())
+  url.searchParams.append("year", year.toString())
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+    },
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
+
+  return (await res.json()).days as string[];
+}
+
 export async function addGymAttendanceAction(isoDate: string) {
   const { authUserID, token } = getAuthCookies();
 
@@ -123,19 +149,20 @@ export async function addGymAttendanceAction(isoDate: string) {
   }
 }
 
-export async function getGymAttendancesAction(month: number, year: number) {
+export async function deleteGymAttendanceAction(isoDate: string) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
-  url.searchParams.append("month", month.toString())
-  url.searchParams.append("year", year.toString())
-
   const res = await fetch(url, {
-    method: "GET",
+    method: "DELETE",
     headers: {
       [AUTH_KEYS.AUTH_USER_ID]: authUserID,
       [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      date: isoDate,
+    }),
   })
   
   if (res.status === 401) {
@@ -145,6 +172,4 @@ export async function getGymAttendancesAction(month: number, year: number) {
     console.debug(await res.json());
     redirect("/internal-error");
   }
-
-  return (await res.json()).days as string[];
 }
