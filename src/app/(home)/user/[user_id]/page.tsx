@@ -67,6 +67,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     </div>
   }
   if (!res.ok) {  // Other errors
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 

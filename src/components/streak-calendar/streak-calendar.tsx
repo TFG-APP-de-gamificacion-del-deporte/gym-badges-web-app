@@ -5,6 +5,7 @@ import { useState } from "react";
 import Calendar, { TileClassNameFunc } from "react-calendar";
 import "./Calendar.css";
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
+import { addGymAttendanceAction } from "@/actions/stats";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -31,6 +32,7 @@ export default function StreakCalendar() {
   }
   
   function handleCalendarClick(date: Date) {
+    // [OLD] Mock
     const index = gymAttendances.findIndex(d => d.valueOf() === date.valueOf());
 
     if (index !== -1) {
@@ -39,6 +41,18 @@ export default function StreakCalendar() {
     else {
       setGymAttendances([date, ...gymAttendances]);
     }
+
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+
+    const isoDate = [
+      date.getFullYear(), 
+      month < 10 ? "0" + month + 1 : month, 
+      day < 10 ? "0" + day : day, 
+    ].join("-");
+    
+    // Send to API
+    addGymAttendanceAction(isoDate)
   }
   
   return (
@@ -51,7 +65,6 @@ export default function StreakCalendar() {
           tileClassName={styleTile}
           onChange={setDateRange}
           value={dateRange}
-          locale="en-GB"
           view="month"
           onClickDay={handleCalendarClick}
           nextLabel=<FaAngleRight/>

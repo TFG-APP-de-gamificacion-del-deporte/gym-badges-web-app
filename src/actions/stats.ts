@@ -27,13 +27,18 @@ export async function getExp() {
   return exp;
 }
 
+
+// ************************************************************
+// WEIGHT AND FAT
+// ************************************************************
+
 type FormResponse = { message: string } | null
 
 export async function addNewDataAction(title: string, dataKey: StatsKeys, prevState: any, formData: FormData): Promise<FormResponse>  {
   // Get own user id
   const { authUserID, token } = getAuthCookies();
 
-  // Get friend id
+  // Get data (weight or fat)
   const data = formData.get(dataKey);
   if (!data) {
     return { message: `Invalid ${title}.` };
@@ -56,6 +61,7 @@ export async function addNewDataAction(title: string, dataKey: StatsKeys, prevSt
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
@@ -80,8 +86,39 @@ export async function getDataAction(dataKey: StatsKeys) {
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
   return (await res.json()).days;
+}
+
+
+// ************************************************************
+// WEIGHT AND FAT
+// ************************************************************
+
+export async function addGymAttendanceAction(isoDate: string) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: isoDate,
+    }),
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
 }

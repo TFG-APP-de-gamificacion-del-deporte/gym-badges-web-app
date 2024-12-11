@@ -25,6 +25,7 @@ export async function getFriendsAction() {
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
@@ -64,6 +65,7 @@ export async function addFriendAction(prevState: any, formData: FormData): Promi
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
@@ -93,6 +95,7 @@ export async function deleteFriendAction(friendID: string) {
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
