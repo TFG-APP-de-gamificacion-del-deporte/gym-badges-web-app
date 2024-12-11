@@ -1,39 +1,39 @@
 "use client";
 
 import styles from "./streak-calendar.module.scss"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar, { TileClassNameFunc } from "react-calendar";
 import "./Calendar.css";
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
-import { addGymAttendanceAction } from "@/actions/stats";
+import { addGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
+import useSWR from "swr";
+import { redirect } from "next/navigation";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
+function toISODate(date: Date) {
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+
+  const isoDate = [
+    date.getFullYear(), 
+    month < 10 ? "0" + month : month, 
+    day < 10 ? "0" + day : day, 
+  ].join("-");
+
+  return isoDate
+}
+
 export default function StreakCalendar() {
-  const [dateRange, setDateRange] = useState<Value>(new Date());
-  const [gymAttendances, setGymAttendances] = useState([
-    new Date(2024, 9, 28),
-    new Date(2024, 9, 29),
-    new Date(2024, 9, 30),
-    new Date(2024, 9, 31),
-    new Date(2024, 10, 4),
-    new Date(2024, 10, 5),
-    new Date(2024, 10, 7),
-    new Date(2024, 10, 8),
-    new Date(2024, 10, 11),
-    new Date(2024, 10, 13),
-    new Date(2024, 10, 14),
-    new Date(2024, 10, 18),
-  ])
-  
+
   const styleTile: TileClassNameFunc = ({activeStartDate, date, view}) => {    
-    return gymAttendances.find(d => d.valueOf() === date.valueOf()) ? [styles.tile, styles.attended] : [styles.tile];
+    return gymAttendances.find(d => toISODate(d) === toISODate(date)) ? [styles.tile, styles.attended] : [styles.tile];
   }
   
   function handleCalendarClick(date: Date) {
-    // [OLD] Mock
-    const index = gymAttendances.findIndex(d => d.valueOf() === date.valueOf());
+    // Save date in useState to paint callendar
+    const index = gymAttendances.findIndex(d => toISODate(d) === toISODate(date));
 
     if (index !== -1) {
       setGymAttendances(gymAttendances.toSpliced(index, 1));
@@ -42,6 +42,7 @@ export default function StreakCalendar() {
       setGymAttendances([date, ...gymAttendances]);
     }
 
+    // Send to API
     const month = date.getMonth() + 1
     const day = date.getDate()
 
@@ -51,9 +52,26 @@ export default function StreakCalendar() {
       day < 10 ? "0" + day : day, 
     ].join("-");
     
-    // Send to API
     addGymAttendanceAction(isoDate)
   }
+
+  const [dateRange, setDateRange] = useState<Value>(new Date());
+  const [gymAttendances, setGymAttendances] = useState<Date[]>([])
+
+  const month = new Date().getMonth() + 1;  // Month is 0-based
+  const year = new Date().getFullYear();
+
+  // Get data from the API
+  const { data, error, isLoading } = useSWR("getGymAttendancesAction", getGymAttendancesAction.bind(null, month, year));
+  
+  useEffect(() => {
+    if (data) {
+      setGymAttendances((data as string[]).map(s => new Date(s)));
+    }
+  }, [data])
+  
+  if (isLoading) return;
+  if (error) redirect("/internal-error");
   
   return (
     <div className={styles.calendar_card}>
