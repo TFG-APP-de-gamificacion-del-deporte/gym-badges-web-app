@@ -55,14 +55,20 @@ export default function ChartCard({
 
   if (isLoading) return
   if (error) redirect("/internal-error");
+
+  const lastValue = data?.length ? data[data.length - 1].value : "--";
+  let variation = data?.length ? data[data.length - 1].value - data[0].value : "--";
+  if (typeof variation === "number") {
+    variation = variation >= 0 ? "+" + variation : variation;
+  }
   
   return (
     <div className={styles.card}>
       <div className={styles.chart_header}>
         <div className={styles.data}>
           <div>
-            <h2>--{unit}</h2>
-            <small style={{color: color}}>-4.1{unit}</small>
+            <h2>{lastValue}{unit}</h2>
+            <small style={{color: color}}>{variation}{unit}</small>
           </div>
           <small>{title}</small>
         </div>
