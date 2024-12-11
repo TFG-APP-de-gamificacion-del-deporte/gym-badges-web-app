@@ -25,3 +25,8 @@ export type User = {
   [USER_KEYS.WEEKLY_GOAL]: number,
   [USER_KEYS.WEIGHT]: number,
 }
+
+export type dataHistory = {
+  date: string,
+  value: number,
+}[]

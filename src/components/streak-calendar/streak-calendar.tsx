@@ -9,22 +9,10 @@ import { addGymAttendanceAction, deleteGymAttendanceAction, getGymAttendancesAct
 import useSWR from "swr";
 import { redirect } from "next/navigation";
 import { getUserAction, setWeeklyGoalAction } from "@/actions/user";
+import { toISODate } from "@/utils/dates";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-function toISODate(date: Date) {
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-
-  const isoDate = [
-    date.getFullYear(), 
-    month < 10 ? "0" + month : month, 
-    day < 10 ? "0" + day : day, 
-  ].join("-");
-
-  return isoDate
-}
 
 export default function StreakCalendar() {
 
@@ -81,7 +69,7 @@ export default function StreakCalendar() {
   
   return (
     <div className={styles.calendar_card}>
-      <h2>33 Weeks</h2>
+      <h2>{user?.streak} week{user?.streak as number !== 1 ? "s" : ""}</h2>
       <small>Streak</small>
       <div className={styles.calendar_container}>
         <Calendar
@@ -104,7 +92,6 @@ export default function StreakCalendar() {
         onChange={ e => {
           const n = Number((e.target as HTMLInputElement).value);
           setWeeklyGoalAction(n);
-          // setCheched(n)
         }}
       >
         <input type="radio" name="goal" value={1} defaultChecked={user?.weekly_goal === 1}/>

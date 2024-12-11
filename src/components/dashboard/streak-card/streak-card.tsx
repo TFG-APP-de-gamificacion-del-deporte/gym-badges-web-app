@@ -1,8 +1,19 @@
+"use client";
+
 import styles from "@/components/dashboard/streak-card/streak-card.module.scss"
 import WeekBar from "./week-bar/week-bar";
 import { FaFire } from "react-icons/fa6";
+import { redirect } from "next/navigation";
+import useSWR from "swr";
+import { getUserAction } from "@/actions/user";
 
 export default function StreakCard() {
+  // Get user info
+  const { data: user, error, isLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
+
+  if (isLoading) return;
+  if (error) redirect("/internal-error");
+
   return (
     <div className={styles.streak_card}>
       {/* TITLE AND STREAK */}
@@ -10,7 +21,7 @@ export default function StreakCard() {
         <h2>Your Streak</h2>
         <div className={styles.streak_count}>
           <FaFire size="1.5rem"/>
-          <h3>{33} week{33 > 1 ? "s" : ""}</h3>
+          <h3>{user?.streak} week{user?.streak as number !== 1 ? "s" : ""}</h3>
         </div>
       </div>
       {/* WEEK BAR */}

@@ -3,29 +3,56 @@
 import clsx from "clsx";
 import styles from "./week-bar.module.scss"
 import { useEffect, useState } from "react";
-import useDebounce from "@/utils/useDebounce";
-import { setWeek } from "@/actions/streak-info";
+import useSWR from "swr";
+import { getUserAction } from "@/actions/user";
+import { redirect } from "next/navigation";
+import { addGymAttendanceAction, deleteGymAttendanceAction } from "@/actions/stats";
+import { toISODate } from "@/utils/dates";
 
 const N_DAYS = Number(styles.N_DAYS);
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 
 export default function WeekBar() {
-  const [currentWeek, setCurrentWeek] = useState([false, false, false, false, false, false, false]);
-  const debouncedWeek = useDebounce(currentWeek, 500);
-
+  
   function handleDayClick(index: number) {
-    const updatedWeek = currentWeek.map((day, i) => {
-      return i === index ? !currentWeek[i] : currentWeek[i]
-    });
+    const today = new Date();
+    const shift = index + 1 - today.getDay();
+    const clickedDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + shift);
+
+    if (clickedDay.getTime() > Date.now()) {
+      return;
+    }
+
+    // Update API
+    if (!currentWeek[index]) {
+      addGymAttendanceAction(toISODate(clickedDay));
+    }
+    else {
+      deleteGymAttendanceAction(toISODate(clickedDay));
+    }
+
     // Update client state
+    const updatedWeek = currentWeek.map((marked, i) => {
+      return i === index ? !marked : marked
+    });
     setCurrentWeek(updatedWeek);
   }
 
-  // Update database when debounced week changes
+  const [currentWeek, setCurrentWeek] = useState([false, false, false, false, false, false, false]);
+
+  // Get user info
+  const { data: user, error, isLoading } = useSWR("getUserAction", getUserAction.bind(null, undefined));
+
+  // Save current week in an useState
   useEffect(() => {
-    setWeek(debouncedWeek)
-  }, [debouncedWeek]);
+    if (user) {
+      setCurrentWeek(user.current_week);
+    }
+  }, [user])
+
+  if (isLoading) return;
+  if (error) redirect("/internal-error");
 
   return (
     <div className={styles.container}>

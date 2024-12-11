@@ -2,9 +2,9 @@
 
 import { STATS_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, StatsKeys } from "@/api/constants";
-import { StatsCardProps } from "@/components/dashboard/stats-card/stats-card";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
+import { dataHistory } from "@/api/models";
 
 // ===== Mocked Database =====
 let weight = 86;
@@ -15,7 +15,7 @@ let exp = 230
 
 
 // TODO Make fetching data non server functions (Not sure anymore)
-export async function getStats(): Promise<StatsCardProps> {
+export async function getStats() {
   return { weight, fat }
 }
 
@@ -90,7 +90,7 @@ export async function getDataAction(dataKey: StatsKeys) {
     redirect("/internal-error");
   }
 
-  return (await res.json()).days;
+  return (await res.json()).days as dataHistory;
 }
 
 
