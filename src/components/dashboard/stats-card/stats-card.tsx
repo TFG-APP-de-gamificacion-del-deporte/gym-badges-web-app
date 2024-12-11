@@ -2,13 +2,7 @@ import clsx from "clsx"
 import styles from "./stats-card.module.scss"
 
 
-export type StatsCardProps = {
-  weight: number;
-  fat: number;
-}
-
-
-export default function StatsCard({ statsCardProps }: { statsCardProps: StatsCardProps }) {
+export default function StatsCard() {
   return (
     <div className={styles.stats_card}>
       <h2>Stats</h2>
@@ -17,14 +11,14 @@ export default function StatsCard({ statsCardProps }: { statsCardProps: StatsCar
         {/* WEIGHT BOX */}
         <div className={clsx(styles.box, styles.green_border)}>
           <div>
-            <h3>{statsCardProps.weight} kg</h3>
+            <h3>{88.5} kg</h3>
             <p>Weight</p>
           </div>
         </div>
         {/* FAT BOX */}
         <div className={clsx(styles.box, styles.yellow_border)}>
           <div>
-            <h3>{statsCardProps.fat}%</h3>
+            <h3>{18}%</h3>
             <p>Fat</p>
           </div>
         </div>

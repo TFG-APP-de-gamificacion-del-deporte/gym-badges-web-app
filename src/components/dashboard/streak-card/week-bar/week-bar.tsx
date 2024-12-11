@@ -10,14 +10,11 @@ const N_DAYS = Number(styles.N_DAYS);
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 
-export type WeekBarProps = boolean[];
-
-
-export default function WeekBar({ initialWeek }: { initialWeek: WeekBarProps }) {
-  const [currentWeek, setCurrentWeek] = useState(initialWeek);
+export default function WeekBar() {
+  const [currentWeek, setCurrentWeek] = useState([false, false, false, false, false, false, false]);
   const debouncedWeek = useDebounce(currentWeek, 500);
 
-  function handleDayFill(index: number) {
+  function handleDayClick(index: number) {
     const updatedWeek = currentWeek.map((day, i) => {
       return i === index ? !currentWeek[i] : currentWeek[i]
     });
@@ -35,10 +32,13 @@ export default function WeekBar({ initialWeek }: { initialWeek: WeekBarProps }) 
       {
         Array.from({length: N_DAYS}).map((_, index) => (
           <div className={styles.day} key={index}>
-            <button onClick={() => handleDayFill(index)} className={clsx(
-              styles.box, 
-              { [styles.filled]: currentWeek.at(index) }
-            )}/>
+            <button 
+              className={clsx(
+                styles.box, 
+                { [styles.filled]: currentWeek.at(index) }
+              )}
+              onClick={() => handleDayClick(index)}
+            />
             <small>{DAYS[index]}</small>
           </div>
         ))
