@@ -27,11 +27,19 @@ function toISODate(date: Date) {
 
 export default function StreakCalendar() {
 
-  const styleTile: TileClassNameFunc = ({activeStartDate, date, view}) => {    
+  const styleTile: TileClassNameFunc = ({activeStartDate, date, view}) => { 
+    if (date.getTime() > Date.now()) {
+      return styles.tile_disabled;
+    }
+    
     return gymAttendances.find(d => toISODate(d) === toISODate(date)) ? [styles.tile, styles.attended] : [styles.tile];
   }
   
   function handleCalendarClick(date: Date) {
+    if (date.getTime() > Date.now()) {
+      return;
+    }
+
     // Save date in useState to paint callendar
     const index = gymAttendances.findIndex(d => toISODate(d) === toISODate(date));
 
