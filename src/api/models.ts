@@ -1,21 +1,32 @@
-export const USER_KEYS = {
-  USER_ID: "user_id",
-  PASSWORD: "password",
-  NAME: "name",
-  EMAIL: "email",
-  IMAGE: "image",
-  WEIGHT: "weight",
-  BODY_FAT: "body_fat",
-  STREAK: "streak",
-} as const;
+import { USER_KEYS } from "./constants";
 
-export type UserKey = typeof USER_KEYS[keyof typeof USER_KEYS]
-export type StatsKeys = typeof USER_KEYS.WEIGHT | typeof USER_KEYS.BODY_FAT | typeof USER_KEYS.STREAK
+export type TopFeat = {
+  description: "string",
+  id: number,
+  image: "string",
+  name: "string"
+}
 
+export type Preference = {
+  on: boolean, 
+  preference_id: number 
+}
 
-export const AUTH_KEYS = {
-  TOKEN: "token",
-  AUTH_USER_ID: "auth_user_id",
-} as const;
+export type User = {
+  [USER_KEYS.USER_ID]: string,
+  [USER_KEYS.BODY_FAT]: number,
+  [USER_KEYS.CURRENT_WEEK]: boolean[],
+  [USER_KEYS.EXPERIENCE]: number,
+  [USER_KEYS.IMAGE]: string,
+  [USER_KEYS.NAME]: string,
+  [USER_KEYS.PREFERENCES]: Preference[],
+  [USER_KEYS.STREAK]: number,
+  [USER_KEYS.TOP_FEATS]: TopFeat[],
+  [USER_KEYS.WEEKLY_GOAL]: number,
+  [USER_KEYS.WEIGHT]: number,
+}
 
-export type AuthKey = typeof AUTH_KEYS[keyof typeof AUTH_KEYS]
+export type dataHistory = {
+  date: string,
+  value: number,
+}[]

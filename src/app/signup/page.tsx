@@ -8,7 +8,7 @@ import { useFormState } from "react-dom";
 import signupAction from "@/actions/signup";
 import { ChangeEvent, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
-import { USER_KEYS } from "@/api/models";
+import { USER_KEYS } from "@/api/constants";
 
 export default function Signup() {
   const initialState = { message: "" }

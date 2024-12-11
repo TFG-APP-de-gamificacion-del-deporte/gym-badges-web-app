@@ -5,7 +5,7 @@ import { cookies } from "next/headers"
 import { FaArrowsRotate, FaCircleXmark, FaPen } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
-import { AUTH_KEYS } from "@/api/models"
+import { AUTH_KEYS } from "@/api/constants"
 import { USER_ENDPOINTS } from "@/api/endpoints"
 
 type GetUserResponse = {
@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
   let res: Response;
   try {
-    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.GET_USER(params.user_id)}`, {
+    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.USER(params.user_id)}`, {
       method: "GET",
       headers: {
         [AUTH_KEYS.AUTH_USER_ID]: authUserID.value,
@@ -67,6 +67,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
     </div>
   }
   if (!res.ok) {  // Other errors
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 

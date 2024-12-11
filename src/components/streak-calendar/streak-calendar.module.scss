@@ -45,6 +45,14 @@
     aspect-ratio: 1;
   }
 
+  .tile_disabled {
+    cursor: default !important;
+    &:hover {
+      background-color: transparent !important;
+      box-shadow: none;
+    }
+  }
+
   .attended {
     background-color: rgba(colors.$orange, 0.5) !important;
     box-shadow: inset 0 0 0 2px colors.$orange !important;

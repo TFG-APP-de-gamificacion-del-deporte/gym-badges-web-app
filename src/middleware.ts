@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { AUTH_ENDPOINTS } from "./api/endpoints";
-import { AUTH_KEYS } from "./api/models";
+import { AUTH_KEYS } from "./api/constants";
 
 
 export async function middleware(req: NextRequest) {

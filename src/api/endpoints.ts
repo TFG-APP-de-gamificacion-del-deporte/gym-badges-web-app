@@ -1,4 +1,4 @@
-import { USER_KEYS } from "./models";
+import { USER_KEYS } from "./constants";
 
 export const AUTH_ENDPOINTS = {
   LOGIN: "/login",
@@ -7,7 +7,7 @@ export const AUTH_ENDPOINTS = {
 } as const;
 
 export const USER_ENDPOINTS = {
-  GET_USER: (userID: string) => `/user/${userID}` as const,
+  USER: (userID: string) => `/user/${userID}` as const,
 } as const;
 
 export const BADGES_ENDPOINTS = {

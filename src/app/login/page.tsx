@@ -8,7 +8,7 @@ import TextInput from "@/components/skewed-text-input/text-input"
 import loginAction from "@/actions/login"
 import { useFormState } from "react-dom";
 import { FaCircleXmark, FaLock, FaUser } from "react-icons/fa6";
-import { USER_KEYS } from "@/api/models";
+import { USER_KEYS } from "@/api/constants";
 
 export default function Login() {
   const initialState = { message: "" }

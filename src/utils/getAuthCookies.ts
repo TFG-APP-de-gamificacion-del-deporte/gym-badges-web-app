@@ -1,4 +1,4 @@
-import { AUTH_KEYS } from "@/api/models";
+import { AUTH_KEYS } from "@/api/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

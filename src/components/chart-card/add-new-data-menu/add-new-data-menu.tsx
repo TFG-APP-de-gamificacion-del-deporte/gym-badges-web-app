@@ -1,6 +1,6 @@
 "use client";
 
-import { StatsKeys } from "@/api/models";
+import { StatsKeys } from "@/api/constants";
 import styles from "./add-new-data-menu.module.scss"
 import { FaPlus, FaXmark } from "react-icons/fa6";
 import { useFormState } from "react-dom";

@@ -4,7 +4,7 @@ import DefaultProfilePicture from "@/components/default-profile-picture/default-
 import clsx from "clsx";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { AUTH_KEYS } from "@/api/models";
+import { AUTH_KEYS } from "@/api/constants";
 
 interface RankingUser {
   image: string,

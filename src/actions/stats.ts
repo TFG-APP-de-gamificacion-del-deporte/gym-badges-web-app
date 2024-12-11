@@ -1,10 +1,10 @@
 "use server";
 
 import { STATS_ENDPOINTS } from "@/api/endpoints";
-import { AUTH_KEYS, StatsKeys } from "@/api/models";
-import { StatsCardProps } from "@/components/dashboard/stats-card/stats-card";
+import { AUTH_KEYS, StatsKeys } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
+import { dataHistory } from "@/api/models";
 
 // ===== Mocked Database =====
 let weight = 86;
@@ -15,7 +15,7 @@ let exp = 230
 
 
 // TODO Make fetching data non server functions (Not sure anymore)
-export async function getStats(): Promise<StatsCardProps> {
+export async function getStats() {
   return { weight, fat }
 }
 
@@ -27,13 +27,18 @@ export async function getExp() {
   return exp;
 }
 
+
+// ************************************************************
+// WEIGHT AND FAT
+// ************************************************************
+
 type FormResponse = { message: string } | null
 
 export async function addNewDataAction(title: string, dataKey: StatsKeys, prevState: any, formData: FormData): Promise<FormResponse>  {
   // Get own user id
   const { authUserID, token } = getAuthCookies();
 
-  // Get friend id
+  // Get data (weight or fat)
   const data = formData.get(dataKey);
   if (!data) {
     return { message: `Invalid ${title}.` };
@@ -56,6 +61,7 @@ export async function addNewDataAction(title: string, dataKey: StatsKeys, prevSt
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
@@ -80,8 +86,90 @@ export async function getDataAction(dataKey: StatsKeys) {
     redirect("/login")
   }
   if (!res.ok) {
+    console.debug(await res.json());
     redirect("/internal-error");
   }
 
-  return (await res.json()).days;
+  return (await res.json()).days as dataHistory;
+}
+
+
+// ************************************************************
+// GYM ATTENDANCES (STREAK)
+// ************************************************************
+
+export async function getGymAttendancesAction(month: number, year: number) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  url.searchParams.append("month", month.toString())
+  url.searchParams.append("year", year.toString())
+
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+    },
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
+
+  return (await res.json()).days as string[];
+}
+
+export async function addGymAttendanceAction(isoDate: string) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: isoDate,
+    }),
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
+}
+
+export async function deleteGymAttendanceAction(isoDate: string) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      date: isoDate,
+    }),
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
 }
