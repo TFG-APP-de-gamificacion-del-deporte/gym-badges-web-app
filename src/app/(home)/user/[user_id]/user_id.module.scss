@@ -118,19 +118,6 @@ $image-size: 128px;
   aspect-ratio: 1;
 }
 
-.edit_button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  color: colors.$regular-text-color;
-  align-self: flex-end;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .user_not_found {
   height: 100%;
   display: flex;

@@ -17,7 +17,7 @@ export default function TextInput({
   required?: boolean,
   name?: string,
   minLength?: number,
-  step: number,
+  step?: number,
 }) {
   return (
     <label htmlFor={`input-${name}`} className={styles.text_field}>

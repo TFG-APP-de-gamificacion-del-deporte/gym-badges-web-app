@@ -1,24 +1,10 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
-import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
-import { FaArrowsRotate, FaCircleXmark, FaPen } from "react-icons/fa6"
+import { FaArrowsRotate } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
-import { AUTH_KEYS } from "@/api/constants"
-import { USER_ENDPOINTS } from "@/api/endpoints"
 import { getUserAction } from "@/actions/user"
-
-type GetUserResponse = {
-  user_id: string,
-  body_fat: number,
-  current_week: boolean[],
-  experience: number,
-  image: string | null,  // url
-  name: string,
-  streak: number,
-  weight: number,
-}
+import EditProfileMenu from "./edit-profile/edit-profile"
 
 const topFeats = [
   {
@@ -38,7 +24,7 @@ const topFeats = [
 
 export default async function Page({ params }: { params: { user_id: string } }) {
 
-  const userInfo = await getUserAction(params.user_id);
+  const user = await getUserAction(params.user_id);
 
   return (
     <div className={styles.layout}>
@@ -49,19 +35,19 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         </div>
         <div className={styles.info_card}>
           <div>
-            <span className={styles.streak}>{userInfo.streak} Weeks</span>
+            <span className={styles.streak}>{user.streak} Weeks</span>
             <p>Streak</p>
           </div>
           <div>
-            <span className={styles.fat}>{userInfo.body_fat}%</span>
+            <span className={styles.fat}>{user.body_fat}%</span>
             <p>Fat</p>
           </div>
           <div className={styles.name}>
-            <span>{userInfo.name}</span>  
-            <p>@{userInfo.user_id}</p>
+            <span>{user.name}</span>  
+            <p>@{user.user_id}</p>
           </div>
           <div>
-            <span className={styles.weight}>{userInfo.weight} kg</span>
+            <span className={styles.weight}>{user.weight} kg</span>
             <p>Weight</p>
           </div>
           <div>
@@ -70,10 +56,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>Friends</p>
           </div>
         </div>
-        <button className={styles.edit_button}>
-          <FaPen/>
-          <p>Edit profile</p>
-        </button>
+        <EditProfileMenu user={user}/>
       </section>
 
       {/* TOP FEATS */}
@@ -99,7 +82,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
       {/* PREFERENCES */}
       <section>
-        <UserPreferences dbPreferences={userInfo.preferences}/>
+        <UserPreferences dbPreferences={user.preferences}/>
       </section>
     </div>
   )
