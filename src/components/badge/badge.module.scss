@@ -126,16 +126,23 @@ $badge-bg-color: #1f1f1f;
   }
 }
 
-.button_complete {
-  @include GV.card;
-  &:hover {
-    background-color: rgba(white, 0.1);
-  }
-}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-.button_unmark {
-  @include GV.card;
-  &:hover {
-    background-color: rgba(red, 0.25);
+  button {
+    @include GV.card;
+    display: flex;
+    gap: 5px;
+    &:hover {
+      background-color: rgba(white, 0.1);
+    }
+  }
+  
+  .button_unmark {
+    &:hover {
+      background-color: rgba(red, 0.25);
+    }
   }
 }

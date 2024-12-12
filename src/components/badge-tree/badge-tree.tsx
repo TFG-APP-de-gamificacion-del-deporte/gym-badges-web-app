@@ -9,6 +9,9 @@ import useMobileScreen from "@/utils/useMobileScreen";
 interface Node {
   id: number,  // If id is negative, it's a root node (name: chest, arms, core...)
   name: string,
+  achieved: boolean,
+  image: string,
+  description: string,
   children: Node[],
 
   width?: number,
@@ -49,12 +52,13 @@ const categoryIcons = new Map([
 ])
 
 function createNodes(node: Node, col: number, row: number) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const nodeRef = useRef<HTMLDivElement>(null); 
 
   const nodeDiv = (
     <div className={styles.node} style={{ gridColumnStart: col, gridRowStart: row }} ref={nodeRef} key={node.id || node.name}>
       { node.id > 0
-        ? <Badge badgeInfo={node as BadgeInfo}/>
+        ? <Badge badgeInfo={node}/>
         : <div className={styles.category}>
             {categoryIcons.get(node.name)}
             <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
