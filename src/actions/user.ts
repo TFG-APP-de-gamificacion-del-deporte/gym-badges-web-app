@@ -4,7 +4,7 @@ import { USER_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
-import { TopFeat, User } from "@/api/models";
+import { BadgeInfo, TopFeat, User } from "@/api/models";
 import { revalidatePath } from "next/cache";
 
 export async function getUserAction(userID?: string) {
@@ -104,7 +104,7 @@ export async function editProfileAction(prevState: any, formData: FormData): Pro
   return { message: "Profile updated." }
 }
 
-export async function setTopFeatsAction (topFeats: TopFeat[]) {
+export async function setTopFeatsAction (topFeatIDs: number[]) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
@@ -116,7 +116,7 @@ export async function setTopFeatsAction (topFeats: TopFeat[]) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      [USER_KEYS.TOP_FEATS]: topFeats.map(tf => tf.id),
+      [USER_KEYS.TOP_FEATS]: topFeatIDs,
     }),
   })
   
@@ -127,4 +127,15 @@ export async function setTopFeatsAction (topFeats: TopFeat[]) {
     console.debug(await res.json());
     redirect("/internal-error");
   }
+}
+
+export async function addTopFeatActrion (topFeatID: number) {
+  const user = await getUserAction();
+
+  const ids = user.top_feats.map(tf => tf.id);
+  ids.push(topFeatID)
+
+  setTopFeatsAction(ids)
+
+  revalidatePath("/user/[user_id]", "page");
 }

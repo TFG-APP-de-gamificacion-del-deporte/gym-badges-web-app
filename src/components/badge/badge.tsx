@@ -4,6 +4,7 @@ import { FaCheck, FaX, FaXmark } from "react-icons/fa6"
 import styles from "./badge.module.scss"
 import clsx from "clsx";
 import { BadgeInfo } from "@/api/models";
+import { addTopFeatActrion } from "@/actions/user";
 
 type BadgeProps = { badgeInfo: BadgeInfo, tooltip?: boolean, noButtons?: boolean, addTopFeatsMode?: boolean }
 
@@ -25,7 +26,7 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
           <div className={styles.buttons}>
             { addTopFeatsMode
               ? badgeInfo.achieved 
-                ? <button>
+                ? <button onClick={() => addTopFeatActrion(badgeInfo.id)}>
                     Show off as Top Feat!
                   </button>
                 : <p>Only achieved badges can be used as top feats.</p> 

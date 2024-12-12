@@ -73,7 +73,6 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <h2>Top Feats</h2>
         <p>Highlight the badges you feel most proud of.</p>
         <div className={styles.top_feats_card}>
-          {/* TODO Use api user's top feats */}
           {user.top_feats.slice(0, 3).map(badgeInfo =>
             <div key={badgeInfo.id}>
               <div className={styles.badge_container}>
@@ -86,7 +85,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             </div>
           )}
         </div>
-        <ChangeTopFeatsMenu user={user}/>
+        <ChangeTopFeatsMenu/>
       </section>
 
       {/* PREFERENCES */}
