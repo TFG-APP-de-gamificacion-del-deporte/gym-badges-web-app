@@ -99,7 +99,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
 
       {/* PREFERENCES */}
       <section>
-        <UserPreferences/>
+        <UserPreferences dbPreferences={userInfo.preferences}/>
       </section>
     </div>
   )
