@@ -9,14 +9,6 @@
 }
 
 .title {
-  @include mq.small-screen {
-    display: none; 
-  }
-
-  @include mq.mobile-screen {
-    display: block; 
-  }
-
   margin-left: 5px;
 
   background-clip: text;

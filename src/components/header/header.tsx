@@ -14,7 +14,10 @@ export default function Header() {
   return (
     <>
       <div className={styles.header}>
-        <Logo/>
+        <div className={styles.logo_container}>
+          <Logo noTitle/>
+          <h1 className={styles.title}>Gym Badges</h1>
+        </div>
         <div className={styles.nav_container}>
           <Nav/>
         </div>
