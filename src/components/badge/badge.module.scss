@@ -56,6 +56,12 @@ $badge-bg-color: #1f1f1f;
   }
 }
 
+.achieved {
+  border-color: rgba(white, 0.3) !important;
+  $transparency: 0.5;
+  background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%) border-box;
+}
+
 .badge_menu {
   @include GV.card;
   width: 50%;

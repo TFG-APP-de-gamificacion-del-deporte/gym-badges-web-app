@@ -9,14 +9,14 @@
       {
         "id": 1,
         "name": "Do five push-ups",
-        "achieved": false,
+        "achieved": true,
         "image": "1.svg",
         "description": "",
         "children": [
           {
             "id": 2,
             "name": "Do ten push-ups",
-            "achieved": false,
+            "achieved": true,
             "image": "2.svg",
             "description": "",
             "children": [
