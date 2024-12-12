@@ -1,23 +1,33 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
-import { FaArrowsRotate } from "react-icons/fa6"
 import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
 import { getUserAction } from "@/actions/user"
-import EditProfileMenu from "./edit-profile/edit-profile"
+import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
+import ChangeTopFeatsMenu from "./change-top-feats-menu/change-top-feats-menu"
+import { TopFeat } from "@/api/models"
 
 const topFeats = [
   {
     id: 4,
     name: "Do thirty push-ups",
+    image: "4.svg",
+    description: "",
+    achieved: true,
   },
   {
     id: 12,
     name: "Bench press 100kg for 5 reps",
+    image: "12.svg",
+    description: "",
+    achieved: true,
   },
   {
     id: 25,
     name: "Biceps curl 30kg dumbbell",
+    image: "25.svg",
+    description: "",
+    achieved: true,
   },
 ]
 
@@ -56,7 +66,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>Friends</p>
           </div>
         </div>
-        <EditProfileMenu user={user}/>
+        <EditProfileMenu/>
       </section>
 
       {/* TOP FEATS */}
@@ -64,9 +74,12 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <h2>Top Feats</h2>
         <p>Highlight the badges you feel most proud of.</p>
         <div className={styles.top_feats_card}>
+          {/* TODO Use api user's top feats */}
           {topFeats.slice(0, 3).map(badgeInfo =>
             <div key={badgeInfo.id}>
-              <div className={styles.badge_container}><Badge badgeInfo={badgeInfo} tooltip={false}/></div>
+              <div className={styles.badge_container}>
+                <Badge badgeInfo={badgeInfo} tooltip={false} noButtons/>
+              </div>
               <div>
                 <h3>{badgeInfo.name}</h3>
                 {/* <p>{description}</p> */}
@@ -74,10 +87,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             </div>
           )}
         </div>
-        <button className={styles.edit_button}>
-          <FaArrowsRotate/>
-          <p>Change badges</p>
-        </button>
+        <ChangeTopFeatsMenu user={user} tempTF={topFeats}/>
       </section>
 
       {/* PREFERENCES */}

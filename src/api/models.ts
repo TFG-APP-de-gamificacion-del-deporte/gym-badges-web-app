@@ -1,10 +1,10 @@
 import { USER_KEYS } from "./constants";
 
-export type TopFeat = {
-  description: "string",
+export interface TopFeat {
   id: number,
-  image: "string",
-  name: "string"
+  name: string
+  image: string,
+  description: string,
 }
 
 export type Preference = {

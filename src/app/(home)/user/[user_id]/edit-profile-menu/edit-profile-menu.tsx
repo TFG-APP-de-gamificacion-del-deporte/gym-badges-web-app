@@ -1,7 +1,7 @@
 "use client";
 
 import { User } from "@/api/models";
-import styles from "./edit-profile.module.scss"
+import styles from "./edit-profile-menu.module.scss"
 import { FaCircleXmark, FaEnvelope, FaFloppyDisk, FaIdBadge, FaPen, FaUpload, FaXmark } from "react-icons/fa6";
 import { useFormState } from "react-dom";
 import { editProfile } from "@/actions/user";
@@ -10,7 +10,7 @@ import { USER_KEYS } from "@/api/constants";
 import { ChangeEvent, useRef, useState } from "react";
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 
-export default function EditProfileMenu({ user }: { user: User }) {
+export default function EditProfileMenu() {
   const initialState = { message: "" }
   const [state, formAction] = useFormState(editProfile, initialState)
 

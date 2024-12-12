@@ -20,7 +20,7 @@ export async function getUserAction(userID?: string) {
   })
 
   if (res.status === 401) {
-    redirect("/login")
+    redirect("/login") // TODO Fix redirect
   }
   if (res.status === 404) {
     redirect("/not-found-error", )
