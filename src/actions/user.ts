@@ -4,7 +4,7 @@ import { USER_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
-import { User } from "@/api/models";
+import { TopFeat, User } from "@/api/models";
 import { revalidatePath } from "next/cache";
 
 export async function getUserAction(userID?: string) {
@@ -61,7 +61,7 @@ export async function setWeeklyGoalAction(n: number) {
 
 type FormResponse = { message: string } | null
 
-export async function editProfile(prevState: any, formData: FormData): Promise<FormResponse> {
+export async function editProfileAction(prevState: any, formData: FormData): Promise<FormResponse> {
   const { authUserID, token } = getAuthCookies();
 
   // Get form info
@@ -102,4 +102,29 @@ export async function editProfile(prevState: any, formData: FormData): Promise<F
   }
 
   return { message: "Profile updated." }
+}
+
+export async function setTopFeatsAction (topFeats: TopFeat[]) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      [USER_KEYS.TOP_FEATS]: topFeats.map(tf => tf.id),
+    }),
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
 }

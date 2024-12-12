@@ -7,6 +7,14 @@ export interface TopFeat {
   description: string,
 }
 
+export interface BadgeInfo {
+  id: number,
+  name: string,
+  image: string,
+  description: string,
+  achieved?: boolean,
+}
+
 export type Preference = {
   on: boolean, 
   preference_id: number 

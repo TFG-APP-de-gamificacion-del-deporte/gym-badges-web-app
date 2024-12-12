@@ -5,27 +5,26 @@ import Badge from "@/components/badge/badge"
 import { getUserAction } from "@/actions/user"
 import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
 import ChangeTopFeatsMenu from "./change-top-feats-menu/change-top-feats-menu"
-import { TopFeat } from "@/api/models"
 
 const topFeats = [
   {
     id: 4,
     name: "Do thirty push-ups",
-    image: "4.svg",
+    image: "/image/4.svg",
     description: "",
     achieved: true,
   },
   {
     id: 12,
     name: "Bench press 100kg for 5 reps",
-    image: "12.svg",
+    image: "/image/12.svg",
     description: "",
     achieved: true,
   },
   {
     id: 25,
     name: "Biceps curl 30kg dumbbell",
-    image: "25.svg",
+    image: "/image/25.svg",
     description: "",
     achieved: true,
   },
@@ -75,7 +74,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <p>Highlight the badges you feel most proud of.</p>
         <div className={styles.top_feats_card}>
           {/* TODO Use api user's top feats */}
-          {topFeats.slice(0, 3).map(badgeInfo =>
+          {user.top_feats.slice(0, 3).map(badgeInfo =>
             <div key={badgeInfo.id}>
               <div className={styles.badge_container}>
                 <Badge badgeInfo={badgeInfo} tooltip={false} noButtons/>
@@ -87,7 +86,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             </div>
           )}
         </div>
-        <ChangeTopFeatsMenu user={user} tempTF={topFeats}/>
+        <ChangeTopFeatsMenu user={user}/>
       </section>
 
       {/* PREFERENCES */}

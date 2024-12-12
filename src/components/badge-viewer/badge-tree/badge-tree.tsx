@@ -3,7 +3,7 @@
 import { RefObject, useEffect, useRef } from "react";
 import styles from "./badge-tree.module.scss"
 import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
-import Badge, { BadgeInfo } from "@/components/badge/badge";
+import Badge from "@/components/badge/badge";
 import useMobileScreen from "@/utils/useMobileScreen";
 
 interface Node {
@@ -23,6 +23,16 @@ interface Badge {
   name: string,
 }
 
+const categoryIcons = new Map([
+  ["chest", <GiShoulderArmor className={styles.chest} key=""/>],
+  ["arms", <GiBiceps key=""/>],
+  ["back", <GiAngelWings key=""/>],
+  ["legs", <GiLegArmor key=""/>],
+  ["core", <GiAbdominalArmor key=""/>],
+  ["consistency", <GiTimeTrap key=""/>],
+  ["social", <GiTwoShadows key=""/>],
+])
+
 function computeWidth(node: Node) {
   if (node.children.length === 0) {
     node.width = 1;
@@ -39,47 +49,6 @@ function computeWidth(node: Node) {
   node.width = width;
 
   return width;
-}
-
-const categoryIcons = new Map([
-  ["chest", <GiShoulderArmor className={styles.chest} key=""/>],
-  ["arms", <GiBiceps key=""/>],
-  ["back", <GiAngelWings key=""/>],
-  ["legs", <GiLegArmor key=""/>],
-  ["core", <GiAbdominalArmor key=""/>],
-  ["consistency", <GiTimeTrap key=""/>],
-  ["social", <GiTwoShadows key=""/>],
-])
-
-function createNodes(node: Node, col: number, row: number) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const nodeRef = useRef<HTMLDivElement>(null); 
-
-  const nodeDiv = (
-    <div className={styles.node} style={{ gridColumnStart: col, gridRowStart: row }} ref={nodeRef} key={node.id || node.name}>
-      { node.id > 0
-        ? <Badge badgeInfo={node}/>
-        : <div className={styles.category}>
-            {categoryIcons.get(node.name)}
-            <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
-          </div>
-      }
-    </div>
-  )
-
-  node.ref = nodeRef;  // Save ref to draw lines later
-
-  let nodes = [nodeDiv];
-  
-  let childCol = col - (node.width as number);
-  
-  for (const child of node.children) {
-    childCol += child.width as number;  // Make room on the left
-    nodes.push(...createNodes(child, childCol, row + 1));
-    childCol += child.width as number;  // Make room on the right
-  }
-
-  return nodes;
 }
 
 function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
@@ -111,7 +80,39 @@ function drawLines(node: Node, canvasCtx: CanvasRenderingContext2D) {
   }
 }
 
-export default function BadgeTree({ tree }: { tree: Node }) {
+export default function BadgeTree({ tree, addTopFeatsMode=false }: { tree: Node, addTopFeatsMode?: boolean }) {
+
+  function createNodes(node: Node, col: number, row: number) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const nodeRef = useRef<HTMLDivElement>(null); 
+  
+    const nodeDiv = (
+      <div className={styles.node} style={{ gridColumnStart: col, gridRowStart: row }} ref={nodeRef} key={node.id || node.name}>
+        { node.id > 0
+          ? <Badge badgeInfo={node} addTopFeatsMode={addTopFeatsMode} tooltip={!addTopFeatsMode}/>
+          : <div className={styles.category}>
+              {categoryIcons.get(node.name)}
+              <h2>{node.name[0].toLocaleUpperCase() + node.name.slice(1)}</h2>
+            </div>
+        }
+      </div>
+    )
+  
+    node.ref = nodeRef;  // Save ref to draw lines later
+  
+    let nodes = [nodeDiv];
+    
+    let childCol = col - (node.width as number);
+    
+    for (const child of node.children) {
+      childCol += child.width as number;  // Make room on the left
+      nodes.push(...createNodes(child, childCol, row + 1));
+      childCol += child.width as number;  // Make room on the right
+    }
+  
+    return nodes;
+  }
+
   const width = computeWidth(tree);
   const cols = width * 2;
   
