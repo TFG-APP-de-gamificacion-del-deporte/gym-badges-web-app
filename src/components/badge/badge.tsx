@@ -34,7 +34,7 @@ export default function Badge({ badgeInfo, tooltip=true }: { badgeInfo: BadgeInf
               : <><FaCheck/>Complete Badge!</>
             }
           </button>
-          { !badgeInfo.achieved &&
+          { badgeInfo.achieved &&
             <button>
               <FaPlus/>
               Add as Top Feat

@@ -140,9 +140,14 @@ $badge-bg-color: #1f1f1f;
   button {
     @include GV.card;
     display: flex;
+    justify-content: center;
     gap: 5px;
     &:hover {
       background-color: rgba(white, 0.1);
+    }
+
+    svg {
+      margin-left: -5px;
     }
   }
   
