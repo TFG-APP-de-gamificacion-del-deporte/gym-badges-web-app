@@ -21,6 +21,9 @@ export async function getUserAction(userID?: string) {
   if (res.status === 401) {
     redirect("/login")
   }
+  if (res.status === 404) {
+    redirect("/not-found-error", )
+  }
   if (!res.ok) {
     console.debug(await res.json());
     redirect("/internal-error");

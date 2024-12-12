@@ -7,6 +7,7 @@ import UserPreferences from "@/components/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
 import { AUTH_KEYS } from "@/api/constants"
 import { USER_ENDPOINTS } from "@/api/endpoints"
+import { getUserAction } from "@/actions/user"
 
 type GetUserResponse = {
   user_id: string,
@@ -36,52 +37,8 @@ const topFeats = [
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
-  const authUserID = cookies().get(AUTH_KEYS.AUTH_USER_ID);
-  const token = cookies().get(AUTH_KEYS.TOKEN);
 
-  if (!authUserID || !token) {
-    redirect("/login");
-  }  
-
-  let res: Response;
-  try {
-    res = await fetch(`${process.env.API_URL}${USER_ENDPOINTS.USER(params.user_id)}`, {
-      method: "GET",
-      headers: {
-        [AUTH_KEYS.AUTH_USER_ID]: authUserID.value,
-        [AUTH_KEYS.TOKEN]: token.value,
-      },
-    });
-  } catch (error) {
-    // API connection error
-    redirect("/internal-error");
-  } 
-
-  if (res.status === 401) {  // Unauthorized
-    redirect("/login");
-  }
-  if (res.status === 404) {  // User not found
-    return <div className={styles.user_not_found}>
-      <FaCircleXmark size="1.2rem"/>
-      User not found
-    </div>
-  }
-  if (!res.ok) {  // Other errors
-    console.debug(await res.json());
-    redirect("/internal-error");
-  }
-
-  const resBody = await res.json();
-  const userInfo: GetUserResponse = {
-    user_id: resBody.user_id,
-    body_fat: resBody.body_fat,
-    current_week: resBody.current_week,
-    experience: resBody.experience,
-    image: resBody.image,
-    name: resBody.name,
-    streak: resBody.streak,
-    weight: resBody.weight,
-  };
+  const userInfo = await getUserAction(params.user_id);
 
   return (
     <div className={styles.layout}>

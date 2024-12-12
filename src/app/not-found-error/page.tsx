@@ -1,5 +1,5 @@
 import Logo from "@/components/logo/logo"
-import styles from "./internal-error.module.scss"
+import styles from "./not-found-error.module.scss"
 
 export default function InternalError() {
   return (
@@ -7,10 +7,9 @@ export default function InternalError() {
       <Logo/>
       <div className={styles.error}>
         <h2>
-          500<hr/>
-          Internal Error
+          404<hr/>
+          User not found :(
         </h2>
-        <p>Please try again later :(</p>
       </div>
     </div>
   )
