@@ -6,30 +6,6 @@ import { getUserAction } from "@/actions/user"
 import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
 import ChangeTopFeatsMenu from "./change-top-feats-menu/change-top-feats-menu"
 
-const topFeats = [
-  {
-    id: 4,
-    name: "Do thirty push-ups",
-    image: "/image/4.svg",
-    description: "",
-    achieved: true,
-  },
-  {
-    id: 12,
-    name: "Bench press 100kg for 5 reps",
-    image: "/image/12.svg",
-    description: "",
-    achieved: true,
-  },
-  {
-    id: 25,
-    name: "Biceps curl 30kg dumbbell",
-    image: "/image/25.svg",
-    description: "",
-    achieved: true,
-  },
-]
-
 
 export default async function Page({ params }: { params: { user_id: string } }) {
 
@@ -73,15 +49,20 @@ export default async function Page({ params }: { params: { user_id: string } }) 
         <h2>Top Feats</h2>
         <p>Highlight the badges you feel most proud of.</p>
         <div className={styles.top_feats_card}>
-          {user.top_feats.slice(0, 3).map(badgeInfo =>
-            <div key={badgeInfo.id}>
-              <div className={styles.badge_container}>
-                <Badge badgeInfo={badgeInfo} tooltip={false} noButtons/>
-              </div>
-              <div>
-                <h3>{badgeInfo.name}</h3>
-                {/* <p>{description}</p> */}
-              </div>
+          {Array.from({length: 3}).map((_, i) =>
+            <div key={i}>
+              { user.top_feats[i]
+                ? <>
+                    <div className={styles.badge_container}>
+                      <Badge badgeInfo={user.top_feats[i]} tooltip={false} noButtons/>
+                    </div>
+                    <div>
+                      <h3>{user.top_feats[i].name}</h3>
+                      {/* <p>{description}</p> */}
+                    </div>
+                  </>
+                : <div key={i} className={styles.no_badge}/>
+              }
             </div>
           )}
         </div>

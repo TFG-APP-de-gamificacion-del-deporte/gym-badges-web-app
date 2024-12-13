@@ -118,6 +118,14 @@ $image-size: 128px;
   aspect-ratio: 1;
 }
 
+.no_badge {
+  min-width: min(25%, 75px);
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background-color: rgba(colors.$badge-bg-color, 0.5);
+  border: 2px solid #303030;
+}
+
 .user_not_found {
   height: 100%;
   display: flex;
