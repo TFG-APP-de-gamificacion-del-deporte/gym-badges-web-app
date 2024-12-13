@@ -50,7 +50,6 @@ export default function WeekBar() {
     }
   }, [user])
 
-  if (isLoading) return;
   if (error) redirect("/internal-error");
 
   return (

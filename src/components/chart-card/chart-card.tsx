@@ -53,7 +53,6 @@ export default function ChartCard({
   const [tooltipCoords, setTooltipCoords] = useState<{x: number, y: number}>();
   let areaInstance: Area | null = null;
 
-  if (isLoading) return
   if (error) redirect("/internal-error");
 
   const lastValue = data?.length ? data[data.length - 1].value : "--";
