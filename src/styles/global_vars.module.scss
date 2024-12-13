@@ -10,7 +10,8 @@ $skew-small: -15deg;
 // ===== Card component =====
 @mixin card {
   background-color: rgba(white, 0.02);
-  backdrop-filter: blur(45px);
+  -webkit-backdrop-filter: blur(45px) !important;
+  backdrop-filter: blur(45px) !important;
   padding: 15px;
   box-shadow: inset 0 0 0 1px rgba(white, 0.15);
   border-radius: $corner-radius-big;

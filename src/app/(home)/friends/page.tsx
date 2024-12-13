@@ -1,13 +1,12 @@
 import styles from "./friends.module.scss"
-import { FaMagnifyingGlass, FaPlus, FaXmark } from "react-icons/fa6"
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
-import Badge, { BadgeInfo } from "@/components/badge/badge"
-import TextInput from "@/components/skewed-text-input/text-input"
+import Badge from "@/components/badge/badge"
 import FriendOptions from "./friend-options/friend-options"
 import { getFriendsAction } from "@/actions/friends"
 import AddFriendMenu from "./add-friend-menu/add-friend-menu"
+import { BadgeInfo } from "@/api/models"
 
 export interface Friend {
   image: string,
@@ -67,13 +66,13 @@ export default async function Page() {
                       <small>Streak</small>
                       <span className={styles.streak}><p>{friend.streak} Weeks</p></span>
                     </div>
-                    {friend.weight !== undefined &&
+                    {friend.weight !== null &&
                       <div>
                         <small>Weight</small>
                         <span className={styles.weight}><p>{friend.weight} kg</p></span>
                       </div>
                     }
-                    {friend.fat !== undefined &&
+                    {friend.fat !== null &&
                       <div>
                         <small>Fat</small>
                         <span className={styles.fat}><p>{friend.fat}%</p></span>

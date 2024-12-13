@@ -7,10 +7,10 @@ import getAuthCookies from "@/utils/getAuthCookies";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getFriendsAction() {
+export async function getFriendsAction(userID?: string) {
   const { authUserID, token } = getAuthCookies();
 
-  const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)
+  const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(userID ? userID : authUserID)}`)
   url.searchParams.append("page", "0")
 
   const res = await fetch(url, {
