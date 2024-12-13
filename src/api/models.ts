@@ -22,7 +22,7 @@ export type Preference = {
 
 export type User = {
   [USER_KEYS.USER_ID]: string,
-  [USER_KEYS.BODY_FAT]: number,
+  [USER_KEYS.BODY_FAT]: number | null,
   [USER_KEYS.CURRENT_WEEK]: boolean[],
   [USER_KEYS.EXPERIENCE]: number,
   [USER_KEYS.IMAGE]: string,
@@ -31,7 +31,7 @@ export type User = {
   [USER_KEYS.STREAK]: number,
   [USER_KEYS.TOP_FEATS]: TopFeat[],
   [USER_KEYS.WEEKLY_GOAL]: number,
-  [USER_KEYS.WEIGHT]: number,
+  [USER_KEYS.WEIGHT]: number | null,
 }
 
 export type dataHistory = {

@@ -20,7 +20,7 @@ export default function StreakCard() {
         <h2>Your Streak</h2>
         <div className={styles.streak_count}>
           <FaFire size="1.5rem"/>
-          <h3>{user?.streak} week{user?.streak as number !== 1 ? "s" : ""}</h3>
+          <h3>{user?.streak} week{user?.streak as number !== 1 && "s"}</h3>
         </div>
       </div>
       {/* WEEK BAR */}

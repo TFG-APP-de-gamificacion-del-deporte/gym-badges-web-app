@@ -70,7 +70,7 @@ export default function StreakCalendar() {
   
   return (
     <div className={styles.calendar_card}>
-      <h2>{user?.streak} week{user?.streak as number !== 1 ? "s" : ""}</h2>
+      <h2>{user?.streak} week{user?.streak as number !== 1 && "s"}</h2>
       <small>Streak</small>
       <div className={styles.calendar_container}>
         <Calendar
