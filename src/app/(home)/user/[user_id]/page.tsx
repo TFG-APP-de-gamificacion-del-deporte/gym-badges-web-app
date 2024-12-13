@@ -5,10 +5,12 @@ import Badge from "@/components/badge/badge"
 import { getUserAction } from "@/actions/user"
 import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
 import ChangeTopFeatsMenu from "./change-top-feats-menu/change-top-feats-menu"
+import getAuthCookies from "@/utils/getAuthCookies"
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
 
+  const { authUserID } = getAuthCookies();
   const user = await getUserAction(params.user_id);
 
   return (
@@ -41,7 +43,9 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>Friends</p>
           </div>
         </div>
-        <EditProfileMenu/>
+        { user.user_id === authUserID &&
+          <EditProfileMenu/>
+        }
       </section>
 
       {/* TOP FEATS */}
@@ -66,13 +70,17 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             </div>
           )}
         </div>
-        <ChangeTopFeatsMenu/>
+        { user.user_id === authUserID &&
+          <ChangeTopFeatsMenu/>
+        }
       </section>
 
       {/* PREFERENCES */}
-      <section>
-        <UserPreferences dbPreferences={user.preferences}/>
-      </section>
+      { user.user_id === authUserID &&
+        <section>
+          <UserPreferences dbPreferences={user.preferences}/>
+        </section>
+      }
     </div>
   )
 }
