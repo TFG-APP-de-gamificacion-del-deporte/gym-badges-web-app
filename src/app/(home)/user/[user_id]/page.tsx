@@ -1,6 +1,6 @@
 import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
-import UserPreferences from "@/components/user-preferences/user-preferences"
+import UserPreferences from "@/app/(home)/user/[user_id]/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
 import { getUserAction } from "@/actions/user"
 import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
