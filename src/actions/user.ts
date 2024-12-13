@@ -4,7 +4,7 @@ import { USER_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
-import { BadgeInfo, TopFeat, User } from "@/api/models";
+import { BadgeInfo, Preference, TopFeat, User } from "@/api/models";
 import { revalidatePath } from "next/cache";
 
 export async function getUserAction(userID?: string) {
@@ -138,4 +138,29 @@ export async function addTopFeatActrion (topFeatID: number) {
   setTopFeatsAction(ids)
 
   revalidatePath("/user/[user_id]", "page");
+}
+
+export async function setPreferenceAction(preferences: Preference) {
+  const { authUserID, token } = getAuthCookies();
+
+  const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      [USER_KEYS.PREFERENCES]: [preferences],
+    }),
+  })
+  
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
 }
