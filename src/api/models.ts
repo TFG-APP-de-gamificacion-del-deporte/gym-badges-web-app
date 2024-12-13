@@ -15,6 +15,15 @@ export interface BadgeInfo {
   achieved?: boolean,
 }
 
+export type BadgeTree = {
+  id: number,
+  name: string,
+  image: string,
+  description: string,
+  achieved: boolean,
+  children: BadgeTree[],
+}
+
 export type Preference = {
   on: boolean, 
   preference_id: number 

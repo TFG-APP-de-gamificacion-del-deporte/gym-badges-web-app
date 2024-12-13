@@ -61,7 +61,7 @@ export default function WeekBar() {
             <button 
               className={clsx(
                 styles.box, 
-                { [styles.filled]: currentWeek.at(index) }
+                { [styles.filled]: currentWeek?.at(index) }
               )}
               onClick={() => handleDayClick(index)}
             />

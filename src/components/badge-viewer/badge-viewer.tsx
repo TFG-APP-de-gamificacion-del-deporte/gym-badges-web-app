@@ -3,12 +3,15 @@
 import styles from "./badge-viewer.module.scss";
 import { useRef, useState, MouseEvent } from "react";
 import BadgeTree from "@/components/badge-viewer/badge-tree/badge-tree";
-
-// TODO Get badges from the API
-import badges from "@/static/badges.json" assert { type: "json" };
+import useSWR from "swr";
+import { getBadges } from "@/actions/badges";
+import { redirect } from "next/navigation";
 
 
 export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode?: boolean }) {
+
+  const { data, error, isLoading } = useSWR("getBadges", getBadges);
+
   // Hooks to handle scroll on drag
   const divRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -55,6 +58,9 @@ export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode
     setDragging(false);
   };
 
+  if (isLoading) { return }
+  if (error) { redirect("/internal-error") }
+
   return (
     <div 
       className={styles.viewer}
@@ -63,7 +69,7 @@ export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      { badges.map((tree, i) => <BadgeTree tree={tree} key={`tree_${i}`} addTopFeatsMode={addTopFeatsMode}/>) }
+      { data?.map((tree, i) => <BadgeTree tree={tree} key={`tree_${i}`} addTopFeatsMode={addTopFeatsMode}/>) }
     </div>
   )
 }

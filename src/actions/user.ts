@@ -4,7 +4,7 @@ import { USER_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
-import { BadgeInfo, Preference, TopFeat, User } from "@/api/models";
+import { Preference, User } from "@/api/models";
 import { revalidatePath } from "next/cache";
 
 export async function getUserAction(userID?: string) {
