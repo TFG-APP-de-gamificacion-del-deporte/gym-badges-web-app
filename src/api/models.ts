@@ -12,7 +12,7 @@ export interface BadgeInfo {
   name: string,
   image: string,
   description: string,
-  exp: number,
+  exp?: number,
   achieved?: boolean,
 }
 
