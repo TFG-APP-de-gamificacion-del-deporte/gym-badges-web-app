@@ -13,7 +13,7 @@ export default function DefaultProfilePicture({ hexColor }: { hexColor?: string 
     const pictureColor = [
       Math.floor(Math.random() * Math.abs(red[0] - purple[0]) + Math.min(red[0], purple[0])),
       Math.floor(Math.random() * Math.abs(red[1] - purple[1]) + Math.min(red[1], purple[1])),
-      Math.floor(Math.random() * Math.abs(red[2] - purple[2]) + Math.min(red[2], purple[2]))
+      Math.floor(Math.random() * Math.abs(red[2] - purple[2]) + Math.min(red[2], purple[2])),
     ]
     
     style = {backgroundColor: `rgb(${pictureColor[0]}, ${pictureColor[1]}, ${pictureColor[2]})`};

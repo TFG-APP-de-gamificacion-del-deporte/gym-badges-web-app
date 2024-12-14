@@ -11,20 +11,33 @@ import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "re
 import { USER_KEYS } from "@/api/constants";
 
 export default function Signup() {
-  const initialState = { message: "" }
-  const [state, formAction] = useFormState(signupAction, initialState)
-
-  const [image, setImage] = useState<string>();
+  const [base64Image, setBase64Image] = useState("");
+  const [imagePreview, setImagePreview] = useState("");
   const imgInputRef = useRef<HTMLInputElement>(null);
+
+  const initialState = { message: "" }
+  const [state, formAction] = useFormState(signupAction.bind(null, base64Image), initialState)
   
-  function handleImageUpload(evt: ChangeEvent<HTMLInputElement>) {
-    if (evt.target.files && evt.target.files[0]) {
-      setImage(URL.createObjectURL(evt.target.files[0]));
+  function handleFileChange(evt: ChangeEvent<HTMLInputElement>) {
+    const file = evt.target?.files?.item(0)
+    if (!file) {
+      return;
     }
+    
+    setImagePreview(URL.createObjectURL(file));
+
+    // Convert the image file to base64
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setBase64Image(reader.result.split(",")[1]); // Exclude the "data:image/*;base64," prefix
+      }
+    };
+    reader.readAsDataURL(file);
   }
 
   function handleRemoveImage() {
-    setImage(undefined)
+    setImagePreview("")
     if (imgInputRef.current) {
       imgInputRef.current.value = "";
     }
@@ -35,13 +48,14 @@ export default function Signup() {
       <Logo/>
       <form action={formAction} className={styles.form}>
         <div className={styles.image_container}>
-          { // DEFAULT OR UPLOADED IMAGE
-            image
-            ? <img src={image as string} alt="Uploaded image"/>
+          {/* DEFAULT OR UPLOADED IMAGE */}
+          { imagePreview
+            // eslint-disable-next-line @next/next/no-img-element
+            ? <img src={imagePreview as string} alt="Uploaded image"/>
             : <DefaultProfilePicture/>
           }
-          { // UPLOAD OR DELETE BUTTON 
-            image
+          {/* UPLOAD OR DELETE BUTTON */}
+          { imagePreview
             ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
                 <FaCircleXmark size="1.2rem"/>
                 <p>Delete Image</p>
@@ -51,7 +65,7 @@ export default function Signup() {
                 <p>Select Image</p>
               </label>
           }
-          <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleImageUpload} ref={imgInputRef} hidden/>
+          <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleFileChange} ref={imgInputRef} hidden/>
         </div>
         {/* TEXT INPUTS */}
         <br/>

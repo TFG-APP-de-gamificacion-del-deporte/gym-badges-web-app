@@ -8,15 +8,16 @@ import crypto from "crypto"
 
 type FormResponse = { message: string } | null
 
-export default async function signupAction(prevState: any, formData: FormData): Promise<FormResponse> {
-  
+export default async function signupAction(base64Image: string, prevState: any, formData: FormData): Promise<FormResponse> {
+
   const signUpInfo = {
     [USER_KEYS.NAME]: formData.get(USER_KEYS.NAME) ,
     [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
     [USER_KEYS.EMAIL]: formData.get(USER_KEYS.EMAIL),
-    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),
-    // TODO [IMAGE_KEY]: image blob,
+    [USER_KEYS.IMAGE]: base64Image,
+    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD) ,
   }
+  
 
   // Validate data
   if (signUpInfo[USER_KEYS.PASSWORD] !== formData.get(USER_KEYS.PASSWORD + "2")) {
@@ -48,6 +49,7 @@ export default async function signupAction(prevState: any, formData: FormData): 
 
     // Invalid signup
     if (!res.ok) {
+      console.debug(await res.json());
       return { message: "Already existing username or email." }
     }
 
