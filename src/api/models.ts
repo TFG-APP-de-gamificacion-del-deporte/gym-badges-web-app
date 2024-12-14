@@ -12,6 +12,7 @@ export interface BadgeInfo {
   name: string,
   image: string,
   description: string,
+  exp: number,
   achieved?: boolean,
 }
 
@@ -21,6 +22,7 @@ export type BadgeTree = {
   image: string,
   description: string,
   achieved: boolean,
+  exp: number,
   children: BadgeTree[],
 }
 

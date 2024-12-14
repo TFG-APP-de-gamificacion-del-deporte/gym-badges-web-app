@@ -20,14 +20,14 @@ export default function StatsCard() {
         {/* WEIGHT BOX */}
         <div className={clsx(styles.box, styles.green_border)}>
           <div>
-            <h3>{user?.weight} kg</h3>
+            <h3>{user?.weight ?? "--"} kg</h3>
             <p>Weight</p>
           </div>
         </div>
         {/* FAT BOX */}
         <div className={clsx(styles.box, styles.yellow_border)}>
           <div>
-            <h3>{user?.body_fat}%</h3>
+            <h3>{user?.body_fat ?? "--"}%</h3>
             <p>Fat</p>
           </div>
         </div>

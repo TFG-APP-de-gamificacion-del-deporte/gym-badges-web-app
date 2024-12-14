@@ -12,15 +12,11 @@ interface Node {
   achieved: boolean,
   image: string,
   description: string,
+  exp: number,
   children: Node[],
 
   width?: number,
   ref?: RefObject<HTMLDivElement>,
-}
-
-interface Badge {
-  id: number,
-  name: string,
 }
 
 const categoryIcons = new Map([
