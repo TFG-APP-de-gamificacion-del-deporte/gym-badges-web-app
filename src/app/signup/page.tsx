@@ -3,45 +3,53 @@
 import Logo from "@/components/logo/logo";
 import styles from "./signup.module.scss"
 import TextInput from "@/components/skewed-text-input/text-input";
-import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import { useFormState } from "react-dom";
 import signupAction from "@/actions/signup";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
 import { USER_KEYS } from "@/api/constants";
+import useDefaultImage from "@/utils/defaultImage";
 
 export default function Signup() {
-  const [base64Image, setBase64Image] = useState("");
-  const [imagePreview, setImagePreview] = useState("");
+  const defaultImage_b64 = useDefaultImage();
+  
+  const [image_b64, setImage_b64] = useState("");
+  const [imgUploaded, setImgUploaded] = useState(false);
+
   const imgInputRef = useRef<HTMLInputElement>(null);
 
   const initialState = { message: "" }
-  const [state, formAction] = useFormState(signupAction.bind(null, base64Image), initialState)
+  const [state, formAction] = useFormState(signupAction.bind(null, image_b64), initialState)
   
   function handleFileChange(evt: ChangeEvent<HTMLInputElement>) {
     const file = evt.target?.files?.item(0)
     if (!file) {
       return;
     }
-    
-    setImagePreview(URL.createObjectURL(file));
+
+    setImgUploaded(true)
 
     // Convert the image file to base64
     const reader = new FileReader();
     reader.onload = () => {
       if (typeof reader.result === "string") {
-        setBase64Image(reader.result.split(",")[1]); // Exclude the "data:image/*;base64," prefix
+        setImage_b64(reader.result);
       }
     };
     reader.readAsDataURL(file);
   }
 
   function handleRemoveImage() {
-    setImagePreview("")
+    setImgUploaded(false)
+    setImage_b64(defaultImage_b64);
     if (imgInputRef.current) {
       imgInputRef.current.value = "";
     }
   }
+
+  useEffect(() => {
+    setImage_b64(defaultImage_b64);
+  }, [defaultImage_b64]);
 
   return (
     <div className={styles.signup_layout}>
@@ -49,22 +57,19 @@ export default function Signup() {
       <form action={formAction} className={styles.form}>
         <div className={styles.image_container}>
           {/* DEFAULT OR UPLOADED IMAGE */}
-          { imagePreview
-            // eslint-disable-next-line @next/next/no-img-element
-            ? <img src={imagePreview as string} alt="Uploaded image"/>
-            : <DefaultProfilePicture/>
-          }
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={image_b64} alt=" "/>
           {/* UPLOAD OR DELETE BUTTON */}
-          { imagePreview
+          { imgUploaded
             ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
-                <FaCircleXmark size="1.2rem"/>
+                <FaCircleXmark/>
                 <p>Delete Image</p>
               </button>
             : <label htmlFor="files" className={styles.upload_picture_button}>
                 <FaUpload/>
                 <p>Select Image</p>
               </label>
-          }
+            }
           <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleFileChange} ref={imgInputRef} hidden/>
         </div>
         {/* TEXT INPUTS */}

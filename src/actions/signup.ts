@@ -14,10 +14,9 @@ export default async function signupAction(base64Image: string, prevState: any, 
     [USER_KEYS.NAME]: formData.get(USER_KEYS.NAME) ,
     [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
     [USER_KEYS.EMAIL]: formData.get(USER_KEYS.EMAIL),
-    [USER_KEYS.IMAGE]: base64Image,
+    [USER_KEYS.IMAGE]: base64Image.split(",")[1],  // Exclude the "data:image/*;base64," prefix,
     [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD) ,
   }
-  
 
   // Validate data
   if (signUpInfo[USER_KEYS.PASSWORD] !== formData.get(USER_KEYS.PASSWORD + "2")) {
@@ -29,6 +28,7 @@ export default async function signupAction(base64Image: string, prevState: any, 
     || !signUpInfo[USER_KEYS.USER_ID]
     || !signUpInfo[USER_KEYS.EMAIL]
     || !signUpInfo[USER_KEYS.PASSWORD]
+    || !signUpInfo[USER_KEYS.IMAGE]
   ) {
     return { message: "Please fill in all the fields." }
   }
