@@ -1,5 +1,4 @@
 import styles from "./friends.module.scss"
-import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import Script from "next/script"
 import Link from "next/link"
 import Badge from "@/components/badge/badge"
@@ -7,6 +6,7 @@ import FriendOptions from "./friend-options/friend-options"
 import { getFriendsAction } from "@/actions/friends"
 import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 import { BadgeInfo } from "@/api/models"
+import ProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 
 export interface Friend {
   image: string,
@@ -46,9 +46,9 @@ export default async function Page() {
 
                 <div className={styles.avatar}>
                   {/* IMAGE, NAME AND USERNAME */}
-                  <Link href={`user/${friend.user}`} className={styles.image_container}>
-                    <DefaultProfilePicture/>
-                  </Link>
+                  <div className={styles.image_container}>
+                    <ProfilePicture image_b64={friend.image}/>
+                  </div>
                   <Link href={`user/${friend.user}`} className={styles.username}>
                     {friend.name}<br/><small>@{friend.user}</small>
                   </Link>
@@ -85,9 +85,9 @@ export default async function Page() {
                     <div className={styles.top_feats}>
                       <small>Top Feats</small>
                       <div className={styles.badges}>
-                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false}/></div>
-                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false}/></div>
-                        <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false}/></div>
+                        { friend.top_feats[0] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false}/></div> }
+                        { friend.top_feats[1] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false}/></div> }
+                        { friend.top_feats[2] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false}/></div> }
                       </div>
                     </div>
                   }

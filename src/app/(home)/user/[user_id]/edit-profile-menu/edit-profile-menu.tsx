@@ -1,6 +1,5 @@
 "use client";
 
-import { User } from "@/api/models";
 import styles from "./edit-profile-menu.module.scss"
 import { FaCircleXmark, FaEnvelope, FaFloppyDisk, FaIdBadge, FaPen, FaUpload, FaXmark } from "react-icons/fa6";
 import { useFormState } from "react-dom";
@@ -8,7 +7,8 @@ import { editProfileAction } from "@/actions/user";
 import TextInput from "@/components/skewed-text-input/text-input";
 import { USER_KEYS } from "@/api/constants";
 import { ChangeEvent, useRef, useState } from "react";
-import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
+import ProfilePicture from "@/components/default-profile-picture/default-profile-picture";
+
 
 export default function EditProfileMenu() {
   const initialState = { message: "" }
@@ -48,12 +48,8 @@ export default function EditProfileMenu() {
         <form action={formAction} className={styles.form}>
           {/* IMAGE */}
           <div className={styles.image_container}>
-            { // DEFAULT OR UPLOADED IMAGE
-              image
-              // eslint-disable-next-line @next/next/no-img-element
-              ? <img src={image as string} alt="Uploaded image"/>
-              : <DefaultProfilePicture/>
-            }
+            {/* TODO Edit profile picture */}
+            <ProfilePicture image_b64={""}/>
             { // UPLOAD OR DELETE BUTTON 
               image
               ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>

@@ -1,10 +1,10 @@
 import Link from "next/link";
 import styles from "./rankings.module.scss"
-import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 import clsx from "clsx";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AUTH_KEYS } from "@/api/constants";
+import ProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 
 interface RankingUser {
   image: string,
@@ -40,7 +40,7 @@ function RankingUser({ user, index, selfUserID }: { user: RankingUser, index: nu
       <div className={styles.rank}><span>{index + 1}</span></div>
       {/* IMAGE, NAME AND USERNAME */}
       <Link href={`user/${user.userID}`} className={styles.image_container}>
-        <DefaultProfilePicture/>
+        <ProfilePicture image_b64={user.image}/>
       </Link>
       <Link href={`user/${user.userID}`} className={styles.username}>
         {user.name}<br/><small>{user.userID}</small>

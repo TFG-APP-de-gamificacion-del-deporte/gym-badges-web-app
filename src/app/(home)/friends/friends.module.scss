@@ -83,7 +83,8 @@ $max_friends: 10;
   flex-grow: 1;
 
   .image_container {
-    max-width: 55px;
+    width: 55px;
+    height: 55px;
   }
 
   .username {
