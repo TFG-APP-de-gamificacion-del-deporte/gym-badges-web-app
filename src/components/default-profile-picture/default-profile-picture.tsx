@@ -1,27 +1,8 @@
-import { FaUser } from "react-icons/fa6";
 import styles from "./default-profile-picture.module.scss"
 
-export default function DefaultProfilePicture({ hexColor }: { hexColor?: string }) {
-  let style = {backgroundColor: hexColor};
-  
-  // If no color 
-  if (!hexColor) {
-    const red = [178, 22, 22];
-    const purple = [140, 25, 231];
-    
-    // Random color between red and purple
-    const pictureColor = [
-      Math.floor(Math.random() * Math.abs(red[0] - purple[0]) + Math.min(red[0], purple[0])),
-      Math.floor(Math.random() * Math.abs(red[1] - purple[1]) + Math.min(red[1], purple[1])),
-      Math.floor(Math.random() * Math.abs(red[2] - purple[2]) + Math.min(red[2], purple[2]))
-    ]
-    
-    style = {backgroundColor: `rgb(${pictureColor[0]}, ${pictureColor[1]}, ${pictureColor[2]})`};
-  }
-
+export default function ProfilePicture({ image_b64 }: { image_b64: string }) {
   return (
-    <div className={styles.default_profile_picture} style={style}>
-      <FaUser size="50%"/>
-    </div>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img className={styles.image} src={"data:image/png;base64," + image_b64} alt=" "/>
   )
 }

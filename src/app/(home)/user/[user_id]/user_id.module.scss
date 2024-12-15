@@ -29,9 +29,8 @@
 
 $image-size: 128px;
 .image_container {
-  & > div, & > img {
-    width: $image-size;
-  }
+  width: 128px;
+  height: 128px;
 
   z-index: 1;
 }

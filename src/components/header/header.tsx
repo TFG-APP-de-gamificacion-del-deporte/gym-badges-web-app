@@ -5,11 +5,12 @@ import LevelBar from "./level-bar/level-bar";
 import Nav from "../nav/nav";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import DefaultProfilePicture from "../default-profile-picture/default-profile-picture";
 import { AUTH_KEYS } from "@/api/constants";
+import ProfilePicture from "../default-profile-picture/default-profile-picture";
+import { getUserAction } from "@/actions/user";
 
-export default function Header() {
-  const user_id = cookies().get(AUTH_KEYS.AUTH_USER_ID);
+export default async function Header() {
+  const user = await getUserAction();
 
   return (
     <>
@@ -23,9 +24,9 @@ export default function Header() {
         </div>
         <div className={styles.account_container}>
           <LevelBar/>
-          <Link href={`/user/${user_id?.value}`}>
+          <Link href={`/user/${user.user_id}`}>
             <div className={styles.image_container}>
-              <DefaultProfilePicture/>
+              <ProfilePicture image_b64={user.image}/>
             </div>
           </Link>
         </div>

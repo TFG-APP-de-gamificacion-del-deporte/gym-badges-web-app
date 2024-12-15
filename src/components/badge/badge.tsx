@@ -22,7 +22,7 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={badgeInfo.image} className={badgeInfo.achieved ? styles.achieved : ""} alt={badgeInfo.id.toString()} draggable={false}/>
         <h2>{badgeInfo.name}</h2>
-        <p className={styles.exp}><span>+{badgeInfo.exp} xp</span></p>
+        { badgeInfo.exp && <p className={styles.exp}><span>+{badgeInfo.exp} xp</span></p>}
         { !noButtons &&
           <div className={styles.buttons}>
             { addTopFeatsMode

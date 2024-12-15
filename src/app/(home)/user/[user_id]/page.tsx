@@ -1,4 +1,3 @@
-import DefaultProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 import styles from "./user_id.module.scss"
 import UserPreferences from "@/app/(home)/user/[user_id]/user-preferences/user-preferences"
 import Badge from "@/components/badge/badge"
@@ -9,10 +8,10 @@ import getAuthCookies from "@/utils/getAuthCookies"
 import { getFriendsAction } from "@/actions/friends"
 import { PREFERENCES } from "@/api/constants"
 import { FaEyeSlash } from "react-icons/fa6"
+import ProfilePicture from "@/components/default-profile-picture/default-profile-picture"
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
-
   const { authUserID } = getAuthCookies();
   const user = await getUserAction(params.user_id);
   const friends = await getFriendsAction(params.user_id);
@@ -28,7 +27,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
       <div className={styles.layout}>
         <section>
           <div className={styles.image_container}>
-            <DefaultProfilePicture/>
+            <ProfilePicture image_b64={user.image}/>
           </div>
           <div className={styles.info_card}>
             <div className={styles.name}>
@@ -50,7 +49,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
       {/* IMAGE AND MAIN INFO */}
       <section>
         <div className={styles.image_container}>
-          <DefaultProfilePicture/>
+          <ProfilePicture image_b64={user.image}/>
         </div>
         <div className={styles.info_card}>
           <div>
