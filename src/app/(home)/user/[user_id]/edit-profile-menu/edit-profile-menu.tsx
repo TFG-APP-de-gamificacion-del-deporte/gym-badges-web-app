@@ -12,6 +12,7 @@ import useDefaultImage from "@/utils/defaultImage";
 import useUser from "@/utils/useUser";
 import { redirect } from "next/navigation";
 
+const MAX_IMAGE_SIZE = 2.5;
 
 export default function EditProfileMenu() {
   const { user, error, isLoading } = useUser();
@@ -19,6 +20,7 @@ export default function EditProfileMenu() {
   const defaultImage_b64 = useDefaultImage();
   
   const [image_b64, setImage_b64] = useState("");
+  const [maxSizeError, setMaxSizeError] = useState(false);
   const imgInputRef = useRef<HTMLInputElement>(null);
   
   const initialState = { message: "" }
@@ -30,6 +32,13 @@ export default function EditProfileMenu() {
       return;
     }
     
+    // Check size is less than 2.5mb
+    if (file.size > MAX_IMAGE_SIZE * 1048576) {
+      setMaxSizeError(true);
+      return;
+    }
+    setMaxSizeError(false);
+
     setImgUploaded(true)
     
     // Convert the image file to base64
@@ -93,6 +102,12 @@ export default function EditProfileMenu() {
               </label>
           }
           <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleFileChange} ref={imgInputRef} hidden/>
+          { maxSizeError && 
+            <span className={styles.error}>
+              <FaCircleXmark size="1.2rem"/>
+              Images can only be up to {MAX_IMAGE_SIZE}mb in size.
+            </span>
+          }
           {/* NAME */}
           <TextInput icon=<FaIdBadge size="1.2rem"/> placeholder="New name" name={USER_KEYS.NAME}/>
           {/* EMAIL */}
