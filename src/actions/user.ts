@@ -61,13 +61,14 @@ export async function setWeeklyGoalAction(n: number) {
 
 type FormResponse = { message: string } | null
 
-export async function editProfileAction(prevState: any, formData: FormData): Promise<FormResponse> {
+export async function editProfileAction(base64Image: string, prevState: any, formData: FormData): Promise<FormResponse> {
   const { authUserID, token } = getAuthCookies();
 
   // Get form info
   const name = formData.get(USER_KEYS.NAME);
   const email = formData.get(USER_KEYS.EMAIL);
-  const image = formData.get(USER_KEYS.IMAGE);
+  const image = base64Image;
+
   if (name === null) {
     return { message: "Invalid name." };
   }
@@ -89,7 +90,7 @@ export async function editProfileAction(prevState: any, formData: FormData): Pro
     body: JSON.stringify({
       [USER_KEYS.NAME]: name,
       [USER_KEYS.EMAIL]: email,
-      // TODO [USER_KEYS.IMAGE]: image,
+      [USER_KEYS.IMAGE]: image,
     }),
   })
   

@@ -15,10 +15,8 @@ export default function Signup() {
   const defaultImage_b64 = useDefaultImage();
   
   const [image_b64, setImage_b64] = useState("");
-  const [imgUploaded, setImgUploaded] = useState(false);
-
   const imgInputRef = useRef<HTMLInputElement>(null);
-
+  
   const initialState = { message: "" }
   const [state, formAction] = useFormState(signupAction.bind(null, image_b64), initialState)
   
@@ -29,7 +27,7 @@ export default function Signup() {
     }
 
     setImgUploaded(true)
-
+    
     // Convert the image file to base64
     const reader = new FileReader();
     reader.onload = () => {
@@ -39,7 +37,7 @@ export default function Signup() {
     };
     reader.readAsDataURL(file);
   }
-
+  
   function handleRemoveImage() {
     setImgUploaded(false)
     setImage_b64(defaultImage_b64);
@@ -47,7 +45,9 @@ export default function Signup() {
       imgInputRef.current.value = "";
     }
   }
-
+  
+  // Initialize image to default profile picture
+  const [imgUploaded, setImgUploaded] = useState(false);
   useEffect(() => {
     setImage_b64(defaultImage_b64);
   }, [defaultImage_b64]);
