@@ -9,6 +9,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
 import { USER_KEYS } from "@/api/constants";
 import useDefaultImage from "@/utils/defaultImage";
+import ProfilePicture from "@/components/default-profile-picture/default-profile-picture";
 
 export default function Signup() {
   const defaultImage_b64 = useDefaultImage();
@@ -33,7 +34,7 @@ export default function Signup() {
     const reader = new FileReader();
     reader.onload = () => {
       if (typeof reader.result === "string") {
-        setImage_b64(reader.result);
+        setImage_b64(reader.result.split(",")[1]);  // Exclude the "data:image/*;base64," prefix
       }
     };
     reader.readAsDataURL(file);
@@ -56,22 +57,21 @@ export default function Signup() {
       <Logo/>
       <form action={formAction} className={styles.form}>
         <div className={styles.image_container}>
-          {/* DEFAULT OR UPLOADED IMAGE */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image_b64} alt=" "/>
-          {/* UPLOAD OR DELETE BUTTON */}
-          { imgUploaded
-            ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
-                <FaCircleXmark/>
-                <p>Delete Image</p>
-              </button>
-            : <label htmlFor="files" className={styles.upload_picture_button}>
-                <FaUpload/>
-                <p>Select Image</p>
-              </label>
-            }
-          <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleFileChange} ref={imgInputRef} hidden/>
+          {/* TODO limitar imagenes a 2mb (probar el tamaño) */}
+          { image_b64 && <ProfilePicture image_b64={image_b64}/> }
         </div>
+        {/* UPLOAD OR DELETE BUTTON */}
+        { imgUploaded
+          ? <button className={styles.remove_image_button} type="button" onClick={handleRemoveImage}>
+              <FaCircleXmark/>
+              <p>Delete Image</p>
+            </button>
+          : <label className={styles.upload_picture_button} htmlFor="files">
+              <FaUpload/>
+              <p>Select Image</p>
+            </label>
+          }
+        <input type="file" accept="image/png, image/jpeg" id="files" name={USER_KEYS.IMAGE} onChange={handleFileChange} ref={imgInputRef} hidden/>
         {/* TEXT INPUTS */}
         <br/>
         <TextInput icon=<FaIdBadge size="1.2rem"/>  placeholder="Name"            name={USER_KEYS.NAME}                         required/>

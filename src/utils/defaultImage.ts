@@ -55,8 +55,9 @@ function generateDefaultImage() {
 
       // Generate base64 image
       const dataURL = canvas.toDataURL("image/png");
+      const image_b64 = dataURL.split(",")[1];  // Exclude the "data:image/*;base64," prefix
       
-      resolve(dataURL);
+      resolve(image_b64);
     };
 
     img.onerror = (error) => {
