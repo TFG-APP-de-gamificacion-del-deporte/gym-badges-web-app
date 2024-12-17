@@ -35,11 +35,12 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
   // Regular mode
   else {
     if (badgeInfo.achieved)
-      buttons = (
-        <button className={styles.button_unmark}>
+      buttons = <>
+        <button className={styles.button_unmark} disabled={badgeInfo.childAchieved}>
           <><FaX/>Unmark as completed</>
         </button>
-      )
+        { badgeInfo.childAchieved && <small className={styles.info}><FaInfoCircle/>Unmarking this badge requires unmarking all sub-badges first.</small> }
+      </>
     else
       buttons = <>
         <button disabled={!badgeInfo.parentAchieved} onClick={handleComplete}>

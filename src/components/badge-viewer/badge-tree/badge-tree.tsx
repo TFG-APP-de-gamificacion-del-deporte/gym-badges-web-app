@@ -97,6 +97,7 @@ export default function BadgeTree({ tree, addTopFeatsMode=false }: { tree: Node,
     for (const child of node.children) {
       childCol += child.width as number;  // Make room on the left
       child.parentAchieved = node.achieved
+      node.childAchieved = node.childAchieved || child.achieved
       nodes.push(...createNodes(child, childCol, row + 1));
       childCol += child.width as number;  // Make room on the right
     }
