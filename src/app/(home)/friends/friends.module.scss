@@ -13,7 +13,7 @@ $max_friends: 10;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  max-height: 100%;  // Required for making .card_layout scrollable
+  height: 100%;  // Required for making .card_layout scrollable
   padding: 30px;
   @include mq.mobile-screen {
     padding: 10px;
@@ -198,5 +198,22 @@ $max_friends: 10;
 
   .badge_container {
     aspect-ratio: 1;
+  }
+}
+
+.paginate {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  .page_button {
+    @include GV.card;
+    display: flex;
+    justify-content: center;
+    &:hover:not([disabled]) {
+      background-color: rgba(white, 0.1);
+    }
   }
 }
