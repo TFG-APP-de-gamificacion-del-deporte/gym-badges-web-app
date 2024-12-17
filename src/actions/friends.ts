@@ -7,11 +7,11 @@ import getAuthCookies from "@/utils/getAuthCookies";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getFriendsAction(userID?: string) {
+export async function getFriendsAction(userID?: string, page: number = 1) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(userID ? userID : authUserID)}`)
-  url.searchParams.append("page", "0")
+  url.searchParams.append("page", page.toString())
 
   const res = await fetch(url, {
     method: "GET",
@@ -69,7 +69,6 @@ export async function addFriendAction(prevState: any, formData: FormData): Promi
     redirect("/internal-error");
   }
 
-  revalidatePath("/friends")
   return { message: `Added ${friendID.toString()} as a friend!` }
 }
 
@@ -98,6 +97,4 @@ export async function deleteFriendAction(friendID: string) {
     console.debug(await res.json());
     redirect("/internal-error");
   }
-
-  revalidatePath("/friends")
 }

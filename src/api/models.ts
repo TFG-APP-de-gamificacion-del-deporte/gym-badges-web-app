@@ -45,3 +45,17 @@ export type dataHistory = {
   date: string,
   value: number,
 }[]
+
+export type RankedUser = {
+  image: string,
+  level: number,
+  name: string,
+  rank: number,
+  streak: number,
+  user_id: string,
+}
+
+export type Ranking = {
+  ranking: RankedUser[],
+  yourself?: RankedUser,
+}

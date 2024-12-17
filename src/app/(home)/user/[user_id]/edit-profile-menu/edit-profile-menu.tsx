@@ -7,7 +7,7 @@ import { editProfileAction } from "@/actions/user";
 import TextInput from "@/components/skewed-text-input/text-input";
 import { USER_KEYS } from "@/api/constants";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import ProfilePicture from "@/components/default-profile-picture/default-profile-picture";
+import ProfilePicture from "@/components/profile-picture/profile-picture";
 import useDefaultImage from "@/utils/defaultImage";
 import useUser from "@/utils/useUser";
 import { redirect } from "next/navigation";

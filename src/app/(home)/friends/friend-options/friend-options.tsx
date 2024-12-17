@@ -6,7 +6,7 @@ import { FaCircleUser, FaEllipsis, FaUserSlash } from "react-icons/fa6";
 import { Friend } from "../page";
 import { deleteFriendAction } from "@/actions/friends";
 
-export default function FriendOptions({friend}: {friend: Friend}) {
+export default function FriendOptions({ friend }: { friend: Friend }) {
   return (
     <>
       {/* OPTIONS BUTTON */}

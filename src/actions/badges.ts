@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export async function getBadgesAction() {
   const { authUserID, token } = getAuthCookies();
   
-  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.GET_BADGES(authUserID)}`)
+  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.BADGES(authUserID)}`)
   const res = await fetch(url, {
     method: "GET",
     headers: {
@@ -32,7 +32,7 @@ export async function getBadgesAction() {
 export async function completeBadgeAction(badgeID: number) {
   const { authUserID, token } = getAuthCookies();
   
-  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.GET_BADGES(authUserID)}`)
+  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.BADGES(authUserID)}`)
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -57,7 +57,7 @@ export async function completeBadgeAction(badgeID: number) {
 export async function unmarkBadgeAction(badgeID: number) {
   const { authUserID, token } = getAuthCookies();
   
-  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.GET_BADGES(authUserID)}`)
+  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.BADGES(authUserID)}`)
   const res = await fetch(url, {
     method: "DELETE",
     headers: {

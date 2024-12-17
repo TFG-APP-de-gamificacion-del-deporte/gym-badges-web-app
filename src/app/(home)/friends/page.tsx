@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./friends.module.scss"
 import Script from "next/script"
 import Link from "next/link"
@@ -6,7 +8,11 @@ import FriendOptions from "./friend-options/friend-options"
 import { getFriendsAction } from "@/actions/friends"
 import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 import { BadgeInfo } from "@/api/models"
-import ProfilePicture from "@/components/default-profile-picture/default-profile-picture"
+import ProfilePicture from "@/components/profile-picture/profile-picture"
+import { useState } from "react";
+import useSWR, { mutate } from "swr";
+import { redirect } from "next/navigation";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 export interface Friend {
   image: string,
@@ -19,8 +25,19 @@ export interface Friend {
   top_feats: BadgeInfo[]
 }
 
-export default async function Page() {
-  const friends = await getFriendsAction();
+export default function Page() {
+  const [page, setPage] = useState(1);
+
+  const { data: friends, error, isLoading } = useSWR(["getFriends", page], ([_, p]) => getFriendsAction(undefined, p), { refreshInterval: 5000 });
+  
+  if (error) {
+    redirect("/internal-error");
+  }
+
+  function changePage(n: number) {
+    setPage(Math.max(1, page + n));
+    mutate(["getFriends", page]);
+  }
 
   return (
     <>
@@ -34,13 +51,13 @@ export default async function Page() {
           {/* TITLE */}
           <div className={styles.title}>
             <h2>Friends</h2>
-            <small>({friends.length})</small>
+            { friends && <small>({friends.length})</small> }
           </div>
           <AddFriendMenu/>
         </header>
 
         <div className={styles.friends_list}>
-          {friends.map(friend => 
+          {friends && friends.map(friend => 
             <div className={styles.friend_container} key={friend.user}>
               <div className={styles.friend} >
 
@@ -50,7 +67,7 @@ export default async function Page() {
                     <ProfilePicture image_b64={friend.image}/>
                   </div>
                   <Link href={`user/${friend.user}`} className={styles.username}>
-                    {friend.name}<br/><small>@{friend.user}</small>
+                    {friend.name}<br/><small>{friend.user}</small>
                   </Link>
                   <FriendOptions friend={friend}/>
                 </div>
@@ -97,6 +114,11 @@ export default async function Page() {
               <hr className={styles.divider}/>
             </div>
           )}
+        </div>
+        <div className={styles.paginate}>
+          <button className={styles.page_button} onClick={() => changePage(-1)}><FaChevronLeft/></button>
+          <span>Page {page}</span>
+          <button className={styles.page_button} onClick={() => changePage(+1)}><FaChevronRight/></button>
         </div>
       </div>
     </>

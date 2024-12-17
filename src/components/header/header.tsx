@@ -4,9 +4,7 @@ import styles from "./header.module.scss";
 import LevelBar from "./level-bar/level-bar";
 import Nav from "../nav/nav";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { AUTH_KEYS } from "@/api/constants";
-import ProfilePicture from "../default-profile-picture/default-profile-picture";
+import ProfilePicture from "../profile-picture/profile-picture";
 import { getUserAction } from "@/actions/user";
 
 export default async function Header() {

@@ -8,7 +8,7 @@ import getAuthCookies from "@/utils/getAuthCookies"
 import { getFriendsAction } from "@/actions/friends"
 import { PREFERENCES } from "@/api/constants"
 import { FaEyeSlash } from "react-icons/fa6"
-import ProfilePicture from "@/components/default-profile-picture/default-profile-picture"
+import ProfilePicture from "@/components/profile-picture/profile-picture"
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
           }
           <div className={styles.name}>
             <span>{user.name}</span>  
-            <p>@{user.user_id}</p>
+            <p>{user.user_id}</p>
           </div>
           { (isOwnProfile || !hideStats) &&
             <div>

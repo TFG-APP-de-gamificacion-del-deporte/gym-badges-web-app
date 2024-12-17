@@ -9,7 +9,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
 import { USER_KEYS } from "@/api/constants";
 import useDefaultImage from "@/utils/defaultImage";
-import ProfilePicture from "@/components/default-profile-picture/default-profile-picture";
+import ProfilePicture from "@/components/profile-picture/profile-picture";
 
 const MAX_IMAGE_SIZE = 2.5;
 
