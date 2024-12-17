@@ -6,10 +6,11 @@ import clsx from "clsx";
 import { redirect } from "next/navigation";
 import ProfilePicture from "@/components/profile-picture/profile-picture";
 import { useState } from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { getFriendsRankingAction, getGlobalRankingAction } from "@/actions/rankings";
 import { Ranking, RankedUser } from "@/api/models";
 import useUser from "@/utils/useUser";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 
 function RankingUser({ user, selfUserID }: { user: RankedUser, selfUserID: string }) {
@@ -61,12 +62,22 @@ export default function Page() {
   const [globalPage, setGlobalPage] = useState(1);
   const [friendsPage, setFriendsPage] = useState(1);
   
-  const { data: globalRanking, error: globalError, isLoading: globalLoading } = useSWR("getGlobalRanking", getGlobalRankingAction.bind(null, globalPage));
-  const { data: friendsRanking, error: friendsRrror, isLoading: friendsLoading } = useSWR("getFriendsRanking", getFriendsRankingAction.bind(null, friendsPage));
+  const { data: friendsRanking, error: friendsRrror, isLoading: friendsLoading } = useSWR(["getFriendsRanking", friendsPage], ([_, page]) => getFriendsRankingAction(page));
+  const { data: globalRanking, error: globalError, isLoading: globalLoading } = useSWR(["getGlobalRanking", globalPage], ([_, page]) => getGlobalRankingAction(page));
   const { user, error: userError, isLoading: userLoading } = useUser();
   
   if (globalError || friendsRrror || userError) {
     redirect("/internal-error");
+  }
+
+  function changeFriendsPage(n: number) {
+    setFriendsPage(Math.max(1, friendsPage + n));
+    mutate("getFriendsRanking");
+  }
+  
+  function changeGlobalPage(n: number) {
+    setGlobalPage(Math.max(1, globalPage + n));
+    mutate("getGlobalRanking");
   }
   
   return (
@@ -75,11 +86,21 @@ export default function Page() {
       <section className={styles.ranking}>
         <h2>Friends Ranking</h2>
         { friendsRanking && user && <RankingList ranking={friendsRanking} selfUserID={user.user_id}/> }
+        <div className={styles.paginate}>
+          <button className={styles.page_button} onClick={() => changeFriendsPage(-1)}><FaChevronLeft/></button>
+          <span>Page {friendsPage}</span>
+          <button className={styles.page_button} onClick={() => changeFriendsPage(+1)}><FaChevronRight/></button>
+        </div>
       </section>
       {/* GLOBAL RANKING */}
       <section className={styles.ranking}>
         <h2>Global Ranking</h2>
         { globalRanking && user && <RankingList ranking={globalRanking} selfUserID={user.user_id}/> }
+        <div className={styles.paginate}>
+          <button className={styles.page_button} onClick={() => changeGlobalPage(-1)}><FaChevronLeft/></button>
+          <span>Page {globalPage}</span>
+          <button className={styles.page_button} onClick={() => changeGlobalPage(+1)}><FaChevronRight/></button>
+        </div>
       </section>
     </div>
   )

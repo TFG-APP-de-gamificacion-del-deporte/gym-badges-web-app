@@ -13,11 +13,14 @@ $box-padding: 5px;
   gap: 40px;
   height: 100%;
   @include GV.scrollable;
-  padding-bottom: 50px !important;
+  @include mq.mobile-screen {
+    padding-bottom: 50px !important;
+  }
 }
 
 .ranking {
   flex-grow: 1;
+  flex-basis: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -146,6 +149,23 @@ $box-padding: 5px;
   .streak_title {
     @include mq.mobile-screen {
       display: none;
+    }
+  }
+}
+
+.paginate {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  .page_button {
+    @include GV.card;
+    display: flex;
+    justify-content: center;
+    &:hover:not([disabled]) {
+      background-color: rgba(white, 0.1);
     }
   }
 }
