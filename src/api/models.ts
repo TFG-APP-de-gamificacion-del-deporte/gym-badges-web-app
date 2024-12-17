@@ -14,21 +14,17 @@ export interface BadgeInfo {
   description: string,
   exp?: number,
   achieved?: boolean,
+  parentAchieved?: boolean,
+  childAchieved?: boolean,
 }
 
-export type BadgeTree = {
-  id: number,
-  name: string,
-  image: string,
-  description: string,
-  achieved: boolean,
-  exp: number,
+export interface BadgeTree extends BadgeInfo {
   children: BadgeTree[],
 }
 
 export type Preference = {
   on: boolean, 
-  preference_id: number 
+  preference_id: number,
 }
 
 export type User = {

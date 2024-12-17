@@ -4,13 +4,13 @@ import styles from "./badge-viewer.module.scss";
 import { useRef, useState, MouseEvent } from "react";
 import BadgeTree from "@/components/badge-viewer/badge-tree/badge-tree";
 import useSWR from "swr";
-import { getBadges } from "@/actions/badges";
+import { getBadgesAction } from "@/actions/badges";
 import { redirect } from "next/navigation";
 
 
 export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode?: boolean }) {
 
-  const { data, error, isLoading } = useSWR("getBadges", getBadges);
+  const { data, error, isLoading } = useSWR("getBadges", getBadgesAction, {refreshInterval: 5000});
 
   // Hooks to handle scroll on drag
   const divRef = useRef<HTMLDivElement>(null);

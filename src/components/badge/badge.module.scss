@@ -140,22 +140,29 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 15px;
 
   button {
     @include GV.card;
     display: flex;
     justify-content: center;
     gap: 5px;
-    &:hover {
+    &:hover:not([disabled]) {
       background-color: rgba(white, 0.1);
     }
   }
   
   .button_unmark {
-    &:hover {
-      background-color: rgba(red, 0.25);
+    &:hover:not([disabled]) {
+      background-color: rgba(red, 0.25) !important;
     }
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }
