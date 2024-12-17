@@ -1,0 +1,15 @@
+@use "@/styles/colors.module.scss" as colors;
+
+.image {
+  border-radius: 100%;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.no_image {
+  border-radius: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(colors.$badge-bg-color, 0.75);
+  border: 1px solid rgba(white, 0.1);
+}

@@ -6,7 +6,7 @@ import FriendOptions from "./friend-options/friend-options"
 import { getFriendsAction } from "@/actions/friends"
 import AddFriendMenu from "./add-friend-menu/add-friend-menu"
 import { BadgeInfo } from "@/api/models"
-import ProfilePicture from "@/components/default-profile-picture/default-profile-picture"
+import ProfilePicture from "@/components/profile-picture/profile-picture"
 
 export interface Friend {
   image: string,
