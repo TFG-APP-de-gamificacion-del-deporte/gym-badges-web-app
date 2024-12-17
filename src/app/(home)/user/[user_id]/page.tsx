@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
           }
           <div className={styles.name}>
             <span>{user.name}</span>  
-            <p>@{user.user_id}</p>
+            <p>{user.user_id}</p>
           </div>
           { (isOwnProfile || !hideStats) &&
             <div>

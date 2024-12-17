@@ -11,7 +11,7 @@ export const USER_ENDPOINTS = {
 } as const;
 
 export const BADGES_ENDPOINTS = {
-  GET_BADGES: (userID: string) => `/badges/${userID}` as const,
+  BADGES: (userID: string) => `/badges/${userID}` as const,
 } as const;
 
 export const FRIENDS_ENDPOINTS = {
@@ -22,4 +22,9 @@ export const STATS_ENDPOINTS = {
   [USER_KEYS.WEIGHT]:   (userID: string) => `/stats/weight/${userID}` as const,
   [USER_KEYS.BODY_FAT]: (userID: string) => `/stats/fat/${userID}` as const,
   [USER_KEYS.STREAK]:   (userID: string) => `/stats/streak/${userID}` as const,
+} as const;
+
+export const RANKINGS_ENDPOINTS = {
+  GLOBAL: (userID: string) => `/rankings/global/${userID}` as const,
+  FRIENDS: (userID: string) => `/rankings/friends/${userID}` as const,
 } as const;
