@@ -14,6 +14,7 @@ export interface BadgeInfo {
   description: string,
   exp?: number,
   achieved?: boolean,
+  parentAchieved?: boolean,
 }
 
 export type BadgeTree = {
@@ -28,7 +29,7 @@ export type BadgeTree = {
 
 export type Preference = {
   on: boolean, 
-  preference_id: number 
+  preference_id: number,
 }
 
 export type User = {

@@ -51,4 +51,8 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
 }
