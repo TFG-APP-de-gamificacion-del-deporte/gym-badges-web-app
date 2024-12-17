@@ -6,10 +6,17 @@ import clsx from "clsx";
 import { BadgeInfo } from "@/api/models";
 import { addTopFeatActrion } from "@/actions/user";
 import { FaInfoCircle } from "react-icons/fa";
+import { completeBadgeAction } from "@/actions/badges";
 
 type BadgeProps = { badgeInfo: BadgeInfo, tooltip?: boolean, noButtons?: boolean, addTopFeatsMode?: boolean }
 
 export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTopFeatsMode=false }: BadgeProps) {
+
+  function handleComplete() {
+    badgeInfo.achieved = true;
+    completeBadgeAction(badgeInfo.id)
+  }
+
   const popoverId = `badge_menu_${badgeInfo.id}_${crypto.randomUUID()}`
 
   let buttons: JSX.Element;
@@ -35,7 +42,7 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
       )
     else
       buttons = <>
-        <button disabled={!badgeInfo.parentAchieved}>
+        <button disabled={!badgeInfo.parentAchieved} onClick={handleComplete}>
           <><FaCheck/>Complete Badge!</>     
         </button>
         { !badgeInfo.parentAchieved && <small className={styles.info}><FaInfoCircle/>This badge requires its preceding badge to be completed first.</small> }

@@ -25,6 +25,10 @@ export const AUTH_KEYS = {
 
 export type AuthKey = typeof AUTH_KEYS[keyof typeof AUTH_KEYS]
 
+export const BADGE_KEYS = {
+  BADGE_ID: "badge_id",
+} as const;
+
 
 export const PREFERENCES = {
   PRIVATE_ACCOUNT: {
