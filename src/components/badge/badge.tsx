@@ -6,7 +6,7 @@ import clsx from "clsx";
 import { BadgeInfo } from "@/api/models";
 import { addTopFeatActrion } from "@/actions/user";
 import { FaInfoCircle } from "react-icons/fa";
-import { completeBadgeAction } from "@/actions/badges";
+import { completeBadgeAction, unmarkBadgeAction } from "@/actions/badges";
 
 type BadgeProps = { badgeInfo: BadgeInfo, tooltip?: boolean, noButtons?: boolean, addTopFeatsMode?: boolean }
 
@@ -15,6 +15,11 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
   function handleComplete() {
     badgeInfo.achieved = true;
     completeBadgeAction(badgeInfo.id)
+  }
+
+  function handleUnmark() {
+    badgeInfo.achieved = false;
+    unmarkBadgeAction(badgeInfo.id)
   }
 
   const popoverId = `badge_menu_${badgeInfo.id}_${crypto.randomUUID()}`
@@ -36,7 +41,7 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
   else {
     if (badgeInfo.achieved)
       buttons = <>
-        <button className={styles.button_unmark} disabled={badgeInfo.childAchieved}>
+        <button className={styles.button_unmark} disabled={badgeInfo.childAchieved} onClick={handleUnmark}>
           <><FaX/>Unmark as completed</>
         </button>
         { badgeInfo.childAchieved && <small className={styles.info}><FaInfoCircle/>Unmarking this badge requires unmarking all sub-badges first.</small> }

@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 
 export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode?: boolean }) {
 
-  const { data, error, isLoading } = useSWR("getBadges", getBadgesAction, {refreshInterval: 60 * 1000});
+  const { data, error, isLoading } = useSWR("getBadges", getBadgesAction, {refreshInterval: 5000});
 
   // Hooks to handle scroll on drag
   const divRef = useRef<HTMLDivElement>(null);

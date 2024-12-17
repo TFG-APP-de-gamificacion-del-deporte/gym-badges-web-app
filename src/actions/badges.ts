@@ -53,3 +53,28 @@ export async function completeBadgeAction(badgeID: number) {
     redirect("/internal-error");
   }
 }
+
+export async function unmarkBadgeAction(badgeID: number) {
+  const { authUserID, token } = getAuthCookies();
+  
+  const url = new URL(`${process.env.API_URL}${BADGES_ENDPOINTS.GET_BADGES(authUserID)}`)
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      [BADGE_KEYS.BADGE_ID]: badgeID,
+    }),
+  })
+
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
+}
