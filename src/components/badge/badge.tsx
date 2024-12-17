@@ -38,7 +38,7 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
         <button disabled={!badgeInfo.parentAchieved}>
           <><FaCheck/>Complete Badge!</>     
         </button>
-        { !badgeInfo.parentAchieved && <p className={styles.info}><FaInfoCircle/>This badge requires its preceding badge to be completed first.</p> }
+        { !badgeInfo.parentAchieved && <small className={styles.info}><FaInfoCircle/>This badge requires its preceding badge to be completed first.</small> }
       </>
   }
 

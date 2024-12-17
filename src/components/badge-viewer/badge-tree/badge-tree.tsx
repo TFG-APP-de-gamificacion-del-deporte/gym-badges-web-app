@@ -5,16 +5,10 @@ import styles from "./badge-tree.module.scss"
 import { GiAbdominalArmor, GiAngelWings, GiBiceps, GiLegArmor, GiShoulderArmor, GiTimeTrap, GiTwoShadows } from "react-icons/gi";
 import Badge from "@/components/badge/badge";
 import useMobileScreen from "@/utils/useMobileScreen";
+import { BadgeInfo } from "@/api/models";
 
-interface Node {
-  id: number,  // If id is negative, it's a root node (name: chest, arms, core...)
-  name: string,
-  achieved: boolean,
-  image: string,
-  description: string,
-  exp: number,
+interface Node extends BadgeInfo {
   children: Node[],
-
   width?: number,
   ref?: RefObject<HTMLDivElement>,
 }
@@ -102,6 +96,7 @@ export default function BadgeTree({ tree, addTopFeatsMode=false }: { tree: Node,
     
     for (const child of node.children) {
       childCol += child.width as number;  // Make room on the left
+      child.parentAchieved = node.achieved
       nodes.push(...createNodes(child, childCol, row + 1));
       childCol += child.width as number;  // Make room on the right
     }

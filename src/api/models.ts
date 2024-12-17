@@ -17,13 +17,7 @@ export interface BadgeInfo {
   parentAchieved?: boolean,
 }
 
-export type BadgeTree = {
-  id: number,
-  name: string,
-  image: string,
-  description: string,
-  achieved: boolean,
-  exp: number,
+export interface BadgeTree extends BadgeInfo {
   children: BadgeTree[],
 }
 

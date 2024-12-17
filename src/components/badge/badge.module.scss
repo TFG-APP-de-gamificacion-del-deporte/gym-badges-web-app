@@ -142,14 +142,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 15px;
 
   button {
     @include GV.card;
     display: flex;
     justify-content: center;
     gap: 5px;
-    &:hover &:not([disabled]) {
+    &:hover:not([disabled]) {
       background-color: rgba(white, 0.1);
     }
   }
