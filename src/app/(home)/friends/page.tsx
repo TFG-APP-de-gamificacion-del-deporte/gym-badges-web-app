@@ -50,7 +50,7 @@ export default async function Page() {
                     <ProfilePicture image_b64={friend.image}/>
                   </div>
                   <Link href={`user/${friend.user}`} className={styles.username}>
-                    {friend.name}<br/><small>@{friend.user}</small>
+                    {friend.name}<br/><small>{friend.user}</small>
                   </Link>
                   <FriendOptions friend={friend}/>
                 </div>
