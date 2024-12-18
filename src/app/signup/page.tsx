@@ -67,7 +67,6 @@ export default function Signup() {
       <Logo/>
       <form action={formAction} className={styles.form}>
         <div className={styles.image_container}>
-          {/* TODO limitar imagenes a 2mb (probar el tamaño) */}
           { image_b64 && <ProfilePicture image_b64={image_b64}/> }
         </div>
         {/* UPLOAD OR DELETE BUTTON */}

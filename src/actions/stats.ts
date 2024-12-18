@@ -6,27 +6,6 @@ import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
 import { dataHistory } from "@/api/models";
 
-// ===== Mocked Database =====
-let weight = 86;
-let fat = 18;
-
-let level = 11
-let exp = 230
-
-
-// TODO Make fetching data non server functions (Not sure anymore)
-export async function getStats() {
-  return { weight, fat }
-}
-
-export async function getLevel() {
-  return level;
-}
-
-export async function getExp() {
-  return exp;
-}
-
 
 // ************************************************************
 // WEIGHT AND FAT
