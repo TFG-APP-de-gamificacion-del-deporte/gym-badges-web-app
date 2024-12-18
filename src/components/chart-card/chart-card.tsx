@@ -58,7 +58,7 @@ export default function ChartCard({
   const lastValue = data?.length ? data[data.length - 1].value : "--";
   let variation = data?.length ? data[data.length - 1].value - data[0].value : "--";
   if (typeof variation === "number") {
-    variation = variation >= 0 ? "+" + variation : variation;
+    variation = variation >= 0 ? "+" + variation.toFixed(2) : variation.toFixed(2);
   }
   
   return (

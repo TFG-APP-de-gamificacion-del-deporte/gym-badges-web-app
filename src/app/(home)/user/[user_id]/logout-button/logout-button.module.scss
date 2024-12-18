@@ -1,0 +1,14 @@
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/global_vars.module.scss" as GV;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: lighten(colors.$red, 5%);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

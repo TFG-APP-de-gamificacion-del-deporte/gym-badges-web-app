@@ -62,3 +62,9 @@ export default async function loginAction(prevState: any, formData: FormData): P
 
   redirect("/");
 }
+
+export async function logoutAction() {
+  cookies().delete(AUTH_KEYS.AUTH_USER_ID);
+  cookies().delete(AUTH_KEYS.TOKEN);
+  redirect("/login")
+}

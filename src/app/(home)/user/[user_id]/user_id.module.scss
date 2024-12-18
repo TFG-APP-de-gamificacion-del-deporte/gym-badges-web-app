@@ -87,6 +87,12 @@ $image-size: 128px;
   }
 }
 
+.profile_buttons {
+  align-self: flex-end;
+  display: flex;
+  gap: 25px
+}
+
 .top_feats_card {
   @include card;
 

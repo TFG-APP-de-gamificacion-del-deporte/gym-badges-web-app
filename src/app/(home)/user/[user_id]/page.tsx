@@ -9,6 +9,7 @@ import { getFriendsAction } from "@/actions/friends"
 import { PREFERENCES } from "@/api/constants"
 import { FaEyeSlash } from "react-icons/fa6"
 import ProfilePicture from "@/components/profile-picture/profile-picture"
+import LogoutButton from "./logout-button/logout-button"
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
@@ -77,7 +78,12 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <p>Friend{friends.length !== 1 && "s"}</p>
           </div>
         </div>
-        { isOwnProfile && <EditProfileMenu/> }
+        { isOwnProfile &&
+          <div className={styles.profile_buttons}>
+            <EditProfileMenu/>
+            <LogoutButton/>
+          </div>
+        }
       </section>
 
       {/* TOP FEATS */}
