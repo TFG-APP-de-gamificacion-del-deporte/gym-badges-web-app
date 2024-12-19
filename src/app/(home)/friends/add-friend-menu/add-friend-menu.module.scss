@@ -8,11 +8,6 @@
   justify-content: center;
   gap: 5px;
   @include GV.card;
-
-  & > span {
-    margin-top: 2px;
-    margin-right: 0.3rem;
-  }
   
   &:hover {
     background-color: rgba(white, 0.1);

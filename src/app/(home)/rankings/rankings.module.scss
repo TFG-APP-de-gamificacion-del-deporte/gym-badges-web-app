@@ -41,6 +41,8 @@ $box-padding: 5px;
   @include GV.scrollable;
   padding-right: 0;
 
+  // TODO Poner los colores oro plata y bronce leyendo el rank y no con nth child
+  // Creando 3 clases de css
   .user {
     &:nth-child(1) .rank {
       @include GV.skewed-container($border: $gold);

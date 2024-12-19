@@ -23,7 +23,7 @@ export async function getUserAction(userID?: string) {
     redirect("/login") // TODO Fix redirect
   }
   if (res.status === 404) {
-    redirect("/not-found-error", )
+    redirect("/not-found-error")
   }
   if (!res.ok) {
     console.debug(await res.json());

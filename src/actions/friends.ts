@@ -1,11 +1,13 @@
 "use server";
 
-import { FRIENDS_ENDPOINTS } from "@/api/endpoints";
+import { FRIENDS_ENDPOINTS, USER_ENDPOINTS } from "@/api/endpoints";
 import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import { Friend } from "@/app/(home)/friends/page";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getUserAction } from "./user";
+import { User } from "@/api/models";
 
 export async function getFriendsAction(userID?: string, page: number = 1) {
   const { authUserID, token } = getAuthCookies();
@@ -35,15 +37,43 @@ export async function getFriendsAction(userID?: string, page: number = 1) {
 
 type FormResponse = { message: string } | null
 
-export async function addFriendAction(prevState: any, formData: FormData): Promise<FormResponse> {
-  // Get own user id
+export async function searchFriendAction(prevState: any, formData: FormData): Promise<FormResponse> {
   const { authUserID, token } = getAuthCookies();
   
   // Get friend id
   const friendID = formData.get(USER_KEYS.USER_ID);
   if (!friendID) {
-    return { message: "Invalid email or password." };
+    return { message: "Invalid username." };
   }
+
+  const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(friendID.toString())}`)
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      [AUTH_KEYS.AUTH_USER_ID]: authUserID,
+      [AUTH_KEYS.TOKEN]: token,
+    },
+  })
+
+  if (res.status === 401) {
+    redirect("/login")
+  }
+  if (res.status === 404) {
+    return { message: "User not found." };
+  }
+  if (!res.ok) {
+    console.debug(await res.json());
+    redirect("/internal-error");
+  }
+
+  const friend = (await res.json()) as User;
+
+  redirect(`/user/${friend.user_id}`);
+}
+
+export async function addFriendAction(friendID: string) {
+  // Get own user id
+  const { authUserID, token } = getAuthCookies();
   
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)
   const res = await fetch(url, {
@@ -58,9 +88,6 @@ export async function addFriendAction(prevState: any, formData: FormData): Promi
     }),
   })
 
-  if (res.status === 404) {
-    return {message: "User not found."} 
-  }
   if (res.status === 401) {
     redirect("/login")
   }
@@ -68,8 +95,6 @@ export async function addFriendAction(prevState: any, formData: FormData): Promi
     console.debug(await res.json());
     redirect("/internal-error");
   }
-
-  return { message: `Added ${friendID.toString()} as a friend!` }
 }
 
 

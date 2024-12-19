@@ -5,11 +5,12 @@ import { getUserAction } from "@/actions/user"
 import EditProfileMenu from "./edit-profile-menu/edit-profile-menu"
 import ChangeTopFeatsMenu from "./change-top-feats-menu/change-top-feats-menu"
 import getAuthCookies from "@/utils/getAuthCookies"
-import { getFriendsAction } from "@/actions/friends"
+import { addFriendAction, getFriendsAction } from "@/actions/friends"
 import { PREFERENCES } from "@/api/constants"
-import { FaEyeSlash } from "react-icons/fa6"
+import { FaEyeSlash, FaPlus } from "react-icons/fa6"
 import ProfilePicture from "@/components/profile-picture/profile-picture"
 import LogoutButton from "./logout-button/logout-button"
+import AddFriendButton from "./add-friend-button/add-friend-button"
 
 
 export default async function Page({ params }: { params: { user_id: string } }) {
@@ -84,6 +85,7 @@ export default async function Page({ params }: { params: { user_id: string } }) 
             <LogoutButton/>
           </div>
         }
+        { !isOwnProfile && <AddFriendButton user={user} isFriend={isFriend}/> }
       </section>
 
       {/* TOP FEATS */}

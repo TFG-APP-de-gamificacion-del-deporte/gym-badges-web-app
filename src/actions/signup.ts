@@ -47,10 +47,15 @@ export default async function signupAction(base64Image: string, prevState: any, 
       body: JSON.stringify(signUpInfo),
     })
 
-    // Invalid signup
+    // Already existing user id or email
+    if (res.status === 409) {
+      return { message: "Already existing username or email." }
+    }
+    // Unexpected error
     if (!res.ok) {
       console.debug(await res.json());
-      return { message: "Already existing username or email." }
+      redirect("/internal-error");
+      // return { message: "Already existing username or email." }
     }
 
     console.debug("User signed up");
