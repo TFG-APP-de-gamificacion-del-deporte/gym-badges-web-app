@@ -8,6 +8,8 @@ import { addTopFeatActrion } from "@/actions/user";
 import { FaInfoCircle } from "react-icons/fa";
 import { completeBadgeAction, unmarkBadgeAction } from "@/actions/badges";
 
+const AUTO_BADGES_THRESHOLD = 66;  // Badges with bigger or equal id's are auto achievable
+
 type BadgeProps = { badgeInfo: BadgeInfo, tooltip?: boolean, noButtons?: boolean, addTopFeatsMode?: boolean }
 
 export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTopFeatsMode=false }: BadgeProps) {
@@ -39,7 +41,9 @@ export default function Badge({ badgeInfo, tooltip=true, noButtons=false, addTop
   }
   // Regular mode
   else {
-    if (badgeInfo.achieved)
+    if (badgeInfo.id >= AUTO_BADGES_THRESHOLD)
+      buttons = <small className={styles.info}><FaInfoCircle/>You will automatically receive this badge when the requirements are satisfied.</small>
+    else if (badgeInfo.achieved)
       buttons = <>
         <button className={styles.button_unmark} disabled={badgeInfo.childAchieved} onClick={handleUnmark}>
           <><FaX/>Unmark as completed</>
