@@ -10,6 +10,6 @@
   border-radius: 100%;
   width: 100% !important;
   height: 100% !important;
-  background-color: rgba(colors.$badge-bg-color, 0.75);
+  background-color: colors.$badge-bg-color;
   border: 1px solid rgba(white, 0.1);
 }

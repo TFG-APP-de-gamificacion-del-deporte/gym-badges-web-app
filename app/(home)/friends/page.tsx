@@ -13,6 +13,7 @@ import { useState } from "react";
 import useSWR, { mutate } from "swr";
 import { redirect } from "next/navigation";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import FriendRequestsMenu from "./friend-requests-menu/friend-request-menu";
 
 export interface Friend {
   image: string,
@@ -29,7 +30,7 @@ export default function Page() {
   const [page, setPage] = useState(1);
 
   const { data: friends, error, isLoading } = useSWR(["getFriends", page], ([_, p]) => getFriendsAction(undefined, p), { refreshInterval: 5000 });
-  
+
   if (error) {
     redirect("/internal-error");
   }
@@ -51,25 +52,26 @@ export default function Page() {
           {/* TITLE */}
           <div className={styles.title}>
             <h2>Friends</h2>
-            { friends && <small>({friends.length})</small> }
+            {friends && <small>({friends.length})</small>}
           </div>
-          <AddFriendMenu/>
+          <FriendRequestsMenu />
+          <AddFriendMenu />
         </header>
 
         <div className={styles.friends_list}>
-          {friends && friends.map(friend => 
+          {friends && friends.map(friend =>
             <div className={styles.friend_container} key={friend.user}>
-              <div className={styles.friend} >
+              <div className={styles.friend}>
 
                 <div className={styles.avatar}>
                   {/* IMAGE, NAME AND USERNAME */}
                   <div className={styles.image_container}>
-                    <ProfilePicture image_b64={friend.image}/>
+                    <ProfilePicture image_b64={friend.image} />
                   </div>
                   <Link href={`user/${friend.user}`} className={styles.username}>
-                    {friend.name}<br/><small>{friend.user}</small>
+                    {friend.name}<br /><small>{friend.user}</small>
                   </Link>
-                  <FriendOptions friend={friend}/>
+                  <FriendOptions friend={friend} />
                 </div>
 
                 <div className={styles.stats_top_feats}>
@@ -98,27 +100,27 @@ export default function Page() {
                   </div>
 
                   {/* TOP FEATS */}
-                  { friend.top_feats.length > 0 && 
+                  {friend.top_feats.length > 0 &&
                     <div className={styles.top_feats}>
                       <small>Top Feats</small>
                       <div className={styles.badges}>
-                        { friend.top_feats[0] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false}/></div> }
-                        { friend.top_feats[1] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false}/></div> }
-                        { friend.top_feats[2] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false}/></div> }
+                        {friend.top_feats[0] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[0]} tooltip={false} /></div>}
+                        {friend.top_feats[1] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[1]} tooltip={false} /></div>}
+                        {friend.top_feats[2] && <div className={styles.badge_container}><Badge badgeInfo={friend.top_feats[2]} tooltip={false} /></div>}
                       </div>
                     </div>
                   }
                 </div>
               </div>
               {/* DIVIDER */}
-              <hr className={styles.divider}/>
+              <hr className={styles.divider} />
             </div>
           )}
         </div>
         <div className={styles.paginate}>
-          <button className={styles.page_button} onClick={() => changePage(-1)}><FaChevronLeft/></button>
+          <button className={styles.page_button} onClick={() => changePage(-1)}><FaChevronLeft /></button>
           <span>Page {page}</span>
-          <button className={styles.page_button} onClick={() => changePage(+1)}><FaChevronRight/></button>
+          <button className={styles.page_button} onClick={() => changePage(+1)}><FaChevronRight /></button>
         </div>
       </div>
     </>

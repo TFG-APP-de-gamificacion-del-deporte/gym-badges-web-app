@@ -16,12 +16,13 @@ export const BADGES_ENDPOINTS = {
 
 export const FRIENDS_ENDPOINTS = {
   FRIENDS: (userID: string) => `/friends/${userID}` as const,
+  FRIEND_REQUESTS: (userID: string) => `/friend-requests/${userID}` as const,
 } as const;
 
 export const STATS_ENDPOINTS = {
-  [USER_KEYS.WEIGHT]:   (userID: string) => `/stats/weight/${userID}` as const,
+  [USER_KEYS.WEIGHT]: (userID: string) => `/stats/weight/${userID}` as const,
   [USER_KEYS.BODY_FAT]: (userID: string) => `/stats/fat/${userID}` as const,
-  [USER_KEYS.STREAK]:   (userID: string) => `/stats/streak/${userID}` as const,
+  [USER_KEYS.STREAK]: (userID: string) => `/stats/streak/${userID}` as const,
 } as const;
 
 export const RANKINGS_ENDPOINTS = {
