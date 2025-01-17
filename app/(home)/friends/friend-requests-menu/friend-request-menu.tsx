@@ -2,14 +2,13 @@
 
 import styles from "./friend-request-menu.module.scss"
 import { FaBell, FaCheck, FaXmark } from "react-icons/fa6";
-import { getFriendsAction } from "@/actions/friends";
+import { addFriendAction, deleteFriendAction, getFriendRequestsAction } from "@/actions/friends";
 import ProfilePicture from "@/components/profile-picture/profile-picture";
 import Link from "next/link";
 import useSWR from "swr";
 
 export default function FriendRequestsMenu() {
-  // TODO Get friend requests instead of friend list
-  const { data: friends, error, isLoading } = useSWR(["getFriends", 1], ([_, p]) => getFriendsAction(undefined, p), { refreshInterval: 5000 });
+  const { data: friendRequests, error, isLoading } = useSWR("getFriendRequestsAction", getFriendRequestsAction, { refreshInterval: 5000 });
 
   return (
     <>
@@ -28,24 +27,29 @@ export default function FriendRequestsMenu() {
           </button>
         </header>
         <div className={styles.friends_list}>
-          {friends && friends.map(friend =>
-            <div className={styles.friend} key={friend.user}>
+          {friendRequests && friendRequests.map(friendReq =>
+            <div className={styles.friend} key={friendReq.user_id}>
               <div className={styles.avatar}>
                 {/* IMAGE, NAME AND USERNAME */}
                 <div className={styles.image_container}>
-                  <ProfilePicture image_b64={friend.image} />
+                  <ProfilePicture image_b64={friendReq.image} />
                 </div>
-                <Link href={`user/${friend.user}`} className={styles.username}>
-                  {friend.name}<br /><small>{friend.user}</small>
+                <Link href={`user/${friendReq.user_id}`} className={styles.username}>
+                  {friendReq.name}<br /><small>{friendReq.user_id}</small>
                 </Link>
                 <div className={styles.accept_reject_buttons}>
-                  <button className={styles.accept_button}><FaCheck size="1.3rem" /></button>
-                  <button className={styles.reject_button}><FaXmark size="1.3rem" /></button>
+                  <button className={styles.accept_button} onClick={() => addFriendAction(friendReq.user_id)}>
+                    <FaCheck size="1.3rem" />
+                  </button>
+                  <button className={styles.reject_button} onClick={() => deleteFriendAction(friendReq.user_id)}>
+                    <FaXmark size="1.3rem" />
+                  </button>
                 </div>
               </div>
             </div>
           )}
         </div>
+        {friendRequests?.length === 0 && "You have no friend requests."}
       </div>
     </>
   )

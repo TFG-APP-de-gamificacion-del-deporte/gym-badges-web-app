@@ -23,7 +23,7 @@ export interface BadgeTree extends BadgeInfo {
 }
 
 export type Preference = {
-  on: boolean, 
+  on: boolean,
   preference_id: number,
 }
 
@@ -39,6 +39,12 @@ export type User = {
   [USER_KEYS.TOP_FEATS]: TopFeat[],
   [USER_KEYS.WEEKLY_GOAL]: number,
   [USER_KEYS.WEIGHT]: number | null,
+}
+
+export type FriendRequest = {
+  [USER_KEYS.USER_ID]: string,
+  [USER_KEYS.NAME]: string,
+  [USER_KEYS.IMAGE]: string,
 }
 
 export type dataHistory = {
