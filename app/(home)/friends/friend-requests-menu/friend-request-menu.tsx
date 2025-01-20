@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./friend-request-menu.module.scss"
-import { FaBell, FaCheck, FaXmark } from "react-icons/fa6";
+import { FaBell, FaCheck, FaCircle, FaXmark } from "react-icons/fa6";
 import { addFriendAction, deleteFriendAction, getFriendRequestsAction } from "@/actions/friends";
 import ProfilePicture from "@/components/profile-picture/profile-picture";
 import Link from "next/link";
@@ -15,7 +15,8 @@ export default function FriendRequestsMenu() {
       {/* FRIEND REQUESTS BUTTON */}
       {/* @ts-ignore  */}
       <button className={styles.friend_requests_button} popovertarget="friend-requests-popover">
-        <FaBell />
+        <FaBell size="1.3rem" ></FaBell>
+        {friendRequests?.length !== undefined && friendRequests?.length > 0 && <FaCircle size="0.7rem" className={styles.red_dot} />}
       </button>
       {/* FRIEND REQUESTS POPOVER */}
       <div className={styles.friend_requests_popover} id="friend-requests-popover" popover="auto">
