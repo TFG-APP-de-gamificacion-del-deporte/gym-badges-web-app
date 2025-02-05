@@ -14,7 +14,6 @@ pipeline {
                         ls -la
                         pwd
                     '''
-
                     docker.withRegistry('https://index.docker.io/v1/', REGISTRY_CREDENTIAL) {
                         def dockerfile = 'docker/dockerfile'
                         def customImage
