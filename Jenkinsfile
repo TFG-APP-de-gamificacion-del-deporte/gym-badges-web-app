@@ -7,7 +7,7 @@ pipeline {
 
     agent any
     stages {
-        stage('Build') {
+        stage('Publish Docker Image') {
             agent any
             steps {
                 script {
@@ -19,6 +19,8 @@ pipeline {
                         def dockerfile = 'docker/dockerfile'
                         def customImage
                         def shortCommitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                        def branch = scm.branches[0].name
+                        echo branch
                         
                         if (params.BRANCH == 'main') {
                             customImage = docker.build("${IMAGE_NAME}:latest", "-f ${dockerfile} .")
@@ -37,14 +39,6 @@ pipeline {
                 cleanup {
                     cleanWs()
                 }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                echo 'Pushing Docker Image to DockerHub'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
             }
         }
     }
