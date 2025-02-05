@@ -19,13 +19,16 @@ pipeline {
                         def dockerfile = 'docker/dockerfile'
                         def customImage
                         def shortCommitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+
                         def branch = scm.branches[0].name
-                        echo branch
+                        if (branch.contains("*/")) {
+                            branch = branch.split("\\*/")[1]
+                        }
                         
-                        if (params.BRANCH == 'main') {
+                        if (branch == 'main') {
                             customImage = docker.build("${IMAGE_NAME}:latest", "-f ${dockerfile} .")
                             customImage.push("latest")
-                        } else if (params.BRANCH == 'develop') {
+                        } else if (branch == 'develop') {
                             customImage = docker.build("${IMAGE_NAME}:DEVELOP", "-f ${dockerfile} .")
                             customImage.push("DEVELOP")
                         } else {
