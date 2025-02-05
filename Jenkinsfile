@@ -23,7 +23,6 @@ pipeline {
                         if (branch.contains("*/")) {
                             branch = branch.split("\\*/")[1]
                         }
-                        echo "Branch:" branch
                         
                         if (branch == 'main') {
                             customImage = docker.build("${IMAGE_NAME}:latest", "-f ${dockerfile} .")
