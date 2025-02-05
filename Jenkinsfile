@@ -4,7 +4,6 @@ pipeline {
         REGISTRY_CREDENTIAL = 'DockerHubDiego'
         IMAGE_NAME = "diegorevenga/gym-badges-web-app"
     }
-
     agent any
     stages {
         stage('Publish Docker Image') {
@@ -15,6 +14,7 @@ pipeline {
                         ls -la
                         pwd
                     '''
+
                     docker.withRegistry('https://index.docker.io/v1/', REGISTRY_CREDENTIAL) {
                         def dockerfile = 'docker/dockerfile'
                         def customImage
@@ -24,6 +24,7 @@ pipeline {
                         if (branch.contains("*/")) {
                             branch = branch.split("\\*/")[1]
                         }
+                        echo "Branch:" branch
                         
                         if (branch == 'main') {
                             customImage = docker.build("${IMAGE_NAME}:latest", "-f ${dockerfile} .")
