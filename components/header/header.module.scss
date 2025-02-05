@@ -1,0 +1,52 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/media-queries.module.scss" as mq;
+@use "@/styles/colors.module.scss" as colors;
+
+$gap: 30px;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: $gap;
+  margin: 15px $gap;
+  justify-content: space-between;
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+
+  .title {
+    @include mq.small-screen {
+      display: none; 
+    }
+
+    @include mq.mobile-screen {
+      display: block; 
+    }
+
+    margin-left: 5px;
+
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, colors.$red 0%, colors.$purple 100%);
+  }
+}
+
+.nav_container {
+  @include mq.mobile-screen {
+    display: none;
+  }
+
+  align-content: center;
+}
+
+.account_container {
+  display: flex;
+  gap: 15px;
+}
+
+.image_container {
+  width: 48px;
+  height: 48px;
+}

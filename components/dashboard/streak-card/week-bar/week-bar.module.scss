@@ -1,0 +1,51 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+
+// Number of days in a week.
+$n_days: 7;
+:export {
+  N_DAYS: $n_days;
+}
+
+@function calcRgbaColor($index) {
+  $start: $index - 1;
+  $end: $index;
+  @return (
+    mix(colors.$red, colors.$purple, (1 - $start/$n_days) * 100), 
+    mix(colors.$red, colors.$purple, (1 - $end/$n_days) * 100)
+  );
+}
+
+.container {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  @for $i from 1 through $n_days {
+    div:nth-child(#{$i}) > .box::before {
+      background: linear-gradient(to right, calcRgbaColor($i)) border-box;
+    }
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  small {
+    text-align: center;
+    translate: -3px;
+  }
+}
+
+.box {
+  @include GV.skewed-square;
+}
+
+.filled {
+  &::before {
+    mask: linear-gradient(#fff 0 0);
+  }
+}

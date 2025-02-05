@@ -1,0 +1,54 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
+
+$transition: color 0.1s ease-out;
+
+.navbar {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  width: 100%;
+
+  @include mq.mobile-screen {
+    padding: 0 25px;
+  }
+}
+
+.link {
+  padding: 10px 12px;
+  border-radius: GV.$corner-radius-small;
+  flex-basis: 0;
+  flex-grow: 1;
+  
+  transition: $transition;
+  &:hover {
+    color: lighten(colors.$purple, 10%);
+    transition: $transition;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    @include mq.mobile-screen {
+      flex-direction: column;
+      margin-left: -5px;
+
+      h3 {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgb(220, 220, 220);
+      }
+    }
+  }
+
+}
+
+.link_active {
+  color: lighten(colors.$purple, 10%);
+  filter: drop-shadow(0 0 7px colors.$purple);
+
+  transition: $transition;
+}

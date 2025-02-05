@@ -1,0 +1,51 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
+
+// Number boxes in the exp bar.
+$n_boxes: 10;
+:export {
+  N_BOXES: $n_boxes;
+}
+
+@function calcRgbaColor($index) {
+  $start: $index - 1;
+  $end: $index;
+  @return (
+    mix(colors.$red, colors.$purple, (1 - $start/$n_boxes) * 100), 
+    mix(colors.$red, colors.$purple, (1 - $end/$n_boxes) * 100)
+  );
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.bar {
+  @include mq.medium-screen {
+    display: none; 
+  }
+  
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+
+  @for $i from 1 through $n_boxes {
+    div:nth-child(#{$i})::before {
+      background: linear-gradient(to right, calcRgbaColor($i)) border-box;
+    }
+  }
+}
+
+.box {
+  @include GV.skewed-square;
+}
+
+.filled {
+  &::before {
+    mask: linear-gradient(#fff 0 0);
+  }
+}

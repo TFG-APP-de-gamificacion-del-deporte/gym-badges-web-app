@@ -1,0 +1,50 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/media-queries.module.scss" as mq;
+
+.tree {
+  position: relative;
+  height: min-content;
+}
+
+.canvas {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column-end: span 2;  // 2 columns wide
+  min-width: 75px;
+  min-height: 75px;
+
+  @include mq.mobile-screen {
+    min-width: 50px;
+    min-height: 50px;
+  }
+}
+
+.category{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+
+  svg {
+    width: 70px;
+    height: 70px;
+    display: flex;
+  }
+
+  .chest {
+    margin-bottom: -7px;
+  }
+}

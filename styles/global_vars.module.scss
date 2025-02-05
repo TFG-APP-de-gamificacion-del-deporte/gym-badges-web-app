@@ -1,0 +1,97 @@
+@use "@/styles/media-queries.module.scss" as mq;
+
+$corner-radius-big: 10px;
+$corner-radius-small: 5px;
+
+$skew: -20deg;
+$skew-small: -15deg;
+
+
+// ===== Card component =====
+@mixin card {
+  background-color: rgba(white, 0.02);
+  -webkit-backdrop-filter: blur(45px) !important;
+  backdrop-filter: blur(45px) !important;
+  padding: 15px;
+  box-shadow: inset 0 0 0 1px rgba(white, 0.15);
+  border-radius: $corner-radius-big;
+}
+
+
+// ===== Skewed elements =====
+@mixin skewed-square {
+  width: 32px;
+  height: 28px;
+  position: relative;
+  transform: skew($skew);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $corner-radius-small; 
+    border: 3px solid transparent;
+    mask:
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+}
+
+@mixin skewed-container($border: white) {
+  padding: 8px 14px;
+  margin: 0 4px;
+  overflow: hidden;
+  position: relative;
+  border-radius: $corner-radius-big; 
+
+  // Border pseudo-element
+  &::before {
+    background: $border border-box;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: $corner-radius-big; 
+    border: 2px solid transparent;
+    mask:
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+
+  // Undo skew
+  transform: skew($skew);
+  & > * {
+    transform: skew(-$skew);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+@mixin skewed-button($border, $background, $hover-color: $background) {
+  @include skewed-container($border);
+  background: $background;
+  cursor: pointer;
+
+  &:hover {
+    background: $hover-color;
+  }
+}
+
+// ===== Scrollable div =====
+@mixin scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 20px;
+  @include mq.small-screen {
+    padding: 1px 10px;
+  }
+}

@@ -1,0 +1,22 @@
+@use "@/styles/global_vars.module.scss" as GV;
+
+.text_field {
+  @include GV.skewed-container;
+  margin: 0 4px;
+  
+  & > div {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+  }
+
+  input {
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+    
+    &:focus {
+      outline: none;
+    }
+  }
+}

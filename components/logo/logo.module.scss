@@ -1,0 +1,17 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title {
+  margin-left: 5px;
+
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, colors.$red 0%, colors.$purple 100%);
+}

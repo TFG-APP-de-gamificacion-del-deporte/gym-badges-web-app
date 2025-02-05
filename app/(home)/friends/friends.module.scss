@@ -1,0 +1,219 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
+
+// Set different anchors for each friend option-popover
+$max_friends: 10;
+:export {
+  MAX_FRIENDS: $max_friends;
+}
+
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 100%;  // Required for making .card_layout scrollable
+  padding: 30px;
+  @include mq.mobile-screen {
+    padding: 10px;
+  }
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  .title {
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    & > small {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+.friends_list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  @include GV.scrollable;
+  padding-bottom: 50px;
+
+  &:has(:popover-open) {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+  }
+}
+
+.friend_container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(white, 0.15);
+  }
+
+  &:last-child hr {
+    display: none;
+  }
+}
+
+.friend {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @include mq.mobile-screen {
+    flex-direction: column;
+    align-items: normal;
+  }
+}
+
+.avatar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-grow: 1;
+
+  .image_container {
+    width: 55px;
+    height: 55px;
+  }
+
+  .username {
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @include mq.mobile-screen {
+      flex-grow: 1;
+    }
+  }
+}
+
+@for $i from 1 through $max_friends {
+  .friend_container:nth-child(#{$i}) .avatar > button {
+    anchor-name: --more_button_#{$i};
+  }
+  .friend_container:nth-child(#{$i}) .avatar > div {
+    position-anchor: --more_button_#{$i};
+  }
+}
+
+.stats_top_feats {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  @include mq.mobile-screen {
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 4px;
+
+  // Stat div
+  & > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  
+    small {
+      color: rgba(colors.$regular-text-color, 0.6);
+    }
+    @include mq.mobile-screen {
+      flex-grow: 1;
+    }
+  }
+  
+
+  $transparency: 0.2;
+
+  .level {
+    min-width: 100%;
+    @include GV.skewed-container($border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%));
+    background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+  }
+
+  .streak {
+    min-width: 100%;
+    @include GV.skewed-container($border: colors.$orange);
+    background-color: rgba(colors.$orange, $transparency);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+  }
+
+  .weight {
+    min-width: 100%;
+    @include GV.skewed-container($border: colors.$green);
+    background-color: rgba(colors.$green, $transparency);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+  }
+
+  .fat {
+    min-width: 100%;
+    @include GV.skewed-container($border: colors.$yellow);
+    background-color: rgba(colors.$yellow, $transparency);
+    color: white;
+    p {
+      margin-left: -2px;
+    }
+  }
+}
+
+.top_feats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  .badges {
+    display: flex;
+    gap: 10px;
+  }
+
+  .badge_container {
+    aspect-ratio: 1;
+  }
+}
+
+.paginate {
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+
+  .page_button {
+    @include GV.card;
+    display: flex;
+    justify-content: center;
+    &:hover:not([disabled]) {
+      background-color: rgba(white, 0.1);
+    }
+  }
+}

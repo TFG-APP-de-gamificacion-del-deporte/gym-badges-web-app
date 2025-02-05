@@ -1,0 +1,147 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+@use "@/styles/media-queries.module.scss" as mq;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  max-height: 100%;  // Required for making this scrollable
+  @include GV.scrollable;
+  padding-bottom: 50px;
+  @include mq.mobile-screen {
+    padding: 10px;
+    padding-bottom: 50px;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    & > h2, & > p {
+      align-self: flex-start;
+    }
+  }
+}
+
+$image-size: 128px;
+.image_container {
+  width: 128px;
+  height: 128px;
+
+  z-index: 1;
+}
+
+@mixin card {
+  @include GV.card;
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  width: 100%;
+}
+
+.info_card {
+  @include card;
+  padding: 40px 15px;
+  margin-top: -($image-size * 1/5);
+  flex-wrap: wrap;
+
+  @include mq.mobile-screen {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+  }
+
+  // Info div
+  & > div {
+    text-align: center;
+    flex-basis: 0;
+    flex-grow: 1;
+
+    span {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+  }
+
+  .name {
+    @include mq.mobile-screen {
+      order: -1;
+      grid-column: 1 / -1;
+    }
+  }
+
+  .streak {
+    color: colors.$orange;
+  }
+
+  .fat {
+    color: colors.$yellow;
+  }
+
+  .weight {
+    color: colors.$green;
+  }
+}
+
+.profile_buttons {
+  align-self: flex-end;
+  display: flex;
+  gap: 25px
+}
+
+.top_feats_card {
+  @include card;
+
+  // Badge div
+  & > div {
+    display: flex;
+    align-items: center;
+    flex-basis: 0;
+    flex-grow: 1;
+    gap: 10px;
+    
+    p {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+    }
+  }
+
+  @include mq.medium-screen {
+    flex-direction: column;
+  }
+}
+
+.badge_container {
+  min-width: min(25%, 75px);
+  aspect-ratio: 1;
+}
+
+.no_badge {
+  min-width: min(25%, 75px);
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background-color: rgba(colors.$badge-bg-color, 0.5);
+  border: 2px solid #303030;
+}
+
+.user_not_found {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.private_msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}

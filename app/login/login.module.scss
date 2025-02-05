@@ -1,0 +1,85 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+
+.login_layout {
+  display: flex;
+  flex-direction: column;
+
+  padding: 30px 5%;
+}
+
+.slogan {
+  text-align: center;
+  margin: 4rem 1rem;
+  font-size: clamp(1.75rem, 5vw, 4rem);
+  font-weight: 700;
+
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, colors.$red 0%, colors.$purple 100%);
+  filter: drop-shadow(0 0 10px rgba(black, 0.5));
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+
+  & > * {
+    width: min(80vw, 25rem);
+  }
+}
+
+.error {
+  color: lighten(colors.$red, 10%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.login {
+  $transparency: 0.1;
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
+  );
+
+  margin: 15px 0 30px 0;
+}
+
+.separator {
+  width: min(90vw, 40rem);
+  position: relative;
+  top: -25px;
+  z-index: -1;
+  
+  $cut-left: calc(50% - 5rem);
+  $cut-right: calc(50% + 5rem);
+  clip-path: polygon(0% 0%, 0% 100%, $cut-left 100%, $cut-left 0, $cut-right 0, $cut-right 100%, 100% 100%, 100% 0%);
+}
+
+.google {
+  @include GV.skewed-button($border: white, $background: white);
+
+  width: min-content;
+  margin-top: -2px;
+  margin-bottom: 40px;
+
+  h3 {
+    color: black;
+  }
+}
+
+.signup {
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
+  );
+}

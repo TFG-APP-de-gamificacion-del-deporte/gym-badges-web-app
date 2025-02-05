@@ -1,0 +1,9 @@
+.viewer {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  gap: 60px;
+  scrollbar-width: none;
+  padding-left: 63px;
+}

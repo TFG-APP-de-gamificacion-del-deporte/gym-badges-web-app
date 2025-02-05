@@ -1,0 +1,8 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "quotes": ["warn", "double"],
+    "eqeqeq": "warn",
+    "comma-dangle": ["warn", "always-multiline"]
+  }
+}

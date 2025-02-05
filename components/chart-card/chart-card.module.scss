@@ -1,0 +1,50 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+
+.card {
+  @include GV.card;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chart_header {
+  display: flex;
+  justify-content: space-between;
+
+  .data { 
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      display: flex;
+      gap: 5px;
+      align-items: flex-end;
+
+      & > small {
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+}
+
+.chart {
+  @include GV.card;
+  flex-grow: 1;
+}
+
+.tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: colors.$regular-text-color;
+  padding: 3px 8px;
+  border-radius: GV.$corner-radius-small;
+  transform: translate(-50%, calc(-50% - 1.3rem));
+
+  small {
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,95 @@
+@use "@/styles/global_vars.module.scss" as GV;
+@use "@/styles/colors.module.scss" as colors;
+
+.signup_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 30px 5%;
+}
+
+.image_container {
+  width: 128px !important;
+  height: 128px !important;
+  border-radius: 100%;
+  background-color: rgba(colors.$badge-bg-color, 0.75);
+}
+
+.remove_image_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: colors.$regular-text-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.upload_picture_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -3px;
+  gap: 5px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  line-height: 0px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  }  
+}
+
+.signup {
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
+  );
+}
+
+.error {
+  color: lighten(colors.$red, 10%) ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.login_form {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 15px;
+
+  & > * {
+    width: min(80vw, 25rem);
+  } 
+}
+
+.login {
+  $transparency: 0.1;
+  $hover-transparency: 0.5;
+  @include GV.skewed-button(
+    $border: linear-gradient(to right, colors.$red 0%, colors.$purple 100%),
+    $background: linear-gradient(to right, rgba(colors.$red, $transparency) 0%, rgba(colors.$purple, $transparency) 100%),
+    $hover-color: linear-gradient(to right, rgba(colors.$red, $hover-transparency) 0%, rgba(colors.$purple, $hover-transparency) 100%),
+  );
+}
