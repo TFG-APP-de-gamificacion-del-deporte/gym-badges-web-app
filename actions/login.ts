@@ -35,7 +35,7 @@ export default async function loginAction(prevState: any, formData: FormData): P
 
     // Invalid login
     if (!res.ok) {
-      return { message: "Invalid email or password." }
+      return { message: "Invalid username or password." }
     }
 
     console.debug("User loged in");
