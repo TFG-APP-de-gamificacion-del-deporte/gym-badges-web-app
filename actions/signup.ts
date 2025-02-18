@@ -5,6 +5,7 @@ import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "crypto"
+import { logServerAction } from "@/utils/logger";
 
 type FormResponse = { message: string } | null
 
@@ -39,7 +40,10 @@ export default async function signupAction(base64Image: string, prevState: any, 
 
   // Authenticate
   try {
-    const res = await fetch(`${process.env.API_URL}${AUTH_ENDPOINTS.SIGNUP}`, {
+    const url = new URL(`${process.env.API_URL}${AUTH_ENDPOINTS.SIGNUP}`);
+    logServerAction(signupAction.name, url.toString());
+
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

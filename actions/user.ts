@@ -6,11 +6,14 @@ import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
 import { Preference, User } from "@/api/models";
 import { revalidatePath } from "next/cache";
+import { logServerAction } from "@/utils/logger";
 
 export async function getUserAction(userID?: string) {
   const { authUserID, token } = getAuthCookies();
-
+  
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(userID ? userID : authUserID)}`)
+  logServerAction(getUserAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "GET",
     headers: {
@@ -38,6 +41,8 @@ export async function setWeeklyGoalAction(n: number) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  logServerAction(setWeeklyGoalAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "PUT",
     headers: {
@@ -80,6 +85,8 @@ export async function editProfileAction(base64Image: string, prevState: any, for
   }
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  logServerAction(editProfileAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "PUT",
     headers: {
@@ -109,6 +116,8 @@ export async function setTopFeatsAction (topFeatIDs: number[]) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  logServerAction(setTopFeatsAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "PUT",
     headers: {
@@ -145,6 +154,8 @@ export async function setPreferenceAction(preferences: Preference) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(authUserID)}`)
+  logServerAction(setPreferenceAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "PUT",
     headers: {

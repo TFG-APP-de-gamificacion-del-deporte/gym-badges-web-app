@@ -5,6 +5,7 @@ import { AUTH_KEYS, StatsKeys } from "@/api/constants";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
 import { dataHistory } from "@/api/models";
+import { logServerAction } from "@/utils/logger";
 
 
 // ************************************************************
@@ -24,6 +25,7 @@ export async function addNewDataAction(title: string, dataKey: StatsKeys, prevSt
   }
 
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS[dataKey](authUserID)}`)
+  logServerAction(addNewDataAction.name, url.toString());
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -52,6 +54,7 @@ export async function getDataAction(dataKey: StatsKeys) {
 
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS[dataKey](authUserID)}`)
   url.searchParams.append("months", "0");  // Available values : 0, 3, 6, 12. To return all use 0.
+  logServerAction(getDataAction.name, url.toString());
 
   const res = await fetch(url, {
     method: "GET",
@@ -83,6 +86,7 @@ export async function getGymAttendancesAction(month: number, year: number) {
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
   url.searchParams.append("month", month.toString())
   url.searchParams.append("year", year.toString())
+  logServerAction(getGymAttendancesAction.name, url.toString());
 
   const res = await fetch(url, {
     method: "GET",
@@ -107,6 +111,8 @@ export async function addGymAttendanceAction(isoDate: string) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  logServerAction(addGymAttendanceAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -132,6 +138,8 @@ export async function deleteGymAttendanceAction(isoDate: string) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${STATS_ENDPOINTS.streak(authUserID)}`)
+  logServerAction(deleteGymAttendanceAction.name, url.toString());
+
   const res = await fetch(url, {
     method: "DELETE",
     headers: {
