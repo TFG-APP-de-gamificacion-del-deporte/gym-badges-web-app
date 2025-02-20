@@ -16,10 +16,11 @@ export default function WeekBar() {
   
   function handleDayClick(index: number) {
     const today = new Date();
-    const shift = index + 1 - today.getDay();
+    const todaysNum = today.getDay() === 0 ? 6 : today.getDay() - 1;  // Sunday should be index 6
+    const shift = index - todaysNum;
     const clickedDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + shift);
 
-    if (clickedDay.getTime() > Date.now()) {
+    if (clickedDay.getTime() > today.getTime()) {
       return;
     }
 
