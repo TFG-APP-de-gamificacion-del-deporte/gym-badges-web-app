@@ -11,18 +11,25 @@ import useUser from "@/utils/useUser";
 const N_DAYS = Number(styles.N_DAYS);
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+function isDayClickable(index: number) {
+  const today = new Date();
+  const todaysNum = today.getDay() === 0 ? 6 : today.getDay() - 1;  // Sunday should be index 6
+  const shift = index - todaysNum;
+  const clickedDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + shift);
+
+  return { 
+    clickable: clickedDay.getTime() <= today.getTime(),
+    clickedDay: clickedDay,
+  };
+}
 
 export default function WeekBar() {
   
   function handleDayClick(index: number) {
-    const today = new Date();
-    const todaysNum = today.getDay() === 0 ? 6 : today.getDay() - 1;  // Sunday should be index 6
-    const shift = index - todaysNum;
-    const clickedDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + shift);
+    
+    const { clickable, clickedDay } = isDayClickable(index);
 
-    if (clickedDay.getTime() > today.getTime()) {
-      return;
-    }
+    if (!clickable) return;
 
     // Update API
     if (!currentWeek[index]) {
@@ -47,6 +54,8 @@ export default function WeekBar() {
   // Save current week in an useState
   useEffect(() => {
     if (user) {
+      console.log(user.current_week);  // FIXME Wrong current week
+      
       setCurrentWeek(user.current_week);
     }
   }, [user])
@@ -61,7 +70,10 @@ export default function WeekBar() {
             <button 
               className={clsx(
                 styles.box, 
-                { [styles.filled]: currentWeek?.at(index) }
+                { 
+                  [styles.filled]: currentWeek?.at(index),
+                  [styles.clickable]: isDayClickable(index).clickable,
+                }
               )}
               onClick={() => handleDayClick(index)}
             />
