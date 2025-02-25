@@ -6,12 +6,14 @@ import { Friend } from "@/app/(home)/friends/page";
 import getAuthCookies from "@/utils/getAuthCookies";
 import { redirect } from "next/navigation";
 import { FriendRequest, User } from "@/api/models";
+import { logServerAction } from "@/utils/logger";
 
 export async function getFriendsAction(userID?: string, page: number = 1) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(userID ? userID : authUserID)}`)
   url.searchParams.append("page", page.toString())
+  logServerAction(getFriendsAction.name, url.toString());
 
   const res = await fetch(url, {
     method: "GET",
@@ -45,6 +47,7 @@ export async function searchFriendAction(prevState: any, formData: FormData): Pr
   }
 
   const url = new URL(`${process.env.API_URL}${USER_ENDPOINTS.USER(friendID.toString())}`)
+  logServerAction(searchFriendAction.name, url.toString());
   const res = await fetch(url, {
     method: "GET",
     headers: {
@@ -74,6 +77,7 @@ export async function addFriendAction(friendID: string) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)
+  logServerAction(addFriendAction.name, url.toString());
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -100,7 +104,7 @@ export async function deleteFriendAction(friendID: string) {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIENDS(authUserID)}`)
-
+  logServerAction(deleteFriendAction.name, url.toString());
   const res = await fetch(url, {
     method: "DELETE",
     headers: {
@@ -126,7 +130,7 @@ export async function getFriendRequestsAction() {
   const { authUserID, token } = getAuthCookies();
 
   const url = new URL(`${process.env.API_URL}${FRIENDS_ENDPOINTS.FRIEND_REQUESTS(authUserID)}`)
-
+  logServerAction(getFriendRequestsAction.name, url.toString());
   const res = await fetch(url, {
     method: "GET",
     headers: {

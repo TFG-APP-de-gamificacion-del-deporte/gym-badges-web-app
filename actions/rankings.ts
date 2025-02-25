@@ -4,6 +4,7 @@ import { AUTH_KEYS } from "@/api/constants";
 import { RANKINGS_ENDPOINTS } from "@/api/endpoints";
 import { Ranking } from "@/api/models";
 import getAuthCookies from "@/utils/getAuthCookies";
+import { logServerAction } from "@/utils/logger";
 import { redirect } from "next/navigation";
 
 export async function getGlobalRankingAction(page: number) {
@@ -11,6 +12,7 @@ export async function getGlobalRankingAction(page: number) {
 
   const url = new URL(`${process.env.API_URL}${RANKINGS_ENDPOINTS.GLOBAL(authUserID)}`)
   url.searchParams.append("page", page.toString())  // 1-based
+  logServerAction(getGlobalRankingAction.name, url.toString());
 
   const res = await fetch(url, {
     method: "GET",
@@ -36,6 +38,7 @@ export async function getFriendsRankingAction(page: number) {
 
   const url = new URL(`${process.env.API_URL}${RANKINGS_ENDPOINTS.FRIENDS(authUserID)}`)
   url.searchParams.append("page", page.toString())  // 1-based
+  logServerAction(getFriendsRankingAction.name, url.toString());
 
   const res = await fetch(url, {
     method: "GET",

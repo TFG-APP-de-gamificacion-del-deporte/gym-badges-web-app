@@ -42,10 +42,18 @@ $n_days: 7;
 
 .box {
   @include GV.skewed-square;
+  cursor: default;
 }
 
 .filled {
   &::before {
     mask: linear-gradient(#fff 0 0);
+  }
+}
+
+.clickable:hover {
+  cursor: pointer;
+  &::before {
+    mask: linear-gradient(rgba(white, 0.8) 0 0);
   }
 }
