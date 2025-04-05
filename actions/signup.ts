@@ -16,8 +16,13 @@ export default async function signupAction(base64Image: string, prevState: any, 
     [USER_KEYS.USER_ID]: formData.get(USER_KEYS.USER_ID),
     [USER_KEYS.EMAIL]: formData.get(USER_KEYS.EMAIL),
     [USER_KEYS.IMAGE]: base64Image,
-    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD) ,
+    [USER_KEYS.PASSWORD]: formData.get(USER_KEYS.PASSWORD),
+    [USER_KEYS.HEIGHT]: Number(formData.get(USER_KEYS.HEIGHT)),
+    [USER_KEYS.SEX]: formData.get(USER_KEYS.SEX),
   }
+
+  console.log(formData.get(USER_KEYS.SEX));
+  
 
   // Validate data
   if (signUpInfo[USER_KEYS.PASSWORD] !== formData.get(USER_KEYS.PASSWORD + "2")) {
@@ -30,6 +35,8 @@ export default async function signupAction(base64Image: string, prevState: any, 
     || !signUpInfo[USER_KEYS.EMAIL]
     || !signUpInfo[USER_KEYS.PASSWORD]
     || !signUpInfo[USER_KEYS.IMAGE]
+    || !signUpInfo[USER_KEYS.HEIGHT]
+    || !signUpInfo[USER_KEYS.SEX]
   ) {
     return { message: "Please fill in all the fields." }
   }

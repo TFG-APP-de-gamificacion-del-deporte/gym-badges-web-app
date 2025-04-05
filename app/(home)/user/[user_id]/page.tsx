@@ -65,14 +65,27 @@ export default async function Page({ params }: { params: { user_id: string } }) 
               <p>Fat</p>
             </div>
           }
+          { (isOwnProfile || !hideStats) &&
+            <div>
+              <span className={styles.weight}>{user.weight || "--"} kg</span>
+              <p>Weight</p>
+            </div>
+          }
           <div className={styles.name}>
             <span>{user.name}</span>  
             <p>{user.user_id}</p>
           </div>
           { (isOwnProfile || !hideStats) &&
             <div>
-              <span className={styles.weight}>{user.weight || "--"} kg</span>
-              <p>Weight</p>
+              <span>{user.height  || "--"} cm</span>
+              <p>Height</p>
+            </div>
+          }
+          { (isOwnProfile || !hideStats) &&
+            <div>
+              {user.sex && <span>{user.sex[0].toLocaleUpperCase() + user.sex.slice(1)}</span>}
+              {!user.sex && <span>--</span>}
+              <p>Sex</p>
             </div>
           }
           <div>
