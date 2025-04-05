@@ -12,6 +12,8 @@ export const USER_KEYS = {
   TOP_FEATS: "top_feats",
   WEEKLY_GOAL: "weekly_goal",
   WEIGHT: "weight",
+  HEIGHT: "height",
+  SEX: "sex",
 } as const;
 
 export type UserKey = typeof USER_KEYS[keyof typeof USER_KEYS]
