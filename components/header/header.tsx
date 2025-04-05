@@ -15,7 +15,7 @@ export default async function Header() {
       <div className={styles.header}>
         <div className={styles.logo_container}>
           <Logo noTitle/>
-          <h1 className={styles.title}>Gym Badges</h1>
+          <Link href="/"><h1 className={styles.title}>Gym Badges</h1></Link>
         </div>
         <div className={styles.nav_container}>
           <Nav/>

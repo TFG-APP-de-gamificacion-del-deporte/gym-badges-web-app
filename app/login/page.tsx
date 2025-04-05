@@ -38,11 +38,11 @@ export default function Login() {
       </form>
 
       <div className={styles.form}>
-        <p>Or continue with</p>
+        {/* <p>Or continue with</p>
         <div className={styles.separator}><LineSeparator/></div>
         <button type="button" className={styles.google}>
           <div><h3>Google</h3></div>
-        </button>
+        </button> */}
         
         <p>New arround?</p>
         <Link href="signup" className={styles.signup}>

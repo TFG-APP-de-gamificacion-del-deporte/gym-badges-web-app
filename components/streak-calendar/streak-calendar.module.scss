@@ -59,6 +59,14 @@
   }
 }
 
+.info {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .goal_selector {
   $border-color: rgba(white, 0.15);
   $border-width: 1px;

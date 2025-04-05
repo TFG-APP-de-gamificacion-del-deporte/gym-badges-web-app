@@ -5,6 +5,7 @@ import { AUTH_KEYS, USER_KEYS } from "@/api/constants";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "crypto"
+import { logServerAction } from "@/utils/logger";
 
 type FormResponse = { message: string } | null
 
@@ -16,7 +17,7 @@ export default async function loginAction(prevState: any, formData: FormData): P
 
   // Validate data
   if (!loginInfo[USER_KEYS.USER_ID] || !loginInfo[USER_KEYS.PASSWORD]) {
-    return { message: "Invalid email or password." };
+    return { message: "Invalid username or password." };
   }
 
   // Encrypt password
@@ -25,7 +26,9 @@ export default async function loginAction(prevState: any, formData: FormData): P
 
   // Authenticate
   try {
-    const res = await fetch(`${process.env.API_URL}${AUTH_ENDPOINTS.LOGIN}`, {
+    const url = new URL(`${process.env.API_URL}${AUTH_ENDPOINTS.LOGIN}`);
+    logServerAction(loginAction.name, url.toString());
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +38,7 @@ export default async function loginAction(prevState: any, formData: FormData): P
 
     // Invalid login
     if (!res.ok) {
-      return { message: "Invalid email or password." }
+      return { message: "Invalid username or password." }
     }
 
     console.debug("User loged in");

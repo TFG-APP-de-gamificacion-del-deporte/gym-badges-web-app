@@ -6,7 +6,7 @@ import TextInput from "@/components/skewed-text-input/text-input";
 import { useFormState } from "react-dom";
 import signupAction from "@/actions/signup";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaUpload } from "react-icons/fa6";
+import { FaAt, FaCircleXmark, FaEnvelope, FaIdBadge, FaLock, FaPerson, FaUpload } from "react-icons/fa6";
 import { USER_KEYS } from "@/api/constants";
 import useDefaultImage from "@/utils/defaultImage";
 import ProfilePicture from "@/components/profile-picture/profile-picture";
@@ -92,6 +92,18 @@ export default function Signup() {
         <TextInput icon=<FaIdBadge size="1.2rem"/>  placeholder="Name"            name={USER_KEYS.NAME}                         required/>
         <TextInput icon=<FaAt size="1.2rem"/>       placeholder="Username"        name={USER_KEYS.USER_ID}                      required/>
         <TextInput icon=<FaEnvelope size="1.2rem"/> placeholder="Email"           name={USER_KEYS.EMAIL}        type="email"    required/>
+        <TextInput icon=<FaPerson size="1.2rem"/>   placeholder="Height (cm)"     name={USER_KEYS.HEIGHT}       type="number"   required min={100} max={300}/>
+        <br/>
+        <section className={styles.sex_selector}>
+          <div>
+            <input type="radio" id="feminine" name="sex" value="feminine" required/>
+            <label htmlFor="feminine">Feminine</label>
+          </div>
+          <div>
+            <input type="radio" id="masculine" name="sex" value="masculine" required/>
+            <label htmlFor="masculine">Masculine</label>
+          </div>
+        </section>
         <br/>
         <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Password"        name={USER_KEYS.PASSWORD}     type="password" required minLength={10}/>
         <TextInput icon=<FaLock size="1.2rem"/>     placeholder="Repeat Password" name={USER_KEYS.PASSWORD+"2"} type="password" required minLength={10}/>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Calendar, { TileClassNameFunc } from "react-calendar";
 import "./Calendar.css";
 import { FaAngleLeft, FaAngleRight, FaAnglesLeft, FaAnglesRight } from "react-icons/fa6";
+import { FaInfoCircle } from "react-icons/fa";
 import { addGymAttendanceAction, deleteGymAttendanceAction, getGymAttendancesAction } from "@/actions/stats";
 import useSWR from "swr";
 import { redirect } from "next/navigation";
@@ -85,6 +86,7 @@ export default function StreakCalendar() {
           prevLabel=<FaAngleLeft/>
           prev2Label=<FaAnglesLeft/>
         />
+      <small className={styles.info}><FaInfoCircle/>{"Mark the days you've gone to the gym in this calendar."}</small>
       </div>
       <h3>Weekly Goal</h3>
       <p>How many times a week you plan to hit the gym?</p>

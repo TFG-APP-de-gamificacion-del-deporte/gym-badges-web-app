@@ -6,10 +6,13 @@ import BadgeTree from "@/components/badge-viewer/badge-tree/badge-tree";
 import useSWR from "swr";
 import { getBadgesAction } from "@/actions/badges";
 import { redirect } from "next/navigation";
+import useMobileScreen from "@/utils/useMobileScreen";
+import { FaInfoCircle } from "react-icons/fa";
 
 
 export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode?: boolean }) {
 
+  const isMobile = useMobileScreen();
   const { data, error, isLoading } = useSWR("getBadges", getBadgesAction, {refreshInterval: 5000});
 
   // Hooks to handle scroll on drag
@@ -62,14 +65,19 @@ export default function BadgeViewer({ addTopFeatsMode=false }: { addTopFeatsMode
   if (error) { redirect("/internal-error") }
 
   return (
-    <div 
-      className={styles.viewer}
-      ref={divRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-    >
-      { data?.map((tree, i) => <BadgeTree tree={tree} key={`tree_${i}`} addTopFeatsMode={addTopFeatsMode}/>) }
-    </div>
+    <>
+      <div className={styles.hint}>
+        <p><FaInfoCircle/>{!isMobile ? "Click and drag to see the badges" : "Swipe to see the badges"}</p>
+      </div>
+      <div 
+        className={styles.viewer}
+        ref={divRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        { data?.map((tree, i) => <BadgeTree tree={tree} key={`tree_${i}`} addTopFeatsMode={addTopFeatsMode}/>) }
+      </div>
+    </>
   )
 }
