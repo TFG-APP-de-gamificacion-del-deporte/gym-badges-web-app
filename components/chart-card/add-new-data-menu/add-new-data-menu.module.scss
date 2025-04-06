@@ -83,3 +83,19 @@
     width: calc(100% - 40px);
   }
 }
+
+.fat_calculator {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  & > a {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
