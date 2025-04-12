@@ -1,0 +1,36 @@
+@use "@/styles/global_vars.module.scss" as GV;
+
+.fat_calculator {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  .hint {
+    margin-top: -8px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+}
+
+.calculate_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: rgba(white, 0.02);
+  border: 1px solid rgba(white, 0.15);
+  border-radius: GV.$corner-radius-big;
+  padding: 5px 20px;
+
+  & > span {
+    margin-top: 2px;
+    margin-right: 0.3rem;
+  }
+  
+  &:hover {
+    background-color: rgba(white, 0.1);
+  }
+}
