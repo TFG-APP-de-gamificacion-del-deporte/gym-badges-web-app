@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, ReactNode } from "react";
+import { Dispatch, HTMLInputTypeAttribute, ReactNode, RefObject, SetStateAction } from "react";
 import styles from "./text-input.module.scss"
 
 
@@ -12,6 +12,9 @@ export default function TextInput({
   step,
   min,
   max,
+  ref,
+  value,
+  setValue,
 }: {
   icon: ReactNode,
   type?: HTMLInputTypeAttribute,
@@ -22,12 +25,28 @@ export default function TextInput({
   step?: number,
   min?: number,
   max?: number,
+  ref?: RefObject<HTMLInputElement>,
+  value?: string | undefined,
+  setValue?: Dispatch<SetStateAction<string | undefined>>
 }) {
   return (
     <label htmlFor={`input-${name}`} className={styles.text_field}>
       <div>
         {icon}
-        <input type={type} id={`input-${name}`} name={name} placeholder={placeholder} required={required} minLength={minLength} step={step} min={min} max={max} /> 
+        <input 
+          type={type} 
+          id={`input-${name}`} 
+          name={name} 
+          placeholder={placeholder} 
+          required={required} 
+          minLength={minLength} 
+          step={step} 
+          min={min} 
+          max={max} 
+          ref={ref}
+          value={value}
+          onChange={(e => setValue && setValue(e.target.value))}
+        /> 
       </div>
     </label>
   )

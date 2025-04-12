@@ -39,7 +39,7 @@ export type User = {
   [USER_KEYS.TOP_FEATS]: TopFeat[],
   [USER_KEYS.WEEKLY_GOAL]: number,
   [USER_KEYS.WEIGHT]: number | null,
-  [USER_KEYS.HEIGHT]: number | null,
+  [USER_KEYS.HEIGHT]: number,
   [USER_KEYS.SEX]: string | null,
 }
 

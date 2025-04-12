@@ -11,6 +11,7 @@
   border: 1px solid rgba(white, 0.15);
   border-radius: GV.$corner-radius-big;
   padding: 5px 20px;
+  margin-bottom: 10px;
 
   & > span {
     margin-top: 2px;
@@ -42,6 +43,10 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+  }
+
+  & > h3 {
+    margin-top: 10px;
   }
 
   header {
@@ -81,21 +86,5 @@
 
   @include mq.mobile-screen {
     width: calc(100% - 40px);
-  }
-}
-
-.fat_calculator {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-
-  & > a {
-    text-decoration: underline;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
   }
 }
